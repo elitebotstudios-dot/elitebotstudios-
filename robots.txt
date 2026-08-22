@@ -16,4 +16,7 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://elitebotstudios.me/sitemap.xml

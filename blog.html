@@ -1016,18 +1016,51 @@
 
     <section class="section" style="padding-top:0;">
       <div class="container">
-        <div class="sec-head" style="text-align:center;margin-bottom:34px;">
-          <h2>Latest AI Automation Guides</h2>
-          <p class="sub" style="margin:10px auto 0;max-width:620px;">Our practical automation guides are being written now. We removed placeholder article links until the real articles are ready to publish.</p>
+        <div class="filters" role="tablist" aria-label="Filter articles">
+          <button class="filter-chip active" data-filter="All" role="tab" aria-selected="true">All</button>
+          <button class="filter-chip" data-filter="AI Basics" role="tab" aria-selected="false">AI Basics</button>
+          <button class="filter-chip" data-filter="Industry Guides" role="tab" aria-selected="false">Industry Guides</button>
+          <button class="filter-chip" data-filter="Automation Tips" role="tab" aria-selected="false">Automation Tips</button>
         </div>
-        <div class="card reveal in" id="blogComingSoon" style="max-width:760px;margin:0 auto;text-align:center;padding:46px 28px;">
-          <span class="kicker">Coming Soon</span>
-          <h3 style="font-family:var(--font-head);font-size:1.6rem;color:var(--text);margin:12px 0;">Real AI automation guides are in production.</h3>
-          <p style="color:var(--text-2);max-width:560px;margin:0 auto 24px;">Until then, explore our interactive demo, ROI calculator, and illustrative automation scenarios.</p>
-          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-            <a href="demo.html" class="btn btn-gold">Try the Demo →</a>
-            <a href="case-studies.html" class="btn btn-outline">View Examples →</a>
-          </div>
+        <div class="sec-head" style="text-align:center;margin-bottom:34px;"><h2>Latest AI Automation Guides</h2></div>
+        <div class="grid grid-3" id="blogGrid">
+          <article class="card blog-card reveal" data-cat="Automation Tips" onclick="location.href='blog/article-1.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-1.svg" alt="Abstract gold editorial graphic for The 5-Minute Lead Response Rule for AI Automation" loading="lazy" width="1200" height="630" /><span class="blog-cat">Automation Tips</span></div>
+            <div class="blog-body"><h3><a href="blog/article-1.html">The 5-Minute Lead Response Rule for AI Automation</a></h3><p class="blog-ex">Why fast lead response wins, what the HBR lead study means, and how AI automation helps businesses answer every inquiry in minutes.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>10 min read</span></div></div>
+          </article>
+          <article class="card blog-card reveal" data-cat="AI Basics" onclick="location.href='blog/article-2.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-2.svg" alt="Abstract gold editorial graphic for AI Automation ROI: Where the Savings Actually Come From" loading="lazy" width="1200" height="630" /><span class="blog-cat">AI Basics</span></div>
+            <div class="blog-body"><h3><a href="blog/article-2.html">AI Automation ROI: Where the Savings Actually Come From</a></h3><p class="blog-ex">A practical breakdown of AI automation ROI: recovered leads, faster response, fewer admin hours, better follow-up, and cleaner operations.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>11 min read</span></div></div>
+          </article>
+          <article class="card blog-card reveal" data-cat="Automation Tips" onclick="location.href='blog/article-3.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-3.svg" alt="Abstract gold editorial graphic for Missed-Call Text-Back Automation: Complete Guide" loading="lazy" width="1200" height="630" /><span class="blog-cat">Automation Tips</span></div>
+            <div class="blog-body"><h3><a href="blog/article-3.html">Missed-Call Text-Back Automation: Complete Guide</a></h3><p class="blog-ex">Learn how missed-call text-back automation works, when to use it, what to say, and how it turns unanswered calls into booked jobs.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>12 min read</span></div></div>
+          </article>
+          <article class="card blog-card reveal" data-cat="AI Basics" onclick="location.href='blog/article-4.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-4.svg" alt="Abstract gold editorial graphic for AI Chatbots vs Human Reps: What Each Does Best" loading="lazy" width="1200" height="630" /><span class="blog-cat">AI Basics</span></div>
+            <div class="blog-body"><h3><a href="blog/article-4.html">AI Chatbots vs Human Reps: What Each Does Best</a></h3><p class="blog-ex">A clear comparison of AI chatbots and human reps: where automation wins, where people are essential, and how to combine both well.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>10 min read</span></div></div>
+          </article>
+          <article class="card blog-card reveal" data-cat="Industry Guides" onclick="location.href='blog/article-5.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-5.svg" alt="Abstract gold editorial graphic for How Dental Clinics Reduce No-Shows With AI Scheduling" loading="lazy" width="1200" height="630" /><span class="blog-cat">Industry Guides</span></div>
+            <div class="blog-body"><h3><a href="blog/article-5.html">How Dental Clinics Reduce No-Shows With AI Scheduling</a></h3><p class="blog-ex">How dental clinics can use AI scheduling, reminders, rescheduling, and follow-up automation to reduce no-shows without fake claims.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>11 min read</span></div></div>
+          </article>
+          <article class="card blog-card reveal" data-cat="AI Basics" onclick="location.href='blog/article-6.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-6.svg" alt="Abstract gold editorial graphic for The Future of Customer Support: AI in 2027" loading="lazy" width="1200" height="630" /><span class="blog-cat">AI Basics</span></div>
+            <div class="blog-body"><h3><a href="blog/article-6.html">The Future of Customer Support: AI in 2027</a></h3><p class="blog-ex">A practical, caveated look at how AI may reshape customer support by 2027 based on current adoption trends and workflow limits.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>12 min read</span></div></div>
+          </article>
+          <article class="card blog-card reveal" data-cat="Industry Guides" onclick="location.href='blog/article-7.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-7.svg" alt="Abstract gold editorial graphic for Real Estate Automation: 10 Systems Agents Need" loading="lazy" width="1200" height="630" /><span class="blog-cat">Industry Guides</span></div>
+            <div class="blog-body"><h3><a href="blog/article-7.html">Real Estate Automation: 10 Systems Agents Need</a></h3><p class="blog-ex">Ten practical real estate automation systems for faster lead response, showing requests, follow-up, CRM hygiene, and client communication.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>12 min read</span></div></div>
+          </article>
+          <article class="card blog-card reveal" data-cat="AI Basics" onclick="location.href='blog/article-8.html'" style="cursor:pointer">
+            <div class="blog-cover"><img class="blog-thumb" src="blog/img/article-8.svg" alt="Abstract gold editorial graphic for How to Choose the Right AI Automation Agency" loading="lazy" width="1200" height="630" /><span class="blog-cat">AI Basics</span></div>
+            <div class="blog-body"><h3><a href="blog/article-8.html">How to Choose the Right AI Automation Agency</a></h3><p class="blog-ex">A practical checklist for choosing an AI automation agency: scope, honesty, integrations, support, security, and measurable outcomes.</p><div class="blog-meta"><span>Elite Bot Studios Team</span><span class="dot"></span><span>2026-08-22</span><span class="dot"></span><span>10 min read</span></div></div>
+          </article>
+        </div>
+        <div id="gridEmpty" style="display:none;text-align:center;padding:50px 20px;border:1px solid rgba(201,168,76,0.25);border-radius:18px;background:var(--surface);">
+          <p style="font-family:var(--font-head);font-size:1.3rem;color:var(--text);">Articles in this category are in production.</p>
+          <p style="color:var(--text-2);margin:8px 0 20px;">Try another category or book a call to discuss your workflow.</p>
+          <a href="case-studies.html" class="btn btn-gold">View Case Studies →</a>
         </div>
                 <div class="newsletter" style="margin-top:70px;">
           <h2>Book a 15-Min Call</h2>
