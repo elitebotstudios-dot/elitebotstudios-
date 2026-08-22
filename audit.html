@@ -2467,7 +2467,7 @@
          snippet once the cookie banner has accept/reject variants.
     ============================================================ */
     window.EBS_GA4_ID = window.EBS_GA4_ID || '';
-    window.EBS_LEAD_ENDPOINT = window.EBS_LEAD_ENDPOINT || ''; // CONFIG [ADD_REAL_INFO]: paste your deployed Google Apps Script /exec URL here (single quotes) // CONFIG [ADD_REAL_GA4_ID]: set a real GA4 Measurement ID to enable forwarding
+    window.EBS_LEAD_ENDPOINT = window.EBS_LEAD_ENDPOINT || 'https://script.google.com/macros/s/AKfycbybOWgzh7-rAWtT8EH9ozZ63ioe4CHHIsxr9vVES30I9NdpmcVQwoWCsZNEbd4tOn5I1Q/exec'; // CONFIG [ADD_REAL_INFO]: paste your deployed Google Apps Script /exec URL here (single quotes) // CONFIG [ADD_REAL_GA4_ID]: set a real GA4 Measurement ID to enable forwarding
 
     /* ---- tracking utility (exact spec) ---- */
     const trackEvent = (eventName, eventParams = {}) => {
