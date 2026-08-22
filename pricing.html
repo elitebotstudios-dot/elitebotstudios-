@@ -890,6 +890,50 @@
       .ebs-notif-bar, .ebs-backtop { display: none !important; }
     }
 
+  
+
+    /* ============================================================
+       MOBILE RESPONSIVENESS HARDENING (2026-08-22)
+    ============================================================ */
+    html, body { overflow-x: hidden !important; max-width: 100vw !important; }
+    *, *::before, *::after { box-sizing: border-box; }
+    img, svg, video, canvas, iframe { max-width: 100%; }
+    body, main, section, header, footer, .container, .shell, .wrap { min-width: 0; }
+    .container, .shell, .wrap { max-width: 100%; }
+
+    @media (max-width: 767px) {
+      .navbar, .topbar {
+        width: 100%; max-width: 100vw; overflow: hidden;
+        padding-left: max(16px, env(safe-area-inset-left)) !important;
+        padding-right: max(16px, env(safe-area-inset-right)) !important;
+      }
+      .navbar .container, .nav-inner {
+        min-width: 0; max-width: 100%;
+        padding-left: 0 !important; padding-right: 0 !important;
+        gap: 10px !important;
+      }
+      .navbar .logo, .topbar .logo { min-width: 0; max-width: calc(100vw - 96px); overflow: hidden; }
+      .nav-right, .top-actions { margin-left: auto; min-width: 0; flex: 0 0 auto; gap: 8px !important; }
+      .menu-toggle { flex: 0 0 44px; width: 44px; height: 44px; margin-left: auto; margin-right: 0; }
+      h1 { font-size: clamp(2rem, 12vw, 3.2rem); }
+      h2 { font-size: clamp(1.55rem, 9vw, 2.35rem); }
+      p { overflow-wrap: break-word; }
+    }
+
+    @media (max-width: 767px) {
+      .ebs-chat-window {
+        left: 0 !important; right: 0 !important; bottom: 0 !important;
+        width: 100vw !important; max-width: 100vw !important;
+        height: 100dvh !important; max-height: 100dvh !important;
+        border-radius: 0 !important;
+      }
+      .ebs-chat-fab { right: max(16px, env(safe-area-inset-right)) !important; bottom: max(16px, env(safe-area-inset-bottom)) !important; }
+      .ebs-chat-fab.ebs-open { display: none !important; }
+      body:has(.ebs-chat-window.ebs-open) .ebs-chat-fab { display: none !important; }
+      .ebs-chat-body { min-height: 0; }
+      .ebs-chat-foot { padding-bottom: max(18px, env(safe-area-inset-bottom)) !important; }
+    }
+
   </style>
   <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
        When you have a real GA4 Measurement ID, paste the standard

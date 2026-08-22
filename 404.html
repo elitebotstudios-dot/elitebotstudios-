@@ -50,6 +50,23 @@
     .foot { margin-top: 40px; font-size: 0.85rem; color: #8a8578; }
     .foot a { color: #c9a84c; text-decoration: none; font-weight: 500; }
     .foot a:hover { text-decoration: underline; }
+  
+
+    /* ============================================================
+       MOBILE RESPONSIVENESS HARDENING (2026-08-22)
+    ============================================================ */
+    html, body { overflow-x: hidden !important; max-width: 100vw !important; }
+    *, *::before, *::after { box-sizing: border-box; }
+    img, svg, video, canvas, iframe { max-width: 100%; }
+    body, main, section, header, footer, .container, .shell, .wrap { min-width: 0; }
+    .container, .shell, .wrap { max-width: 100%; }
+
+    @media (max-width: 560px) {
+      .shell, .wrap { width: 100%; padding-left: 16px !important; padding-right: 16px !important; }
+      .topbar { max-width: 100%; gap: 12px; }
+      h1 { font-size: clamp(2rem, 11vw, 2.8rem); }
+    }
+
   </style>
 </head>
 <body>
