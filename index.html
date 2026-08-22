@@ -671,7 +671,7 @@
     }
     .cube-wrap {
       position: relative;
-      width: clamp(180px, 20vw, 260px); height: clamp(180px, 20vw, 260px);
+      width: clamp(240px, 26vw, 360px); height: clamp(240px, 26vw, 360px);
       transform-style: preserve-3d;
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -705,6 +705,118 @@
     .cube-corner.c2 { top: 0; right: 0; }
     .cube-corner.c3 { bottom: 0; left: 0; }
     .cube-corner.c4 { bottom: 0; right: 0; }
+
+    .textback-demo {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(16px, 2vw, 24px);
+      padding: clamp(20px, 2.8vw, 34px);
+      border: 1px solid rgba(201, 168, 76, 0.42);
+      background:
+        radial-gradient(circle at 22% 16%, rgba(232, 212, 139, 0.1), transparent 34%),
+        linear-gradient(145deg, rgba(201, 168, 76, 0.07), rgba(255,255,255,0.012));
+      box-shadow: inset 0 0 0 1px rgba(232, 212, 139, 0.06), 0 28px 80px rgba(0,0,0,0.36);
+      overflow: hidden;
+    }
+    .textback-demo::before,
+    .textback-demo::after {
+      content: '';
+      position: absolute;
+      width: 70px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232, 212, 139, 0.65), transparent);
+      opacity: 0.6;
+    }
+    .textback-demo::before { top: 18px; right: 18px; }
+    .textback-demo::after { left: 18px; bottom: 18px; }
+    .textback-head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+    .textback-live {
+      color: var(--gold-light);
+      opacity: 0.95;
+    }
+    .textback-bubbles {
+      position: relative;
+      z-index: 1;
+      min-height: 168px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+    .textback-bubble {
+      max-width: 88%;
+      padding: 13px 15px;
+      border-radius: 18px;
+      font-size: clamp(0.76rem, 1vw, 0.9rem);
+      line-height: 1.45;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.055);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.24);
+      opacity: 0;
+    }
+    .textback-bubble.inbound {
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+      animation: textInLeft 6.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    }
+    .textback-bubble.outbound {
+      align-self: flex-end;
+      color: #0a0a0a;
+      border-color: rgba(232, 212, 139, 0.55);
+      border-bottom-right-radius: 5px;
+      background: var(--gold-gradient);
+      animation: textInRight 6.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      animation-delay: 1.45s;
+    }
+    .textback-foot {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      animation: textbackPulse 6.8s ease infinite 2.65s;
+    }
+    .textback-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 14px rgba(201, 168, 76, 0.9);
+    }
+    @keyframes textInLeft {
+      0%, 8% { opacity: 0; transform: translateX(-32px) translateY(8px); }
+      18%, 76% { opacity: 1; transform: translateX(0) translateY(0); }
+      92%, 100% { opacity: 0; transform: translateY(-8px); }
+    }
+    @keyframes textInRight {
+      0%, 12% { opacity: 0; transform: translateX(32px) translateY(8px); }
+      24%, 70% { opacity: 1; transform: translateX(0) translateY(0); }
+      88%, 100% { opacity: 0; transform: translateY(-8px); }
+    }
+    @keyframes textbackPulse {
+      0%, 18% { opacity: 0; }
+      28%, 66% { opacity: 0.95; }
+      86%, 100% { opacity: 0; }
+    }
 
     .ring {
       position: absolute; border-radius: 50%;
@@ -815,14 +927,33 @@
     .problem-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, auto);
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
       gap: 32px;
       margin-top: 64px;
     }
     .problem-grid > * { min-width: 0; }
     .problem-card { display: flex; flex-direction: column; min-height: 320px; }
-    .problem-card.big { grid-column: span 2; grid-row: span 2; min-height: 672px; }
-    .problem-card .card-text { flex: 1; }
+    .problem-card.big { grid-column: span 2; grid-row: span 2; min-height: 0; }
+    .problem-card .card-text { flex: 0 0 auto; }
+    .problem-card:not(.big) .card-text { flex: 1; }
+    .problem-card-visual {
+      flex: 1 1 auto;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: clamp(26px, 4vw, 52px) 0 clamp(18px, 3vw, 34px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+    .problem-card-visual svg {
+      width: min(340px, 82%);
+      height: auto;
+      color: var(--gold);
+      opacity: 0.24;
+      filter: drop-shadow(0 0 22px rgba(201, 168, 76, 0.2));
+    }
     .p-stat { margin-top: 36px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.06); }
     .p-stat .p-num {
       font-family: var(--font-mono);
@@ -1128,6 +1259,26 @@
       font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
       color: var(--gold); opacity: 0.7;
     }
+
+    .ind-card.has-watermark { position: relative; }
+    .ind-card.has-watermark h3,
+    .ind-card.has-watermark p,
+    .ind-card.has-watermark .ind-tag { position: relative; z-index: 1; }
+    .ind-watermark {
+      position: absolute;
+      top: clamp(36px, 4vw, 54px);
+      right: clamp(24px, 4vw, 46px);
+      width: min(42%, 190px);
+      height: auto;
+      color: var(--gold);
+      opacity: 0.13;
+      stroke-width: 1.4;
+      pointer-events: none;
+      filter: drop-shadow(0 0 18px rgba(201, 168, 76, 0.18));
+    }
+    .ind-healthcare .ind-watermark,
+    .ind-construction .ind-watermark { width: min(48%, 170px); }
+    .ind-more .ind-watermark { left: 50%; right: auto; transform: translateX(-50%); width: min(34%, 160px); }
     .ind-home { grid-area: home; }
     .ind-healthcare { grid-area: healthcare; }
     .ind-realestate { grid-area: realestate; }
@@ -1329,6 +1480,63 @@
     }
     .final-cta p { font-size: 1.1rem; max-width: 560px; margin: 0 auto 20px; }
     .final-note { margin-top: 24px; font-size: 0.85rem; color: #8a8578; }
+
+    .booking-section { text-align: center; }
+    .booking-section .sec-head-center {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .booking-section .sec-label.center { justify-content: center; }
+    .booking-section .sec-label.center::after { display: block; }
+    .booking-section .sec-head-center p {
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .booking-cta-card {
+      max-width: 760px;
+      margin: 42px auto 0;
+      padding: 0 clamp(18px, 4vw, 34px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .booking-cta-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 620px;
+      display: grid;
+      gap: 16px;
+    }
+    .booking-cta-list li {
+      position: relative;
+      padding: 14px 18px;
+      line-height: 1.75;
+      color: var(--text-2);
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.018);
+    }
+    .booking-cta-list li::before {
+      content: '';
+      display: block;
+      width: 34px;
+      height: 1px;
+      margin: 0 auto 10px;
+      background: var(--gold-gradient);
+      opacity: 0.8;
+    }
+    .booking-cta-card .btn { margin: 2.5rem auto; }
+    .booking-cta-alt {
+      margin: 0 auto;
+      font-size: 0.86rem;
+      line-height: 1.65;
+      opacity: 0.7;
+      color: var(--text-2);
+    }
+    .booking-cta-alt + .booking-cta-alt { margin-top: 12px; }
 
     /* Form */
     .form-card {
@@ -1604,9 +1812,10 @@
       .loader-word { letter-spacing: 0.14em; }
 
       /* Problem grid → single column */
-      .problem-grid { grid-template-columns: 1fr; margin-top: 44px; gap: 24px; }
+      .problem-grid { grid-template-columns: 1fr; grid-template-rows: none; margin-top: 44px; gap: 24px; }
       .problem-card.big { grid-column: auto; grid-row: auto; min-height: 0; }
       .problem-card { min-height: 0; }
+      .problem-card-visual { min-height: 120px; margin: 26px 0 20px; }
 
       /* Services → vertical stacked cards (no horizontal scroll) */
       .hs-head { padding: 60px 0 36px; }
@@ -1672,6 +1881,8 @@
         gap: 24px;
       }
       .ind-card { min-height: 170px; }
+      .ind-watermark { width: min(34%, 120px); top: 34px; right: 24px; }
+      .ind-more .ind-watermark { width: min(28%, 110px); }
 
       /* Demo preview */
       .demo-grid { gap: 44px; }
@@ -2401,20 +2612,16 @@
               <div class="ring r1"></div>
               <div class="ring r2"></div>
               <div class="cube-wrap" id="cubeWrap">
-                <div class="cube">
-                  <div class="cube-face f1"></div>
-                  <div class="cube-face f2"></div>
-                  <div class="cube-face f3"></div>
-                  <div class="cube-face f4"></div>
-                  <div class="cube-face f5"></div>
-                  <div class="cube-face f6"></div>
-                  <div class="cube-corner c1"></div>
-                  <div class="cube-corner c2"></div>
-                  <div class="cube-corner c3"></div>
-                  <div class="cube-corner c4"></div>
+                <div class="textback-demo" role="img" aria-label="Missed-call text-back automation preview">
+                  <div class="textback-head"><span>Missed Call</span><span class="textback-live">AI Reply</span></div>
+                  <div class="textback-bubbles">
+                    <div class="textback-bubble inbound">Do you have availability today?</div>
+                    <div class="textback-bubble outbound">Yes! We can fit you in at 2 PM.</div>
+                  </div>
+                  <div class="textback-foot"><span class="textback-dot"></span><span>Booked in seconds</span></div>
                 </div>
               </div>
-              <span class="v-label">Autonomous · Always On</span>
+              <span class="v-label">Missed-Call Text-Back · Always On</span>
             </div>
           </div>
         </div>
@@ -2459,6 +2666,14 @@
                 Every minute a lead waits is a minute your competitor can win. The fastest responder
                 usually gets the job, not the best price.
               </p>
+              <div class="problem-card-visual" aria-hidden="true">
+                <svg viewBox="0 0 320 160" role="presentation" focusable="false">
+                  <circle cx="92" cy="80" r="48" fill="none" stroke="currentColor" />
+                  <path d="M92 45v38l28 20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M154 82h28l18-34 32 76 24-42h38" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M42 80h-18M92 30V12M92 148v-18M140 80h-18" fill="none" stroke="currentColor" stroke-linecap="round" />
+                </svg>
+              </div>
               <div class="p-stat">
                 <div class="p-num">21x</div>
                 <div class="p-lbl">more likely to qualify when you respond in 5 minutes</div>
@@ -2676,13 +2891,22 @@
           </div>
 
           <div class="ind-grid">
-            <article class="card ind-card ind-home tilt reveal" style="--d:.05s">
+            <article class="card ind-card ind-home has-watermark tilt reveal" style="--d:.05s">
               <span class="ind-tag">01</span>
+              <svg class="ind-watermark" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                <path d="M30 82l42-42 12 12-42 42H30z" fill="none" stroke="currentColor" stroke-linejoin="round" />
+                <path d="M62 25l11-11 33 33-11 11" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M22 95h76" fill="none" stroke="currentColor" stroke-linecap="round" />
+              </svg>
               <h3>Home Services</h3>
               <p>HVAC, plumbing, electrical, instant quotes, instant booking, zero missed jobs.</p>
             </article>
-            <article class="card ind-card ind-healthcare tilt reveal" style="--d:.1s">
+            <article class="card ind-card ind-healthcare has-watermark tilt reveal" style="--d:.1s">
               <span class="ind-tag">02</span>
+              <svg class="ind-watermark" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                <path d="M48 18h24v30h30v24H72v30H48V72H18V48h30z" fill="none" stroke="currentColor" stroke-linejoin="round" />
+                <circle cx="60" cy="60" r="48" fill="none" stroke="currentColor" opacity="0.5" />
+              </svg>
               <h3>Healthcare</h3>
               <p>Dental, clinics, med spas, patient intake and scheduling on autopilot.</p>
             </article>
@@ -2711,13 +2935,22 @@
               <h3>Gyms &amp; Fitness</h3>
               <p>Trials booked while the lead is still motivated.</p>
             </article>
-            <article class="card ind-card ind-construction tilt reveal" style="--d:.4s">
+            <article class="card ind-card ind-construction has-watermark tilt reveal" style="--d:.4s">
               <span class="ind-tag">08</span>
+              <svg class="ind-watermark" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                <path d="M22 92h76M32 92V56l28-22 28 22v36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M48 92V68h24v24M24 58l36-30 36 30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
               <h3>Construction</h3>
               <p>Quotes and callbacks, before the next bidder picks up.</p>
             </article>
-            <article class="card ind-card ind-more tilt reveal" style="--d:.45s">
+            <article class="card ind-card ind-more has-watermark tilt reveal" style="--d:.45s">
               <span class="ind-tag">09</span>
+              <svg class="ind-watermark" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+                <rect x="28" y="34" width="64" height="52" rx="4" fill="none" stroke="currentColor" />
+                <path d="M44 34v-8h32v8M42 54h36M42 68h24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M84 72l8 8 16-18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
               <h3>Professional Services</h3>
               <p>Intake, follow-ups, and admin workflows on autopilot.</p>
             </article>
