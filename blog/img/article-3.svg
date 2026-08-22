@@ -1,8 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
-<title id="t">Missed-Call Text-Back Automation: Complete Guide</title><desc id="d">Abstract gold linework on a black background for an Elite Bot Studios article.</desc>
-<defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#e8d48b"/><stop offset="0.55" stop-color="#c9a84c"/><stop offset="1" stop-color="#a07c2a"/></linearGradient><radialGradient id="r" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#c9a84c" stop-opacity="0.22"/><stop offset="1" stop-color="#050505" stop-opacity="0"/></radialGradient></defs>
-<rect width="1200" height="630" fill="#050505"/><rect width="1200" height="630" fill="url(#r)"/>
-<g fill="none" stroke="url(#g)" stroke-width="2" opacity="0.75"><path d="M120 430 C260 260 390 500 530 315 S820 170 1060 300"/><path d="M120 470 H1080" opacity="0.35"/><circle cx="424" cy="170" r="68" opacity="0.22"/><rect x="585" y="183" width="230" height="150" rx="20" opacity="0.18"/></g>
-<text x="96" y="116" fill="#c9a84c" font-family="Inter, Arial" font-size="18" letter-spacing="8">ELITE BOT STUDIOS</text>
-<text x="96" y="520" fill="#f5f0e8" font-family="Georgia, serif" font-size="48" font-weight="700">Missed-Call Text-Back Automation: Complete Guide</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Missed-Call Text-Back Automation: Complete Guide</title>
+  <desc id="desc">Premium black and gold Elite Bot Studios editorial banner for the article Missed-Call Text-Back Automation: Complete Guide.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4dfa0"/><stop offset="0.5" stop-color="#c9a84c"/><stop offset="1" stop-color="#8f6b24"/></linearGradient>
+    <radialGradient id="spot" cx="68%" cy="38%" r="56%"><stop offset="0" stop-color="#c9a84c" stop-opacity="0.16"/><stop offset="1" stop-color="#050505" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+    <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse"><path d="M72 0H0V72" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#050505"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#spot)"/>
+  <circle cx="930" cy="250" r="170" fill="#c9a84c" opacity="0.08" filter="url(#soft)"/>
+  <path d="M830 125h230L960 255h145L760 505l105-190H735z" fill="none" stroke="url(#gold)" stroke-width="14" stroke-linejoin="round" opacity="0.62"/>
+  <path d="M760 505 865 315H735l95-190h230" fill="none" stroke="#f4dfa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <rect x="64" y="78" width="520" height="36" rx="18" fill="#111111" stroke="#c9a84c" stroke-opacity="0.26"/>
+  <text x="84" y="102" fill="#c9a84c" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="5">AUTOMATION TIPS</text>
+  <text fill="#f5f0e8" font-family="Georgia, 'Times New Roman', serif" font-size="45" font-weight="700" letter-spacing="-1.2">
+    <tspan x="84" y="293">Missed-Call Text-Back</tspan>
+<tspan x="84" y="343">Automation: Complete Guide</tspan>
+  </text>
+  <text x="84" y="492" fill="#a49e8d" font-family="Inter, Arial, sans-serif" font-size="22">Turn unanswered calls into active conversations</text>
+  <path d="M84 535h250" stroke="url(#gold)" stroke-width="2" opacity="0.8"/>
+  <text x="84" y="575" fill="#8a8578" font-family="Inter, Arial, sans-serif" font-size="15" letter-spacing="4">ELITE BOT STUDIOS</text>
 </svg>

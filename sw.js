@@ -4,7 +4,7 @@
    Precaching is resilient: a missing file (e.g. an icon not yet
    uploaded to the web root) cannot break the whole cache install.
 ============================================================ */
-const CACHE_VERSION = 'ebs-v13';
+const CACHE_VERSION = 'ebs-v14';
 const PRECACHE = [
   '/',
   '/index.html',
