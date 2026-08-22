@@ -1,0 +1,2374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Demo Case Studies, Automation Examples | Elite Bot Studios</title>
+  <meta name="description" content="Illustrative examples of what Elite Bot Studios builds: lead response, missed-call recovery, booking, and support. Demo scenarios, not client results." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Elite Bot Studios" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="canonical" href="https://elitebotstudios.me/case-studies.html" />  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="Demo Case Studies, Automation Examples | Elite Bot Studios" />
+  <meta property="og:description" content="Illustrative examples of what Elite Bot Studios builds: lead response, missed-call recovery, booking, and support. Demo scenarios, not client results." />
+  <meta property="og:url" content="https://elitebotstudios.me/case-studies.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Demo Case Studies, Automation Examples | Elite Bot Studios" />
+  <meta name="twitter:description" content="Illustrative examples of what Elite Bot Studios builds: lead response, missed-call recovery, booking, and support. Demo scenarios, not client results." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/twitter-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#050505" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Elite Bot Studios",
+    "url": "https://elitebotstudios.me",
+    "logo": "https://elitebotstudios.me/assets/logo-512.png",
+    "email": "elitebotstudios@gmail.com",
+    "description": "AI business automation: instant lead response, missed-call text-back, appointment booking and 24/7 support systems.",
+    "areaServed": "Worldwide",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "elitebotstudios@gmail.com",
+      "contactType": "sales",
+      "availableLanguage": "English"
+    },
+    "sameAs": [
+      "https://linkedin.com/company/elite-bot-studios",
+      "https://twitter.com/elitebotstudios"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://elitebotstudios.me/"}, {"@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://elitebotstudios.me/case-studies.html"}]
+  }
+  </script>
+  <style>
+    /* Skip link */
+    .skip-link {
+      position: fixed; top: 12px; left: 12px; z-index: 12000;
+      padding: 12px 22px;
+      background: #c9a84c;
+      color: #0a0a0a;
+      font-weight: 600; font-size: 0.9rem;
+      border-radius: 2px;
+      transform: translateY(-200%);
+      transition: transform 0.3s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+
+    /* ============ Standard page (black & gold) ============ */
+    :root {
+      --bg: #050505; --bg-2: #0a0a0a; --surface: #111111; --border: #1a1a1a;
+      --gold: #c9a84c; --gold-light: #e8d48b; --gold-dark: #a07c2a;
+      --text: #f5f0e8; --text-2: #8a8578; --accent: #c9a84c; --accent-2: #a07c2a;
+      --font-head: 'Playfair Display', 'Georgia', serif;
+      --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      --nav-h: 76px;
+      --gradient: linear-gradient(100deg, #e8d48b 0%, #c9a84c 55%, #a07c2a 100%);
+      --container: 1400px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: clip; max-width: 100vw; }
+    @supports not (overflow-x: clip) { html, body { overflow-x: hidden; } }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-body); font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(201, 168, 76, 0.28); color: #fff; }
+    a { color: inherit; text-decoration: none; }
+    img, svg { max-width: 100%; }
+    button { font-family: inherit; }
+    .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+    .gold-text {
+      background: var(--gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+
+    /* ---- Navbar ---- */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      height: var(--nav-h); display: flex; align-items: center;
+      background: rgba(5, 5, 5, 0.55);
+      -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .navbar.scrolled { background: rgba(5, 5, 5, 0.85); border-bottom: 1px solid rgba(201, 168, 76, 0.15); }
+    .navbar .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: inline-flex; align-items: baseline; gap: 10px; flex-shrink: 1; min-width: 0; }
+    .logo .elite {
+      font-family: var(--font-head); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.02em;
+      background: var(--gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent; white-space: nowrap;
+    }
+    .logo .diamond { color: var(--gold); font-size: 0.55rem; align-self: center; opacity: 0.9; }
+    .logo .botstudios {
+      font-family: var(--font-body); font-weight: 300; font-size: 0.95rem;
+      letter-spacing: 0.32em; text-transform: uppercase; color: var(--text); white-space: nowrap;
+    }
+    .nav-links { display: flex; align-items: center; gap: clamp(24px, 3vw, 44px); }
+    .nav-links a {
+      position: relative; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-2);
+      padding: 8px 0; transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 50%; bottom: 0;
+      width: 0; height: 1px; background: var(--gold-light);
+      transform: translateX(-50%); transition: width 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+    .btn-outline {
+      background: transparent; color: var(--gold-light); padding: 13px 26px; font-size: 13px;
+      letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+      border: 1px solid rgba(201, 168, 76, 0.55); border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover { border-color: rgba(232, 212, 139, 0.9); background: rgba(201, 168, 76, 0.08); }
+    .btn-gold {
+      background: var(--gradient); color: #0a0a0a; font-weight: 700;
+      padding: 15px 30px; font-size: 14px; letter-spacing: 0.08em; border-radius: 6px; border: none;
+      box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3); transition: all 0.3s ease;
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(201, 168, 76, 0.45); }
+    /* ---- Page hero ---- */
+    .page-hero { padding: 90px 0 70px; position: relative; overflow: hidden; }
+    .page-hero::before {
+      content: ''; position: absolute; top: -260px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 520px; pointer-events: none;
+      background: radial-gradient(closest-side, rgba(201, 168, 76, 0.16), transparent 70%);
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .kicker::before { content: ''; width: 28px; height: 1px; background: var(--gradient); }
+    .page-hero h1 {
+      font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(2.2rem, 5.4vw, 4.2rem); line-height: 1.12;
+      margin: 18px 0 20px; letter-spacing: -0.01em;
+    }
+    .page-hero .sub { max-width: 640px; color: var(--text-2); font-size: 1.05rem; }
+    .page-hero .hero-note {
+      display: inline-flex; align-items: center; gap: 9px; margin-top: 26px;
+      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.06em;
+      color: var(--text-2); border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 999px; padding: 8px 16px; background: rgba(201, 168, 76, 0.05);
+    }
+    .hero-note i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+
+    /* ---- Cards / grid ---- */
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px); border-color: rgba(201, 168, 76, 0.45);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 34px rgba(201, 168, 76, 0.07);
+    }
+    .grid { display: grid; gap: 24px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .section { padding: 90px 0; }
+    .sec-head { margin-bottom: 46px; }
+    .sec-head h2 { font-family: var(--font-head); font-size: clamp(1.7rem, 3.6vw, 2.7rem); font-weight: 700; margin-top: 12px; }
+
+    /* ---- Filter chips ---- */
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .filter-chip {
+      border: 1px solid rgba(201, 168, 76, 0.4); background: transparent; color: var(--text-2);
+      border-radius: 999px; padding: 10px 20px; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; cursor: pointer; transition: all 0.3s ease;
+    }
+    .filter-chip:hover { color: var(--gold-light); border-color: rgba(201, 168, 76, 0.75); }
+    .filter-chip.active {
+      background: var(--gradient); color: #0a0a0a; border-color: transparent;
+      box-shadow: 0 8px 24px rgba(201, 168, 76, 0.35);
+    }
+
+    /* ---- Case study cards ---- */
+    .cs-card { overflow: hidden; display: flex; flex-direction: column; }
+    .cs-top {
+      padding: 22px 24px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(120deg, rgba(201, 168, 76, 0.1), transparent 60%);
+    }
+    .cs-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      border: 1px solid rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.08);
+      display: flex; align-items: center; justify-content: center; font-size: 19px;
+    }
+    .cs-cat {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-left: auto;
+    }
+    .cs-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .cs-body h3 { font-family: var(--font-head); font-size: 1.28rem; font-weight: 700; line-height: 1.3; }
+    .cs-body .cs-challenge { color: var(--text-2); font-size: 0.92rem; }
+    .cs-body .cs-solution { font-size: 0.92rem; }
+    .cs-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: auto; }
+    .cs-stat {
+      border: 1px solid rgba(201, 168, 76, 0.25); border-radius: 12px; padding: 12px 10px;
+      text-align: center; background: rgba(201, 168, 76, 0.04);
+    }
+    .cs-stat .v {
+      font-family: var(--font-head); font-weight: 700; font-size: 1.2rem; color: var(--gold-light);
+    }
+    .cs-stat .k { font-size: 10.5px; color: var(--text-2); letter-spacing: 0.04em; margin-top: 3px; line-height: 1.35; }
+    .cs-read {
+      margin-top: 6px; align-self: flex-start;
+      background: none; border: none; cursor: pointer;
+      color: var(--gold-light); font-size: 13.5px; font-weight: 600; letter-spacing: 0.04em;
+      padding: 0; border-bottom: 1px solid rgba(232, 212, 139, 0.4); padding-bottom: 2px;
+      transition: border-color 0.3s ease;
+    }
+    .cs-read:hover { border-color: var(--gold-light); }
+
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1300; overflow-y: auto;
+      background: rgba(0, 0, 0, 0.85);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      display: flex; align-items: flex-start; justify-content: center; padding: 40px 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      width: 860px; max-width: 100%; margin: auto 0;
+      background: linear-gradient(160deg, #131313, #0a0a0a);
+      border: 1px solid rgba(201, 168, 76, 0.45); border-radius: 22px;
+      padding: 44px 40px 40px; position: relative;
+      transform: translateY(24px) scale(0.97); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .modal-overlay.open .modal-card { transform: translateY(0) scale(1); }
+    .modal-x {
+      position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(201, 168, 76, 0.3); background: rgba(255, 255, 255, 0.03);
+      color: var(--text-2); cursor: pointer; font-size: 14px; transition: all 0.25s ease;
+    }
+    .modal-x:hover { color: var(--gold-light); border-color: rgba(201, 168, 76, 0.7); }
+    .modal-card h2 { font-family: var(--font-head); font-size: clamp(1.5rem, 3.4vw, 2.2rem); font-weight: 700; margin: 8px 0 6px; }
+    .modal-card .m-sub { color: var(--text-2); font-size: 0.95rem; margin-bottom: 26px; }
+    .m-block { margin-bottom: 22px; }
+    .m-block h4 {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .m-block p, .m-block li { color: var(--text-2); font-size: 0.95rem; line-height: 1.75; }
+    .m-block ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+    .m-quote {
+      border-left: 3px solid var(--gold); background: rgba(201, 168, 76, 0.05);
+      padding: 18px 22px; border-radius: 0 12px 12px 0; margin: 22px 0;
+    }
+    .m-quote p { font-family: var(--font-head); font-style: italic; font-size: 1.08rem; color: var(--text); line-height: 1.6; }
+    .m-quote .who { font-size: 0.78rem; color: var(--text-2); margin-top: 10px; font-style: normal; font-family: var(--font-body); }
+    .m-quote .who em { color: var(--gold); font-style: normal; }
+    .m-timeline { display: flex; flex-direction: column; gap: 0; }
+    .m-tl-item { display: flex; gap: 16px; position: relative; padding-bottom: 18px; }
+    .m-tl-item::before {
+      content: ''; position: absolute; left: 5px; top: 16px; bottom: 0;
+      width: 1px; background: rgba(201, 168, 76, 0.3);
+    }
+    .m-tl-item:last-child::before { display: none; }
+    .m-tl-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--gradient); flex-shrink: 0; margin-top: 6px; }
+    .m-tl-item .t { font-family: var(--font-mono); font-size: 0.8rem; color: var(--gold-light); white-space: nowrap; }
+    .m-tl-item .d { font-size: 0.92rem; color: var(--text-2); }
+    .m-mock { display: block; width: 100%; border: 1px solid rgba(201, 168, 76, 0.3); border-radius: 14px; background: #0a0a0a; }
+    .modal-note {
+      margin-top: 20px; font-size: 0.8rem; color: #8a8578; font-style: italic;
+      border-top: 1px solid var(--border); padding-top: 16px;
+    }
+
+    /* ---- Blog ---- */
+    .blog-card { overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
+    .blog-cover { position: relative; aspect-ratio: 16/9; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .blog-cover svg { width: 100%; height: 100%; display: block; }
+    .blog-cat {
+      position: absolute; top: 14px; left: 14px;
+      background: rgba(5, 5, 5, 0.75); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      border: 1px solid rgba(201, 168, 76, 0.4); border-radius: 999px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-light); padding: 6px 12px;
+    }
+    .blog-body { padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .blog-body h3 { font-family: var(--font-head); font-size: 1.32rem; font-weight: 700; line-height: 1.3; }
+    .blog-body h3 a:hover { color: var(--gold-light); }
+    .blog-ex { color: var(--text-2); font-size: 0.93rem; flex: 1; }
+    .blog-meta {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      font-family: var(--font-mono); font-size: 11.5px; color: #8a8578;
+      border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px;
+    }
+    .blog-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); }
+
+    /* ---- Newsletter ---- */
+    .newsletter {
+      border: 1px solid rgba(201, 168, 76, 0.35); border-radius: 22px;
+      background: linear-gradient(140deg, rgba(201, 168, 76, 0.09), transparent 55%);
+      padding: 46px 40px; text-align: center;
+    }
+    .newsletter h2 { font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin-bottom: 10px; }
+    .newsletter p { color: var(--text-2); max-width: 520px; margin: 0 auto 24px; }
+    .newsletter form { display: flex; gap: 12px; max-width: 460px; margin: 0 auto; }
+    .newsletter input {
+      flex: 1; min-width: 0; background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(201, 168, 76, 0.3); border-radius: 10px;
+      color: var(--text); padding: 14px 16px; font-family: inherit; font-size: 0.95rem;
+    }
+    .newsletter input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.14); }
+    .newsletter .btn-gold { padding: 14px 24px; border-radius: 10px; }
+    .nl-msg { margin-top: 12px; font-size: 0.85rem; color: var(--gold-light); min-height: 1.4em; }
+
+    /* ---- Article ---- */
+    .article-layout { display: grid; grid-template-columns: 1fr 260px; gap: 48px; align-items: start; }
+    .article-body { max-width: 760px; }
+    .article-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 12px; color: #8a8578; margin: 22px 0 34px; }
+    .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); }
+    .article-body h2 {
+      font-family: var(--font-head); font-size: 1.55rem; font-weight: 700;
+      margin: 42px 0 16px; padding-top: 14px;
+    }
+    .article-body p { color: #cfc9bc; margin-bottom: 20px; }
+    .article-body ul, .article-body ol { margin: 0 0 20px 24px; color: #cfc9bc; display: flex; flex-direction: column; gap: 10px; }
+    .article-body strong { color: var(--text); }
+    .article-body blockquote {
+      border-left: 3px solid var(--gold); background: rgba(201, 168, 76, 0.05);
+      padding: 18px 22px; border-radius: 0 12px 12px 0; margin: 26px 0;
+      font-family: var(--font-head); font-style: italic; font-size: 1.12rem; color: var(--text); line-height: 1.6;
+    }
+    .toc {
+      position: sticky; top: calc(var(--nav-h) + 30px);
+      border: 1px solid rgba(201, 168, 76, 0.3); border-radius: 16px;
+      background: var(--surface); padding: 22px 20px;
+    }
+    .toc h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .toc a {
+      display: block; padding: 7px 0; font-size: 13.5px; color: var(--text-2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04); transition: color 0.25s ease, padding-left 0.25s ease;
+    }
+    .toc a:hover { color: var(--gold-light); padding-left: 5px; }
+    .article-cta {
+      margin-top: 40px; border: 1px solid rgba(201, 168, 76, 0.35); border-radius: 18px;
+      background: linear-gradient(140deg, rgba(201, 168, 76, 0.1), transparent 60%);
+      padding: 30px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+    .article-cta h3 { font-family: var(--font-head); font-size: 1.25rem; }
+    .article-cta p { color: var(--text-2); font-size: 0.9rem; margin-top: 4px; }
+
+    /* ---- Footer ---- */
+    .footer { border-top: 1px solid var(--border); padding: 56px 0 30px; background: var(--bg-2); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+    .footer-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin: 14px 0 10px; }
+    .footer-about { color: var(--text-2); font-size: 0.9rem; max-width: 340px; }
+    .footer h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--text); margin-bottom: 16px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.92rem; color: var(--text-2); transition: color 0.3s ease, padding-left 0.3s ease; }
+    .footer-links a:hover { color: var(--gold-light); padding-left: 6px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .footer-contact a { color: var(--text-2); font-size: 0.92rem; }
+    .footer-contact a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      border-top: 1px solid var(--border); padding-top: 24px;
+      font-size: 0.82rem; color: #8a8578;
+    }
+    .footer-legal { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-legal a { color: #8a8578; }
+    .footer-legal a:hover { color: var(--gold-light); }
+
+    /* ---- Reveal ---- */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 1199px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } .article-layout { grid-template-columns: 1fr; } .toc { position: static; } }
+    @media (max-width: 1023px) { .nav-links, .nav-cta, .ebs-nav-tools { display: none; } }
+    @media (max-width: 767px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .page-hero { padding: 60px 0 50px; }
+      .section { padding: 60px 0; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .newsletter form { flex-direction: column; }
+      .newsletter { padding: 32px 22px; }
+      .modal-card { padding: 34px 22px 28px; }
+      .article-cta { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .card:hover { transform: none; }
+    }
+    @media print {
+      .navbar, #mobileMenu, .footer, .ebs-chat-fab, .ebs-chat-window, .ebs-exit-overlay,
+      .ebs-notif-bar, .ebs-backtop, .toc, .article-cta { display: none !important; }
+    }
+
+        /* ============================================================
+       PHASE 2, EBS ENGAGEMENT LAYER (chatbot, toasts, notif bar,
+       shortcuts, theme, PWA bits)
+       Vanilla JS only · respects prefers-reduced-motion
+    ============================================================ */
+    .ebs-hidden { display: none !important; }
+
+    /* ---- Overflow safety (zero horizontal scroll, all pages) ---- */
+    html, body { overflow-x: clip; max-width: 100vw; }
+    @supports not (overflow-x: clip) { html, body { overflow-x: hidden; } }
+
+
+    /* ---- Smart notification bar ---- */
+    .ebs-notif-bar {
+      position: relative; z-index: 1200;
+      width: 100%; min-height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(90deg, #a07c2a 0%, #c9a84c 55%, #d9b95f 100%);
+      color: #0a0a0a; font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+      padding: 8px 56px; text-align: center;
+      box-sizing: border-box;
+      transform: translateY(0); transition: transform 0.45s ease;
+    }
+    .ebs-notif-bar.ebs-out { transform: translateY(-100%); }
+    .ebs-notif-msg {
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 100%;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    @media (max-width: 767px) {
+      .ebs-notif-bar { font-size: 12px; }
+      .ebs-notif-msg { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.4; }
+    }
+    .ebs-notif-msg.ebs-swap { opacity: 0; transform: translateY(6px); }
+    .ebs-notif-msg a {
+      color: #0a0a0a; text-decoration: underline; text-underline-offset: 2px;
+      margin-left: 8px; white-space: nowrap;
+    }
+    .ebs-notif-msg a:hover { background: rgba(10, 10, 10, 0.12); border-radius: 4px; }
+    .ebs-notif-x {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; min-width: 36px; min-height: 36px;
+      border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(10, 10, 10, 0.12); color: #0a0a0a;
+      font-size: 13px; line-height: 1; display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s ease;
+    }
+    .ebs-notif-x:hover { background: rgba(10, 10, 10, 0.25); }
+    /* audit.html app-shell: shift fixed topbar/stage below the in-flow bar */
+    body.ebs-bar-active .topbar { top: 40px; }
+    body.ebs-bar-active .stage { top: calc(var(--topbar-h, 64px) + 40px); }
+
+    /* ---- Back to top ---- */
+    .ebs-backtop {
+      position: fixed; right: 26px; bottom: 100px; z-index: 1140;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(17, 17, 17, 0.9);
+      border: 1px solid rgba(201, 168, 76, 0.5); color: var(--gold-light, #e8d48b);
+      cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(12px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, box-shadow 0.3s ease;
+    }
+    .ebs-backtop.ebs-show { opacity: 1; visibility: visible; transform: translateY(0); }
+    .ebs-backtop:hover { box-shadow: 0 0 20px rgba(201, 168, 76, 0.35); border-color: var(--gold-light, #e8d48b); }
+
+    /* ---- AI Chatbot ---- */
+    .ebs-chat-fab {
+      position: fixed; right: 24px; bottom: 24px; z-index: 1150;
+      width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 60%, #a07c2a);
+      color: #0a0a0a;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0.45);
+      animation: ebsFabPulse 2.6s ease-out infinite;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-fab:hover { transform: translateY(-3px) scale(1.04); }
+    .ebs-chat-fab.ebs-open { animation: none; transform: scale(0.9); opacity: 0; pointer-events: none; }
+    @keyframes ebsFabPulse {
+      0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0.5); }
+      70% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 22px rgba(201, 168, 76, 0); }
+      100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+    .ebs-chat-badge {
+      position: absolute; top: -4px; right: -4px;
+      min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px;
+      background: #e8d48b; color: #0a0a0a;
+      font-size: 11px; font-weight: 700; line-height: 20px; text-align: center;
+      border: 2px solid #050505;
+      display: none;
+    }
+    .ebs-chat-fab.ebs-unread .ebs-chat-badge { display: block; }
+
+    .ebs-chat-window {
+      position: fixed; right: 24px; bottom: 100px; z-index: 1150;
+      width: 400px; height: 600px; max-width: calc(100vw - 32px);
+      max-height: calc(100vh - 140px);
+      display: flex; flex-direction: column;
+      background: rgba(10, 10, 10, 0.88);
+      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(201, 168, 76, 0.08);
+      opacity: 0; transform: translateY(16px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ebs-chat-window.ebs-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .ebs-chat-head {
+      flex-shrink: 0;
+      padding: 16px 18px;
+      background: linear-gradient(100deg, rgba(232, 212, 139, 0.12), rgba(201, 168, 76, 0.04));
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    }
+    .ebs-chat-title-row { display: flex; align-items: center; gap: 9px; }
+    .ebs-chat-title {
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 1.12rem; font-weight: 600; color: var(--text, #f5f0e8);
+    }
+    .ebs-online {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      color: #22c55e; margin-top: 2px;
+    }
+    .ebs-online i {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: ebsPulse 1.8s ease-out infinite;
+    }
+    .ebs-chat-sub {
+      font-size: 11px; color: #8a8578; letter-spacing: 0.04em;
+      margin-top: 3px;
+    }
+    .ebs-chat-actions { display: flex; gap: 8px; position: absolute; right: 16px; top: 16px; }
+    .ebs-icon-btn {
+      width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(201, 168, 76, 0.3);
+      background: rgba(255, 255, 255, 0.03); color: var(--text-2, #8a8578);
+      cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .ebs-icon-btn:hover { color: var(--gold-light, #e8d48b); border-color: rgba(201, 168, 76, 0.7); }
+    .ebs-icon-btn.ebs-muted { opacity: 0.45; }
+
+    .ebs-chat-body {
+      flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain;
+      padding: 18px 16px; display: flex; flex-direction: column; gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .ebs-msg { max-width: 82%; padding: 11px 15px; font-size: 0.9rem; line-height: 1.55; }
+    .ebs-msg p { margin: 0 0 6px; }
+    .ebs-msg p:last-child { margin-bottom: 0; }
+    .ebs-msg a { color: inherit; text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+    .ebs-msg.ebs-ai {
+      align-self: flex-start; background: #151515;
+      border: 1px solid rgba(201, 168, 76, 0.18);
+      color: var(--text, #f5f0e8);
+      border-radius: 16px 16px 16px 5px;
+    }
+    .ebs-msg.ebs-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 70%, #a07c2a);
+      color: #0a0a0a; font-weight: 500;
+      border-radius: 16px 16px 5px 16px;
+      box-shadow: 0 6px 18px rgba(201, 168, 76, 0.18);
+    }
+    .ebs-typing { display: inline-flex; gap: 5px; padding: 14px 16px; }
+    .ebs-typing span {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--gold, #c9a84c);
+      animation: ebsTyping 1.2s ease-in-out infinite;
+    }
+    .ebs-typing span:nth-child(2) { animation-delay: 0.15s; }
+    .ebs-typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes ebsTyping {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+    .ebs-quick-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 16px 12px; }
+    .ebs-chip {
+      border: 1px solid rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.06);
+      color: var(--gold-light, #e8d48b); border-radius: 999px;
+      padding: 8px 14px; font-size: 12.5px; font-weight: 500; cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .ebs-chip:hover { background: rgba(201, 168, 76, 0.18); transform: translateY(-1px); }
+    .ebs-chat-foot {
+      flex-shrink: 0; display: flex; gap: 10px; align-items: center;
+      padding: 12px 14px 16px; border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .ebs-chat-input {
+      flex: 1; min-width: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(201, 168, 76, 0.28);
+      border-radius: 999px; color: var(--text, #f5f0e8);
+      padding: 12px 18px; font-size: 0.9rem; font-family: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-input::placeholder { color: #8a8578; }
+    .ebs-chat-input:focus {
+      outline: none; border-color: var(--gold, #c9a84c);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+    }
+    .ebs-chat-send {
+      flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: none;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 70%, #a07c2a);
+      color: #0a0a0a; cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-send:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(201, 168, 76, 0.4); }
+    @media (max-width: 560px) {
+      .ebs-chat-window {
+        right: 0; bottom: 0; width: 100vw; height: 100dvh; max-width: 100vw;
+        max-height: 100dvh; border-radius: 0; border: none;
+      }
+      .ebs-chat-fab { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+    }
+
+    /* ---- Navbar theme toggle ---- */
+    .ebs-nav-tools { display: flex; align-items: center; gap: 10px; }
+    .ebs-theme-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(201, 168, 76, 0.45); background: transparent;
+      color: var(--gold-light, #e8d48b); cursor: pointer; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .ebs-theme-btn:hover { background: rgba(201, 168, 76, 0.12); }
+    @media (max-width: 1023px) {
+      .ebs-nav-tools { margin-left: auto; }
+    }
+
+    /* ---- Light theme (Bonus 3) ---- */
+    html[data-theme="light"] {
+      --bg: #f5f0e8; --bg-2: #ede5d4; --surface: #ffffff;
+      --border: #e2d7bf; --text: #1c1a16; --text-2: #6b6352;
+      --gold: #a07c2a; --gold-light: #8a6a1f; --gold-dark: #6d531a;
+    }
+    html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+    html[data-theme="light"] .navbar {
+      background: rgba(245, 240, 232, 0.8);
+      border-bottom: 1px solid rgba(160, 124, 42, 0.18);
+    }
+    html[data-theme="light"] .footer {
+      background: var(--bg-2); border-top: 1px solid rgba(160, 124, 42, 0.2);
+    }
+    html[data-theme="light"] .ebs-chat-window { background: rgba(255, 255, 255, 0.92); }
+    html[data-theme="light"] .ebs-msg.ebs-ai { background: #f2ecdd; border-color: rgba(160, 124, 42, 0.25); }
+    html[data-theme="light"] .ebs-chat-badge { border-color: #f5f0e8; }
+
+    /* ---- Reduced motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      .ebs-chat-fab, .ebs-online i { animation: none; }
+      .ebs-typing span { animation: none; opacity: 0.8; }
+      .ebs-chat-window { transition: opacity 0.2s ease; }
+    }
+
+    /* ---- Mobile menu (all pages): #menuToggle + #mobileMenu ---- */
+    /* World-class treatment: hairline gold bezel, swelling inner glow,
+       gold-hairline icon that morphs into a fine X, editorial full-screen
+       panel with indexed links, hairline separators, staggered entrance.  */
+    #menuToggle {
+      display: none;
+      width: 44px; height: 44px;
+      min-width: 44px; min-height: 44px;
+      border: 1px solid rgba(201, 168, 76, 0.38);
+      background: radial-gradient(130% 130% at 50% 0%, rgba(232, 212, 139, 0.10), transparent 58%),
+                  rgba(10, 10, 10, 0.55);
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 1100;
+      position: relative;
+      align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 4.5px;
+      flex-shrink: 0;
+      overflow: hidden;
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      transition: border-color .3s ease, box-shadow .4s ease, transform .25s ease;
+    }
+    #menuToggle::before { /* slow-swelling inner glow */
+      content: '';
+      position: absolute; inset: -60%;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(232, 212, 139, 0.16), transparent 70%);
+      opacity: 0;
+      transition: opacity .6s ease;
+      pointer-events: none;
+    }
+    #menuToggle:hover, #menuToggle:focus-visible {
+      border-color: rgba(232, 212, 139, 0.8);
+      box-shadow: 0 0 22px rgba(201, 168, 76, 0.22), inset 0 0 14px rgba(201, 168, 76, 0.10);
+      outline: none;
+    }
+    #menuToggle:hover::before, #menuToggle:focus-visible::before { opacity: 1; }
+    #menuToggle:active { transform: scale(0.94); }
+    #menuToggle .menu-line {
+      width: 18px; height: 1.5px;
+      background: linear-gradient(90deg, #e8d48b, #c9a84c);
+      border-radius: 999px;
+      box-shadow: 0 0 6px rgba(201, 168, 76, 0.45);
+      display: block;
+      position: relative;
+      transition: transform .45s cubic-bezier(.65,.05,.36,1), opacity .3s ease;
+    }
+    #menuToggle.is-open .menu-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    #menuToggle.is-open .menu-line:nth-child(2) { opacity: 0; transform: scaleX(0.3); }
+    #menuToggle.is-open .menu-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    #mobileMenu {
+      position: fixed; inset: 0;
+      width: 100%; height: 100vh; height: 100dvh;
+      background: radial-gradient(90% 60% at 50% 0%, rgba(201, 168, 76, 0.09), transparent 62%),
+                  rgba(5, 5, 5, 0.98);
+      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+      z-index: 1050;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      gap: 0;
+      padding: 96px 26px 52px;
+      box-sizing: border-box;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .45s ease, visibility .45s ease;
+      overflow-y: auto;
+      counter-reset: menuItem;
+    }
+    #mobileMenu::before { /* micro brand mark */
+      content: 'ELITE \25C6  BOT STUDIOS';
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.42em;
+      text-indent: 0.42em; /* optically center tracked type */
+      color: rgba(232, 212, 139, 0.9);
+      text-align: center;
+      padding-bottom: 24px;
+      margin-bottom: 26px;
+      width: min(340px, 86vw);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+      margin-top: auto;
+    }
+    #mobileMenu::after { /* top hairline of light */
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: min(560px, 82%); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.55), transparent);
+    }
+    #mobileMenu.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+    #mobileMenu.is-open a { animation: menuLinkIn .5s cubic-bezier(.22,.61,.36,1) both; }
+    #mobileMenu.is-open a:nth-child(1) { animation-delay: .06s; }
+    #mobileMenu.is-open a:nth-child(2) { animation-delay: .11s; }
+    #mobileMenu.is-open a:nth-child(3) { animation-delay: .16s; }
+    #mobileMenu.is-open a:nth-child(4) { animation-delay: .21s; }
+    #mobileMenu.is-open a:nth-child(5) { animation-delay: .26s; }
+    #mobileMenu.is-open a:nth-child(6) { animation-delay: .31s; }
+    #mobileMenu.is-open a:nth-child(7) { animation-delay: .36s; }
+    #mobileMenu.is-open a:nth-child(8) { animation-delay: .41s; }
+    #mobileMenu.is-open a:nth-child(9) { animation-delay: .46s; }
+    @keyframes menuLinkIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #mobileMenu.is-open a { animation: none; }
+      #menuToggle, #menuToggle .menu-line { transition: none; }
+    }
+    #mobileMenu a {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 1.12rem; font-weight: 500;
+      color: #f5f0e8; text-decoration: none;
+      letter-spacing: 0.06em;
+      display: block;
+      width: min(340px, 86vw);
+      text-align: center;
+      padding: 15px 0;
+      position: relative;
+      transition: color .25s ease, letter-spacing .3s ease;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email) {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+      counter-increment: menuItem;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email)::before { /* gold index 01-07 */
+      content: '0' counter(menuItem);
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.35em; text-indent: 0.35em;
+      color: rgba(201, 168, 76, 0.55);
+      transition: color .25s ease;
+    }
+    #mobileMenu a:hover, #mobileMenu a:focus-visible {
+      color: #e8d48b;
+      letter-spacing: 0.1em;
+      outline: none;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email):hover::before,
+    #mobileMenu a:not(.menu-cta):not(.menu-email):focus-visible::before { color: #e8d48b; }
+    #mobileMenu .menu-cta {
+      margin-top: 38px;
+      margin-bottom: auto;
+      width: auto;
+      padding: 16px 46px; border-radius: 999px;
+      border: 1px solid rgba(232, 212, 139, 0.65);
+      background: linear-gradient(135deg, #ecd88f, #c9a84c 55%, #a07c2a);
+      color: #0a0a0a !important;
+      font-family: var(--font-body, 'Inter', sans-serif) !important;
+      font-size: 0.86rem !important; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      transition: transform .25s ease, box-shadow .3s ease;
+    }
+    #mobileMenu .menu-cta:hover, #mobileMenu .menu-cta:focus-visible {
+      color: #0a0a0a !important;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 38px rgba(201, 168, 76, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.14em;
+    }
+    #mobileMenu .menu-email {
+      margin-top: 30px;
+      padding: 4px 0;
+      font-size: 0.9rem !important;
+      color: var(--text-2, #8a8578) !important;
+      letter-spacing: 0.08em;
+    }
+    #mobileMenu .menu-email:hover { color: #c9a84c !important; }
+
+    /* ---- Hide floating chat while the mobile menu is open ---- */
+    body.ebs-menu-open .ebs-chat-fab,
+    body.ebs-menu-open .ebs-chat-window { display: none !important; }
+
+    @media (max-width: 1024px) {
+      #menuToggle { display: flex !important; }
+      .desktop-nav-links { display: none !important; }
+      .nav-title { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      .navbar .nav-cta { display: none; }
+    }
+
+    /* ---- Navbar helper alignment (no overlap, all pages) ---- */
+    .navbar, .topbar { box-sizing: border-box; }
+    .navbar .logo, .topbar .logo { flex-shrink: 0; white-space: nowrap; z-index: 2; }
+    .nav-right, .top-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+    /* ---- Contact email note + About block (index) ---- */
+    .contact-email-note {
+      margin-top: 22px; padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.9rem; color: var(--text-2, #8a8578); text-align: center;
+    }
+    .about-note {
+      margin-bottom: 28px; padding: 26px 28px;
+      border-color: rgba(201, 168, 76, 0.3);
+      background: linear-gradient(140deg, rgba(201, 168, 76, 0.07), transparent 55%);
+    }
+    .about-note h3 {
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 1.2rem; font-weight: 700; color: var(--text, #f5f0e8);
+      margin-bottom: 10px;
+    }
+    .about-note p { color: var(--text-2, #8a8578); font-size: 0.95rem; line-height: 1.75; max-width: 900px; }
+
+    /* ---- iOS: inputs at least 16px on mobile to prevent auto-zoom ---- */
+    @media (max-width: 767px) {
+      input, select, textarea { font-size: 16px !important; }
+    }
+
+    /* ---- Print ---- */
+    @media print {
+      .ebs-chat-fab, .ebs-chat-window,
+      .ebs-notif-bar, .ebs-backtop { display: none !important; }
+    }
+
+  
+    /* ---- FAQ (added 2026-08-22: matches site FAQ component) ---- */
+    #faq .faq-wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .faq-sec-head { text-align: center; margin-bottom: 34px; }
+    .faq-sec-label { display: inline-block; font-size: 0.78rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent, #c9a84c); font-weight: 600; margin-bottom: 12px; }
+    .faq-sec-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.7rem, 4vw, 2.4rem); color: var(--text, #f5f0e8); font-weight: 600; margin: 0; }
+    .faq-item { border: 1px solid var(--border, #1a1a1a); border-radius: 4px; background: var(--surface, #111111); margin-bottom: 14px; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .faq-item.open { border-color: rgba(201, 168, 76, 0.5); box-shadow: 0 0 30px rgba(201, 168, 76, 0.06); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px 24px; color: var(--text, #f5f0e8); font-family: inherit; font-size: 1rem; font-weight: 600; text-align: left; background: transparent; border: 0; cursor: pointer; min-height: 44px; }
+    .faq-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(201, 168, 76, 0.4); color: var(--accent, #c9a84c); font-size: 0.9rem; font-weight: 400; transition: transform 0.35s ease, background 0.3s ease; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gradient, linear-gradient(100deg, #e8d48b 0%, #c9a84c 55%, #a07c2a 100%)); color: #0a0a0a; border-color: transparent; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+    .faq-a-inner { padding: 0 24px 20px; font-size: 0.95rem; color: var(--text-2, #8a8578); line-height: 1.65; }
+
+  </style>
+  <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
+       When you have a real GA4 Measurement ID, paste the standard
+       gtag.js loader + gtag('config') snippet here. The PHASE 3 event
+       tracker forwards automatically once the ID is set. No invalid
+       IDs load. -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are these case studies based on real clients?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. These are illustrative scenarios that show how our systems respond to leads, recover missed calls, and book appointments. Real client stories will replace them once engagements go live."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you build systems like these for businesses like mine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "These scenarios cover common patterns: lead response, missed-call recovery, appointment booking, and customer support. Your system is scoped to your exact lead flow on a 15-minute call."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I see the systems in action?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The interactive demo runs the same flow live in your browser, and the free audit shows where AI applies to your business."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens after I review the examples?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Book a 15-Min Call and we will map these automation patterns to your business, then send a clear scope if it is a fit."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <!-- Accessibility: skip straight to content -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="navbar" id="navbar">
+    <div class="container">
+      <a href="/" class="logo" aria-label="Elite Bot Studios, home">
+        <span class="elite">ELITE</span>
+        <span class="diamond" aria-hidden="true">◆</span>
+        <span class="botstudios">Bot Studios</span>
+      </a>
+      <nav class="nav-links desktop-nav-links" aria-label="Primary">
+        <a href="/#services">Services</a>
+        <a href="demo.html">Demo</a>
+        <a href="calculator.html">Calculator</a>
+        <a href="pricing.html">How We Engage</a>
+        <a href="audit.html">Audit</a>
+      </nav>
+      <div class="nav-right">
+        <div class="ebs-nav-tools">
+          <button class="ebs-theme-btn" aria-label="Switch to light mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        </div>
+        <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-outline nav-cta"><span class="btn-label">Book a 15-Min Call</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav id="mobileMenu" aria-label="Mobile navigation">
+    <a href="/">Home</a>
+    <a href="/#services">Services</a>
+    <a href="demo.html">Demo</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="pricing.html">How We Engage</a>
+    <a href="audit.html">Audit</a>
+    <a href="/#contact">Contact</a>
+    <a class="menu-email" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
+    <a class="menu-cta" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a>
+  </nav>
+
+  <main id="main">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="kicker reveal in">What Our Systems Can Do</span>
+        <h1 class="reveal in">Automation Examples.<br><span class="gold-text">Illustrative Demos.</span></h1>
+        <p class="sub reveal in">Six example scenarios show how our systems respond to leads, recover missed calls, and book appointments. They are illustrative demos, not client results.</p>
+        <div class="hero-note reveal in"><i aria-hidden="true"></i> Demo Case Studies. These scenarios are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="filters" role="tablist" aria-label="Filter case studies">
+          <button class="filter-chip active" data-filter="All" role="tab" aria-selected="true">All</button>
+          <button class="filter-chip" data-filter="Home Services" role="tab" aria-selected="false">Home Services</button>
+          <button class="filter-chip" data-filter="Healthcare" role="tab" aria-selected="false">Healthcare</button>
+          <button class="filter-chip" data-filter="Real Estate" role="tab" aria-selected="false">Real Estate</button>
+          <button class="filter-chip" data-filter="Legal" role="tab" aria-selected="false">Legal</button>
+          <button class="filter-chip" data-filter="E-Commerce" role="tab" aria-selected="false">E-Commerce</button>
+        </div>
+        <div class="grid grid-3" id="csGrid">
+      <article class="card cs-card reveal" data-cat="Home Services">
+        <div class="cs-top">
+          <span class="cs-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-6v-6h-4v6H4a1 1 0 0 1-1-1v-9.5z"/></svg></span>
+          <span class="cs-cat">Home Services</span>
+        </div>
+        <div class="cs-body">
+          <h3>Texas HVAC Company</h3>
+          <p class="cs-challenge"><strong style="color:var(--text-2)">Challenge:</strong> After-hours calls went to voicemail and next-morning callbacks missed 62% of hot leads.</p>
+          <p class="cs-solution"><strong>Solution:</strong> Deployed instant AI response + missed-call text-back with smart booking links.</p>
+          <div class="cs-stats">
+            <div class="cs-stat"><div class="v">+47%</div><div class="k">Bookings</div></div>
+            <div class="cs-stat"><div class="v">-62%</div><div class="k">Missed Calls</div></div>
+            <div class="cs-stat"><div class="v">$47K</div><div class="k">Recovered / 30d</div></div>
+          </div>
+          <button class="cs-read" data-cs="0" aria-haspopup="dialog">Read Full Story →</button>
+        </div>
+      </article>
+      <article class="card cs-card reveal" data-cat="Healthcare">
+        <div class="cs-top">
+          <span class="cs-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7V3z"/></svg></span>
+          <span class="cs-cat">Healthcare</span>
+        </div>
+        <div class="cs-body">
+          <h3>Lakeside Dental Clinic</h3>
+          <p class="cs-challenge"><strong style="color:var(--text-2)">Challenge:</strong> Reception answered only during office hours; 1 in 3 new-patient calls rolled to voicemail.</p>
+          <p class="cs-solution"><strong>Solution:</strong> AI receptionist that answers, triages, and books, plus automated no-show recovery.</p>
+          <div class="cs-stats">
+            <div class="cs-stat"><div class="v">-62%</div><div class="k">No-Shows</div></div>
+            <div class="cs-stat"><div class="v">+38%</div><div class="k">New Patients</div></div>
+            <div class="cs-stat"><div class="v">11h</div><div class="k">Saved / Week</div></div>
+          </div>
+          <button class="cs-read" data-cs="1" aria-haspopup="dialog">Read Full Story →</button>
+        </div>
+      </article>
+      <article class="card cs-card reveal" data-cat="Real Estate">
+        <div class="cs-top">
+          <span class="cs-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6l8-3 8 3v15M4 21h16M9 21v-6h6v6"/></svg></span>
+          <span class="cs-cat">Real Estate</span>
+        </div>
+        <div class="cs-body">
+          <h3>Summit Realty Group</h3>
+          <p class="cs-challenge"><strong style="color:var(--text-2)">Challenge:</strong> Zillow and portal leads went cold because response times averaged 3+ hours.</p>
+          <p class="cs-solution"><strong>Solution:</strong> Sub-30-second AI response that qualifies buyers, filters by budget, and books showings.</p>
+          <div class="cs-stats">
+            <div class="cs-stat"><div class="v">5.1x</div><div class="k">Lead Conversion</div></div>
+            <div class="cs-stat"><div class="v">23s</div><div class="k">Avg Response</div></div>
+            <div class="cs-stat"><div class="v">$310K</div><div class="k">Closed / 90d</div></div>
+          </div>
+          <button class="cs-read" data-cs="2" aria-haspopup="dialog">Read Full Story →</button>
+        </div>
+      </article>
+      <article class="card cs-card reveal" data-cat="Legal">
+        <div class="cs-top">
+          <span class="cs-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M5 7h14M5 7l-2 5a3 3 0 0 0 6 0L7 7M19 7l-2 5a3 3 0 0 0 6 0l-2-5"/></svg></span>
+          <span class="cs-cat">Legal</span>
+        </div>
+        <div class="cs-body">
+          <h3>Hartwell Injury Law</h3>
+          <p class="cs-challenge"><strong style="color:var(--text-2)">Challenge:</strong> Intake team missed 40% of after-hours calls; qualified cases were slipping to competitors.</p>
+          <p class="cs-solution"><strong>Solution:</strong> 24/7 AI intake that screens case types, urgency, and books consults automatically.</p>
+          <div class="cs-stats">
+            <div class="cs-stat"><div class="v">+52%</div><div class="k">Intakes Booked</div></div>
+            <div class="cs-stat"><div class="v">100%</div><div class="k">Calls Answered</div></div>
+            <div class="cs-stat"><div class="v">9pm</div><div class="k">Still Booking</div></div>
+          </div>
+          <button class="cs-read" data-cs="3" aria-haspopup="dialog">Read Full Story →</button>
+        </div>
+      </article>
+      <article class="card cs-card reveal" data-cat="E-Commerce">
+        <div class="cs-top">
+          <span class="cs-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1.2 13H4.8L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span>
+          <span class="cs-cat">E-Commerce</span>
+        </div>
+        <div class="cs-body">
+          <h3>Nova Skincare Co.</h3>
+          <p class="cs-challenge"><strong style="color:var(--text-2)">Challenge:</strong> Support tickets piled up; cart abandonment sat at 71% with no recovery system.</p>
+          <p class="cs-solution"><strong>Solution:</strong> AI support that resolves 80% of tickets + cart-recovery flows via SMS and WhatsApp.</p>
+          <div class="cs-stats">
+            <div class="cs-stat"><div class="v">+19%</div><div class="k">Cart Recovery</div></div>
+            <div class="cs-stat"><div class="v">-74%</div><div class="k">Support Load</div></div>
+            <div class="cs-stat"><div class="v">4.9★</div><div class="k">CSAT Score</div></div>
+          </div>
+          <button class="cs-read" data-cs="4" aria-haspopup="dialog">Read Full Story →</button>
+        </div>
+      </article>
+      <article class="card cs-card reveal" data-cat="Home Services">
+        <div class="cs-top">
+          <span class="cs-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-6v-6h-4v6H4a1 1 0 0 1-1-1v-9.5z"/></svg></span>
+          <span class="cs-cat">Home Services</span>
+        </div>
+        <div class="cs-body">
+          <h3>ProFix Plumbing</h3>
+          <p class="cs-challenge"><strong style="color:var(--text-2)">Challenge:</strong> Lone dispatcher juggled calls, quotes, and scheduling, 2-day follow-up backlog.</p>
+          <p class="cs-solution"><strong>Solution:</strong> AI answers, quotes standard jobs instantly, and books the first available slot.</p>
+          <div class="cs-stats">
+            <div class="cs-stat"><div class="v">3.4x</div><div class="k">Speed to Quote</div></div>
+            <div class="cs-stat"><div class="v">+29%</div><div class="k">Jobs Booked</div></div>
+            <div class="cs-stat"><div class="v">$9.8K</div><div class="k">Saved / Month</div></div>
+          </div>
+          <button class="cs-read" data-cs="5" aria-haspopup="dialog">Read Full Story →</button>
+        </div>
+      </article>
+        </div>
+                <div class="newsletter" style="margin-top:70px;">
+          <h2>Book a 15-Min Call</h2>
+          <p>We'll map the exact AI systems your business needs, and show you what they'd recover.</p>
+          <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Book a 15-Min Call →</a>
+          <p style="margin-top:14px;font-size:0.85rem;color:var(--text-2);">Prefer email? <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a></p>
+        </div>
+      </div>
+    </section>
+
+  <div class="modal-overlay" id="csModal0" role="dialog" aria-modal="true" aria-label="Texas HVAC Company case study">
+    <div class="modal-card">
+      <button class="modal-x" data-close aria-label="Close case study">✕</button>
+      <span class="kicker">Home Services · Demo Case Study</span>
+      <h2>Texas HVAC Company</h2>
+      <p class="m-sub">AI Lead Response &amp; Booking System</p>
+
+      <div class="m-block"><h4>The Challenge</h4><p>A 14-truck HVAC company in Texas was losing after-hours and weekend inquiries to voicemail. Technicians were on call, but nobody answered the phone, and by 9am the next morning, homeowners had already booked a competitor. Internal tracking showed 62% of missed calls never converted.</p></div>
+      <div class="m-block"><h4>The Solution</h4><p>We deployed a three-part system: instant AI SMS response on every missed call, a 24/7 AI phone line that qualifies urgency (no heat, AC failure, repair vs. replacement), and automated booking links pushed straight into their calendar.</p></div>
+      <div class="m-block"><h4>Implementation</h4>
+        <ul><li>Week 1, AI Missed-Call Text-Back live on their existing number</li><li>Week 1, AI chat on website + Google Business Profile</li><li>Week 2, Calendar sync so qualified leads self-book service windows</li><li>Week 3, Follow-up engine for unanswered quotes</li></ul>
+      </div>
+      <div class="m-block"><h4>The Results</h4><p>Within 30 days the company recovered $47,000 in booked jobs that would previously have gone to voicemail, bookings rose 47%, and missed-call bleed dropped 62%. The office manager reports the phone now rings with pre-qualified customers instead of voicemail dumps.</p></div>
+
+      <div class="m-quote">
+        <p>“We were literally paying for leads and then sending them to voicemail. The AI answers in seconds, even at 2am. It paid for itself in the first week.”</p>
+        <div class="who">Operations Manager, Texas HVAC Company <em>(demo quote; real client quotes coming soon)</em></div>
+      </div>
+
+      <svg class="m-mock" viewBox="0 0 640 200" role="img" aria-label="Illustrative mockup of the AI system interface" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="640" height="200" fill="#0a0a0a"/>
+      <rect x="1" y="1" width="638" height="198" fill="none" stroke="#c9a84c" stroke-opacity="0.35" rx="14"/>
+      <rect x="26" y="24" width="180" height="152" rx="12" fill="#111111" stroke="#c9a84c" stroke-opacity="0.5"/>
+      <rect x="38" y="40" width="156" height="12" rx="6" fill="#1a1a1a"/>
+      <rect x="38" y="60" width="120" height="8" rx="4" fill="#1a1a1a"/>
+      <rect x="38" y="86" width="132" height="26" rx="8" fill="#c9a84c" fill-opacity="0.85"/>
+      <rect x="98" y="86" width="72" height="26" rx="8" fill="#0a0a0a" opacity="0.25"/>
+      <rect x="38" y="122" width="140" height="26" rx="8" fill="none" stroke="#c9a84c" stroke-opacity="0.6"/>
+      <rect x="38" y="158" width="96" height="6" rx="3" fill="#1a1a1a"/>
+      <text x="226" y="52" font-family="Georgia, serif" font-size="15" fill="#e8d48b">AI Reply, HVAC SYSTEM</text>
+      <rect x="226" y="66" width="388" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="86" width="330" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="106" width="280" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="134" width="180" height="24" rx="12" fill="none" stroke="#e8d48b" stroke-opacity="0.8"/>
+      <rect x="420" y="134" width="194" height="24" rx="12" fill="#c9a84c"/>
+      <text x="448" y="151" font-family="monospace" font-size="11" fill="#0a0a0a">BOOK NOW</text>
+      <text x="226" y="182" font-family="monospace" font-size="10" fill="#8a8578">Illustrative mockup, real screenshots coming with client launches</text>
+    </svg>
+
+      <div class="m-block" style="margin-top:22px;"><h4>Implementation Timeline</h4>
+        <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Discovery call + system map</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 3</span>: <span class="d">AI responses live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 7</span>: <span class="d">Calendar booking live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 21</span>: <span class="d">First full ROI report</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">$47K recovered</span></div></div></div>
+      </div>
+
+      <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="csModal1" role="dialog" aria-modal="true" aria-label="Lakeside Dental Clinic case study">
+    <div class="modal-card">
+      <button class="modal-x" data-close aria-label="Close case study">✕</button>
+      <span class="kicker">Healthcare · Demo Case Study</span>
+      <h2>Lakeside Dental Clinic</h2>
+      <p class="m-sub">AI Lead Response &amp; Booking System</p>
+
+      <div class="m-block"><h4>The Challenge</h4><p>Lakeside Dental was losing roughly a third of new-patient calls to voicemail during lunch hours and weekends. Worse, 14% of booked appointments ended in no-shows, each one costing chair time and revenue that never came back.</p></div>
+      <div class="m-block"><h4>The Solution</h4><p>We built an AI receptionist that answers every call, answers insurance and pricing questions, and books directly into their practice calendar. A second AI layer sends smart reminders and instantly re-books patients who cancel.</p></div>
+      <div class="m-block"><h4>Implementation</h4>
+        <ul><li>Week 1, Call-flow mapping with the front desk</li><li>Week 1, AI phone + website chat live</li><li>Week 2, Practice-management calendar sync</li><li>Week 3, No-show recovery texts + rebooking links</li></ul>
+      </div>
+      <div class="m-block"><h4>The Results</h4><p>No-shows dropped 62% within 60 days, new-patient volume rose 38%, and the front desk reclaimed 11 hours a week. The clinic now runs on 100% booked slots for hygiene appointments two weeks out.</p></div>
+
+      <div class="m-quote">
+        <p>“Our front desk used to spend half the day playing phone tag. Now the AI does that, and patients actually show up.”</p>
+        <div class="who">Practice Owner, Lakeside Dental Clinic <em>(demo quote; real client quotes coming soon)</em></div>
+      </div>
+
+      <svg class="m-mock" viewBox="0 0 640 200" role="img" aria-label="Illustrative mockup of the AI system interface" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="640" height="200" fill="#0a0a0a"/>
+      <rect x="1" y="1" width="638" height="198" fill="none" stroke="#c9a84c" stroke-opacity="0.35" rx="14"/>
+      <rect x="26" y="24" width="180" height="152" rx="12" fill="#111111" stroke="#c9a84c" stroke-opacity="0.5"/>
+      <rect x="38" y="40" width="156" height="12" rx="6" fill="#1a1a1a"/>
+      <rect x="38" y="60" width="120" height="8" rx="4" fill="#1a1a1a"/>
+      <rect x="38" y="86" width="132" height="26" rx="8" fill="#c9a84c" fill-opacity="0.85"/>
+      <rect x="98" y="86" width="72" height="26" rx="8" fill="#0a0a0a" opacity="0.25"/>
+      <rect x="38" y="122" width="140" height="26" rx="8" fill="none" stroke="#c9a84c" stroke-opacity="0.6"/>
+      <rect x="38" y="158" width="96" height="6" rx="3" fill="#1a1a1a"/>
+      <text x="226" y="52" font-family="Georgia, serif" font-size="15" fill="#e8d48b">AI Reply, DENTAL SYSTEM</text>
+      <rect x="226" y="66" width="388" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="86" width="330" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="106" width="280" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="134" width="180" height="24" rx="12" fill="none" stroke="#e8d48b" stroke-opacity="0.8"/>
+      <rect x="420" y="134" width="194" height="24" rx="12" fill="#c9a84c"/>
+      <text x="448" y="151" font-family="monospace" font-size="11" fill="#0a0a0a">BOOK NOW</text>
+      <text x="226" y="182" font-family="monospace" font-size="10" fill="#8a8578">Illustrative mockup, real screenshots coming with client launches</text>
+    </svg>
+
+      <div class="m-block" style="margin-top:22px;"><h4>Implementation Timeline</h4>
+        <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Discovery + compliance review</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 4</span>: <span class="d">AI receptionist live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 10</span>: <span class="d">Calendar sync</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">Reminders + rebooking</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 60</span>: <span class="d">-62% no-shows</span></div></div></div>
+      </div>
+
+      <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="csModal2" role="dialog" aria-modal="true" aria-label="Summit Realty Group case study">
+    <div class="modal-card">
+      <button class="modal-x" data-close aria-label="Close case study">✕</button>
+      <span class="kicker">Real Estate · Demo Case Study</span>
+      <h2>Summit Realty Group</h2>
+      <p class="m-sub">AI Lead Response &amp; Booking System</p>
+
+      <div class="m-block"><h4>The Challenge</h4><p>Summit Realty was buying leads from three portals but agents responded in hours, not seconds. By the time someone called back, the buyer had already talked to two other agents. Their CRM showed 78% of leads were never followed up more than once.</p></div>
+      <div class="m-block"><h4>The Solution</h4><p>We wired an AI lead engine into every portal: instant text + chat response, budget and timeline qualification, and automatic showing-booking that respects each agent’s territory and calendar.</p></div>
+      <div class="m-block"><h4>Implementation</h4>
+        <ul><li>Week 1, Portal lead ingestion wired up</li><li>Week 2, AI qualification conversations live</li><li>Week 3, Showing scheduler + agent routing</li><li>Week 4, Follow-up cadence for cold leads</li></ul>
+      </div>
+      <div class="m-block"><h4>The Results</h4><p>Average first-response time dropped from 3 hours to 23 seconds. Conversion rose 5.1x on the same ad spend, and the team closed $310K in commissions within the first 90 days. Cold leads now get 90 days of automatic nurture instead of silence.</p></div>
+
+      <div class="m-quote">
+        <p>“The AI qualifies better than most new agents. Hot buyers get a showing booked before I even pick up my phone.”</p>
+        <div class="who">Team Lead, Summit Realty Group <em>(demo quote; real client quotes coming soon)</em></div>
+      </div>
+
+      <svg class="m-mock" viewBox="0 0 640 200" role="img" aria-label="Illustrative mockup of the AI system interface" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="640" height="200" fill="#0a0a0a"/>
+      <rect x="1" y="1" width="638" height="198" fill="none" stroke="#c9a84c" stroke-opacity="0.35" rx="14"/>
+      <rect x="26" y="24" width="180" height="152" rx="12" fill="#111111" stroke="#c9a84c" stroke-opacity="0.5"/>
+      <rect x="38" y="40" width="156" height="12" rx="6" fill="#1a1a1a"/>
+      <rect x="38" y="60" width="120" height="8" rx="4" fill="#1a1a1a"/>
+      <rect x="38" y="86" width="132" height="26" rx="8" fill="#c9a84c" fill-opacity="0.85"/>
+      <rect x="98" y="86" width="72" height="26" rx="8" fill="#0a0a0a" opacity="0.25"/>
+      <rect x="38" y="122" width="140" height="26" rx="8" fill="none" stroke="#c9a84c" stroke-opacity="0.6"/>
+      <rect x="38" y="158" width="96" height="6" rx="3" fill="#1a1a1a"/>
+      <text x="226" y="52" font-family="Georgia, serif" font-size="15" fill="#e8d48b">AI Reply, REALTOR SYSTEM</text>
+      <rect x="226" y="66" width="388" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="86" width="330" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="106" width="280" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="134" width="180" height="24" rx="12" fill="none" stroke="#e8d48b" stroke-opacity="0.8"/>
+      <rect x="420" y="134" width="194" height="24" rx="12" fill="#c9a84c"/>
+      <text x="448" y="151" font-family="monospace" font-size="11" fill="#0a0a0a">BOOK NOW</text>
+      <text x="226" y="182" font-family="monospace" font-size="10" fill="#8a8578">Illustrative mockup, real screenshots coming with client launches</text>
+    </svg>
+
+      <div class="m-block" style="margin-top:22px;"><h4>Implementation Timeline</h4>
+        <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Portal + CRM audit</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 3</span>: <span class="d">AI response live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 8</span>: <span class="d">Routing + calendars</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 14</span>: <span class="d">Nurture sequences</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 90</span>: <span class="d">$310K closed</span></div></div></div>
+      </div>
+
+      <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="csModal3" role="dialog" aria-modal="true" aria-label="Hartwell Injury Law case study">
+    <div class="modal-card">
+      <button class="modal-x" data-close aria-label="Close case study">✕</button>
+      <span class="kicker">Legal · Demo Case Study</span>
+      <h2>Hartwell Injury Law</h2>
+      <p class="m-sub">AI Lead Response &amp; Booking System</p>
+
+      <div class="m-block"><h4>The Challenge</h4><p>A personal-injury firm ran intake from 9-to-5 while their ideal clients, people in accidents, called at all hours. 40% of after-hours calls went unanswered, and every missed call was a case walking into a competitor’s office.</p></div>
+      <div class="m-block"><h4>The Solution</h4><p>We deployed an AI intake agent that answers 100% of calls instantly, screens for case type and urgency, captures key details, and books the consultation directly on the senior attorney’s calendar, with a text summary sent to the team.</p></div>
+      <div class="m-block"><h4>Implementation</h4>
+        <ul><li>Week 1, Intake script + legal disclaimers drafted</li><li>Week 1, AI phone line live</li><li>Week 2, Website chat + lead form AI</li><li>Week 3, Calendar + case-management sync</li><li>Week 4, Daily intake digest email</li></ul>
+      </div>
+      <div class="m-block"><h4>The Results</h4><p>Intakes booked rose 52%, and the firm now captures after-hours cases they previously never saw. The senior attorney arrives each morning to a pre-screened calendar instead of a voicemail inbox.</p></div>
+
+      <div class="m-quote">
+        <p>“Cases come in at 11pm now. We wake up to booked consults. That simply did not happen before.”</p>
+        <div class="who">Managing Partner, Hartwell Injury Law <em>(demo quote; real client quotes coming soon)</em></div>
+      </div>
+
+      <svg class="m-mock" viewBox="0 0 640 200" role="img" aria-label="Illustrative mockup of the AI system interface" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="640" height="200" fill="#0a0a0a"/>
+      <rect x="1" y="1" width="638" height="198" fill="none" stroke="#c9a84c" stroke-opacity="0.35" rx="14"/>
+      <rect x="26" y="24" width="180" height="152" rx="12" fill="#111111" stroke="#c9a84c" stroke-opacity="0.5"/>
+      <rect x="38" y="40" width="156" height="12" rx="6" fill="#1a1a1a"/>
+      <rect x="38" y="60" width="120" height="8" rx="4" fill="#1a1a1a"/>
+      <rect x="38" y="86" width="132" height="26" rx="8" fill="#c9a84c" fill-opacity="0.85"/>
+      <rect x="98" y="86" width="72" height="26" rx="8" fill="#0a0a0a" opacity="0.25"/>
+      <rect x="38" y="122" width="140" height="26" rx="8" fill="none" stroke="#c9a84c" stroke-opacity="0.6"/>
+      <rect x="38" y="158" width="96" height="6" rx="3" fill="#1a1a1a"/>
+      <text x="226" y="52" font-family="Georgia, serif" font-size="15" fill="#e8d48b">AI Reply, LEGAL SYSTEM</text>
+      <rect x="226" y="66" width="388" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="86" width="330" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="106" width="280" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="134" width="180" height="24" rx="12" fill="none" stroke="#e8d48b" stroke-opacity="0.8"/>
+      <rect x="420" y="134" width="194" height="24" rx="12" fill="#c9a84c"/>
+      <text x="448" y="151" font-family="monospace" font-size="11" fill="#0a0a0a">BOOK NOW</text>
+      <text x="226" y="182" font-family="monospace" font-size="10" fill="#8a8578">Illustrative mockup, real screenshots coming with client launches</text>
+    </svg>
+
+      <div class="m-block" style="margin-top:22px;"><h4>Implementation Timeline</h4>
+        <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Intake compliance review</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 3</span>: <span class="d">AI intake live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 10</span>: <span class="d">Calendar sync</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">+52% intakes</span></div></div></div>
+      </div>
+
+      <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="csModal4" role="dialog" aria-modal="true" aria-label="Nova Skincare Co. case study">
+    <div class="modal-card">
+      <button class="modal-x" data-close aria-label="Close case study">✕</button>
+      <span class="kicker">E-Commerce · Demo Case Study</span>
+      <h2>Nova Skincare Co.</h2>
+      <p class="m-sub">AI Lead Response &amp; Booking System</p>
+
+      <div class="m-block"><h4>The Challenge</h4><p>A DTC skincare brand was drowning in support tickets, shipping questions, tracking links, return policies, while $40K/month in abandoned carts sat untouched. Support cost was climbing faster than revenue.</p></div>
+      <div class="m-block"><h4>The Solution</h4><p>We installed an AI support agent trained on their entire policy library that resolves routine tickets instantly, and a cart-recovery engine that re-engages abandoners with personalized SMS within minutes of leaving.</p></div>
+      <div class="m-block"><h4>Implementation</h4>
+        <ul><li>Week 1, Knowledge base ingested + AI trained</li><li>Week 2, AI support live on site + email</li><li>Week 3, Cart-recovery SMS flows</li><li>Week 4, Escalation routing to humans</li></ul>
+      </div>
+      <div class="m-block"><h4>The Results</h4><p>Support volume dropped 74% while CSAT rose to 4.9 stars, the AI answers instantly at 2am, which customers love. Cart recovery added 19% in recovered revenue in the first full month.</p></div>
+
+      <div class="m-quote">
+        <p>“Customers think we hired a 24/7 support team. It’s one AI, and it’s better than our old helpdesk.”</p>
+        <div class="who">Founder, Nova Skincare Co. <em>(demo quote; real client quotes coming soon)</em></div>
+      </div>
+
+      <svg class="m-mock" viewBox="0 0 640 200" role="img" aria-label="Illustrative mockup of the AI system interface" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="640" height="200" fill="#0a0a0a"/>
+      <rect x="1" y="1" width="638" height="198" fill="none" stroke="#c9a84c" stroke-opacity="0.35" rx="14"/>
+      <rect x="26" y="24" width="180" height="152" rx="12" fill="#111111" stroke="#c9a84c" stroke-opacity="0.5"/>
+      <rect x="38" y="40" width="156" height="12" rx="6" fill="#1a1a1a"/>
+      <rect x="38" y="60" width="120" height="8" rx="4" fill="#1a1a1a"/>
+      <rect x="38" y="86" width="132" height="26" rx="8" fill="#c9a84c" fill-opacity="0.85"/>
+      <rect x="98" y="86" width="72" height="26" rx="8" fill="#0a0a0a" opacity="0.25"/>
+      <rect x="38" y="122" width="140" height="26" rx="8" fill="none" stroke="#c9a84c" stroke-opacity="0.6"/>
+      <rect x="38" y="158" width="96" height="6" rx="3" fill="#1a1a1a"/>
+      <text x="226" y="52" font-family="Georgia, serif" font-size="15" fill="#e8d48b">AI Reply, ECOM SYSTEM</text>
+      <rect x="226" y="66" width="388" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="86" width="330" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="106" width="280" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="134" width="180" height="24" rx="12" fill="none" stroke="#e8d48b" stroke-opacity="0.8"/>
+      <rect x="420" y="134" width="194" height="24" rx="12" fill="#c9a84c"/>
+      <text x="448" y="151" font-family="monospace" font-size="11" fill="#0a0a0a">BOOK NOW</text>
+      <text x="226" y="182" font-family="monospace" font-size="10" fill="#8a8578">Illustrative mockup, real screenshots coming with client launches</text>
+    </svg>
+
+      <div class="m-block" style="margin-top:22px;"><h4>Implementation Timeline</h4>
+        <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Policy + FAQ ingestion</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 4</span>: <span class="d">AI support live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 12</span>: <span class="d">Cart-recovery flows</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">+19% recovered carts</span></div></div></div>
+      </div>
+
+      <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="csModal5" role="dialog" aria-modal="true" aria-label="ProFix Plumbing case study">
+    <div class="modal-card">
+      <button class="modal-x" data-close aria-label="Close case study">✕</button>
+      <span class="kicker">Home Services · Demo Case Study</span>
+      <h2>ProFix Plumbing</h2>
+      <p class="m-sub">AI Lead Response &amp; Booking System</p>
+
+      <div class="m-block"><h4>The Challenge</h4><p>ProFix Plumbing ran on a single dispatcher. Emergency calls stacked up, quote requests waited up to two days, and customers booked whoever answered first. Growth was capped by phone time.</p></div>
+      <div class="m-block"><h4>The Solution</h4><p>We automated the entire front office: AI answers every call, provides instant ballpark quotes for standard jobs, and books the first available technician slot. Emergency calls are triaged and routed to the on-call plumber in seconds.</p></div>
+      <div class="m-block"><h4>Implementation</h4>
+        <ul><li>Week 1, Job + pricing catalog mapped</li><li>Week 2, AI phone + text quoting live</li><li>Week 3, Technician calendar sync</li><li>Week 4, Emergency triage routing</li></ul>
+      </div>
+      <div class="m-block"><h4>The Results</h4><p>Quote turnaround went from 2 days to under a minute, booked jobs rose 29%, and the owner reclaimed the cost of a dispatcher, about $9.8K per month. The dispatcher now handles exceptions, not every call.</p></div>
+
+      <div class="m-quote">
+        <p>“I hired AI to answer phones and it replaced my dispatcher’s entire workload. That’s $9,800 a month back in my pocket.”</p>
+        <div class="who">Owner, ProFix Plumbing <em>(demo quote; real client quotes coming soon)</em></div>
+      </div>
+
+      <svg class="m-mock" viewBox="0 0 640 200" role="img" aria-label="Illustrative mockup of the AI system interface" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="640" height="200" fill="#0a0a0a"/>
+      <rect x="1" y="1" width="638" height="198" fill="none" stroke="#c9a84c" stroke-opacity="0.35" rx="14"/>
+      <rect x="26" y="24" width="180" height="152" rx="12" fill="#111111" stroke="#c9a84c" stroke-opacity="0.5"/>
+      <rect x="38" y="40" width="156" height="12" rx="6" fill="#1a1a1a"/>
+      <rect x="38" y="60" width="120" height="8" rx="4" fill="#1a1a1a"/>
+      <rect x="38" y="86" width="132" height="26" rx="8" fill="#c9a84c" fill-opacity="0.85"/>
+      <rect x="98" y="86" width="72" height="26" rx="8" fill="#0a0a0a" opacity="0.25"/>
+      <rect x="38" y="122" width="140" height="26" rx="8" fill="none" stroke="#c9a84c" stroke-opacity="0.6"/>
+      <rect x="38" y="158" width="96" height="6" rx="3" fill="#1a1a1a"/>
+      <text x="226" y="52" font-family="Georgia, serif" font-size="15" fill="#e8d48b">AI Reply, PLUMBER SYSTEM</text>
+      <rect x="226" y="66" width="388" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="86" width="330" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="106" width="280" height="10" rx="5" fill="#1a1a1a"/>
+      <rect x="226" y="134" width="180" height="24" rx="12" fill="none" stroke="#e8d48b" stroke-opacity="0.8"/>
+      <rect x="420" y="134" width="194" height="24" rx="12" fill="#c9a84c"/>
+      <text x="448" y="151" font-family="monospace" font-size="11" fill="#0a0a0a">BOOK NOW</text>
+      <text x="226" y="182" font-family="monospace" font-size="10" fill="#8a8578">Illustrative mockup, real screenshots coming with client launches</text>
+    </svg>
+
+      <div class="m-block" style="margin-top:22px;"><h4>Implementation Timeline</h4>
+        <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Catalog + pricing session</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 4</span>: <span class="d">AI answering live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 10</span>: <span class="d">Calendar sync</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">+29% booked jobs</span></div></div></div>
+      </div>
+
+      <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+    (function () {
+      var buttons = document.querySelectorAll('.cs-read');
+      function openModal(id) {
+        var m = document.getElementById(id);
+        if (!m) return;
+        m.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(m) {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () { openModal('csModal' + b.getAttribute('data-cs')); });
+      });
+      document.querySelectorAll('.modal-overlay').forEach(function (m) {
+        m.querySelector('[data-close]').addEventListener('click', function () { closeModal(m); });
+        m.addEventListener('click', function (e) { if (e.target === m) closeModal(m); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        document.querySelectorAll('.modal-overlay.open').forEach(closeModal);
+      });
+    })();
+  </script>
+        <section class="section" id="faq">
+        <div class="faq-wrap">
+          <div class="faq-sec-head">
+            <span class="faq-sec-label">FAQ</span>
+            <h2 class="faq-sec-title">Questions? Answered.</h2>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA1">
+              Are these case studies based on real clients?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA1" role="region">
+              <div class="faq-a-inner">No. These are illustrative scenarios that show how our systems respond to leads, recover missed calls, and book appointments. Real client stories will replace them once engagements go live.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA2">
+              Do you build systems like these for businesses like mine?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA2" role="region">
+              <div class="faq-a-inner">These scenarios cover common patterns: lead response, missed-call recovery, appointment booking, and customer support. Your system is scoped to your exact lead flow on a 15-minute call.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA3">
+              Can I see the systems in action?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA3" role="region">
+              <div class="faq-a-inner">Yes. The interactive demo runs the same flow live in your browser, and the free audit shows where AI applies to your business.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA4">
+              What happens after I review the examples?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA4" role="region">
+              <div class="faq-a-inner">Book a 15-Min Call and we will map these automation patterns to your business, then send a clear scope if it is a fit.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  <script>
+    /* FAQ accordion (one open at a time) */
+    (function () {
+      var items = document.querySelectorAll('#faq .faq-item');
+      items.forEach(function (item) {
+        var q = item.querySelector('.faq-q');
+        var a = item.querySelector('.faq-a');
+        q.addEventListener('click', function () {
+          var isOpen = item.classList.contains('open');
+          items.forEach(function (other) {
+            other.classList.remove('open');
+            other.querySelector('.faq-a').style.maxHeight = null;
+            other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            a.style.maxHeight = a.scrollHeight + 'px';
+            q.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+
+    </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo" aria-label="Elite Bot Studios, home">
+            <span class="elite">ELITE</span>
+            <span class="diamond" aria-hidden="true">◆</span>
+            <span class="botstudios">Bot Studios</span>
+          </a>
+          <p class="footer-tag">AI Business Automation</p>
+          <p class="footer-about">
+            We engineer AI systems that respond, qualify, and book, turning the
+            leads you already have into revenue you're currently losing.
+          </p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <nav class="footer-links" aria-label="Footer quick links">
+            <a href="demo.html">Demo</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="pricing.html">How We Engage</a>
+            <a href="audit.html">Free Audit</a>
+            <a href="case-studies.html">Case Studies</a>
+            <a href="blog.html">Blog</a>
+          </nav>
+        </div>
+        <div>
+          <h4>Get In Touch</h4>
+          <div class="footer-contact">
+            <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
+            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a>
+          </div>
+          <div class="footer-social" style="display:flex;gap:14px;">
+            <a href="https://linkedin.com/company/elite-bot-studios" aria-label="Elite Bot Studios on LinkedIn" rel="noopener">in</a>
+            <a href="https://twitter.com/elitebotstudios" aria-label="Elite Bot Studios on X (Twitter)" rel="noopener">𝕏</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Elite Bot Studios. All rights reserved.</span>
+        <nav class="footer-legal" aria-label="Legal">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="/cookies.html">Cookie Policy</a>
+        </nav>
+        <span>Built with Intelligence</span>
+      </div>
+    </div>
+  </footer>
+    <!-- ============================================================
+       PHASE 2 WIDGETS, Elite AI Chatbot, notif bar, back-to-top
+  ============================================================ -->
+  <div class="ebs-notif-bar" id="ebsNotifBar" role="region" aria-label="Announcements">
+    <span class="ebs-notif-msg" id="ebsNotifMsg"></span>
+    <button class="ebs-notif-x" id="ebsNotifX" aria-label="Dismiss announcement">✕</button>
+  </div>
+
+  <button class="ebs-chat-fab" id="ebsChatFab" aria-label="Open Elite AI Assistant chat" aria-expanded="false" aria-controls="ebsChatWindow">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3C6.9 3 3 6.6 3 11c0 2.4 1.1 4.6 3 6.1V21l3.4-1.8c.8.2 1.7.3 2.6.3 5.1 0 9-3.6 9-8s-3.9-8-9-8z" fill="currentColor"/>
+      <path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="ebs-chat-badge" id="ebsChatBadge" aria-hidden="true">1</span>
+  </button>
+
+  <section class="ebs-chat-window" id="ebsChatWindow" role="dialog" aria-label="Elite AI Assistant" aria-hidden="true">
+    <div class="ebs-chat-head">
+      <div class="ebs-chat-title-row">
+        <span class="ebs-chat-title">Elite AI Assistant</span>
+        <span class="ebs-online"><i aria-hidden="true"></i> Online</span>
+      </div>
+      <div class="ebs-chat-sub">Powered by Elite Bot Studios</div>
+      <div class="ebs-chat-actions">
+        <button class="ebs-icon-btn" id="ebsSoundToggle" aria-label="Toggle chat sounds" aria-pressed="true" title="Sound on/off"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+        <button class="ebs-icon-btn" id="ebsChatClose" aria-label="Close chat">✕</button>
+      </div>
+    </div>
+    <div class="ebs-chat-body" id="ebsChatBody" aria-live="polite"></div>
+    <div class="ebs-quick-row" id="ebsQuickRow">
+      <button class="ebs-chip" data-q="How pricing works">How Pricing Works</button>
+      <button class="ebs-chip" data-q="Watch demo">Watch Demo</button>
+      <button class="ebs-chip" data-q="Book a call">Book a 15-Min Call</button>
+    </div>
+    <div class="ebs-chat-foot">
+      <input type="text" class="ebs-chat-input" id="ebsChatInput"
+             placeholder="Type your message…" aria-label="Chat message" maxlength="400"
+             autocomplete="off" />
+      <button class="ebs-chat-send" id="ebsChatSend" aria-label="Send message">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5 12.5 21 3l-9 18-2.2-6.3L2.5 12.5z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <button class="ebs-backtop" id="ebsBackTop" aria-label="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script>
+    /* ============================================================
+       PHASE 2, EBS ENGAGEMENT ENGINE
+       Chatbot · live feed · notif bar · shortcuts · theme ·
+       PWA  (vanilla JS, no libraries)
+    ============================================================ */
+    (function () {
+      'use strict';
+      var CFG = window.EBS_CFG || {};
+      var $ = function (id) { return document.getElementById(id); };
+      var store = {
+        get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+        set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+        del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+      };
+      var EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var CALENDLY = 'https://calendly.com/elitebotstudios/15min';
+
+      /* ============================================================
+         LEAD WEBHOOK, shared by every lead form on the site
+         CONFIG [ADD_REAL_INFO]: set window.EBS_LEAD_ENDPOINT (page
+         EBS_CONFIG) to your deployed Google Apps Script URL.
+         Until configured, submissions return {ok:false} and the UI
+         shows an honest fallback. We never fake success.
+      ============================================================ */
+      function submitEBSLead(payload) {
+        var ENDPOINT = window.EBS_LEAD_ENDPOINT || '';
+        var body = {
+          name: (payload && payload.name) || '',
+          email: (payload && payload.email) || '',
+          phone: (payload && payload.phone) || '',
+          businessType: (payload && payload.businessType) || '',
+          website: (payload && payload.website) || '',
+          message: (payload && payload.message) || '',
+          sourcePage: (payload && payload.sourcePage) || window.location.pathname,
+          planInterest: (payload && payload.planInterest) || '',
+          leadType: (payload && payload.leadType) || 'General',
+          context: (payload && payload.context) || '',
+          auditAnswers: (payload && payload.auditAnswers) || null,
+          auditResult: (payload && payload.auditResult) || null,
+          timestamp: new Date().toISOString()
+        };
+        if (!ENDPOINT) return Promise.resolve({ ok: false, reason: 'no_endpoint' });
+        return fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(body)
+        }).then(function (res) {
+          if (!res.ok && !res.redirected) throw new Error('HTTP ' + res.status);
+          return { ok: true };
+        }).catch(function () {
+          return { ok: false, reason: 'network' };
+        });
+      }
+
+      window.submitEBSLead = submitEBSLead;
+
+
+
+
+      /* ---------- WebAudio "pop" (subtle, respects sound toggle) ---------- */
+      var audioCtx = null, soundOn = store.get('ebs_chat_sound', true) !== false;
+      function beep() {
+        if (!soundOn) return;
+        try {
+          audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+          var t = audioCtx.currentTime;
+          var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+          o.type = 'sine'; o.frequency.setValueAtTime(660, t);
+          o.frequency.exponentialRampToValueAtTime(920, t + 0.07);
+          g.gain.setValueAtTime(0.05, t);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start(t); o.stop(t + 0.13);
+        } catch (e) {}
+      }
+
+
+      /* ============================================================
+         FEATURE 1, ELITE AI CHATBOT
+      ============================================================ */
+      var KNOWLEDGE = {
+        greetings: {
+          keys: ['hi', 'hello', 'hey', 'salam', 'assalam', 'greetings'],
+          reply: 'Hello, I\'m the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?'
+        },
+        pricing: {
+          keys: ['price', 'pricing', 'cost', 'how much', 'plans', 'subscription', 'fee'],
+          reply: 'We build custom systems, so we quote after a short 15-minute conversation instead of selling fixed packages. Book a free call and we will walk through your exact stack: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book a 15-Min Call →</a>'
+        },
+        services: {
+          keys: ['what do you do', 'services', 'offer', 'solutions', 'automation'],
+          reply: 'We build custom AI systems for instant lead response, missed-call text-back, appointment booking, and 24/7 customer support. Which one interests you most?'
+        },
+        demo: {
+          keys: ['demo', 'example', 'show me', 'try', 'test', 'simulate'],
+          reply: 'Absolutely. Try our live interactive demo where you can chat with an AI as if you were a customer: <a href="/demo.html">Launch the Interactive Demo →</a>'
+        },
+        roi: {
+          keys: ['roi', 'worth it', 'return', 'revenue', 'money', 'save', 'profit'],
+          reply: 'Good question. Try our ROI Calculator to see exactly how much revenue you\'re losing right now: <a href="/calculator.html">Open the ROI Calculator →</a>'
+        },
+        time: {
+          keys: ['how long', 'setup time', 'how fast', 'timeline', 'quick', 'launch'],
+          reply: 'Most systems are live within <strong>one to two weeks</strong> after our kickoff call. We handle everything; you just approve the flows.'
+        },
+        contact: {
+          keys: ['contact', 'call', 'book', 'talk', 'meeting', 'consult', 'speak', 'appointment', 'schedule', 'email', 'mail', 'reach'],
+          reply: 'You can reach us directly at <a href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>, or book a free 15-minute call: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book on Calendly →</a>'
+        },
+        industries: {
+          keys: ['industry', 'business type', 'work with', 'sector', 'niche', 'dentist', 'hvac', 'real estate', 'clinic', 'restaurant'],
+          reply: 'We build custom systems for businesses across industries, including HVAC, dental, real estate, legal, construction, e-commerce, restaurants, gyms, and professional services. What\'s your business?'
+        },
+        thanks: {
+          keys: ['thanks', 'thank you', 'shukriya', 'great', 'awesome', 'cool', 'nice'],
+          reply: 'You\'re welcome. Anything else I can help you with?'
+        },
+        fallback: {
+          keys: [],
+          reply: "Great question. I can pass it to the team so someone follows up within one business day. What's your email?"
+        }
+      };
+      function matchKB(text) {
+        var t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s$]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+        var best = null, bestScore = 0;
+        for (var cat in KNOWLEDGE) {
+          if (!KNOWLEDGE[cat].keys) continue;
+          var score = 0;
+          KNOWLEDGE[cat].keys.forEach(function (k) {
+            if (k.indexOf(' ') > -1) { if (t.indexOf(' ' + k + ' ') > -1) score += 3; }
+            else { var rx = new RegExp('\\b' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b'); if (rx.test(t)) score += 2; }
+          });
+          if (score > bestScore) { bestScore = score; best = cat; }
+        }
+        return bestScore > 0 ? best : 'fallback';
+      }
+      var chat = {
+        history: store.get('ebs_chat_history', []),
+        open: false, msgCount: 0, emailCaptured: !!store.get('ebs_chat_email', '')
+      };
+      function addBubble(role, html) {
+        var body = $('ebsChatBody'); if (!body) return;
+        var el = document.createElement('div');
+        el.className = 'ebs-msg ' + (role === 'ai' ? 'ebs-ai' : 'ebs-user');
+        if (role === 'user') { el.textContent = html; }
+        else { el.innerHTML = html.replace(/\n/g, '<br>'); }
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+        return el;
+      }
+      function showTyping() {
+        var body = $('ebsChatBody');
+        var el = document.createElement('div');
+        el.className = 'ebs-msg ebs-ai ebs-typing' ;
+        el.setAttribute('aria-label', 'Elite AI is typing…');
+        el.innerHTML = '<span></span><span></span><span></span>';
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+        return el;
+      }
+      function aiReply(text) {
+        var cat = matchKB(text);
+        var typing = showTyping();
+        setTimeout(function () {
+          if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+          var html = KNOWLEDGE[cat].reply;
+          if (cat === 'fallback' && !chat.emailCaptured) {
+            html = KNOWLEDGE.fallback.reply;
+          }
+          addBubble('ai', html);
+          chat.history.push({ role: 'ai', text: html });
+          store.set('ebs_chat_history', chat.history);
+          if (!chat.open) setBadge(chat.msgCount);
+          beep();
+          maybeAskEmail();
+        }, 1500);
+      }
+      function setBadge(n) {
+        var fab = $('ebsChatFab'), badge = $('ebsChatBadge');
+        if (!fab || !badge) return;
+        if (n > 0) { fab.classList.add('ebs-unread'); badge.textContent = n > 9 ? '9+' : String(n); }
+        else fab.classList.remove('ebs-unread');
+      }
+      function maybeAskEmail() {
+        if (chat.emailCaptured) return;
+        if (chat.msgCount >= 3 && !chat.askedEmail) {
+          chat.askedEmail = true;
+          setTimeout(function () {
+            addBubble('ai', "By the way, so the team can send you a short personalized summary: what's your email?");
+            chat.history.push({ role: 'ai', text: "By the way, so the team can send you a short personalized summary: what's your email?" });
+            store.set('ebs_chat_history', chat.history);
+          }, 1200);
+        }
+      }
+      function userSend(raw) {
+        var text = String(raw || '').trim();
+        if (!text) return;
+        var body = $('ebsChatBody');
+        if (body) { $('ebsQuickRow').classList.add('ebs-hidden'); }
+        addBubble('user', text);
+        chat.history.push({ role: 'user', text: text });
+        store.set('ebs_chat_history', chat.history);
+        chat.msgCount++;
+        if (!chat.emailCaptured && EMAIL_RX.test(text)) {
+          chat.emailCaptured = true;
+          store.set('ebs_chat_email', text);
+          var ctx = chat.history.slice(-6).map(function (m) { return m.role + ': ' + m.text; }).join(' | ');
+          submitEBSLead({ email: text, planInterest: 'Chat', leadType: 'Chat', context: ctx }).then(function (res) {
+            var okMsg = "Thanks. We'll get back to you within one business day. Meanwhile, would you like to see the <a href=\"/demo.html\">live demo</a>?";
+            var failMsg = "I couldn't save your details right now. Please try again later, or book a call: <a href=\"" + CALENDLY + "\" target=\"_blank\" rel=\"noopener noreferrer\">Book a 15-Min Call →</a>";
+            addBubble('ai', res && res.ok ? okMsg : failMsg);
+            chat.history.push({ role: 'ai', text: res && res.ok ? okMsg : failMsg });
+            store.set('ebs_chat_history', chat.history);
+          });
+          return;
+        }
+        aiReply(text);
+      }
+      function openChat() {
+        chat.open = true;
+        var win = $('ebsChatWindow'), fab = $('ebsChatFab');
+        if (!win) return;
+        win.classList.add('ebs-open'); win.setAttribute('aria-hidden', 'false');
+        fab.classList.add('ebs-open'); fab.setAttribute('aria-expanded', 'true');
+        setBadge(0);
+        if (chat.history.length === 0) {
+          addBubble('ai', "Hello, I'm the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?");
+          chat.history.push({ role: 'ai', text: "Hello, I'm the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?" });
+          store.set('ebs_chat_history', chat.history);
+        } else {
+          chat.history.forEach(function (m) { addBubble(m.role === 'ai' ? 'ai' : 'user', m.text); });
+        }
+        setTimeout(function () { var i = $('ebsChatInput'); if (i) i.focus(); }, 350);
+      }
+      function closeChat() {
+        chat.open = false;
+        var win = $('ebsChatWindow'), fab = $('ebsChatFab');
+        if (!win) return;
+        win.classList.remove('ebs-open'); win.setAttribute('aria-hidden', 'true');
+        fab.classList.remove('ebs-open'); fab.setAttribute('aria-expanded', 'false');
+        $('ebsChatBody').innerHTML = '';
+      }
+      function initChat() {
+        var fab = $('ebsChatFab');
+        if (!fab) return;
+        fab.addEventListener('click', function () { chat.open ? closeChat() : openChat(); });
+        $('ebsChatClose').addEventListener('click', closeChat);
+        $('ebsChatSend').addEventListener('click', function () { var i = $('ebsChatInput'); userSend(i.value); i.value = ''; });
+        $('ebsChatInput').addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); userSend(e.target.value); e.target.value = ''; }
+        });
+        $('ebsQuickRow').querySelectorAll('.ebs-chip').forEach(function (chip) {
+          chip.addEventListener('click', function () { userSend(chip.getAttribute('data-q')); });
+        });
+        var snd = $('ebsSoundToggle');
+        function syncSnd() {
+          snd.classList.toggle('ebs-muted', !soundOn);
+          snd.innerHTML = soundOn
+            ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
+            : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m16 9 5 5"/><path d="m21 9-5 5"/></svg>';
+          snd.setAttribute('aria-pressed', String(soundOn));
+        }
+        snd.addEventListener('click', function () { soundOn = !soundOn; store.set('ebs_chat_sound', soundOn); syncSnd(); });
+        syncSnd();
+      }
+
+      /* ============================================================
+         FEATURE 3, SMART NOTIFICATION BAR
+      ============================================================ */
+      function initNotifBar() {
+        var bar = $('ebsNotifBar'), msg = $('ebsNotifMsg');
+        if (!bar) return;
+        /* Place the bar as the FIRST element of <body> so it sits above the
+           navbar in normal document flow (no fixed offsets, no overlaps). */
+        try {
+          if (bar.parentElement && bar.parentElement !== document.body) {
+            document.body.insertBefore(bar, document.body.firstChild);
+          }
+        } catch (err) { /* non-fatal */ }
+        var dismissed = store.get('ebs_notif_dismissed', 0);
+        if (dismissed > Date.now()) { bar.classList.add('ebs-hidden'); return; }
+        var MSGS = [
+          { html: 'Book a 15-Min Call', href: CALENDLY, external: true }
+        ];
+        var i = 0, timer;
+        document.body.classList.add('ebs-bar-active');
+        function render(next) {
+          msg.classList.add('ebs-swap');
+          setTimeout(function () {
+            var m = MSGS[i];
+            msg.innerHTML = m.href && m.html.indexOf('<a') === -1
+              ? m.html + ' <a href="' + m.href + '"' + (m.external ? ' target="_blank" rel="noopener noreferrer"' : '') + '>→</a>'
+              : m.html;
+            msg.classList.remove('ebs-swap');
+            i = (i + 1) % MSGS.length;
+          }, 450);
+        }
+        render();
+        timer = setInterval(render, 8000);
+        $('ebsNotifX').addEventListener('click', function () {
+          clearInterval(timer);
+          store.set('ebs_notif_dismissed', Date.now() + 7 * 864e5);
+          bar.classList.add('ebs-out');
+          document.body.classList.remove('ebs-bar-active');
+          setTimeout(function () { bar.classList.add('ebs-hidden'); }, 500);
+        });
+      }
+
+      /* ============================================================
+         BONUS 1 + 2, SCROLL PROGRESS & BACK-TO-TOP
+      ============================================================ */
+      function initScrollTools() {
+        var bt = $('ebsBackTop');
+        if (!bt) return;
+        var onScroll = function () {
+          bt.classList.toggle('ebs-show', window.scrollY > 500);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        bt.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: REDUCE ? 'auto' : 'smooth' }); });
+      }
+
+      /* ============================================================
+         BONUS 3, DARK / LIGHT THEME TOGGLE
+      ============================================================ */
+      function initTheme() {
+        var btns = document.querySelectorAll('.ebs-theme-btn');
+        if (!btns.length) return;
+        var saved = store.get('ebs_theme', 'dark');
+        document.documentElement.setAttribute('data-theme', saved);
+        function sync() {
+          var light = document.documentElement.getAttribute('data-theme') === 'light';
+          btns.forEach(function (b) {
+            b.innerHTML = light
+              ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>'
+              : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+            b.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+          });
+        }
+        btns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            store.set('ebs_theme', next);
+            sync();
+          });
+        });
+        sync();
+      }
+
+      /* ============================================================
+         BONUS 5, PWA SERVICE WORKER
+      ============================================================ */
+      function initPWA() {
+        if (!('serviceWorker' in navigator)) return;
+        var proto = location.protocol;
+        if (proto !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () { /* offline cache only, safe to ignore */ });
+        });
+      }
+
+      /* ============================================================ */
+      initChat();
+      initNotifBar();
+      initScrollTools();
+      initTheme();
+      /* ============================================================
+         MOBILE MENU (all pages), #menuToggle + #mobileMenu
+         Bulletproof: first click opens, ESC/resize/link/backdrop close,
+         body scroll locked while open, aria synced, single binding.
+      ============================================================ */
+      function initMobileMenu() {
+        var tgl = document.getElementById('menuToggle');
+        var menu = document.getElementById('mobileMenu');
+        if (!tgl || !menu) return;
+        if (menu.getAttribute('data-ebs-bound') === '1') return;
+        menu.setAttribute('data-ebs-bound', '1');
+        function setOpen(open) {
+          tgl.classList.toggle('is-open', open);
+          menu.classList.toggle('is-open', open);
+          tgl.setAttribute('aria-expanded', String(open));
+          tgl.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          document.body.style.overflow = open ? 'hidden' : '';
+          document.body.classList.toggle('ebs-menu-open', open);
+        }
+        tgl.addEventListener('click', function () {
+          setOpen(!menu.classList.contains('is-open'));
+        });
+        menu.addEventListener('click', function (ev) {
+          var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+          if (a || ev.target === menu) setOpen(false);
+        });
+        document.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Escape' && menu.classList.contains('is-open')) setOpen(false);
+        });
+        window.addEventListener('resize', function () {
+          if (window.innerWidth > 1024 && menu.classList.contains('is-open')) setOpen(false);
+        });
+      }
+      initMobileMenu();
+
+      initPWA();
+    })();
+  </script>
+
+  <script>
+    /* ============================================================
+       PHASE 3, EBS GA4 ENTERPRISE EVENT TRACKING
+       Base config + advanced custom events (vanilla JS, no libs)
+
+       ▸ SWAP THE MEASUREMENT ID: change EBS_GA4_ID below (or
+         set window.EBS_GA4_ID (or EBS_CONFIG.ga4Id) to your real GA4 Measurement ID).
+       ▸ Event taxonomy documented in the deployment guide (§ GA4).
+       ▸ TODO (launch): enable Google Consent Mode v2 in the base
+         snippet once the cookie banner has accept/reject variants.
+    ============================================================ */
+    window.EBS_GA4_ID = window.EBS_GA4_ID || '';
+    window.EBS_LEAD_ENDPOINT = window.EBS_LEAD_ENDPOINT || ''; // CONFIG [ADD_REAL_INFO]: paste your deployed Google Apps Script /exec URL here (single quotes) // CONFIG [ADD_REAL_GA4_ID]: set a real GA4 Measurement ID to enable forwarding
+
+    /* ---- tracking utility (exact spec) ---- */
+    const trackEvent = (eventName, eventParams = {}) => {
+      console.log(`📊 [Analytics Log] ${eventName}`, eventParams);
+      if (window.EBS_GA4_ID && typeof gtag === 'function') {
+        gtag('event', eventName, eventParams);
+      }
+    };
+
+    (function () {
+      'use strict';
+      const GA4 = window.EBS_GA4_ID;
+      const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const store = {
+        get: (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+        set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+      };
+      const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      const PAGE = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '') || 'index';
+      const seen = { scroll: {}, io: {}, section: {} };
+      const fired = {};
+
+      /* ---- set user properties once (only when GA4 is configured) ---- */
+      try {
+        if (!GA4 || typeof gtag !== 'function') throw new Error('GA4 not configured');
+        gtag('set', 'user_properties', {
+          device_class: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          language: navigator.language || 'en',
+          page_name: PAGE
+        });
+      } catch (e) {}
+
+      /* ---- session + visit classification ---- */
+      const visited = store.get('ebs_ga_visited', false);
+      trackEvent(visited ? 'returning_visit' : 'first_visit');
+      store.set('ebs_ga_visited', true);
+
+      const once = (key, fn) => { if (fired[key]) return; fired[key] = true; fn(); };
+
+      const isExternal = (a) => {
+        try {
+          const u = new URL(a.href, location.href);
+          return u.origin !== location.origin;
+        } catch (e) { return false; }
+      };
+
+      /* ============================================================
+         1) UNIVERSAL, engagement & scroll
+      ============================================================ */
+      [5, 10, 30, 60].forEach(s => {
+        setTimeout(() => trackEvent('time_on_page', { seconds: s, page: PAGE }), s * 1000);
+      });
+
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (scrollTicking || REDUCE) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - window.innerHeight;
+          const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 100;
+          [25, 50, 75, 90, 100].forEach(mark => {
+            if (pct >= mark && !seen.scroll[mark]) {
+              seen.scroll[mark] = true;
+              trackEvent('scroll_depth', { percent: mark, page: PAGE });
+            }
+          });
+          scrollTicking = false;
+        });
+      }, { passive: true });
+
+      /* ============================================================
+         2) UNIVERSAL, clicks (delegated)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+
+        const a = t.closest('a');
+        if (a) {
+          const href = a.getAttribute('href') || '';
+          if (isExternal(a)) {
+            trackEvent('link_click', { link_url: href, link_domain: (() => { try { return new URL(href, location.href).hostname; } catch (e) { return ''; } })(), page: PAGE });
+          }
+          if (/\.(pdf|zip|docx?|xlsx?|pptx?|mp4|mp3|csv)(\?|$)/i.test(href)) {
+            trackEvent('file_download', { file_name: href.split('/').pop(), link_url: href });
+          }
+          if (a.closest('.ebs-notif-bar')) {
+            trackEvent('notif_cta_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.nav-links')) {
+            trackEvent('nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('#mobileMenu')) {
+            trackEvent('mobile_nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.footer-legal')) {
+            trackEvent('legal_link_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.toc')) {
+            trackEvent('article_toc_click', { link_url: href });
+          }
+          // ---- page-specific CTAs ----
+          if (PAGE === 'demo' && a.textContent.includes('Setup Call')) {
+            trackEvent('demo_cta_click', { destination: href });
+          }
+          if (PAGE === 'calculator' && a.closest('.cta-btns')) {
+            trackEvent('calculator_cta_click', { destination: href, amount_text: (document.getElementById('ctaAmount') || {}).textContent || '' });
+          }
+          if (PAGE === 'pricing' && /calendly/i.test(href)) {
+            trackEvent('pricing_cta_click', { destination: href });
+          }
+          if (PAGE === 'audit' && /calendly/i.test(href)) {
+            trackEvent('audit_cta_click', { destination: href });
+          }
+          if (PAGE === 'blog' && a.closest('.blog-card')) {
+            trackEvent('blog_article_open', { article_url: href });
+          }
+          if (PAGE === 'case-studies' && a.closest('.cs-card')) {
+            trackEvent('case_study_click', { link_url: href });
+          }
+          if (PAGE.startsWith('article') && a.closest('.article-cta')) {
+            trackEvent('article_cta_click', { page: PAGE });
+          }
+        }
+
+        const btn = t.closest('button');
+        if (btn) {
+          if (btn.id === 'ebsBackTop' || btn.classList.contains('ebs-backtop')) {
+            trackEvent('back_to_top_click', { scroll_y: Math.round(window.scrollY) });
+          }
+          if (btn.classList.contains('ebs-theme-btn')) {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            trackEvent('theme_changed', { mode: next });
+          }
+          if (btn.classList.contains('filter-chip')) {
+            const filterCat = btn.getAttribute('data-filter');
+            trackEvent(PAGE === 'blog' ? 'blog_filter' : 'case_studies_filter', { category: filterCat });
+            // Functional category filter (show/hide cards, active chip, empty state)
+            const chipRow = btn.closest('.filters');
+            if (chipRow) {
+              chipRow.querySelectorAll('.filter-chip').forEach((chip) => {
+                const on = (chip === btn);
+                chip.classList.toggle('active', on);
+                if (chip.hasAttribute('aria-selected')) chip.setAttribute('aria-selected', on ? 'true' : 'false');
+              });
+              const grid = document.getElementById(PAGE === 'blog' ? 'blogGrid' : 'csGrid');
+              if (grid) {
+                let shown = 0;
+                grid.querySelectorAll('[data-cat]').forEach((card) => {
+                  const match = (filterCat === 'All') || card.getAttribute('data-cat') === filterCat;
+                  card.style.display = match ? '' : 'none';
+                  if (match) shown++;
+                });
+                const empty = document.getElementById('gridEmpty');
+                if (empty) empty.style.display = (shown === 0) ? 'block' : 'none';
+              }
+            }
+          }
+          if (btn.classList.contains('cs-read')) {
+            trackEvent('case_modal_open', { case_index: btn.getAttribute('data-cs') });
+          }
+          if (btn.classList.contains('modal-x') || (btn.hasAttribute && btn.hasAttribute('data-close'))) {
+            trackEvent('case_modal_close', {});
+          }
+          if (PAGE === 'demo' && btn.classList.contains('tab')) {
+            trackEvent('demo_tab_switch', { industry: btn.getAttribute('data-industry') });
+          }
+          if (PAGE === 'demo' && btn.id === 'sendBtn') {
+            trackEvent('demo_message_sent', {});
+          }
+          if (PAGE === 'pricing' && btn.classList.contains('faq-head')) {
+            trackEvent('pricing_faq_open', { question: (btn.textContent || '').trim().slice(0, 60) });
+          }
+          if (PAGE === 'audit' && btn.id === 'startBtn') {
+            trackEvent('audit_started', {});
+          }
+          if (PAGE === 'audit' && btn.closest('.option')) {
+            const opts = btn.closest('.q-screen') ? btn.closest('.q-screen').querySelectorAll('.option') : [];
+            let idx = -1;
+            opts.forEach((o, i) => { if (o === btn.closest('.option')) idx = i; });
+            trackEvent('audit_answer', { option_index: idx, option_text: (btn.textContent || '').trim().slice(0, 60) });
+          }
+        }
+      });
+
+      /* ============================================================
+         3) UNIVERSAL, forms (delegated focus/submit)
+      ============================================================ */
+      document.addEventListener('focusin', (e) => {
+        const input = e.target;
+        if (!input || !input.matches || !input.matches('input, textarea, select')) return;
+        const form = input.closest('form');
+        if (!form) return;
+        const key = 'form_' + (form.id || 'anon');
+        once(key, () => trackEvent('form_start', { form_id: form.id || 'anonymous', page: PAGE }));
+      });
+
+      document.addEventListener('submit', (e) => {
+        const form = e.target;
+        if (!form || !form.id) return;
+        const id = form.id;
+        if (id === 'contactForm') {
+          const email = ((document.getElementById('cfEmail') || {}).value || '').trim();
+          const name = ((document.getElementById('cfName') || {}).value || '').trim();
+          trackEvent('contact_form_submit', { valid_email: EMAIL_RX.test(email), has_name: name.length > 1 });
+        } else {
+          trackEvent('form_submit', { form_id: id, page: PAGE });
+        }
+      });
+
+      /* ============================================================
+         4) UNIVERSAL, PWA install
+      ============================================================ */
+      window.addEventListener('appinstalled', () => trackEvent('pwa_installed', {}));
+
+      /* ============================================================
+         5) CHATBOT EVENTS (widget present on every page)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        if (t.closest('#ebsChatFab')) {
+          const open = !!document.getElementById('ebsChatWindow') && document.getElementById('ebsChatWindow').classList.contains('ebs-open');
+          trackEvent(open ? 'chat_closed' : 'chat_opened', { page: PAGE });
+        }
+        if (t.closest('#ebsChatClose')) {
+          trackEvent('chat_closed', { page: PAGE });
+        }
+        if (t.closest('#ebsChatSend')) {
+          const input = document.getElementById('ebsChatInput');
+          const text = (input && input.value || '').trim();
+          trackEvent('chat_message_sent', { length: text.length, page: PAGE });
+        }
+        if (t.closest('.ebs-chip')) {
+          trackEvent('chat_quick_reply', { label: (t.closest('.ebs-chip').textContent || '').trim() });
+        }
+        if (t.closest('#ebsSoundToggle')) {
+          trackEvent('chat_sound_toggled', {});
+        }
+      });
+
+      /* email captured, poll localStorage for the engine's write */
+      let lastEmail = store.get('ebs_chat_email', null);
+      setInterval(() => {
+        const now = store.get('ebs_chat_email', null);
+        if (now && now !== lastEmail) {
+          lastEmail = now;
+          trackEvent('chat_email_captured', { page: PAGE });
+          // TODO: Send to backend/CRM webhook (shared with engagement engine)
+        }
+      }, 1500);
+
+      /* ============================================================
+         6) EXIT-INTENT / NOTIF BAR / TOASTS (observe class changes)
+      ============================================================ */
+      const observeClass = (id, cls, onAdd, onRemove) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const mo = new MutationObserver(() => {
+          const has = el.classList.contains(cls);
+          if (has && !el.__ebsHad) { el.__ebsHad = true; onAdd(); }
+          else if (!has && el.__ebsHad) { el.__ebsHad = false; onRemove && onRemove(); }
+        });
+        mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+      };
+
+      observeClass('ebsNotifBar', 'ebs-out',
+        () => trackEvent('notif_bar_dismissed', {}));
+
+      /* ============================================================
+         8) COOKIE CONSENT
+      ============================================================ */
+      const cookieBtn = document.getElementById('cookieAccept');
+      if (cookieBtn) {
+        cookieBtn.addEventListener('click', () => trackEvent('cookie_consent', { choice: 'accepted' }));
+      }
+
+      /* ============================================================
+         9) SECTION VIEWS (IntersectionObserver, once each)
+      ============================================================ */
+      const SECTION_SELECTORS = {
+        index: [['#home', 'hero_view'], ['#results', 'results_view'], ['#comparison', 'comparison_view'],
+                ['#faq', 'faq_view'], ['#booking', 'call_cta_view'], ['#services', 'services_view'],
+                ['#industries', 'industries_view']],
+        demo: [['.demo-grid', 'demo_dashboard_view'], ['#missed-call', 'demo_missedcall_view']],
+        calculator: [['#results', 'calculator_results_view'], ['.cta-section', 'calculator_cta_view']],
+        pricing: [['#what-we-build', 'pricing_what_we_build_view'], ['#how-it-works', 'pricing_process_view'], ['#investment', 'pricing_investment_view']],
+        audit: [['#results', 'audit_results_view']],
+        'case-studies': [['.page-hero', 'case_studies_view']],
+        blog: [['.page-hero', 'blog_view']]
+      };
+      const map = SECTION_SELECTORS[PAGE] || (PAGE.startsWith('article') ? [['.article-cta', 'article_read_complete']] : []);
+      const seenIO = {};
+      if ('IntersectionObserver' in window && map.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (!en.isIntersecting) return;
+            const key = en.target.id || en.target.className;
+            if (seenIO[key]) return;
+            seenIO[key] = true;
+            map.filter(([sel]) => {
+              const el = document.querySelector(sel);
+              return el === en.target;
+            }).forEach(([sel, evt]) => trackEvent(evt, { page: PAGE }));
+          });
+        }, { threshold: 0.35 });
+        map.forEach(([sel]) => {
+          const el = document.querySelector(sel);
+          if (el) io.observe(el);
+        });
+      }
+
+      /* ============================================================
+         10) PAGE-SPECIFIC, calculators & configurators
+      ============================================================ */
+      if (PAGE === 'calculator') {
+        const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+        const fire = debounce((el) => {
+          trackEvent('calculator_input', {
+            control: el.id || el.name || 'control',
+            value: el.value || el.textContent || ''
+          });
+        }, 800);
+        document.addEventListener('input', (e) => {
+          const t = e.target;
+          if (t && t.closest && (t.closest('.slider') || t.closest('.control') || t.closest('input') || t.closest('.calc'))) {
+            if (t.id) fire(t);
+          }
+        });
+      }
+      if (PAGE === 'pricing') {
+
+      }
+
+      console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
+    })();
+  </script>
+
+</body>
+</html>

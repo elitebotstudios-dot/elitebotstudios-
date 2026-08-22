@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're Offline, Elite Bot Studios</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <meta name="robots" content="noindex" />
+  <style>
+    :root { --bg:#050505; --gold:#c9a84c; --gold-light:#e8d48b; --text:#f5f0e8; --text-2:#8a8578; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      min-height:100dvh; display:flex; align-items:center; justify-content:center;
+      background:var(--bg); color:var(--text);
+      font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+      text-align:center; padding:24px;
+    }
+    .wrap { max-width:520px; }
+    .mark {
+      width:76px; height:76px; margin:0 auto 26px; border-radius:50%;
+      border:1px solid rgba(201,168,76,0.6);
+      display:flex; align-items:center; justify-content:center;
+      font-family:Georgia,serif; font-size:34px; font-weight:700; color:var(--gold);
+      box-shadow:0 0 40px rgba(201,168,76,0.25);
+    }
+    h1 { font-family:Georgia,'Playfair Display',serif; font-size:clamp(1.6rem,5vw,2.4rem); margin-bottom:14px; }
+    h1 span { background:linear-gradient(100deg,#e8d48b,#c9a84c 55%,#a07c2a); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+    p { color:var(--text-2); line-height:1.7; margin-bottom:28px; }
+    .btn {
+      display:inline-block; padding:15px 32px; border-radius:8px;
+      background:linear-gradient(135deg,#e8d48b,#c9a84c 60%,#a07c2a);
+      color:#0a0a0a; font-weight:700; text-decoration:none; letter-spacing:0.04em;
+      box-shadow:0 10px 28px rgba(201,168,76,0.35);
+    }
+    .hint { margin-top:22px; font-size:12.5px; color:#8a8578; }
+  </style>
+  <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
+       When you have a real GA4 Measurement ID, paste the standard
+       gtag.js loader + gtag('config') snippet here. The PHASE 3 event
+       tracker forwards automatically once the ID is set. No invalid
+       IDs load. -->
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark" aria-hidden="true">E</div>
+    <h1>You're <span>Offline</span></h1>
+    <p>No connection detected. The AI never sleeps, but your internet does. Reconnect and the full experience will be waiting.</p>
+    <a class="btn" href="/" onclick="try{location.reload();}catch(e){}">Try Again</a>
+    <p class="hint">Elite Bot Studios · AI Business Automation</p>
+  </div>
+  <script>
+    /* ============================================================
+       PHASE 3, EBS GA4 ENTERPRISE EVENT TRACKING
+       Base config + advanced custom events (vanilla JS, no libs)
+
+       ▸ SWAP THE MEASUREMENT ID: change EBS_GA4_ID below (or
+         set window.EBS_GA4_ID (or EBS_CONFIG.ga4Id) to your real GA4 Measurement ID).
+       ▸ Event taxonomy documented in the deployment guide (§ GA4).
+       ▸ TODO (launch): enable Google Consent Mode v2 in the base
+         snippet once the cookie banner has accept/reject variants.
+    ============================================================ */
+    window.EBS_GA4_ID = window.EBS_GA4_ID || ''; // CONFIG [ADD_REAL_GA4_ID]: set a real GA4 Measurement ID to enable forwarding
+
+    /* ---- tracking utility (exact spec) ---- */
+    const trackEvent = (eventName, eventParams = {}) => {
+      console.log(`📊 [Analytics Log] ${eventName}`, eventParams);
+      if (window.EBS_GA4_ID && typeof gtag === 'function') {
+        gtag('event', eventName, eventParams);
+      }
+    };
+
+    (function () {
+      'use strict';
+      const GA4 = window.EBS_GA4_ID;
+      const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const store = {
+        get: (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+        set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+      };
+      const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      const PAGE = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '') || 'index';
+      const seen = { scroll: {}, io: {}, section: {} };
+      const fired = {};
+
+      /* ---- set user properties once (only when GA4 is configured) ---- */
+      try {
+        if (!GA4 || typeof gtag !== 'function') throw new Error('GA4 not configured');
+        gtag('set', 'user_properties', {
+          device_class: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          language: navigator.language || 'en',
+          page_name: PAGE
+        });
+      } catch (e) {}
+
+      /* ---- session + visit classification ---- */
+      const visited = store.get('ebs_ga_visited', false);
+      trackEvent(visited ? 'returning_visit' : 'first_visit');
+      store.set('ebs_ga_visited', true);
+
+      const once = (key, fn) => { if (fired[key]) return; fired[key] = true; fn(); };
+
+      const isExternal = (a) => {
+        try {
+          const u = new URL(a.href, location.href);
+          return u.origin !== location.origin;
+        } catch (e) { return false; }
+      };
+
+      /* ============================================================
+         1) UNIVERSAL, engagement & scroll
+      ============================================================ */
+      [5, 10, 30, 60].forEach(s => {
+        setTimeout(() => trackEvent('time_on_page', { seconds: s, page: PAGE }), s * 1000);
+      });
+
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (scrollTicking || REDUCE) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - window.innerHeight;
+          const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 100;
+          [25, 50, 75, 90, 100].forEach(mark => {
+            if (pct >= mark && !seen.scroll[mark]) {
+              seen.scroll[mark] = true;
+              trackEvent('scroll_depth', { percent: mark, page: PAGE });
+            }
+          });
+          scrollTicking = false;
+        });
+      }, { passive: true });
+
+      /* ============================================================
+         2) UNIVERSAL, clicks (delegated)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+
+        const a = t.closest('a');
+        if (a) {
+          const href = a.getAttribute('href') || '';
+          if (isExternal(a)) {
+            trackEvent('link_click', { link_url: href, link_domain: (() => { try { return new URL(href, location.href).hostname; } catch (e) { return ''; } })(), page: PAGE });
+          }
+          if (/\.(pdf|zip|docx?|xlsx?|pptx?|mp4|mp3|csv)(\?|$)/i.test(href)) {
+            trackEvent('file_download', { file_name: href.split('/').pop(), link_url: href });
+          }
+          if (a.closest('.ebs-notif-bar')) {
+            trackEvent('notif_cta_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.nav-links')) {
+            trackEvent('nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('#mobileMenu')) {
+            trackEvent('mobile_nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.footer-legal')) {
+            trackEvent('legal_link_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.toc')) {
+            trackEvent('article_toc_click', { link_url: href });
+          }
+          // ---- page-specific CTAs ----
+          if (PAGE === 'demo' && a.textContent.includes('Setup Call')) {
+            trackEvent('demo_cta_click', { destination: href });
+          }
+          if (PAGE === 'calculator' && a.closest('.cta-btns')) {
+            trackEvent('calculator_cta_click', { destination: href, amount_text: (document.getElementById('ctaAmount') || {}).textContent || '' });
+          }
+          if (PAGE === 'pricing' && /calendly/i.test(href)) {
+            trackEvent('pricing_cta_click', { destination: href });
+          }
+          if (PAGE === 'audit' && /calendly/i.test(href)) {
+            trackEvent('audit_cta_click', { destination: href });
+          }
+          if (PAGE === 'blog' && a.closest('.blog-card')) {
+            trackEvent('blog_article_open', { article_url: href });
+          }
+          if (PAGE === 'case-studies' && a.closest('.cs-card')) {
+            trackEvent('case_study_click', { link_url: href });
+          }
+          if (PAGE.startsWith('article') && a.closest('.article-cta')) {
+            trackEvent('article_cta_click', { page: PAGE });
+          }
+        }
+
+        const btn = t.closest('button');
+        if (btn) {
+          if (btn.id === 'ebsBackTop' || btn.classList.contains('ebs-backtop')) {
+            trackEvent('back_to_top_click', { scroll_y: Math.round(window.scrollY) });
+          }
+          if (btn.classList.contains('ebs-theme-btn')) {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            trackEvent('theme_changed', { mode: next });
+          }
+          if (btn.classList.contains('filter-chip')) {
+            trackEvent(PAGE === 'blog' ? 'blog_filter' : 'case_studies_filter', { category: btn.getAttribute('data-filter') });
+          }
+          if (btn.classList.contains('cs-read')) {
+            trackEvent('case_modal_open', { case_index: btn.getAttribute('data-cs') });
+          }
+          if (btn.classList.contains('modal-x') || (btn.hasAttribute && btn.hasAttribute('data-close'))) {
+            trackEvent('case_modal_close', {});
+          }
+          if (PAGE === 'demo' && btn.classList.contains('tab')) {
+            trackEvent('demo_tab_switch', { industry: btn.getAttribute('data-industry') });
+          }
+          if (PAGE === 'demo' && btn.id === 'sendBtn') {
+            trackEvent('demo_message_sent', {});
+          }
+          if (PAGE === 'pricing' && btn.classList.contains('faq-head')) {
+            trackEvent('pricing_faq_open', { question: (btn.textContent || '').trim().slice(0, 60) });
+          }
+          if (PAGE === 'audit' && btn.id === 'startBtn') {
+            trackEvent('audit_started', {});
+          }
+          if (PAGE === 'audit' && btn.closest('.option')) {
+            const opts = btn.closest('.q-screen') ? btn.closest('.q-screen').querySelectorAll('.option') : [];
+            let idx = -1;
+            opts.forEach((o, i) => { if (o === btn.closest('.option')) idx = i; });
+            trackEvent('audit_answer', { option_index: idx, option_text: (btn.textContent || '').trim().slice(0, 60) });
+          }
+        }
+      });
+
+      /* ============================================================
+         3) UNIVERSAL, forms (delegated focus/submit)
+      ============================================================ */
+      document.addEventListener('focusin', (e) => {
+        const input = e.target;
+        if (!input || !input.matches || !input.matches('input, textarea, select')) return;
+        const form = input.closest('form');
+        if (!form) return;
+        const key = 'form_' + (form.id || 'anon');
+        once(key, () => trackEvent('form_start', { form_id: form.id || 'anonymous', page: PAGE }));
+      });
+
+      document.addEventListener('submit', (e) => {
+        const form = e.target;
+        if (!form || !form.id) return;
+        const id = form.id;
+        if (id === 'contactForm') {
+          const email = ((document.getElementById('cfEmail') || {}).value || '').trim();
+          const name = ((document.getElementById('cfName') || {}).value || '').trim();
+          trackEvent('contact_form_submit', { valid_email: EMAIL_RX.test(email), has_name: name.length > 1 });
+        } else {
+          trackEvent('form_submit', { form_id: id, page: PAGE });
+        }
+      });
+
+      /* ============================================================
+         4) UNIVERSAL, PWA install
+      ============================================================ */
+      window.addEventListener('appinstalled', () => trackEvent('pwa_installed', {}));
+
+      /* ============================================================
+         5) CHATBOT EVENTS (widget present on every page)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        if (t.closest('#ebsChatFab')) {
+          const open = !!document.getElementById('ebsChatWindow') && document.getElementById('ebsChatWindow').classList.contains('ebs-open');
+          trackEvent(open ? 'chat_closed' : 'chat_opened', { page: PAGE });
+        }
+        if (t.closest('#ebsChatClose')) {
+          trackEvent('chat_closed', { page: PAGE });
+        }
+        if (t.closest('#ebsChatSend')) {
+          const input = document.getElementById('ebsChatInput');
+          const text = (input && input.value || '').trim();
+          trackEvent('chat_message_sent', { length: text.length, page: PAGE });
+        }
+        if (t.closest('.ebs-chip')) {
+          trackEvent('chat_quick_reply', { label: (t.closest('.ebs-chip').textContent || '').trim() });
+        }
+        if (t.closest('#ebsSoundToggle')) {
+          trackEvent('chat_sound_toggled', {});
+        }
+      });
+
+      /* email captured, poll localStorage for the engine's write */
+      let lastEmail = store.get('ebs_chat_email', null);
+      setInterval(() => {
+        const now = store.get('ebs_chat_email', null);
+        if (now && now !== lastEmail) {
+          lastEmail = now;
+          trackEvent('chat_email_captured', { page: PAGE });
+          // TODO: Send to backend/CRM webhook (shared with engagement engine)
+        }
+      }, 1500);
+
+      /* ============================================================
+         6) EXIT-INTENT / NOTIF BAR / TOASTS (observe class changes)
+      ============================================================ */
+      const observeClass = (id, cls, onAdd, onRemove) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const mo = new MutationObserver(() => {
+          const has = el.classList.contains(cls);
+          if (has && !el.__ebsHad) { el.__ebsHad = true; onAdd(); }
+          else if (!has && el.__ebsHad) { el.__ebsHad = false; onRemove && onRemove(); }
+        });
+        mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+      };
+
+      observeClass('ebsNotifBar', 'ebs-out',
+        () => trackEvent('notif_bar_dismissed', {}));
+
+      /* ============================================================
+         8) COOKIE CONSENT
+      ============================================================ */
+      const cookieBtn = document.getElementById('cookieAccept');
+      if (cookieBtn) {
+        cookieBtn.addEventListener('click', () => trackEvent('cookie_consent', { choice: 'accepted' }));
+      }
+
+      /* ============================================================
+         9) SECTION VIEWS (IntersectionObserver, once each)
+      ============================================================ */
+      const SECTION_SELECTORS = {
+        index: [['#home', 'hero_view'], ['#results', 'results_view'], ['#comparison', 'comparison_view'],
+                ['#faq', 'faq_view'], ['#booking', 'call_cta_view'], ['#services', 'services_view'],
+                ['#industries', 'industries_view']],
+        demo: [['.demo-grid', 'demo_dashboard_view'], ['#missed-call', 'demo_missedcall_view']],
+        calculator: [['#results', 'calculator_results_view'], ['.cta-section', 'calculator_cta_view']],
+        pricing: [['#what-we-build', 'pricing_what_we_build_view'], ['#how-it-works', 'pricing_process_view'], ['#investment', 'pricing_investment_view']],
+        audit: [['#results', 'audit_results_view']],
+        'case-studies': [['.page-hero', 'case_studies_view']],
+        blog: [['.page-hero', 'blog_view']]
+      };
+      const map = SECTION_SELECTORS[PAGE] || (PAGE.startsWith('article') ? [['.article-cta', 'article_read_complete']] : []);
+      const seenIO = {};
+      if ('IntersectionObserver' in window && map.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (!en.isIntersecting) return;
+            const key = en.target.id || en.target.className;
+            if (seenIO[key]) return;
+            seenIO[key] = true;
+            map.filter(([sel]) => {
+              const el = document.querySelector(sel);
+              return el === en.target;
+            }).forEach(([sel, evt]) => trackEvent(evt, { page: PAGE }));
+          });
+        }, { threshold: 0.35 });
+        map.forEach(([sel]) => {
+          const el = document.querySelector(sel);
+          if (el) io.observe(el);
+        });
+      }
+
+      /* ============================================================
+         10) PAGE-SPECIFIC, calculators & configurators
+      ============================================================ */
+      if (PAGE === 'calculator') {
+        const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+        const fire = debounce((el) => {
+          trackEvent('calculator_input', {
+            control: el.id || el.name || 'control',
+            value: el.value || el.textContent || ''
+          });
+        }, 800);
+        document.addEventListener('input', (e) => {
+          const t = e.target;
+          if (t && t.closest && (t.closest('.slider') || t.closest('.control') || t.closest('input') || t.closest('.calc'))) {
+            if (t.id) fire(t);
+          }
+        });
+      }
+      if (PAGE === 'pricing') {
+
+      }
+
+      console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
+    })();
+  </script>
+
+</body>
+</html>

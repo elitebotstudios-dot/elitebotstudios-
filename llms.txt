@@ -1,0 +1,43 @@
+# Elite Bot Studios
+
+> AI Business Automation Agency. We build custom AI automation systems that respond to leads in under 30 seconds, book appointments, recover missed calls, and automate customer support. Every system is scoped after a 15-minute call. No fixed packages, no public price list.
+
+## What we build
+
+- AI Lead Response Systems
+- Missed-Call Text-Back Automation
+- AI Appointment Booking
+- AI FAQ and Qualification Bots
+- Follow-Up and Re-Engagement Automation
+- Zero-Touch CRM Logging
+- Smart Reminders and Rescheduling
+
+## Try before you commit
+
+- [Interactive Demo](https://elitebotstudios.me/demo.html): simulated AI lead response, qualification, and booking. Runs in your browser, no real customer data involved.
+- [Free Lead Flow Audit](https://elitebotstudios.me/audit.html): four questions, a personal automation blueprint.
+- [ROI Calculator](https://elitebotstudios.me/calculator.html): see how much revenue slow lead response costs you.
+- [Case Studies](https://elitebotstudios.me/case-studies.html): illustrative scenarios, not client results. Real client stories will replace them once engagements go live.
+
+## How we engage
+
+- [How We Engage](https://elitebotstudios.me/pricing.html): custom scoping after a 15-minute call. No fixed packages, no public price list.
+- Guarantee: the 60-Day Safety Net. If the system does not deliver the lead recovery we model in your ROI plan within 60 days, we refund what you paid. Details are in your proposal.
+- Timeline: most systems launch within 1-2 weeks, depending on complexity.
+
+## Blog
+
+- [Blog](https://elitebotstudios.me/blog.html): guides on fast lead response, missed-call text-back, AI chatbots, industry automation, and choosing an AI agency.
+
+## FAQ
+
+- Q: What do you automate? A: Lead response, follow-up, appointment booking, missed-call recovery, customer support, and the repetitive workflows your team does by hand.
+- Q: How much does it cost? A: Every system is scoped after a 15-minute call. We publish no fixed prices. The audit, calculator, and demo are free to use.
+- Q: How fast do you launch? A: Most systems launch within 1-2 weeks, depending on complexity.
+- Q: What if it does not work? A: The 60-Day Safety Net refunds what you paid if the system does not deliver the lead recovery we model in your ROI plan.
+
+## Contact
+
+- Book a call: https://calendly.com/elitebotstudios/15min
+- Email: elitebotstudios@gmail.com
+- Website: https://elitebotstudios.me

@@ -1,0 +1,19 @@
+# Elite Bot Studios — robots.txt
+# Generated 2026-08-21 · updated 2026-08-22 (AI crawler policy)
+
+User-agent: *
+Allow: /
+
+# Block nothing — the whole site is indexable
+
+# Explicitly allow AI answer-engine crawlers (visibility policy)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://elitebotstudios.me/sitemap.xml

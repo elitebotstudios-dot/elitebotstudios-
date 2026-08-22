@@ -1,0 +1,3559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO META ===== -->
+  <title>Interactive AI Demo Center, Elite Bot Studios</title>
+  <link rel="canonical" href="https://elitebotstudios.me/demo.html" />
+  <meta name="description" content="Test our AI lead response systems in real time. Chat with the AI, watch it qualify leads and book appointments automatically, in under 30 seconds." />
+  <meta name="theme-color" content="#050505" />
+  <meta property="og:title" content="Interactive AI Demo Center, Elite Bot Studios" />
+  <meta property="og:description" content="Test our AI lead response systems in real time. Chat with the AI, watch it qualify leads and book appointments automatically, in under 30 seconds." />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://elitebotstudios.me/demo.html" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Interactive AI Demo Center, Elite Bot Studios" />
+  <meta name="twitter:description" content="Test our AI lead response systems in real time. Chat with the AI, watch it qualify leads and book appointments automatically, in under 30 seconds." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/twitter-image.jpg" />
+
+  <!-- Favicon (inline SVG) --><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- ===== FONTS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- ===== ICONS ===== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <style>
+    /* Skip link */
+    .skip-link {
+      position: fixed; top: 12px; left: 12px; z-index: 12000;
+      padding: 12px 22px;
+      background: #c9a84c;
+      color: #0a0a0a;
+      font-weight: 600; font-size: 0.9rem;
+      border-radius: 2px;
+      transform: translateY(-200%);
+      transition: transform 0.3s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    /* ============================================================
+       DESIGN TOKENS (matches main site)
+    ============================================================ */
+    :root {
+      --bg: #050505;
+      --surface: #111111;
+      --border: #1a1a1a;
+      --accent: #c9a84c;
+      --accent-2: #a07c2a;
+      --gold-light: #e8d48b;
+      --gold-dark: #a07c2a;
+      --gradient: linear-gradient(100deg, #e8d48b 0%, #c9a84c 55%, #a07c2a 100%);
+      --text: #f5f0e8;
+      --text-2: #8a8578;
+      --success: #10b981;
+      --warn: #fbbf24;
+      --danger: #f87171;
+      --font-head: 'Playfair Display', 'Georgia', serif;
+      --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      --container: 1400px;
+      --nav-h: 76px;
+      --radius: 18px;
+      color-scheme: dark;
+    }
+
+    /* ============================================================
+       RESET / BASE
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
+
+    body {
+      font-family: var(--font-body);
+      font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.7;
+      color: var(--text-2);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+    input, select, textarea { font-family: inherit; }
+
+    ::selection { background: rgba(201, 168, 76, 0.28); color: #fff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #222222; border-radius: 6px; }
+    ::-webkit-scrollbar-thumb:hover { background: #333333; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+    .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    .grad-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .section { padding: 90px 0; position: relative; }
+
+    .section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .section-label::before, .section-label::after {
+      content: ''; width: 28px; height: 2px; border-radius: 2px; background: var(--gradient);
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text); margin: 16px 0 14px; line-height: 1.2;
+    }
+    .section-sub { font-size: 1.02rem; }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-weight: 600; font-size: 1rem; border-radius: 12px; border: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--gradient); color: #0a0a0a; padding: 16px 34px;
+      box-shadow: 0 8px 24px rgba(201, 168, 76, 0.18);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201, 168, 76, 0.38), 0 8px 28px rgba(160, 124, 42, 0.28); }
+    .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-outline {
+      background: transparent; color: var(--gold-light, #e8d48b); padding: 15px 30px;
+      border: 1px solid rgba(201, 168, 76, 0.55);
+    }
+    .btn-outline:hover {
+      transform: translateY(-2px);
+      border-color: rgba(232, 212, 139, 0.9);
+      background: rgba(201, 168, 76, 0.08);
+    }
+    /* Navbar CTA, gold fill sweep (matches index.html) */
+    .nav-cta { position: relative; overflow: hidden; }
+    .nav-cta::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-cta .btn-label { position: relative; z-index: 2; transition: color 0.3s ease; }
+    .nav-cta:hover::before { transform: scaleX(1); }
+    .nav-cta:hover .btn-label { color: #0a0a0a; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      background: rgba(5, 5, 5, 0.6);
+      -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .navbar.scrolled { background: rgba(5, 5, 5, 0.88); box-shadow: 0 10px 36px rgba(0, 0, 0, 0.4); }
+
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+
+    .logo { display: inline-flex; align-items: baseline; gap: 10px; flex-shrink: 1; min-width: 0; }
+    .logo .elite {
+      font-family: var(--font-head);
+      font-weight: 700; font-size: 1.35rem; letter-spacing: 0.02em;
+      background: var(--gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      white-space: nowrap;
+    }
+    .logo .diamond { color: var(--accent); font-size: 0.55rem; align-self: center; opacity: 0.9; }
+    .logo .botstudios {
+      font-family: var(--font-body);
+      font-weight: 300; font-size: 0.95rem;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .nav-title {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: 999px;
+      border: 1px solid rgba(201, 168, 76, 0.3); background: rgba(255, 255, 255, 0.02);
+      font-family: var(--font-mono, var(--font-body));
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-2);
+    }
+    .nav-title b { color: var(--gold-light, #e8d48b); font-weight: 600; }
+
+    @media (max-width: 480px) {
+      #sfxBtnNav { display: none; }
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    .sfx-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); font-size: 0.82rem; font-weight: 600;
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+    .sfx-btn:hover { border-color: rgba(201, 168, 76, 0.45); color: var(--text); }
+    .sfx-btn.off { color: #8a8578; border-color: var(--border); }
+
+    .nav-cta { padding: 11px 22px; font-size: 0.9rem; border-radius: 999px; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position: relative;
+      padding: 84px 0 70px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.11) 1px, transparent 1.5px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 25%, transparent 72%);
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 25%, transparent 72%);
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute; border-radius: 50%; filter: blur(110px); pointer-events: none;
+      animation: glowPulse 9s ease-in-out infinite alternate;
+    }
+    .hero-glow.g1 { width: 560px; height: 560px; top: -240px; left: 50%; transform: translateX(-50%); background: rgba(201, 168, 76, 0.14); }
+    .hero-glow.g2 { width: 420px; height: 420px; bottom: -220px; right: -140px; background: rgba(160, 124, 42, 0.16); animation-delay: 2s; }
+    @keyframes glowPulse { from { opacity: 0.75; transform: scale(1); } to { opacity: 1; transform: scale(1.1); } }
+
+    .hero-content { position: relative; z-index: 2; max-width: 780px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 9px 20px; border-radius: 999px;
+      border: 1px solid rgba(201, 168, 76, 0.35); background: rgba(201, 168, 76, 0.07);
+      font-size: 0.85rem; font-weight: 600; color: #e8d48b; margin-bottom: 26px;
+      letter-spacing: 0.04em;
+    }
+    .live-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+      50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.12;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .hero-sub { max-width: 620px; margin: 0 auto; font-size: 1.08rem; }
+
+    /* ============================================================
+       GLASS CARDS
+    ============================================================ */
+    .glass {
+      background: rgba(18, 18, 26, 0.72);
+      -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glass:hover { border-color: rgba(201, 168, 76, 0.25); }
+
+    /* ============================================================
+       INDUSTRY TABS
+    ============================================================ */
+    .tabs { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 46px; }
+    .tab {
+      padding: 13px 26px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); font-size: 0.95rem; font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .tab:hover { border-color: rgba(201, 168, 76, 0.45); color: var(--text); transform: translateY(-2px); }
+    .tab.active {
+      background: var(--gradient); color: #0a0a0a; border-color: transparent;
+      box-shadow: 0 8px 28px rgba(201, 168, 76, 0.28);
+    }
+
+    /* ============================================================
+       DEMO GRID (phone + dashboard)
+    ============================================================ */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: minmax(330px, 400px) 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .col-left { position: sticky; top: calc(var(--nav-h) + 20px); }
+    .col-right { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+    /* ============================================================
+       PHONE (chat)
+    ============================================================ */
+    .phone-wrap { position: relative; }
+    .phone-wrap::before {
+      content: ''; position: absolute; inset: -10%;
+      background: radial-gradient(closest-side, rgba(201, 168, 76, 0.16), rgba(160, 124, 42, 0.10), transparent 78%);
+      filter: blur(34px); z-index: -1;
+    }
+    .phone-shell {
+      background: #0b0b0b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 42px;
+      padding: 12px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(201, 168, 76, 0.07);
+    }
+    .phone-screen {
+      background: #0a0a0a;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .phone-status {
+      padding: 12px 20px 4px; text-align: center;
+      font-size: 0.72rem; font-weight: 600; color: var(--text-2); letter-spacing: 0.04em;
+    }
+
+    .chat-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .chat-avatar {
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--gradient);
+      box-shadow: 0 0 18px rgba(201, 168, 76, 0.35);
+    }
+    .chat-id { min-width: 0; }
+    .chat-name {
+      font-family: var(--font-head); font-size: 0.95rem; font-weight: 600;
+      color: var(--text); line-height: 1.3;
+    }
+    .chat-biz {
+      font-size: 0.72rem; color: var(--text-2); line-height: 1.3;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;
+    }
+    .chat-ai-chip {
+      margin-left: auto; flex-shrink: 0;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--accent); border: 1px solid rgba(201, 168, 76, 0.4);
+      background: rgba(201, 168, 76, 0.08);
+      padding: 3px 9px; border-radius: 999px;
+    }
+    .reset-btn {
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid var(--border); background: transparent; color: var(--text-2);
+      transition: all 0.25s ease;
+    }
+    .reset-btn:hover { color: var(--accent); border-color: rgba(201, 168, 76, 0.5); transform: rotate(-90deg); }
+
+    .chat-body {
+      display: flex; flex-direction: column; gap: 14px;
+      padding: 18px 14px 16px;
+      height: 400px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .chat-msg { display: flex; flex-direction: column; max-width: 85%; animation: msgIn 0.35s ease; }
+    .chat-msg.customer { align-self: flex-start; align-items: flex-start; }
+    .chat-msg.ai { align-self: flex-end; align-items: flex-end; }
+    @keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .ai-label {
+      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 5px;
+    }
+    .bubble {
+      padding: 12px 16px; font-size: 0.88rem; line-height: 1.55;
+      border-radius: 18px; overflow-wrap: anywhere;
+    }
+    .customer .bubble { background: #151515; color: #f0e6d2; border-bottom-left-radius: 6px; }
+    .ai .bubble {
+      background: var(--gradient); color: #0a0a0a; font-weight: 500;
+      border-bottom-right-radius: 6px;
+      box-shadow: 0 8px 22px rgba(201, 168, 76, 0.16);
+    }
+
+    .typing-bubble {
+      display: inline-flex; align-items: center; gap: 5px; padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .typing-bubble span {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+      animation: typingBounce 1.2s ease-in-out infinite;
+    }
+    .typing-bubble span:nth-child(2) { animation-delay: 0.15s; }
+    .typing-bubble span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    .chat-input {
+      display: flex; gap: 10px; padding: 12px 14px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .chat-input input {
+      flex: 1; min-width: 0;
+      padding: 12px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.04);
+      color: var(--text); font-size: 0.9rem;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .chat-input input::placeholder { color: #8a8578; }
+    .chat-input input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12); }
+    .chat-input input:disabled { opacity: 0.55; }
+    .send-btn {
+      flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
+      background: var(--gradient); color: #0a0a0a; border: none; font-size: 1rem;
+      box-shadow: 0 6px 18px rgba(201, 168, 76, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    }
+    .send-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(201, 168, 76, 0.45); }
+    .send-btn:disabled { opacity: 0.5; transform: none; cursor: not-allowed; }
+
+    /* Presets */
+    .preset-wrap { margin-top: 22px; }
+    .preset-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .preset-head > span { font-size: 0.85rem; font-weight: 600; color: var(--text-2); }
+    .auto-btn {
+      padding: 8px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); font-size: 0.8rem; font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .auto-btn:hover { border-color: rgba(201, 168, 76, 0.5); color: var(--text); }
+    .auto-btn.active { background: rgba(201, 168, 76, 0.1); border-color: rgba(201, 168, 76, 0.55); color: var(--accent); }
+
+    .preset-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .preset-chip {
+      padding: 10px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); font-size: 0.83rem; font-weight: 500;
+      transition: all 0.22s ease; text-align: left;
+    }
+    .preset-chip:hover { border-color: rgba(201, 168, 76, 0.55); color: var(--accent); transform: translateY(-2px); }
+    .preset-wrap.disabled { opacity: 0.55; pointer-events: none; }
+    .preset-hint { margin-top: 12px; font-size: 0.8rem; color: #8a8578; }
+
+    /* ============================================================
+       DASHBOARD HEADER
+    ============================================================ */
+    .dash-head {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+      padding: 24px 26px; flex-wrap: wrap;
+    }
+    .dash-title { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+    .dash-sub { font-size: 0.88rem; margin-top: 4px; }
+    .dash-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .scenario-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(160, 124, 42, 0.4); background: rgba(160, 124, 42, 0.1);
+      color: #e8d48b; font-size: 0.78rem; font-weight: 600;
+    }
+
+    /* ============================================================
+       LEAD PROCESSING CARD
+    ============================================================ */
+    .lead-card {
+      position: relative; padding: 26px; overflow: hidden;
+      border-left: 3px solid var(--border);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .lead-card.state-new { border-left-color: var(--danger); box-shadow: 0 0 30px rgba(248, 113, 113, 0.10); }
+    .lead-card.state-qual { border-left-color: var(--warn); box-shadow: 0 0 30px rgba(251, 191, 36, 0.10); }
+    .lead-card.state-booked { border-left-color: var(--success); box-shadow: 0 0 36px rgba(16, 185, 129, 0.16); }
+    .lead-card.flash-booked { animation: cardPulse 0.8s ease; }
+    @keyframes cardPulse {
+      0% { transform: scale(1); } 40% { transform: scale(1.012); } 100% { transform: scale(1); }
+    }
+
+    .lead-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
+    .lead-title { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .live-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 12px; border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08);
+      color: var(--success); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+    }
+
+    .status-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .status-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      font-size: 0.88rem; font-weight: 600; color: var(--text-2);
+      transition: all 0.4s ease;
+    }
+    .state-new .status-chip { color: #ffb3bd; border-color: rgba(248, 113, 113, 0.45); background: rgba(248, 113, 113, 0.08); }
+    .state-qual .status-chip { color: #fde68a; border-color: rgba(251, 191, 36, 0.45); background: rgba(251, 191, 36, 0.08); }
+    .state-booked .status-chip {
+      color: #6ee7b7; border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.1);
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.25);
+      animation: bookedIn 0.5s ease;
+    }
+    @keyframes bookedIn { from { transform: scale(0.85); } to { transform: scale(1); } }
+
+    .sms-badge {
+      display: none; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(201, 168, 76, 0.4); background: rgba(201, 168, 76, 0.07);
+      color: var(--accent); font-size: 0.78rem; font-weight: 600;
+    }
+    .sms-badge.show { display: inline-flex; animation: msgIn 0.4s ease; }
+
+    .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+    .lead-field {
+      padding: 14px 16px; border-radius: 12px;
+      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.02);
+      min-height: 66px;
+    }
+    .f-label {
+      display: block; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2);
+      margin-bottom: 5px;
+    }
+    .f-value {
+      display: block; font-size: 0.94rem; font-weight: 600; color: var(--text);
+      overflow-wrap: anywhere; transition: color 0.3s ease;
+    }
+    .f-value.placeholder { color: #8a8578; font-weight: 500; }
+    .f-value.urg-high { color: var(--danger); }
+    .f-value.urg-med { color: var(--warn); }
+    .f-value.urg-low { color: var(--success); }
+    .lead-field.field-flash { animation: fieldFlash 0.9s ease; }
+    @keyframes fieldFlash {
+      0% { background: rgba(201, 168, 76, 0.18); border-color: rgba(201, 168, 76, 0.55); }
+      100% { background: rgba(255, 255, 255, 0.02); border-color: var(--border); }
+    }
+
+    /* Response speed */
+    .resp-block {
+      margin-top: 18px; padding: 16px 18px;
+      border-radius: 12px; border: 1px dashed rgba(201, 168, 76, 0.3);
+      background: rgba(201, 168, 76, 0.03);
+    }
+    .resp-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .resp-num {
+      font-family: var(--font-mono, var(--font-head)); font-size: 1.35rem; font-weight: 500;
+      color: var(--accent); letter-spacing: -0.01em; font-variant-numeric: tabular-nums;
+    }
+    .resp-num.flash { animation: fieldFlash 0.9s ease; }
+    .sla-track {
+      margin-top: 10px; height: 6px; border-radius: 4px;
+      background: rgba(255, 255, 255, 0.07); overflow: hidden;
+    }
+    .sla-fill {
+      height: 100%; width: 0%; border-radius: 4px;
+      background: var(--gradient);
+      transition: width 0.2s linear;
+    }
+    .resp-bottom { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; font-size: 0.74rem; color: var(--text-2); flex-wrap: wrap; }
+
+    /* Confetti */
+    .confetti-box { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .cf {
+      position: absolute; top: -12px; width: 7px; height: 12px; border-radius: 2px;
+      animation: cfFall 1.3s ease-out forwards;
+    }
+    @keyframes cfFall {
+      to { transform: translateY(260px) rotate(560deg); opacity: 0; }
+    }
+
+    /* ============================================================
+       AUTOMATION LOG
+    ============================================================ */
+    .feed-card { padding: 24px 26px; }
+    .feed-card h3 { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .feed-card .feed-sub { font-size: 0.82rem; margin-bottom: 16px; }
+    .feed { display: flex; flex-direction: column; gap: 8px; max-height: 300px; overflow-y: auto; padding-right: 6px; }
+    .feed li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 14px; border-radius: 10px;
+      border: 1px solid transparent; background: rgba(255, 255, 255, 0.025);
+      font-size: 0.85rem;
+      animation: feedIn 0.4s ease;
+    }
+    @keyframes feedIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+    .feed-ico { flex-shrink: 0; font-size: 0.95rem; line-height: 1.4; }
+    .feed-text { flex: 1; color: var(--text-2); line-height: 1.5; }
+    .feed-time { flex-shrink: 0; font-family: var(--font-mono, var(--font-body)); font-size: 0.72rem; color: #8a8578; font-variant-numeric: tabular-nums; margin-top: 2px; }
+
+    /* ============================================================
+       GOOGLE CALENDAR (simulated)
+    ============================================================ */
+    .cal-card { padding: 24px 26px; }
+    .cal-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .cal-logo {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 12px; font-size: 1.15rem;
+      background: linear-gradient(135deg, #1a73e8, #0b57d0);
+      box-shadow: 0 6px 18px rgba(26, 115, 232, 0.3);
+    }
+    .cal-title { font-family: var(--font-head); font-size: 1.02rem; font-weight: 700; color: var(--text); }
+    .cal-date { font-size: 0.8rem; color: var(--text-2); }
+    .cal-chip {
+      margin-left: auto; padding: 5px 12px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      font-size: 0.7rem; font-weight: 600; color: var(--text-2);
+    }
+
+    .cal-list { display: flex; flex-direction: column; gap: 8px; }
+    .cal-row { display: grid; grid-template-columns: 74px 1fr; gap: 12px; align-items: stretch; }
+    .cal-time { font-family: var(--font-mono, var(--font-body)); font-size: 0.78rem; color: var(--text-2); text-align: right; padding-top: 10px; font-variant-numeric: tabular-nums; }
+    .cal-slot {
+      min-height: 40px; border-radius: 10px;
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.02);
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .cal-slot:hover { border-color: rgba(201, 168, 76, 0.35); }
+    .cal-avail { font-size: 0.74rem; color: #8a8578; }
+    .cal-slot.locked { border-style: solid; border-color: var(--border); background: rgba(255, 255, 255, 0.015); }
+    .cal-lock { font-size: 0.74rem; color: #8a8578; }
+    .cal-slot.booked {
+      border-style: solid; border-color: transparent;
+      background: var(--gradient);
+      box-shadow: 0 6px 18px rgba(201, 168, 76, 0.22);
+      color: #0a0a0a;
+    }
+    .cal-slot.booked .evt-title { font-size: 0.82rem; font-weight: 600; overflow-wrap: anywhere; }
+    .cal-slot.booked .evt-check {
+      margin-left: auto; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(10, 10, 10, 0.18); font-size: 0.68rem; font-weight: 700;
+    }
+    .cal-slot.just-booked { animation: slotPulse 1.6s ease; }
+    @keyframes slotPulse {
+      0% { transform: scale(0.92); filter: brightness(1.6); }
+      35% { transform: scale(1.03); }
+      100% { transform: scale(1); filter: brightness(1); }
+    }
+    .cal-note { margin-top: 14px; font-size: 0.78rem; color: #8a8578; }
+
+    /* ============================================================
+       MISSED CALL SECTION
+    ============================================================ */
+    .mc-grid { display: grid; grid-template-columns: minmax(320px, 400px) 1fr; gap: 40px; align-items: start; }
+
+    .mc-phone { transition: none; }
+    .mc-phone.ringing { animation: phoneShake 0.14s ease-in-out infinite alternate; }
+    @keyframes phoneShake {
+      from { transform: translateX(-3px) rotate(-0.7deg); }
+      to { transform: translateX(3px) rotate(0.7deg); }
+    }
+
+    .mc-screen { position: relative; height: 470px; }
+    .mc-mode {
+      position: absolute; inset: 0;
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px 18px; text-align: center;
+    }
+    .mc-mode.active { display: flex; animation: msgIn 0.35s ease; }
+
+    /* Idle */
+    .mc-clock { font-family: var(--font-head); font-size: 2.6rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+    .mc-day { font-size: 0.85rem; color: var(--text-2); margin-bottom: 30px; }
+    .mc-shield {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 20px; border-radius: 14px;
+      border: 1px solid rgba(16, 185, 129, 0.35); background: rgba(16, 185, 129, 0.07);
+      color: #6ee7b7; font-size: 0.88rem; font-weight: 600;
+    }
+    .mc-shield-sub { margin-top: 14px; font-size: 0.78rem; color: #8a8578; }
+
+    /* Ringing */
+    .ring-avatar {
+      position: relative; width: 86px; height: 86px; margin-bottom: 26px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; background: var(--gradient);
+      font-size: 2rem;
+      box-shadow: 0 0 34px rgba(201, 168, 76, 0.4);
+    }
+    .ring-avatar::before, .ring-avatar::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid rgba(201, 168, 76, 0.55);
+      animation: ringPulse 1.3s ease-out infinite;
+    }
+    .ring-avatar::after { animation-delay: 0.65s; }
+    @keyframes ringPulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(2); opacity: 0; } }
+    .ring-name { font-family: var(--font-head); font-size: 1.35rem; font-weight: 700; color: var(--text); }
+    .ring-num { font-size: 0.9rem; color: var(--text-2); margin-top: 2px; }
+    .ring-status {
+      margin-top: 14px; font-size: 0.8rem; font-weight: 600; color: var(--accent);
+      animation: blinkText 1s ease-in-out infinite;
+    }
+    @keyframes blinkText { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .ring-actions { display: flex; gap: 18px; margin-top: 30px; }
+    .ring-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 58px; height: 58px; border-radius: 50%;
+      border: none; font-size: 1.2rem; color: #fff;
+      transition: transform 0.2s ease;
+    }
+    .ring-btn:hover { transform: scale(1.08); }
+    .ring-decline { background: #ef4444; box-shadow: 0 8px 22px rgba(239, 68, 68, 0.35); }
+    .ring-accept { background: var(--success); box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35); }
+
+    /* Missed */
+    .missed-banner {
+      width: 100%; padding: 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(248, 113, 113, 0.45);
+      background: rgba(248, 113, 113, 0.08);
+      color: #ffb3bd;
+      animation: bannerIn 0.5s ease;
+    }
+    @keyframes bannerIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+    .missed-icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .missed-title { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: #ffb3bd; }
+    .missed-sub { font-size: 0.85rem; color: var(--text-2); margin-top: 4px; }
+    .missed-action {
+      margin-top: 22px; font-size: 0.85rem; font-weight: 600; color: var(--accent);
+      animation: blinkText 1s ease-in-out infinite;
+    }
+
+    /* SMS */
+    .mc-sms { justify-content: flex-start; }
+    .mc-sms-head {
+      width: 100%; display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 12px;
+      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.03);
+      margin-bottom: 14px;
+    }
+    .mc-sms-head .sms-ico {
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15); color: var(--success); font-size: 0.8rem;
+    }
+    .mc-sms-head .sms-label { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+    .mc-sms-head .sms-chip {
+      margin-left: auto; padding: 3px 10px; border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08);
+      color: var(--success); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.1em;
+    }
+    .sms-thread { width: 100%; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 330px; padding-right: 4px; }
+    .msg-time { font-size: 0.66rem; color: #8a8578; margin-top: 3px; padding: 0 4px; }
+
+    /* MC controls */
+    .mc-card { padding: 30px; }
+    .mc-card h3 { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 18px; }
+    .mc-steps { display: flex; flex-direction: column; gap: 16px; margin-bottom: 26px; }
+    .mc-steps li { display: flex; gap: 14px; align-items: flex-start; }
+    .mc-step-num {
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 10px;
+      background: rgba(201, 168, 76, 0.08); border: 1px solid rgba(201, 168, 76, 0.3);
+      color: var(--accent); font-family: var(--font-head); font-weight: 700; font-size: 0.9rem;
+    }
+    .mc-steps h4 { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+    .mc-steps p { font-size: 0.84rem; margin-top: 2px; }
+
+    .mc-form label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .mc-input-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .mc-input-row input {
+      flex: 1; min-width: 200px;
+      padding: 14px 16px; border-radius: 12px;
+      border: 1px solid var(--border); background: rgba(255, 255, 255, 0.03);
+      color: var(--text); font-size: 0.95rem; font-variant-numeric: tabular-nums;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .mc-input-row input::placeholder { color: #8a8578; }
+    .mc-input-row input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12); }
+    .mc-input-row input.shake { animation: inputShake 0.45s ease; border-color: var(--danger); }
+    @keyframes inputShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-7px); }
+      40%, 80% { transform: translateX(7px); }
+    }
+    .mc-err { display: none; margin-top: 10px; font-size: 0.8rem; color: var(--danger); font-weight: 500; }
+    .mc-err.show { display: block; animation: msgIn 0.3s ease; }
+    .mc-reset {
+      margin-top: 16px; padding: 8px 0; border: none; background: transparent;
+      color: var(--text-2); font-size: 0.85rem; font-weight: 600;
+      transition: color 0.25s ease;
+    }
+    .mc-reset:hover { color: var(--accent); }
+    .mc-hint { margin-top: 18px; padding: 12px 16px; border-radius: 10px; border: 1px dashed rgba(201, 168, 76, 0.25); background: rgba(201, 168, 76, 0.03); font-size: 0.8rem; color: var(--text-2); }
+
+    /* ============================================================
+       CTA + FOOTER
+    ============================================================ */
+    .cta-section { overflow: hidden; }
+    .cta-glow {
+      position: absolute; bottom: -280px; left: 50%; transform: translateX(-50%);
+      width: 760px; height: 520px; border-radius: 50%;
+      background: rgba(160, 124, 42, 0.14); filter: blur(120px); pointer-events: none;
+    }
+    .cta-inner { position: relative; z-index: 1; text-align: center; max-width: 720px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+      font-weight: 700; letter-spacing: -0.02em; color: var(--text);
+      margin-bottom: 16px; line-height: 1.2;
+    }
+    .cta-inner p { font-size: 1.02rem; margin-bottom: 34px; }
+    .cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    .footer { border-top: 1px solid rgba(255, 255, 255, 0.07); padding: 40px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-brand { display: flex; flex-direction: column; gap: 6px; }
+    .footer-tagline { font-size: 0.85rem; }
+    .footer-copy { font-size: 0.85rem; }
+    .footer-copy a { color: var(--accent); font-weight: 500; }
+    .footer-copy a:hover { text-decoration: underline; }
+
+    /* ============================================================
+       REVEAL
+    ============================================================ */
+    .reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition-delay: var(--d, 0s);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1060px) {
+      .demo-grid { grid-template-columns: 1fr; }
+      .col-left { position: static; max-width: 420px; margin: 0 auto; width: 100%; }
+      .mc-grid { grid-template-columns: 1fr; }
+      .mc-phone-wrap { max-width: 420px; margin: 0 auto; width: 100%; }
+    }
+    @media (max-width: 700px) {
+      .nav-title { display: none; }
+      .section { padding: 64px 0; }
+      .lead-grid { grid-template-columns: 1fr; }
+      .mc-input-row { flex-direction: column; }
+      .mc-input-row .btn { width: 100%; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .chat-body { height: 360px; }
+      .mc-screen { height: 440px; }
+    }
+    @media (max-width: 480px) {
+      .nav-cta { padding: 10px 16px; font-size: 0.82rem; }
+      .sfx-btn { padding: 8px 12px; font-size: 0.75rem; }
+      .dash-head { padding: 20px; }
+      .lead-card, .feed-card, .cal-card { padding: 20px; }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+    ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+
+
+
+
+    /* ============================================================
+       PHASE 2, EBS ENGAGEMENT LAYER (chatbot, toasts, notif bar,
+       shortcuts, theme, PWA bits)
+       Vanilla JS only · respects prefers-reduced-motion
+    ============================================================ */
+    .ebs-hidden { display: none !important; }
+
+    /* ---- Overflow safety (zero horizontal scroll, all pages) ---- */
+    html, body { overflow-x: clip; max-width: 100vw; }
+    @supports not (overflow-x: clip) { html, body { overflow-x: hidden; } }
+
+
+    /* ---- Smart notification bar ---- */
+    .ebs-notif-bar {
+      position: relative; z-index: 1200;
+      width: 100%; min-height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(90deg, #a07c2a 0%, #c9a84c 55%, #d9b95f 100%);
+      color: #0a0a0a; font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+      padding: 8px 56px; text-align: center;
+      box-sizing: border-box;
+      transform: translateY(0); transition: transform 0.45s ease;
+    }
+    .ebs-notif-bar.ebs-out { transform: translateY(-100%); }
+    .ebs-notif-msg {
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 100%;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    @media (max-width: 767px) {
+      .ebs-notif-bar { font-size: 12px; }
+      .ebs-notif-msg { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.4; }
+    }
+    .ebs-notif-msg.ebs-swap { opacity: 0; transform: translateY(6px); }
+    .ebs-notif-msg a {
+      color: #0a0a0a; text-decoration: underline; text-underline-offset: 2px;
+      margin-left: 8px; white-space: nowrap;
+    }
+    .ebs-notif-msg a:hover { background: rgba(10, 10, 10, 0.12); border-radius: 4px; }
+    .ebs-notif-x {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; min-width: 36px; min-height: 36px;
+      border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(10, 10, 10, 0.12); color: #0a0a0a;
+      font-size: 13px; line-height: 1; display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s ease;
+    }
+    .ebs-notif-x:hover { background: rgba(10, 10, 10, 0.25); }
+    /* audit.html app-shell: shift fixed topbar/stage below the in-flow bar */
+    body.ebs-bar-active .topbar { top: 40px; }
+    body.ebs-bar-active .stage { top: calc(var(--topbar-h, 64px) + 40px); }
+
+    /* ---- Back to top ---- */
+    .ebs-backtop {
+      position: fixed; right: 26px; bottom: 100px; z-index: 1140;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(17, 17, 17, 0.9);
+      border: 1px solid rgba(201, 168, 76, 0.5); color: var(--gold-light, #e8d48b);
+      cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(12px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, box-shadow 0.3s ease;
+    }
+    .ebs-backtop.ebs-show { opacity: 1; visibility: visible; transform: translateY(0); }
+    .ebs-backtop:hover { box-shadow: 0 0 20px rgba(201, 168, 76, 0.35); border-color: var(--gold-light, #e8d48b); }
+
+    /* ---- AI Chatbot ---- */
+    .ebs-chat-fab {
+      position: fixed; right: 24px; bottom: 24px; z-index: 1150;
+      width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 60%, #a07c2a);
+      color: #0a0a0a;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0.45);
+      animation: ebsFabPulse 2.6s ease-out infinite;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-fab:hover { transform: translateY(-3px) scale(1.04); }
+    .ebs-chat-fab.ebs-open { animation: none; transform: scale(0.9); opacity: 0; pointer-events: none; }
+    @keyframes ebsFabPulse {
+      0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0.5); }
+      70% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 22px rgba(201, 168, 76, 0); }
+      100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+    .ebs-chat-badge {
+      position: absolute; top: -4px; right: -4px;
+      min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px;
+      background: #e8d48b; color: #0a0a0a;
+      font-size: 11px; font-weight: 700; line-height: 20px; text-align: center;
+      border: 2px solid #050505;
+      display: none;
+    }
+    .ebs-chat-fab.ebs-unread .ebs-chat-badge { display: block; }
+
+    .ebs-chat-window {
+      position: fixed; right: 24px; bottom: 100px; z-index: 1150;
+      width: 400px; height: 600px; max-width: calc(100vw - 32px);
+      max-height: calc(100vh - 140px);
+      display: flex; flex-direction: column;
+      background: rgba(10, 10, 10, 0.88);
+      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(201, 168, 76, 0.08);
+      opacity: 0; transform: translateY(16px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ebs-chat-window.ebs-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .ebs-chat-head {
+      flex-shrink: 0;
+      padding: 16px 18px;
+      background: linear-gradient(100deg, rgba(232, 212, 139, 0.12), rgba(201, 168, 76, 0.04));
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    }
+    .ebs-chat-title-row { display: flex; align-items: center; gap: 9px; }
+    .ebs-chat-title {
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 1.12rem; font-weight: 600; color: var(--text, #f5f0e8);
+    }
+    .ebs-online {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      color: #22c55e; margin-top: 2px;
+    }
+    .ebs-online i {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: ebsPulse 1.8s ease-out infinite;
+    }
+    .ebs-chat-sub {
+      font-size: 11px; color: #8a8578; letter-spacing: 0.04em;
+      margin-top: 3px;
+    }
+    .ebs-chat-actions { display: flex; gap: 8px; position: absolute; right: 16px; top: 16px; }
+    .ebs-icon-btn {
+      width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(201, 168, 76, 0.3);
+      background: rgba(255, 255, 255, 0.03); color: var(--text-2, #8a8578);
+      cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .ebs-icon-btn:hover { color: var(--gold-light, #e8d48b); border-color: rgba(201, 168, 76, 0.7); }
+    .ebs-icon-btn.ebs-muted { opacity: 0.45; }
+
+    .ebs-chat-body {
+      flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain;
+      padding: 18px 16px; display: flex; flex-direction: column; gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .ebs-msg { max-width: 82%; padding: 11px 15px; font-size: 0.9rem; line-height: 1.55; }
+    .ebs-msg p { margin: 0 0 6px; }
+    .ebs-msg p:last-child { margin-bottom: 0; }
+    .ebs-msg a { color: inherit; text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+    .ebs-msg.ebs-ai {
+      align-self: flex-start; background: #151515;
+      border: 1px solid rgba(201, 168, 76, 0.18);
+      color: var(--text, #f5f0e8);
+      border-radius: 16px 16px 16px 5px;
+    }
+    .ebs-msg.ebs-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 70%, #a07c2a);
+      color: #0a0a0a; font-weight: 500;
+      border-radius: 16px 16px 5px 16px;
+      box-shadow: 0 6px 18px rgba(201, 168, 76, 0.18);
+    }
+    .ebs-typing { display: inline-flex; gap: 5px; padding: 14px 16px; }
+    .ebs-typing span {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--gold, #c9a84c);
+      animation: ebsTyping 1.2s ease-in-out infinite;
+    }
+    .ebs-typing span:nth-child(2) { animation-delay: 0.15s; }
+    .ebs-typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes ebsTyping {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+    .ebs-quick-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 16px 12px; }
+    .ebs-chip {
+      border: 1px solid rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.06);
+      color: var(--gold-light, #e8d48b); border-radius: 999px;
+      padding: 8px 14px; font-size: 12.5px; font-weight: 500; cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .ebs-chip:hover { background: rgba(201, 168, 76, 0.18); transform: translateY(-1px); }
+    .ebs-chat-foot {
+      flex-shrink: 0; display: flex; gap: 10px; align-items: center;
+      padding: 12px 14px 16px; border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .ebs-chat-input {
+      flex: 1; min-width: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(201, 168, 76, 0.28);
+      border-radius: 999px; color: var(--text, #f5f0e8);
+      padding: 12px 18px; font-size: 0.9rem; font-family: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-input::placeholder { color: #8a8578; }
+    .ebs-chat-input:focus {
+      outline: none; border-color: var(--gold, #c9a84c);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+    }
+    .ebs-chat-send {
+      flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: none;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 70%, #a07c2a);
+      color: #0a0a0a; cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-send:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(201, 168, 76, 0.4); }
+    @media (max-width: 560px) {
+      .ebs-chat-window {
+        right: 0; bottom: 0; width: 100vw; height: 100dvh; max-width: 100vw;
+        max-height: 100dvh; border-radius: 0; border: none;
+      }
+      .ebs-chat-fab { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+    }
+
+    /* ---- Navbar theme toggle ---- */
+    .ebs-nav-tools { display: flex; align-items: center; gap: 10px; }
+    .ebs-theme-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(201, 168, 76, 0.45); background: transparent;
+      color: var(--gold-light, #e8d48b); cursor: pointer; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .ebs-theme-btn:hover { background: rgba(201, 168, 76, 0.12); }
+    @media (max-width: 1023px) {
+      .ebs-nav-tools { margin-left: auto; }
+    }
+
+    /* ---- Light theme (Bonus 3) ---- */
+    html[data-theme="light"] {
+      --bg: #f5f0e8; --bg-2: #ede5d4; --surface: #ffffff;
+      --border: #e2d7bf; --text: #1c1a16; --text-2: #6b6352;
+      --gold: #a07c2a; --gold-light: #8a6a1f; --gold-dark: #6d531a;
+    }
+    html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+    html[data-theme="light"] .navbar {
+      background: rgba(245, 240, 232, 0.8);
+      border-bottom: 1px solid rgba(160, 124, 42, 0.18);
+    }
+    html[data-theme="light"] .footer {
+      background: var(--bg-2); border-top: 1px solid rgba(160, 124, 42, 0.2);
+    }
+    html[data-theme="light"] .ebs-chat-window { background: rgba(255, 255, 255, 0.92); }
+    html[data-theme="light"] .ebs-msg.ebs-ai { background: #f2ecdd; border-color: rgba(160, 124, 42, 0.25); }
+    html[data-theme="light"] .ebs-chat-badge { border-color: #f5f0e8; }
+
+    /* ---- Reduced motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      .ebs-chat-fab, .ebs-online i { animation: none; }
+      .ebs-typing span { animation: none; opacity: 0.8; }
+      .ebs-chat-window { transition: opacity 0.2s ease; }
+    }
+
+    /* ---- Mobile menu (all pages): #menuToggle + #mobileMenu ---- */
+    /* World-class treatment: hairline gold bezel, swelling inner glow,
+       gold-hairline icon that morphs into a fine X, editorial full-screen
+       panel with indexed links, hairline separators, staggered entrance.  */
+    #menuToggle {
+      display: none;
+      width: 44px; height: 44px;
+      min-width: 44px; min-height: 44px;
+      border: 1px solid rgba(201, 168, 76, 0.38);
+      background: radial-gradient(130% 130% at 50% 0%, rgba(232, 212, 139, 0.10), transparent 58%),
+                  rgba(10, 10, 10, 0.55);
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 1100;
+      position: relative;
+      align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 4.5px;
+      flex-shrink: 0;
+      overflow: hidden;
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      transition: border-color .3s ease, box-shadow .4s ease, transform .25s ease;
+    }
+    #menuToggle::before { /* slow-swelling inner glow */
+      content: '';
+      position: absolute; inset: -60%;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(232, 212, 139, 0.16), transparent 70%);
+      opacity: 0;
+      transition: opacity .6s ease;
+      pointer-events: none;
+    }
+    #menuToggle:hover, #menuToggle:focus-visible {
+      border-color: rgba(232, 212, 139, 0.8);
+      box-shadow: 0 0 22px rgba(201, 168, 76, 0.22), inset 0 0 14px rgba(201, 168, 76, 0.10);
+      outline: none;
+    }
+    #menuToggle:hover::before, #menuToggle:focus-visible::before { opacity: 1; }
+    #menuToggle:active { transform: scale(0.94); }
+    #menuToggle .menu-line {
+      width: 18px; height: 1.5px;
+      background: linear-gradient(90deg, #e8d48b, #c9a84c);
+      border-radius: 999px;
+      box-shadow: 0 0 6px rgba(201, 168, 76, 0.45);
+      display: block;
+      position: relative;
+      transition: transform .45s cubic-bezier(.65,.05,.36,1), opacity .3s ease;
+    }
+    #menuToggle.is-open .menu-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    #menuToggle.is-open .menu-line:nth-child(2) { opacity: 0; transform: scaleX(0.3); }
+    #menuToggle.is-open .menu-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    #mobileMenu {
+      position: fixed; inset: 0;
+      width: 100%; height: 100vh; height: 100dvh;
+      background: radial-gradient(90% 60% at 50% 0%, rgba(201, 168, 76, 0.09), transparent 62%),
+                  rgba(5, 5, 5, 0.98);
+      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+      z-index: 1050;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      gap: 0;
+      padding: 96px 26px 52px;
+      box-sizing: border-box;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .45s ease, visibility .45s ease;
+      overflow-y: auto;
+      counter-reset: menuItem;
+    }
+    #mobileMenu::before { /* micro brand mark */
+      content: 'ELITE \25C6  BOT STUDIOS';
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.42em;
+      text-indent: 0.42em; /* optically center tracked type */
+      color: rgba(232, 212, 139, 0.9);
+      text-align: center;
+      padding-bottom: 24px;
+      margin-bottom: 26px;
+      width: min(340px, 86vw);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+      margin-top: auto;
+    }
+    #mobileMenu::after { /* top hairline of light */
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: min(560px, 82%); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.55), transparent);
+    }
+    #mobileMenu.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+    #mobileMenu.is-open a { animation: menuLinkIn .5s cubic-bezier(.22,.61,.36,1) both; }
+    #mobileMenu.is-open a:nth-child(1) { animation-delay: .06s; }
+    #mobileMenu.is-open a:nth-child(2) { animation-delay: .11s; }
+    #mobileMenu.is-open a:nth-child(3) { animation-delay: .16s; }
+    #mobileMenu.is-open a:nth-child(4) { animation-delay: .21s; }
+    #mobileMenu.is-open a:nth-child(5) { animation-delay: .26s; }
+    #mobileMenu.is-open a:nth-child(6) { animation-delay: .31s; }
+    #mobileMenu.is-open a:nth-child(7) { animation-delay: .36s; }
+    #mobileMenu.is-open a:nth-child(8) { animation-delay: .41s; }
+    #mobileMenu.is-open a:nth-child(9) { animation-delay: .46s; }
+    @keyframes menuLinkIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #mobileMenu.is-open a { animation: none; }
+      #menuToggle, #menuToggle .menu-line { transition: none; }
+    }
+    #mobileMenu a {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 1.12rem; font-weight: 500;
+      color: #f5f0e8; text-decoration: none;
+      letter-spacing: 0.06em;
+      display: block;
+      width: min(340px, 86vw);
+      text-align: center;
+      padding: 15px 0;
+      position: relative;
+      transition: color .25s ease, letter-spacing .3s ease;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email) {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+      counter-increment: menuItem;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email)::before { /* gold index 01-07 */
+      content: '0' counter(menuItem);
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.35em; text-indent: 0.35em;
+      color: rgba(201, 168, 76, 0.55);
+      transition: color .25s ease;
+    }
+    #mobileMenu a:hover, #mobileMenu a:focus-visible {
+      color: #e8d48b;
+      letter-spacing: 0.1em;
+      outline: none;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email):hover::before,
+    #mobileMenu a:not(.menu-cta):not(.menu-email):focus-visible::before { color: #e8d48b; }
+    #mobileMenu .menu-cta {
+      margin-top: 38px;
+      margin-bottom: auto;
+      width: auto;
+      padding: 16px 46px; border-radius: 999px;
+      border: 1px solid rgba(232, 212, 139, 0.65);
+      background: linear-gradient(135deg, #ecd88f, #c9a84c 55%, #a07c2a);
+      color: #0a0a0a !important;
+      font-family: var(--font-body, 'Inter', sans-serif) !important;
+      font-size: 0.86rem !important; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      transition: transform .25s ease, box-shadow .3s ease;
+    }
+    #mobileMenu .menu-cta:hover, #mobileMenu .menu-cta:focus-visible {
+      color: #0a0a0a !important;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 38px rgba(201, 168, 76, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.14em;
+    }
+    #mobileMenu .menu-email {
+      margin-top: 30px;
+      padding: 4px 0;
+      font-size: 0.9rem !important;
+      color: var(--text-2, #8a8578) !important;
+      letter-spacing: 0.08em;
+    }
+    #mobileMenu .menu-email:hover { color: #c9a84c !important; }
+
+    /* ---- Hide floating chat while the mobile menu is open ---- */
+    body.ebs-menu-open .ebs-chat-fab,
+    body.ebs-menu-open .ebs-chat-window { display: none !important; }
+
+    @media (max-width: 1024px) {
+      #menuToggle { display: flex !important; }
+      .desktop-nav-links { display: none !important; }
+      .nav-title { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      .navbar .nav-cta { display: none; }
+    }
+
+    /* ---- Navbar helper alignment (no overlap, all pages) ---- */
+    .navbar, .topbar { box-sizing: border-box; }
+    .navbar .logo, .topbar .logo { flex-shrink: 0; white-space: nowrap; z-index: 2; }
+    .nav-right, .top-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+    /* ---- Contact email note + About block (index) ---- */
+    .contact-email-note {
+      margin-top: 22px; padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.9rem; color: var(--text-2, #8a8578); text-align: center;
+    }
+    .about-note {
+      margin-bottom: 28px; padding: 26px 28px;
+      border-color: rgba(201, 168, 76, 0.3);
+      background: linear-gradient(140deg, rgba(201, 168, 76, 0.07), transparent 55%);
+    }
+    .about-note h3 {
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 1.2rem; font-weight: 700; color: var(--text, #f5f0e8);
+      margin-bottom: 10px;
+    }
+    .about-note p { color: var(--text-2, #8a8578); font-size: 0.95rem; line-height: 1.75; max-width: 900px; }
+
+    /* ---- iOS: inputs at least 16px on mobile to prevent auto-zoom ---- */
+    @media (max-width: 767px) {
+      input, select, textarea { font-size: 16px !important; }
+    }
+
+    /* ---- Print ---- */
+    @media print {
+      .ebs-chat-fab, .ebs-chat-window,
+      .ebs-notif-bar, .ebs-backtop { display: none !important; }
+    }
+
+  
+    /* ---- FAQ (added 2026-08-22: matches site FAQ component) ---- */
+    #faq .faq-wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .faq-sec-head { text-align: center; margin-bottom: 34px; }
+    .faq-sec-label { display: inline-block; font-size: 0.78rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent, #c9a84c); font-weight: 600; margin-bottom: 12px; }
+    .faq-sec-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.7rem, 4vw, 2.4rem); color: var(--text, #f5f0e8); font-weight: 600; margin: 0; }
+    .faq-item { border: 1px solid var(--border, #1a1a1a); border-radius: 4px; background: var(--surface, #111111); margin-bottom: 14px; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+    .faq-item.open { border-color: rgba(201, 168, 76, 0.5); box-shadow: 0 0 30px rgba(201, 168, 76, 0.06); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px 24px; color: var(--text, #f5f0e8); font-family: inherit; font-size: 1rem; font-weight: 600; text-align: left; background: transparent; border: 0; cursor: pointer; min-height: 44px; }
+    .faq-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(201, 168, 76, 0.4); color: var(--accent, #c9a84c); font-size: 0.9rem; font-weight: 400; transition: transform 0.35s ease, background 0.3s ease; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gradient, linear-gradient(100deg, #e8d48b 0%, #c9a84c 55%, #a07c2a 100%)); color: #0a0a0a; border-color: transparent; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+    .faq-a-inner { padding: 0 24px 20px; font-size: 0.95rem; color: var(--text-2, #8a8578); line-height: 1.65; }
+
+  </style>
+  <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
+       When you have a real GA4 Measurement ID, paste the standard
+       gtag.js loader + gtag('config') snippet here. The PHASE 3 event
+       tracker forwards automatically once the ID is set. No invalid
+       IDs load. -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this a real AI or a scripted demo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A simulated demo. It runs in your browser and shows how our AI responds to inquiries, qualifies leads, and books appointments in under 30 seconds. No real customer data is involved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I see how the automation works before buying?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. This demo and the free lead flow audit show the systems in action before any commitment. Every build is scoped on a 15-minute call."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can the system be customized for my business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every system is custom-built around your lead flow, industry, and existing tools. There are no fixed packages."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens after I try the demo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Book a 15-Min Call from any page. We will walk through your lead flow, show which automations apply to your business, and send a clear scope if it is a fit."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- ============================================================
+       HEADER / NAVBAR
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="/" class="logo" aria-label="Elite Bot Studios, main site">
+        <span class="elite">ELITE</span>
+        <span class="diamond" aria-hidden="true">◆</span>
+        <span class="botstudios">Bot Studios</span>
+      </a>
+
+      <span class="nav-title"><b>Interactive AI Demo Center</b></span>
+
+      <div class="nav-right">
+        <button class="sfx-btn" id="sfxBtnNav" aria-label="Toggle sound effects">Sound FX: On</button>
+        <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-outline nav-cta"><span class="btn-label">Book a 15-Min Call</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></button>
+      </div>
+    </div>
+  </header>
+
+  <nav id="mobileMenu" aria-label="Mobile navigation">
+    <a href="/">Home</a>
+    <a href="/#services">Services</a>
+    <a href="demo.html" aria-current="page">Demo</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="pricing.html">How We Engage</a>
+    <a href="audit.html">Audit</a>
+    <a href="/#contact">Contact</a>
+    <a class="menu-email" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
+    <a class="menu-cta" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a>
+  </nav>
+
+  <main id="main">
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
+    <section class="hero">
+      <div class="hero-glow g1"></div>
+      <div class="hero-glow g2"></div>
+
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-badge reveal"><span class="live-dot"></span> LIVE AI SIMULATOR</span>
+          <h1 class="reveal" style="--d:.08s">Test Our AI <span class="grad-text">Lead Systems</span> in Real-Time</h1>
+          <p class="hero-sub reveal" style="--d:.16s">
+            Select an industry below and see how our AI responds to inquiries, qualifies leads,
+            and logs appointments in under 30 seconds.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DEMO SIMULATOR
+    ============================================================ -->
+    <section class="section" id="simulator" style="padding-top:40px;">
+      <div class="container">
+
+        <!-- Industry tabs -->
+        <div class="tabs reveal" role="tablist" aria-label="Choose an industry scenario">
+          <button class="tab active" data-industry="hvac" role="tab" aria-selected="true">HVAC &amp; Home Services</button>
+          <button class="tab" data-industry="dental" role="tab" aria-selected="false">Dental Clinic</button>
+          <button class="tab" data-industry="realestate" role="tab" aria-selected="false">Real Estate</button>
+        </div>
+
+        <div class="demo-grid">
+          <!-- ===== LEFT: CUSTOMER VIEW (phone chat) ===== -->
+          <div class="col-left reveal" style="--d:.1s">
+            <div class="phone-wrap">
+              <div class="phone-shell">
+                <div class="phone-screen">
+                  <div class="phone-status" id="phoneClock">–</div>
+
+                  <div class="chat-header">
+                    <div class="chat-avatar" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z" fill="#0a0a0a"/>
+                      </svg>
+                    </div>
+                    <div class="chat-id">
+                      <div class="chat-name">Elite AI Assistant</div>
+                      <div class="chat-biz" id="chatBiz">for Summit Air &amp; Heating</div>
+                    </div>
+                    <span class="chat-ai-chip">AI</span>
+                    <button class="reset-btn" id="resetChat" aria-label="Reset conversation" title="Reset conversation">
+                      <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <div class="chat-body" id="chatBody"></div>
+
+                  <div class="chat-input">
+                    <input type="text" id="chatInput" maxlength="220" placeholder="Type a message as the customer…" autocomplete="off" />
+                    <button class="send-btn" id="sendBtn" aria-label="Send message">
+                      <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="preset-wrap" id="presetWrap">
+              <div class="preset-head">
+                <span>Quick customer prompts</span>
+                <button class="auto-btn" id="autoBtn">Auto-play demo</button>
+              </div>
+              <div class="preset-chips" id="presetChips"></div>
+              <p class="preset-hint">You're the customer, tap a prompt or type anything you'd ask a real business.</p>
+            </div>
+          </div>
+
+          <!-- ===== RIGHT: BUSINESS OWNER VIEW (dashboard) ===== -->
+          <div class="col-right">
+            <div class="dash-head glass reveal" style="--d:.15s">
+              <div>
+                <h2 class="dash-title">Real-Time Business Dashboard</h2>
+                <p class="dash-sub">This is what your team sees automatically as the AI talks to the lead.</p>
+              </div>
+              <div class="dash-chips">
+                <span class="scenario-chip" id="scenarioChip">HVAC · Summit Air &amp; Heating</span>
+                <button class="sfx-btn" id="sfxBtnDash" aria-label="Toggle sound effects">Sound FX: On</button>
+              </div>
+            </div>
+
+            <!-- Lead processing card -->
+            <div class="lead-card glass reveal" id="leadCard" style="--d:.2s">
+              <div class="lead-head">
+                <span class="lead-title">Live Lead Processing</span>
+                <span class="live-chip"><span class="live-dot"></span> LIVE</span>
+              </div>
+
+              <div class="status-row">
+                <span class="status-chip" id="ldStatus">Waiting for first message…</span>
+                <span class="sms-badge" id="smsBadge">Confirmation SMS sent</span>
+              </div>
+
+              <div class="lead-grid">
+                <div class="lead-field" id="fldName">
+                  <span class="f-label">Customer Name</span>
+                  <span class="f-value placeholder" id="ldName">–</span>
+                </div>
+                <div class="lead-field" id="fldService">
+                  <span class="f-label">Service Needed</span>
+                  <span class="f-value placeholder" id="ldService">–</span>
+                </div>
+                <div class="lead-field" id="fldUrgency">
+                  <span class="f-label">Urgency Level</span>
+                  <span class="f-value placeholder" id="ldUrgency">–</span>
+                </div>
+                <div class="lead-field" id="fldSlot">
+                  <span class="f-label">Booked Time Slot</span>
+                  <span class="f-value placeholder" id="ldSlot">–</span>
+                </div>
+              </div>
+
+              <div class="resp-block">
+                <div class="resp-top">
+                  <span class="f-label" style="margin:0;">Response Speed Tracker</span>
+                  <span class="resp-num" id="ldResp">–</span>
+                </div>
+                <div class="sla-track"><div class="sla-fill" id="slaFill"></div></div>
+                <div class="resp-bottom">
+                  <span>Target: under 30 seconds</span>
+                  <span id="ldAvg">Session avg: –</span>
+                </div>
+              </div>
+
+              <div class="confetti-box" id="confettiBox"></div>
+            </div>
+
+            <!-- Automation log -->
+            <div class="feed-card glass reveal" style="--d:.25s">
+              <h3>Automation Log</h3>
+              <p class="feed-sub">Everything the AI does, logged in real time.</p>
+              <ul class="feed" id="feed"></ul>
+            </div>
+
+            <!-- Google Calendar -->
+            <div class="cal-card glass reveal" style="--d:.3s">
+              <div class="cal-head">
+                <div class="cal-logo" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+                <div>
+                  <div class="cal-title">Google Calendar</div>
+                  <div class="cal-date" id="calDate">Tomorrow</div>
+                </div>
+                <span class="cal-chip">Simulated</span>
+              </div>
+              <ul class="cal-list" id="calList"></ul>
+              <p class="cal-note">Watch the slot fill in automatically the moment the AI books the lead.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         MISSED-CALL TEXT-BACK SIMULATOR
+    ============================================================ -->
+    <section class="section" id="missed-call">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Missed-Call Simulator</span>
+          <h2 class="section-title">Test Missed-Call Text-Back</h2>
+          <p class="section-sub">Every missed call is a missed paycheck, unless your AI texts back instantly. Try it below.</p>
+        </div>
+
+        <div class="mc-grid">
+          <!-- Phone -->
+          <div class="mc-phone-wrap reveal" style="--d:.1s">
+            <div class="phone-wrap">
+              <div class="phone-shell mc-phone" id="mcPhone">
+                <div class="phone-screen">
+                  <div class="mc-screen">
+                    <div class="mc-mode active" id="mcIdle">
+                      <div class="mc-clock" id="mcClock">–</div>
+                      <div class="mc-day" id="mcDay">–</div>
+                      <div class="mc-shield"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Missed-Call Protection: Active</div>
+                      <p class="mc-shield-sub">This phone is "unattended", like your business after hours.<br>Simulate a missed call to see what happens next.</p>
+                    </div>
+
+                    <div class="mc-mode" id="mcRing">
+                      <div class="ring-avatar" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+                      <div class="ring-name">Customer</div>
+                      <div class="ring-num" id="ringNum">+1 (555) 123-4567</div>
+                      <div class="ring-status">Incoming call…</div>
+                      <div class="ring-actions" aria-hidden="true">
+                        <button class="ring-btn ring-decline" tabindex="-1"><i class="fa-solid fa-phone-slash"></i></button>
+                        <button class="ring-btn ring-accept" tabindex="-1"><i class="fa-solid fa-phone"></i></button>
+                      </div>
+                    </div>
+
+                    <div class="mc-mode" id="mcMissed">
+                      <div class="missed-banner">
+                        <div class="missed-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/><path d="m3 3 18 18"/></svg></div>
+                        <div class="missed-title">Missed Call from Customer</div>
+                        <div class="missed-sub" id="missedNum">+1 (555) 123-4567</div>
+                        <div class="missed-sub" id="missedTime">–</div>
+                      </div>
+                      <div class="missed-action">AI text-back triggering…</div>
+                    </div>
+
+                    <div class="mc-mode" id="mcSms">
+                      <div class="mc-sms-head">
+                        <div class="sms-ico"><i class="fa-solid fa-comment-sms" aria-hidden="true"></i></div>
+                        <div class="sms-label">SMS · <span id="smsNum">+1 (555) 123-4567</span></div>
+                        <span class="sms-chip">AI TEXT-BACK</span>
+                      </div>
+                      <div class="sms-thread" id="smsThread"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="mc-controls reveal" style="--d:.18s">
+            <div class="glass mc-card">
+              <h3>How it works</h3>
+              <ol class="mc-steps">
+                <li>
+                  <span class="mc-step-num">1</span>
+                  <div>
+                    <h4>Customer calls your business</h4>
+                    <p>Nobody picks up, it's after hours, or your team is busy.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="mc-step-num">2</span>
+                  <div>
+                    <h4>AI texts back in under a second</h4>
+                    <p>The missed call instantly triggers a personalized text message.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="mc-step-num">3</span>
+                  <div>
+                    <h4>AI books the appointment</h4>
+                    <p>The conversation continues, and the slot lands on your calendar. Even at 2 AM.</p>
+                  </div>
+                </li>
+              </ol>
+
+              <div class="mc-form">
+                <label for="mcNumber">Enter a phone number (Simulator)</label>
+                <div class="mc-input-row">
+                  <input type="tel" id="mcNumber" inputmode="tel" placeholder="(555) 123-4567" maxlength="14" autocomplete="off" />
+                  <button class="btn btn-primary" id="mcCallBtn">
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i> Simulate Missed Call
+                  </button>
+                </div>
+                <p class="mc-err" id="mcErr"></p>
+                <button class="mc-reset" id="mcReset">Reset simulator</button>
+                <p class="mc-hint">Have sound on? You'll hear the phone ring, 3 rings, no answer, then the AI takes over.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CTA
+    ============================================================ -->
+    <section class="section cta-section">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="cta-inner reveal">
+          <h2>Impressed? Get This Exact System <span class="grad-text">For Your Business.</span></h2>
+          <p>Within two weeks, a system just like this could be answering your customers and booking your calendar, even at 2 AM.</p>
+          <div class="cta-btns">
+            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book a 15-Min Call</a>
+            <a href="/" class="btn btn-outline"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Main Site</a>
+          </div>
+        </div>
+      </div>
+    </section>
+        <section class="section" id="faq">
+        <div class="faq-wrap">
+          <div class="faq-sec-head">
+            <span class="faq-sec-label">FAQ</span>
+            <h2 class="faq-sec-title">Questions? Answered.</h2>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA1">
+              Is this a real AI or a scripted demo?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA1" role="region">
+              <div class="faq-a-inner">A simulated demo. It runs in your browser and shows how our AI responds to inquiries, qualifies leads, and books appointments in under 30 seconds. No real customer data is involved.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA2">
+              Can I see how the automation works before buying?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA2" role="region">
+              <div class="faq-a-inner">Yes. This demo and the free lead flow audit show the systems in action before any commitment. Every build is scoped on a 15-minute call.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA3">
+              Can the system be customized for my business?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA3" role="region">
+              <div class="faq-a-inner">Yes. Every system is custom-built around your lead flow, industry, and existing tools. There are no fixed packages.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="faqA4">
+              What happens after I try the demo?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id="faqA4" role="region">
+              <div class="faq-a-inner">Book a 15-Min Call from any page. We will walk through your lead flow, show which automations apply to your business, and send a clear scope if it is a fit.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  <script>
+    /* FAQ accordion (one open at a time) */
+    (function () {
+      var items = document.querySelectorAll('#faq .faq-item');
+      items.forEach(function (item) {
+        var q = item.querySelector('.faq-q');
+        var a = item.querySelector('.faq-a');
+        q.addEventListener('click', function () {
+          var isOpen = item.classList.contains('open');
+          items.forEach(function (other) {
+            other.classList.remove('open');
+            other.querySelector('.faq-a').style.maxHeight = null;
+            other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+            a.style.maxHeight = a.scrollHeight + 'px';
+            q.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+
+    </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="Elite Bot Studios, main site">
+          <span class="elite">ELITE</span>
+          <span class="diamond" aria-hidden="true">◆</span>
+          <span class="botstudios">Bot Studios</span>
+        </a>
+        <p class="footer-tagline">AI-Powered Business Automation</p>
+      </div>
+      <p class="footer-copy">© 2026 Elite Bot Studios. All rights reserved. · <a href="/">Main Site</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a> · <a href="cookies.html">Cookie Policy</a> · <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a> · <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+
+    /* ============================================================
+       HELPERS
+    ============================================================ */
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const rand = (a, b) => a + Math.random() * (b - a);
+    const nowTime = () => new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const dayPart = () => { const h = new Date().getHours(); return h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening'; };
+    const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+    function formatName(name) {
+      const parts = String(name).trim().split(/\s+/).filter(Boolean);
+      if (!parts.length) return 'New Lead';
+      let out = cap(parts[0]);
+      if (parts[1]) out += ' ' + parts[1].charAt(0).toUpperCase() + '.';
+      return esc(out);
+    }
+
+    /* ============================================================
+       SOUND FX (Web Audio, no external files)
+    ============================================================ */
+    const SFX = {
+      ctx: null,
+      on: true,
+      ensure() {
+        if (!this.on) return false;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return false;
+        if (!this.ctx) this.ctx = new AC();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        return true;
+      },
+      tone(freq, delay, dur, vol = 0.1, type = 'sine') {
+        if (!this.ensure()) return;
+        const t0 = this.ctx.currentTime + delay;
+        const o = this.ctx.createOscillator();
+        const g = this.ctx.createGain();
+        o.type = type;
+        o.frequency.setValueAtTime(freq, t0);
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(vol, t0 + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        o.connect(g); g.connect(this.ctx.destination);
+        o.start(t0); o.stop(t0 + dur + 0.06);
+      },
+      pop() { this.tone(540, 0, 0.07, 0.07, 'triangle'); this.tone(820, 0.05, 0.09, 0.05, 'triangle'); },
+      ding() { this.tone(880, 0, 0.16, 0.07, 'sine'); this.tone(1174.7, 0.09, 0.22, 0.05, 'sine'); },
+      success() { [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => this.tone(f, i * 0.09, 0.24, 0.09, 'sine')); },
+      ring() { for (let i = 0; i < 3; i++) { const t = i * 1.15; this.tone(440, t, 0.95, 0.06, 'sine'); this.tone(480, t, 0.95, 0.06, 'sine'); } },
+      missed() { this.tone(392, 0, 0.22, 0.08, 'sine'); this.tone(311, 0.2, 0.38, 0.08, 'sine'); }
+    };
+
+    /* ============================================================
+       SCHEDULE MODEL (simulated calendar)
+    ============================================================ */
+    const DAY_SLOTS = [
+      { time: '9:00 AM',  status: 'free' },
+      { time: '10:00 AM', status: 'free' },
+      { time: '11:00 AM', status: 'free' },
+      { time: '12:00 PM', status: 'blocked', note: 'Team meeting' },
+      { time: '1:00 PM',  status: 'free' },
+      { time: '2:00 PM',  status: 'free' },
+      { time: '3:00 PM',  status: 'free' },
+      { time: '4:00 PM',  status: 'blocked', note: 'Maintenance call' },
+      { time: '5:00 PM',  status: 'free' }
+    ];
+    DAY_SLOTS.forEach(s => s.label = 'Tomorrow · ' + s.time);
+    const freeSlots = () => DAY_SLOTS.filter(s => s.status === 'free' && !s.demoBooked);
+    function clearDemoBookings() { DAY_SLOTS.forEach(s => s.demoBooked = null); }
+
+    /* ============================================================
+       INDUSTRY SCENARIOS
+    ============================================================ */
+    const INDUSTRIES = {
+      hvac: {
+        id: 'hvac',
+        tabLabel: 'HVAC · Summit Air & Heating',
+        business: 'Summit Air & Heating',
+        greeting: () => `Good ${dayPart()}! Thanks for contacting Summit Air & Heating. I'm their AI assistant, how can I help you today?`,
+        presets: ["My AC stopped cooling!", "How much for a tune-up?", "Can someone come tomorrow at 10 AM?"],
+        detectService(t) {
+          const x = t.toLowerCase();
+          if (/(tune[\s-]?up|maintenance|service check|checkup)/.test(x)) return 'AC Tune-Up / Maintenance';
+          if (/(install|new (unit|system|ac)|replace)/.test(x)) return 'New System Installation';
+          if (/(heat|furnace)/.test(x)) return 'Heating Repair';
+          if (/(cool|cooling|\ba\/?c\b|air ?condition)/.test(x)) return 'AC Repair, Not Cooling';
+          return 'HVAC Service Request';
+        },
+        ack(service) {
+          if (service.includes('Not Cooling')) return "Oh no, a warm house is the worst, especially right now! I can get a certified technician out to you quickly.";
+          if (service.includes('Tune-Up')) return "Great timing, a seasonal tune-up keeps your AC running at peak efficiency.";
+          if (service.includes('Install')) return "Exciting! New system installs are our specialty, we'll get you set up with the right unit.";
+          if (service.includes('Heating')) return "Got it, we'll get your heat back on fast.";
+          return "Happy to help with that!";
+        },
+        askName: () => "What's your name so I can get you on the schedule?",
+        askTime(a, b) { return `We have ${a} and ${b} open tomorrow, which works better for you?`; },
+        bookedReply(name, slot) { return `Perfect, ${name}. You're booked for ${slot}. Our technician will text you a 30-minute heads-up before arriving. Is there anything else I can help with?`; },
+        price: "Our seasonal tune-up is $89 for most systems, and repairs are always quoted upfront before any work begins, no surprises.",
+        insurance: "We work with most home warranty and insurance providers, and we'll verify your coverage for you. Want me to get you booked?",
+        smsCustomer: "Hey! My AC just stopped blowing cold air, can someone come out today?",
+        smsBook: slot => `Absolutely. I can get a technician out tomorrow morning, I've reserved ${slot} for you. A confirmation text is on its way!`,
+        smsTitle: 'AC Repair, SMS Lead',
+        smsSlot: null
+      },
+      dental: {
+        id: 'dental',
+        tabLabel: 'Dental · BrightSmile Dental',
+        business: 'BrightSmile Dental',
+        greeting: () => `Good ${dayPart()}! Welcome to BrightSmile Dental. I'm their AI assistant, how can I help you today?`,
+        presets: ["I have a terrible toothache", "Do you accept insurance?", "Need to book a teeth cleaning."],
+        detectService(t) {
+          const x = t.toLowerCase();
+          if (/(tooth[\s-]?ache|pain|hurt|emergency|urgent)/.test(x)) return 'Emergency Toothache';
+          if (/(clean|hygien)/.test(x)) return 'Teeth Cleaning';
+          if (/insur/.test(x)) return 'Insurance Consultation';
+          if (/(whiten|bleach)/.test(x)) return 'Teeth Whitening';
+          if (/(check[\s-]?up|exam)/.test(x)) return 'Dental Checkup';
+          return 'Dental Appointment';
+        },
+        ack(service) {
+          if (service.includes('Emergency')) return "I'm so sorry you're in pain, That's the worst. We hold same-day emergency slots for exactly this.";
+          if (service.includes('Cleaning')) return "Great choice. A standard cleaning takes about 45 minutes, and our hygienists are wonderful.";
+          if (service.includes('Insurance')) return "We'd be happy to help with that!";
+          if (service.includes('Whitening')) return "Ooh, good timing, our whitening special is running this month.";
+          return "Happy to help with that!";
+        },
+        askName: () => "Can I get your name? I'll check the earliest opening for you.",
+        askTime(a, b) { return `Our next openings are tomorrow at ${a} or ${b}, what time suits you best?`; },
+        bookedReply(name, slot) { return `You're all set, ${name}. I've reserved ${slot} for you. You'll get a confirmation text with directions, plus a reminder the day before. Anything else I can help with?`; },
+        price: "A standard cleaning is $119, and we accept most major PPO plans, we verify your benefits for free before your visit.",
+        insurance: "Yes! We accept most major PPO plans (Delta Dental, Cigna, Aetna) and we handle all the paperwork for you. Want me to book your appointment?",
+        smsCustomer: "Hi! I've had a bad toothache since last night. Do you have anything today?",
+        smsBook: slot => `Sorry to hear that. I've reserved our earliest emergency opening, ${slot}. We'll confirm by text. Anything else you need?`,
+        smsTitle: 'Emergency Toothache, SMS Lead',
+        smsSlot: '9:00 AM'
+      },
+      realestate: {
+        id: 'realestate',
+        tabLabel: 'Real Estate · Oakwood Realty',
+        business: 'Oakwood Realty',
+        greeting: () => `Good ${dayPart()}! Thanks for contacting Oakwood Realty. I'm their AI assistant, how can I help you today?`,
+        presets: ["Is the property on Oak Street still available?", "I want to schedule a viewing this weekend."],
+        detectService(t) {
+          const x = t.toLowerCase();
+          if (/oak/.test(x)) return 'Property Viewing, Oak Street';
+          if (/(view|tour|show)/.test(x)) return 'Property Viewing';
+          if (/(sell|valuation|list my|listing)/.test(x)) return 'Home Valuation';
+          if (/(buy|looking|purchase|first home)/.test(x)) return 'Buyer Consultation';
+          if (/rent/.test(x)) return 'Rental Inquiry';
+          return 'Real Estate Inquiry';
+        },
+        ack(service) {
+          if (service.includes('Oak Street')) return "Great news, the Oak Street property is still available! It's a 3-bed, 2-bath with a renovated kitchen, listed at $425,000.";
+          if (service.includes('Viewing')) return "I'd love to get you in for a private viewing!";
+          if (service.includes('Valuation')) return "Smart move! A professional home valuation is free and takes about 30 minutes.";
+          return "Happy to help.";
+        },
+        askName: () => "May I have your name? I'll get the viewing set up for you.",
+        askTime(a, b) { return `I can show you the property tomorrow at ${a} or ${b}, which do you prefer?`; },
+        bookedReply(name, slot) { return `Wonderful, ${name}. Your private viewing is locked in for ${slot}. I've sent the address and listing details to your phone. Anything else you'd like to know?`; },
+        price: "Viewings are completely free. And if you decide to move forward, buyer's agent fees are typically covered by the seller.",
+        insurance: "Home tours don't require insurance, but our mortgage partners can walk you through everything when you're ready. Want me to get you booked?",
+        smsCustomer: "Hi! I just saw the sign on Oak Street, is the house still for sale?",
+        smsBook: slot => `It sure is. I've penciled you in for a viewing ${slot}. I'll text you the address and listing details shortly.`,
+        smsTitle: 'Viewing, Oak Street · SMS Lead',
+        smsSlot: null
+      }
+    };
+
+    /* ============================================================
+       CONVERSATION STATE
+    ============================================================ */
+    let session = null;
+    const UI = {
+      busy: false,
+      gen: 0,                 // guards async replies across resets
+      autoplay: false,
+      autoQueue: [],
+      autoTimers: [],
+      respInt: null,
+      respStart: 0,
+      respSum: 0,
+      respCount: 0,
+      mcBusy: false,
+      mcTimers: []
+    };
+
+    function freshSession(id) {
+      session = {
+        industry: id,
+        stage: 'idle',        // idle → name → time → post (booked)
+        name: null,
+        service: null,
+        urgency: null,
+        urgencySet: false,
+        slot: null,
+        pendingSlot: null,
+        asks: { name: 0, time: 0 },
+        msgCount: 0
+      };
+    }
+
+    /* ============================================================
+       TEXT EXTRACTION ("AI" parsing)
+    ============================================================ */
+    function extractName(text) {
+      const m = text.match(/(?:i'?m|i am|this is|call me|my name is|name's|name is)\s+([A-Z][A-Za-z'-]+)/i);
+      if (m) return cap(m[1]);
+      const STOP = ['no', 'nope', 'yes', 'yep', 'yeah', 'ok', 'okay', 'hi', 'hey', 'hello', 'thanks', 'thank', 'sure', 'maybe', 'please', 'test', 'none', 'nothing', 'later'];
+      const words = text.trim().split(/\s+/);
+      if (words.length <= 2 && !/\d/.test(text) && /^[A-Za-z][A-Za-z'-]+$/.test(words[0]) && !STOP.includes(words[0].toLowerCase())) {
+        return cap(words[0]);
+      }
+      return null;
+    }
+
+    function detectUrgency(text) {
+      const t = text.toLowerCase();
+      if (/(emergency|urgent|asap|right away|right now|immediately|terrible|severe|awful|stopped|not (working|cooling)|broken|leak|pain|hurt|today|tonight)/.test(t)) return 'High';
+      if (/(tomorrow|soon|this week|weekend|as soon as possible)/.test(t)) return 'Medium';
+      return 'Low';
+    }
+
+    function extractSlot(text) {
+      const t = ' ' + text.toLowerCase();
+      let hour = null, isPM = null;
+      const m = t.match(/(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)/);
+      if (m) {
+        hour = parseInt(m[1], 10);
+        if (m[3]) isPM = /p/.test(m[3]);
+        if (hour < 1 || hour > 12) return null;
+      } else {
+        const bare = t.match(/at\s+(\d{1,2})(?![\d:])/);
+        if (bare) { hour = parseInt(bare[1], 10); if (hour < 1 || hour > 12) return null; }
+      }
+      if (hour == null) {
+        if (/morning/.test(t)) { hour = 10; isPM = false; }
+        else if (/afternoon/.test(t)) { hour = 2; isPM = true; }
+        else if (/evening/.test(t)) { hour = 5; isPM = true; }
+        else return null;
+      } else if (isPM == null) {
+        isPM = hour <= 6; // 1–6 → PM, 7–11 → AM, 12 → PM
+      }
+      const h24 = isPM ? (hour === 12 ? 12 : hour + 12) : (hour === 12 ? 0 : hour);
+      const disp = (h24 % 12 === 0 ? 12 : h24 % 12) + ':00 ' + (h24 >= 12 ? 'PM' : 'AM');
+      const slot = DAY_SLOTS.find(s => s.time === disp);
+      if (slot) {
+        if (slot.status === 'blocked') return { blocked: true, time: slot.time };
+        return { slot };
+      }
+      return null;
+    }
+
+    function extractFrom(text) {
+      return {
+        service: INDUSTRIES[session.industry].detectService(text),
+        urgency: detectUrgency(text),
+        name: extractName(text),
+        slot: extractSlot(text)
+      };
+    }
+
+    /* ============================================================
+       CHAT UI
+    ============================================================ */
+    const chatBody = $('chatBody');
+    const chatInput = $('chatInput');
+    const sendBtn = $('sendBtn');
+    const inputPlaceholder = chatInput.placeholder;
+
+    function scrollChat() { chatBody.scrollTop = chatBody.scrollHeight; }
+
+    function customerBubble(text) {
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-msg customer';
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      b.textContent = text;
+      wrap.appendChild(b);
+      return wrap;
+    }
+
+    function aiBubble(text) {
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-msg ai';
+      const label = document.createElement('span');
+      label.className = 'ai-label';
+      label.textContent = 'AI';
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      b.textContent = text;
+      wrap.append(label, b);
+      return wrap;
+    }
+
+    function typingBubble() {
+      const wrap = document.createElement('div');
+      wrap.className = 'chat-msg ai typing-wrap';
+      const label = document.createElement('span');
+      label.className = 'ai-label';
+      label.textContent = 'AI is typing…';
+      const b = document.createElement('div');
+      b.className = 'bubble typing-bubble';
+      b.innerHTML = '<span></span><span></span><span></span>';
+      wrap.append(label, b);
+      return wrap;
+    }
+
+    function setChatDisabled(disabled) {
+      chatInput.disabled = disabled;
+      sendBtn.disabled = disabled;
+      $('presetWrap').classList.toggle('disabled', disabled);
+      if (disabled) {
+        chatInput.dataset.oldPh = chatInput.placeholder;
+        chatInput.placeholder = 'AI is typing…';
+      } else {
+        chatInput.placeholder = chatInput.dataset.oldPh || inputPlaceholder;
+      }
+    }
+
+    /* ============================================================
+       LEAD CARD / CRM UI
+    ============================================================ */
+    function setLeadStatus(state) {
+      const el = $('ldStatus');
+      const card = $('leadCard');
+      const map = {
+        idle:  'Waiting for first message…',
+        new:   'New Inquiry',
+        qual:  'Qualifying…',
+        booked:'Appointment Booked!'
+      };
+      el.textContent = map[state];
+      card.classList.remove('state-new', 'state-qual', 'state-booked');
+      if (state === 'new') card.classList.add('state-new');
+      if (state === 'qual') card.classList.add('state-qual');
+      if (state === 'booked') {
+        card.classList.add('state-booked');
+        card.classList.remove('flash-booked');
+        void card.offsetWidth;
+        card.classList.add('flash-booked');
+      }
+    }
+
+    function setField(id, value, extraClass = '') {
+      const el = $(id);
+      const field = el.closest('.lead-field');
+      el.textContent = value;
+      el.className = 'f-value' + (extraClass ? ' ' + extraClass : '');
+      if (field) {
+        field.classList.remove('field-flash');
+        void field.offsetWidth;
+        field.classList.add('field-flash');
+      }
+    }
+
+    function setSla(seconds) {
+      $('slaFill').style.width = Math.min(100, (seconds / 30) * 100) + '%';
+    }
+
+    function startRespTimer() {
+      UI.respStart = performance.now();
+      clearInterval(UI.respInt);
+      UI.respInt = setInterval(() => {
+        const s = (performance.now() - UI.respStart) / 1000;
+        $('ldResp').textContent = s.toFixed(1) + 's';
+        setSla(s);
+      }, 100);
+    }
+
+    function stopRespTimer() {
+      clearInterval(UI.respInt);
+      UI.respInt = null;
+      const s = (performance.now() - UI.respStart) / 1000;
+      $('ldResp').textContent = s.toFixed(1) + 's';
+      setSla(s);
+      UI.respSum += s;
+      UI.respCount++;
+      $('ldAvg').textContent = 'Session avg: ' + (UI.respSum / UI.respCount).toFixed(1) + 's';
+      const el = $('ldResp');
+      el.classList.remove('flash');
+      void el.offsetWidth;
+      el.classList.add('flash');
+    }
+
+    function feed(text, icon = '•') {
+      const ul = $('feed');
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="feed-ico">${icon}</span><span class="feed-text">${text}</span><span class="feed-time">${nowTime()}</span>`;
+      ul.prepend(li);
+      while (ul.children.length > 14) ul.removeChild(ul.lastChild);
+    }
+
+    function confetti() {
+      const box = $('confettiBox');
+      const colors = ['#c9a84c', '#e8d48b', '#a07c2a', '#f5f0e8', '#10b981'];
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('span');
+        p.className = 'cf';
+        p.style.left = rand(5, 95) + '%';
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDelay = rand(0, 0.35) + 's';
+        p.style.transform = 'rotate(' + rand(0, 360) + 'deg)';
+        box.appendChild(p);
+        setTimeout(() => p.remove(), 1800);
+      }
+    }
+
+    /* ============================================================
+       CALENDAR UI
+    ============================================================ */
+    const calRows = {};
+    function renderCalendar() {
+      const ul = $('calList');
+      ul.innerHTML = '';
+      calRows.length = 0;
+      DAY_SLOTS.forEach(s => {
+        const li = document.createElement('li');
+        li.className = 'cal-row';
+        const time = document.createElement('span');
+        time.className = 'cal-time';
+        time.textContent = s.time;
+        const box = document.createElement('div');
+        box.className = 'cal-slot';
+        if (s.status === 'blocked') {
+          box.classList.add('locked');
+          box.innerHTML = `<span class="cal-lock">${s.note}</span>`;
+        } else {
+          box.innerHTML = '<span class="cal-avail">Available</span>';
+        }
+        li.append(time, box);
+        ul.appendChild(li);
+        calRows[s.time] = box;
+      });
+    }
+
+    function calendarBook(time, title) {
+      const box = calRows[time];
+      if (!box) return;
+      box.className = 'cal-slot booked just-booked';
+      box.innerHTML = `<span class="evt-ico"><i class="fa-solid fa-clock" aria-hidden="true"></i></span><span class="evt-title">${esc(title)}</span><span class="evt-check">✓</span>`;
+      setTimeout(() => box.classList.remove('just-booked'), 1800);
+    }
+
+    /* ============================================================
+       CONVERSATION ENGINE
+    ============================================================ */
+    function alternativesText(cfg) {
+      const free = freeSlots();
+      if (free.length >= 2) return cfg.askTime(free[0].time, free[1].time);
+      if (free.length === 1) return `I still have ${free[0].time} tomorrow, want me to lock it in?`;
+      return "We're filling up fast, the team will text you first thing with the next openings. Anything else I can help with?";
+    }
+
+    function doBook(slot) {
+      const cfg = INDUSTRIES[session.industry];
+      session.slot = slot.label;
+      session.stage = 'post';
+      slot.demoBooked = true;
+      setField('ldSlot', slot.label);
+      setLeadStatus('booked');
+      calendarBook(slot.time, `${session.service} · ${session.name ? formatName(session.name) : 'New Lead'}`);
+      feed(`Slot reserved: ${slot.label}`, '•');
+      feed('Confirmation SMS sent to customer', '•');
+      feed('Lead synced to CRM and pipeline', '•');
+      $('smsBadge').classList.add('show');
+      SFX.success();
+      confetti();
+    }
+
+    function bookAndReply(slot) {
+      const cfg = INDUSTRIES[session.industry];
+      const s = slot || session.pendingSlot || freeSlots()[0];
+      session.pendingSlot = null;
+      if (!s) {
+        session.stage = 'post';
+        return { text: "We're fully booked tomorrow! The team will text you first thing with the next openings. Anything else I can help with?" };
+      }
+      doBook(s);
+      return { text: cfg.bookedReply(session.name ? formatName(session.name) : 'there', s.label) };
+    }
+
+    function buildReply(text, ex) {
+      const cfg = INDUSTRIES[session.industry];
+      const t = text.toLowerCase();
+      const priceQ = /(how much|price|cost|charge|fee|rate|expensive)/.test(t);
+      const insQ = /insur/.test(t);
+
+      /*, Post-booking follow-ups, */
+      if (session.stage === 'post') {
+        if (priceQ) return { text: cfg.price + ' Anything else I can help you with?' };
+        if (insQ) return { text: cfg.insurance };
+        if (/(thank|thx|appreciate)/.test(t)) return { text: `You're very welcome, ${session.name ? formatName(session.name) : 'friend'}! We'll see you at your appointment.` };
+        if (/(cancel|reschedule|change)/.test(t)) return { text: "No problem! I've notified the team, just reply here anytime and I'll sort it out." };
+        return { text: "Got it, I've noted that for the team. Is there anything else you need today?" };
+      }
+
+      /*, First inbound message, */
+      if (session.stage === 'idle') {
+        session.stage = 'name';
+        const parts = [cfg.ack(ex.service)];
+        if (ex.urgency === 'High') parts.push("I've flagged this as HIGH priority so we can get to you fast.");
+        if (priceQ) parts.push(cfg.price);
+        if (ex.name) {
+          session.name = ex.name;
+          setField('ldName', formatName(ex.name));
+          feed(`Name captured: ${ex.name}`);
+        }
+        if (ex.slot) {
+          if (ex.slot.blocked) parts.push(`Quick heads-up: ${ex.slot.time} tomorrow just got taken.`);
+          else session.pendingSlot = ex.slot.slot;
+        }
+        if (ex.name) {
+          if (session.pendingSlot) return bookAndReply();
+          session.stage = 'time';
+          parts.push(cfg.askTime(freeSlots()[0] ? freeSlots()[0].time : '9:00 AM', freeSlots()[1] ? freeSlots()[1].time : '2:00 PM'));
+        } else {
+          parts.push(cfg.askName());
+        }
+        return { text: parts.join(' ') };
+      }
+
+      /*, Waiting for name, */
+      if (session.stage === 'name') {
+        if (ex.slot) {
+          if (ex.slot.blocked) {
+            session.pendingSlot = null;
+            return { text: `Oof, ${ex.slot.time} tomorrow was just taken. ${alternativesText(cfg)}` };
+          }
+          session.pendingSlot = ex.slot.slot;
+        }
+        if (ex.name) {
+          session.name = ex.name;
+          setField('ldName', formatName(ex.name));
+          feed(`Name captured: ${ex.name}`);
+          if (session.pendingSlot) return bookAndReply();
+          session.stage = 'time';
+          return { text: `Nice to meet you, ${formatName(ex.name)}! ${alternativesText(cfg)}` };
+        }
+        session.asks.name++;
+        if (session.asks.name >= 2) {
+          session.stage = 'time';
+          return { text: `No worries, we can add your name anytime! Let's get you booked. ${alternativesText(cfg)}` };
+        }
+        const pre = session.pendingSlot ? `Noted: ${session.pendingSlot.label} tomorrow. ` : '';
+        return { text: pre + "I just need a first name to hold your spot, what should I call you?" };
+      }
+
+      /*, Waiting for time, */
+      if (session.stage === 'time') {
+        if (ex.slot) {
+          if (ex.slot.blocked) {
+            session.asks.time++;
+            return { text: `Ah, ${ex.slot.time} tomorrow literally just got snapped up. ${alternativesText(cfg)}` };
+          }
+          return bookAndReply(ex.slot.slot);
+        }
+        session.asks.time++;
+        if (session.asks.time >= 2) {
+          const free = freeSlots();
+          if (!free.length) {
+            session.stage = 'post';
+            return { text: "We're fully booked tomorrow! The team will text you first thing with the next openings. Anything else I can help with?" };
+          }
+          return bookAndReply(free[0]);
+        }
+        return { text: alternativesText(cfg) };
+      }
+
+      return { text: "Got it! Is there anything else you'd like me to help with today?" };
+    }
+
+    /*, Core message handler, */
+    function handleCustomer(text) {
+      UI.busy = true;
+      setChatDisabled(true);
+      const myGen = ++UI.gen;
+
+      session.msgCount++;
+      if (session.msgCount === 1) setLeadStatus('new');
+
+      const ex = extractFrom(text);
+
+      if (!session.service) {
+        session.service = ex.service;
+        setField('ldService', ex.service);
+        feed(`Service detected: "${ex.service}"`, '•');
+      }
+      if (!session.urgencySet) {
+        session.urgency = ex.urgency;
+        session.urgencySet = true;
+        const cls = ex.urgency === 'High' ? 'urg-high' : ex.urgency === 'Medium' ? 'urg-med' : 'urg-low';
+        setField('ldUrgency', ex.urgency, cls);
+        feed(`Urgency classified: ${ex.urgency}`, '•');
+      }
+
+      const reply = buildReply(text, ex);
+
+      const typing = typingBubble();
+      chatBody.appendChild(typing);
+      scrollChat();
+      startRespTimer();
+
+      const delay = 1100 + Math.min(1600, reply.text.length * 12) + rand(0, 500);
+      setTimeout(() => {
+        if (myGen !== UI.gen) return; // session was reset, abort
+        typing.remove();
+        chatBody.appendChild(aiBubble(reply.text));
+        scrollChat();
+        SFX.ding();
+        stopRespTimer();
+        feed(`AI replied in ${$('ldResp').textContent}, target: under 30 seconds`, '•');
+        UI.busy = false;
+        setChatDisabled(false);
+        if (UI.autoplay) scheduleAuto(1600);
+      }, delay);
+    }
+
+    function sendUser(raw, fromAuto) {
+      if (UI.busy) return;
+      if (!fromAuto) stopAuto();
+      const text = raw.trim();
+      if (!text) return;
+      chatBody.appendChild(customerBubble(text));
+      scrollChat();
+      SFX.pop();
+      handleCustomer(text);
+    }
+
+    /* ============================================================
+       AUTOPLAY
+    ============================================================ */
+    function startAuto() {
+      if (UI.busy) return;
+      UI.autoplay = true;
+      const b = $('autoBtn');
+      b.textContent = '⏹ Stop auto-demo';
+      b.classList.add('active');
+      scheduleAuto(900);
+    }
+    function stopAuto() {
+      UI.autoplay = false;
+      UI.autoTimers.forEach(clearTimeout);
+      UI.autoTimers = [];
+      const b = $('autoBtn');
+      b.textContent = 'Auto-play demo';
+      b.classList.remove('active');
+    }
+    function scheduleAuto(delay) {
+      if (!UI.autoplay) return;
+      UI.autoTimers.push(setTimeout(() => {
+        if (!UI.autoplay || UI.busy) return;
+        const next = UI.autoQueue.shift();
+        if (next) sendUser(next, true);
+        else stopAuto();
+      }, delay));
+    }
+
+    /* ============================================================
+       SCENARIO SWITCHING / RESET
+    ============================================================ */
+    function resetDashboard() {
+      setLeadStatus('idle');
+      setField('ldName', '–');
+      setField('ldService', '–');
+      setField('ldUrgency', '–');
+      setField('ldSlot', '–');
+      $('ldResp').textContent = '–';
+      $('slaFill').style.width = '0%';
+      $('ldAvg').textContent = 'Session avg: –';
+      $('smsBadge').classList.remove('show');
+      $('feed').innerHTML = '';
+      UI.respSum = 0;
+      UI.respCount = 0;
+    }
+
+    function switchIndustry(id) {
+      stopAuto();
+      clearInterval(UI.respInt);
+      UI.respInt = null;
+      UI.busy = false;
+      UI.gen++;
+      setChatDisabled(false);
+      clearDemoBookings();
+      renderCalendar();
+
+      freshSession(id);
+      resetDashboard();
+
+      document.querySelectorAll('.tab').forEach(t => {
+        const on = t.dataset.industry === id;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+
+      const cfg = INDUSTRIES[id];
+      $('scenarioChip').textContent = cfg.tabLabel;
+      $('chatBiz').textContent = 'for ' + cfg.business;
+      renderPresets();
+      feed(`Scenario loaded: ${cfg.business}`, '•');
+      chatBody.innerHTML = '';
+      chatBody.appendChild(aiBubble(cfg.greeting()));
+      scrollChat();
+    }
+
+    function renderPresets() {
+      const cfg = INDUSTRIES[session.industry];
+      const wrap = $('presetChips');
+      wrap.innerHTML = '';
+      cfg.presets.forEach(p => {
+        const b = document.createElement('button');
+        b.className = 'preset-chip';
+        b.type = 'button';
+        b.textContent = p;
+        b.addEventListener('click', () => sendUser(p));
+        wrap.appendChild(b);
+      });
+      UI.autoQueue = [...cfg.presets];
+    }
+
+    /* ============================================================
+       MISSED-CALL SIMULATOR
+    ============================================================ */
+    const mcPhone = $('mcPhone');
+    const mcCallBtn = $('mcCallBtn');
+
+    function showMcMode(mode) {
+      ['mcIdle', 'mcRing', 'mcMissed', 'mcSms'].forEach(id => {
+        $(id).classList.toggle('active', id === mode);
+      });
+    }
+
+    function formatPhoneInput(v) {
+      const d = v.replace(/\D/g, '').slice(0, 10);
+      if (!d) return '';
+      if (d.length <= 3) return '(' + d;
+      if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+      return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+    }
+
+    function mcLater(fn, ms) { UI.mcTimers.push(setTimeout(fn, ms)); }
+
+    function mcReset() {
+      UI.mcTimers.forEach(clearTimeout);
+      UI.mcTimers = [];
+      UI.mcBusy = false;
+      mcCallBtn.disabled = false;
+      mcPhone.classList.remove('ringing');
+      $('smsThread').innerHTML = '';
+      $('mcErr').classList.remove('show');
+      showMcMode('mcIdle');
+    }
+
+    function smsPush(role, text, delay) {
+      mcLater(() => {
+        const thread = $('smsThread');
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-msg ' + (role === 'ai' ? 'ai' : 'customer');
+        if (role === 'ai') {
+          const label = document.createElement('span');
+          label.className = 'ai-label';
+          label.textContent = 'AI';
+          wrap.appendChild(label);
+        }
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        b.textContent = text;
+        wrap.appendChild(b);
+        const time = document.createElement('span');
+        time.className = 'msg-time';
+        time.textContent = nowTime();
+        wrap.appendChild(time);
+        thread.appendChild(wrap);
+        thread.scrollTop = thread.scrollHeight;
+      }, delay);
+    }
+
+    function smsThread(cfg, displayNum) {
+      const slotPref = cfg.smsSlot ? freeSlots().find(s => s.time === cfg.smsSlot) : null;
+      const slot = slotPref || freeSlots()[0];
+
+      smsPush('ai', "Hi! Sorry we missed your call. How can we help you today?", 200);
+      smsPush('customer', cfg.smsCustomer, 2600);
+
+      const aiTxt = slot ? cfg.smsBook(slot.label) : "We're fully booked tomorrow, but the team will text you first thing with our next openings!";
+      mcLater(() => {
+        if (slot) {
+          slot.demoBooked = true;
+          calendarBook(slot.time, cfg.smsTitle);
+          feed(`Appointment booked via SMS thread: ${slot.label}`, '•');
+          feed('Confirmation text sent automatically', '•');
+          SFX.success();
+        }
+      }, 5200);
+      smsPush('ai', aiTxt, 5200);
+      smsPush('customer', 'Perfect, thank you.', 8000);
+
+      mcLater(() => {
+        UI.mcBusy = false;
+        mcCallBtn.disabled = false;
+      }, 9500);
+    }
+
+    function simulateMissedCall() {
+      if (UI.mcBusy) return;
+      const raw = $('mcNumber').value.replace(/\D/g, '');
+      const err = $('mcErr');
+      if (raw.length < 7) {
+        err.textContent = 'Please enter a valid phone number (at least 7 digits).';
+        err.classList.add('show');
+        $('mcNumber').classList.add('shake');
+        setTimeout(() => $('mcNumber').classList.remove('shake'), 500);
+        return;
+      }
+      err.classList.remove('show');
+      UI.mcBusy = true;
+      mcCallBtn.disabled = true;
+      mcReset();
+      UI.mcBusy = true;
+      mcCallBtn.disabled = true;
+
+      const displayNum = formatPhoneInput(raw);
+      $('ringNum').textContent = displayNum;
+      $('missedNum').textContent = displayNum;
+      $('smsNum').textContent = displayNum;
+
+      showMcMode('mcRing');
+      mcPhone.classList.add('ringing');
+      SFX.ring();
+
+      mcLater(() => {
+        mcPhone.classList.remove('ringing');
+        $('missedTime').textContent = nowTime();
+        showMcMode('mcMissed');
+        SFX.missed();
+        feed(`Missed call detected from ${displayNum}`, '•');
+        feed('AI text-back triggered in 0.8 seconds', '•');
+      }, 3200);
+
+      mcLater(() => {
+        showMcMode('mcSms');
+        smsThread(INDUSTRIES[session.industry], displayNum);
+      }, 4100);
+    }
+
+    /* ============================================================
+       WIRING
+    ============================================================ */
+    // Sound toggle
+    try { SFX.on = localStorage.getItem('ebs_sfx') !== 'off'; } catch (e) { /* sandboxed */ }
+    const sfxButtons = [$('sfxBtnNav'), $('sfxBtnDash')];
+    function syncSfx() {
+      sfxButtons.forEach(b => {
+        b.textContent = SFX.on ? 'Sound FX: On' : 'Sound FX: Off';
+        b.classList.toggle('off', !SFX.on);
+      });
+    }
+    sfxButtons.forEach(b => b.addEventListener('click', () => {
+      SFX.on = !SFX.on;
+      try { localStorage.setItem('ebs_sfx', SFX.on ? 'on' : 'off'); } catch (e) { /* sandboxed */ }
+      syncSfx();
+    }));
+    syncSfx();
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(t => {
+      t.addEventListener('click', () => switchIndustry(t.dataset.industry));
+    });
+
+    // Chat input
+    sendBtn.addEventListener('click', () => { sendUser(chatInput.value); chatInput.value = ''; chatInput.focus(); });
+    chatInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendUser(chatInput.value);
+        chatInput.value = '';
+      }
+    });
+    $('resetChat').addEventListener('click', () => switchIndustry(session.industry));
+    $('autoBtn').addEventListener('click', () => { UI.autoplay ? stopAuto() : startAuto(); });
+
+    // Missed call
+    $('mcNumber').addEventListener('input', e => { e.target.value = formatPhoneInput(e.target.value); });
+    mcCallBtn.addEventListener('click', simulateMissedCall);
+    $('mcReset').addEventListener('click', mcReset);
+
+    // Navbar scroll state
+    const navbar = $('navbar');
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Clock + calendar date labels
+    const now = new Date();
+    $('phoneClock').textContent = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) + ' · Live Demo';
+    $('mcClock').textContent = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    $('mcDay').textContent = now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric' });
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    $('calDate').textContent = `Tomorrow · ${days[tomorrow.getDay()]}, ${months[tomorrow.getMonth()]} ${tomorrow.getDate()}`;
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('visible'));
+    }
+
+    // Init
+    switchIndustry('hvac');
+  </script>
+    <!-- ============================================================
+       PHASE 2 WIDGETS, Elite AI Chatbot, notif bar, back-to-top
+  ============================================================ -->
+  <div class="ebs-notif-bar" id="ebsNotifBar" role="region" aria-label="Announcements">
+    <span class="ebs-notif-msg" id="ebsNotifMsg"></span>
+    <button class="ebs-notif-x" id="ebsNotifX" aria-label="Dismiss announcement">✕</button>
+  </div>
+
+  <button class="ebs-chat-fab" id="ebsChatFab" aria-label="Open Elite AI Assistant chat" aria-expanded="false" aria-controls="ebsChatWindow">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3C6.9 3 3 6.6 3 11c0 2.4 1.1 4.6 3 6.1V21l3.4-1.8c.8.2 1.7.3 2.6.3 5.1 0 9-3.6 9-8s-3.9-8-9-8z" fill="currentColor"/>
+      <path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="ebs-chat-badge" id="ebsChatBadge" aria-hidden="true">1</span>
+  </button>
+
+  <section class="ebs-chat-window" id="ebsChatWindow" role="dialog" aria-label="Elite AI Assistant" aria-hidden="true">
+    <div class="ebs-chat-head">
+      <div class="ebs-chat-title-row">
+        <span class="ebs-chat-title">Elite AI Assistant</span>
+        <span class="ebs-online"><i aria-hidden="true"></i> Online</span>
+      </div>
+      <div class="ebs-chat-sub">Powered by Elite Bot Studios</div>
+      <div class="ebs-chat-actions">
+        <button class="ebs-icon-btn" id="ebsSoundToggle" aria-label="Toggle chat sounds" aria-pressed="true" title="Sound on/off"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+        <button class="ebs-icon-btn" id="ebsChatClose" aria-label="Close chat">✕</button>
+      </div>
+    </div>
+    <div class="ebs-chat-body" id="ebsChatBody" aria-live="polite"></div>
+    <div class="ebs-quick-row" id="ebsQuickRow">
+      <button class="ebs-chip" data-q="How pricing works">How Pricing Works</button>
+      <button class="ebs-chip" data-q="Watch demo">Watch Demo</button>
+      <button class="ebs-chip" data-q="Book a call">Book a 15-Min Call</button>
+    </div>
+    <div class="ebs-chat-foot">
+      <input type="text" class="ebs-chat-input" id="ebsChatInput"
+             placeholder="Type your message…" aria-label="Chat message" maxlength="400"
+             autocomplete="off" />
+      <button class="ebs-chat-send" id="ebsChatSend" aria-label="Send message">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5 12.5 21 3l-9 18-2.2-6.3L2.5 12.5z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <button class="ebs-backtop" id="ebsBackTop" aria-label="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script>
+    /* ============================================================
+       PHASE 2, EBS ENGAGEMENT ENGINE
+       Chatbot · live feed · notif bar · shortcuts · theme ·
+       PWA  (vanilla JS, no libraries)
+    ============================================================ */
+    (function () {
+      'use strict';
+      var CFG = window.EBS_CFG || {};
+      var $ = function (id) { return document.getElementById(id); };
+      var store = {
+        get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+        set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+        del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+      };
+      var EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var CALENDLY = 'https://calendly.com/elitebotstudios/15min';
+
+      /* ============================================================
+         LEAD WEBHOOK, shared by every lead form on the site
+         CONFIG [ADD_REAL_INFO]: set window.EBS_LEAD_ENDPOINT (page
+         EBS_CONFIG) to your deployed Google Apps Script URL.
+         Until configured, submissions return {ok:false} and the UI
+         shows an honest fallback. We never fake success.
+      ============================================================ */
+      function submitEBSLead(payload) {
+        var ENDPOINT = window.EBS_LEAD_ENDPOINT || '';
+        var body = {
+          name: (payload && payload.name) || '',
+          email: (payload && payload.email) || '',
+          phone: (payload && payload.phone) || '',
+          businessType: (payload && payload.businessType) || '',
+          website: (payload && payload.website) || '',
+          message: (payload && payload.message) || '',
+          sourcePage: (payload && payload.sourcePage) || window.location.pathname,
+          planInterest: (payload && payload.planInterest) || '',
+          leadType: (payload && payload.leadType) || 'General',
+          context: (payload && payload.context) || '',
+          auditAnswers: (payload && payload.auditAnswers) || null,
+          auditResult: (payload && payload.auditResult) || null,
+          timestamp: new Date().toISOString()
+        };
+        if (!ENDPOINT) return Promise.resolve({ ok: false, reason: 'no_endpoint' });
+        return fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(body)
+        }).then(function (res) {
+          if (!res.ok && !res.redirected) throw new Error('HTTP ' + res.status);
+          return { ok: true };
+        }).catch(function () {
+          return { ok: false, reason: 'network' };
+        });
+      }
+
+      window.submitEBSLead = submitEBSLead;
+
+
+
+
+      /* ---------- WebAudio "pop" (subtle, respects sound toggle) ---------- */
+      var audioCtx = null, soundOn = store.get('ebs_chat_sound', true) !== false;
+      function beep() {
+        if (!soundOn) return;
+        try {
+          audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+          var t = audioCtx.currentTime;
+          var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+          o.type = 'sine'; o.frequency.setValueAtTime(660, t);
+          o.frequency.exponentialRampToValueAtTime(920, t + 0.07);
+          g.gain.setValueAtTime(0.05, t);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start(t); o.stop(t + 0.13);
+        } catch (e) {}
+      }
+
+
+      /* ============================================================
+         FEATURE 1, ELITE AI CHATBOT
+      ============================================================ */
+      var KNOWLEDGE = {
+        greetings: {
+          keys: ['hi', 'hello', 'hey', 'salam', 'assalam', 'greetings'],
+          reply: 'Hello, I\'m the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?'
+        },
+        pricing: {
+          keys: ['price', 'pricing', 'cost', 'how much', 'plans', 'subscription', 'fee'],
+          reply: 'We build custom systems, so we quote after a short 15-minute conversation instead of selling fixed packages. Book a free call and we will walk through your exact stack: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book a 15-Min Call →</a>'
+        },
+        services: {
+          keys: ['what do you do', 'services', 'offer', 'solutions', 'automation'],
+          reply: 'We build custom AI systems for instant lead response, missed-call text-back, appointment booking, and 24/7 customer support. Which one interests you most?'
+        },
+        demo: {
+          keys: ['demo', 'example', 'show me', 'try', 'test', 'simulate'],
+          reply: 'Absolutely. Try our live interactive demo where you can chat with an AI as if you were a customer: <a href="/demo.html">Launch the Interactive Demo →</a>'
+        },
+        roi: {
+          keys: ['roi', 'worth it', 'return', 'revenue', 'money', 'save', 'profit'],
+          reply: 'Good question. Try our ROI Calculator to see exactly how much revenue you\'re losing right now: <a href="/calculator.html">Open the ROI Calculator →</a>'
+        },
+        time: {
+          keys: ['how long', 'setup time', 'how fast', 'timeline', 'quick', 'launch'],
+          reply: 'Most systems are live within <strong>one to two weeks</strong> after our kickoff call. We handle everything; you just approve the flows.'
+        },
+        contact: {
+          keys: ['contact', 'call', 'book', 'talk', 'meeting', 'consult', 'speak', 'appointment', 'schedule', 'email', 'mail', 'reach'],
+          reply: 'You can reach us directly at <a href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>, or book a free 15-minute call: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book on Calendly →</a>'
+        },
+        industries: {
+          keys: ['industry', 'business type', 'work with', 'sector', 'niche', 'dentist', 'hvac', 'real estate', 'clinic', 'restaurant'],
+          reply: 'We build custom systems for businesses across industries, including HVAC, dental, real estate, legal, construction, e-commerce, restaurants, gyms, and professional services. What\'s your business?'
+        },
+        thanks: {
+          keys: ['thanks', 'thank you', 'shukriya', 'great', 'awesome', 'cool', 'nice'],
+          reply: 'You\'re welcome. Anything else I can help you with?'
+        },
+        fallback: {
+          keys: [],
+          reply: "Great question. I can pass it to the team so someone follows up within one business day. What's your email?"
+        }
+      };
+      function matchKB(text) {
+        var t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s$]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+        var best = null, bestScore = 0;
+        for (var cat in KNOWLEDGE) {
+          if (!KNOWLEDGE[cat].keys) continue;
+          var score = 0;
+          KNOWLEDGE[cat].keys.forEach(function (k) {
+            if (k.indexOf(' ') > -1) { if (t.indexOf(' ' + k + ' ') > -1) score += 3; }
+            else { var rx = new RegExp('\\b' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b'); if (rx.test(t)) score += 2; }
+          });
+          if (score > bestScore) { bestScore = score; best = cat; }
+        }
+        return bestScore > 0 ? best : 'fallback';
+      }
+      var chat = {
+        history: store.get('ebs_chat_history', []),
+        open: false, msgCount: 0, emailCaptured: !!store.get('ebs_chat_email', '')
+      };
+      function addBubble(role, html) {
+        var body = $('ebsChatBody'); if (!body) return;
+        var el = document.createElement('div');
+        el.className = 'ebs-msg ' + (role === 'ai' ? 'ebs-ai' : 'ebs-user');
+        if (role === 'user') { el.textContent = html; }
+        else { el.innerHTML = html.replace(/\n/g, '<br>'); }
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+        return el;
+      }
+      function showTyping() {
+        var body = $('ebsChatBody');
+        var el = document.createElement('div');
+        el.className = 'ebs-msg ebs-ai ebs-typing' ;
+        el.setAttribute('aria-label', 'Elite AI is typing…');
+        el.innerHTML = '<span></span><span></span><span></span>';
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+        return el;
+      }
+      function aiReply(text) {
+        var cat = matchKB(text);
+        var typing = showTyping();
+        setTimeout(function () {
+          if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+          var html = KNOWLEDGE[cat].reply;
+          if (cat === 'fallback' && !chat.emailCaptured) {
+            html = KNOWLEDGE.fallback.reply;
+          }
+          addBubble('ai', html);
+          chat.history.push({ role: 'ai', text: html });
+          store.set('ebs_chat_history', chat.history);
+          if (!chat.open) setBadge(chat.msgCount);
+          beep();
+          maybeAskEmail();
+        }, 1500);
+      }
+      function setBadge(n) {
+        var fab = $('ebsChatFab'), badge = $('ebsChatBadge');
+        if (!fab || !badge) return;
+        if (n > 0) { fab.classList.add('ebs-unread'); badge.textContent = n > 9 ? '9+' : String(n); }
+        else fab.classList.remove('ebs-unread');
+      }
+      function maybeAskEmail() {
+        if (chat.emailCaptured) return;
+        if (chat.msgCount >= 3 && !chat.askedEmail) {
+          chat.askedEmail = true;
+          setTimeout(function () {
+            addBubble('ai', "By the way, so the team can send you a short personalized summary: what's your email?");
+            chat.history.push({ role: 'ai', text: "By the way, so the team can send you a short personalized summary: what's your email?" });
+            store.set('ebs_chat_history', chat.history);
+          }, 1200);
+        }
+      }
+      function userSend(raw) {
+        var text = String(raw || '').trim();
+        if (!text) return;
+        var body = $('ebsChatBody');
+        if (body) { $('ebsQuickRow').classList.add('ebs-hidden'); }
+        addBubble('user', text);
+        chat.history.push({ role: 'user', text: text });
+        store.set('ebs_chat_history', chat.history);
+        chat.msgCount++;
+        if (!chat.emailCaptured && EMAIL_RX.test(text)) {
+          chat.emailCaptured = true;
+          store.set('ebs_chat_email', text);
+          var ctx = chat.history.slice(-6).map(function (m) { return m.role + ': ' + m.text; }).join(' | ');
+          submitEBSLead({ email: text, planInterest: 'Chat', leadType: 'Chat', context: ctx }).then(function (res) {
+            var okMsg = "Thanks. We'll get back to you within one business day. Meanwhile, would you like to see the <a href=\"/demo.html\">live demo</a>?";
+            var failMsg = "I couldn't save your details right now. Please try again later, or book a call: <a href=\"" + CALENDLY + "\" target=\"_blank\" rel=\"noopener noreferrer\">Book a 15-Min Call →</a>";
+            addBubble('ai', res && res.ok ? okMsg : failMsg);
+            chat.history.push({ role: 'ai', text: res && res.ok ? okMsg : failMsg });
+            store.set('ebs_chat_history', chat.history);
+          });
+          return;
+        }
+        aiReply(text);
+      }
+      function openChat() {
+        chat.open = true;
+        var win = $('ebsChatWindow'), fab = $('ebsChatFab');
+        if (!win) return;
+        win.classList.add('ebs-open'); win.setAttribute('aria-hidden', 'false');
+        fab.classList.add('ebs-open'); fab.setAttribute('aria-expanded', 'true');
+        setBadge(0);
+        if (chat.history.length === 0) {
+          addBubble('ai', "Hello, I'm the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?");
+          chat.history.push({ role: 'ai', text: "Hello, I'm the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?" });
+          store.set('ebs_chat_history', chat.history);
+        } else {
+          chat.history.forEach(function (m) { addBubble(m.role === 'ai' ? 'ai' : 'user', m.text); });
+        }
+        setTimeout(function () { var i = $('ebsChatInput'); if (i) i.focus(); }, 350);
+      }
+      function closeChat() {
+        chat.open = false;
+        var win = $('ebsChatWindow'), fab = $('ebsChatFab');
+        if (!win) return;
+        win.classList.remove('ebs-open'); win.setAttribute('aria-hidden', 'true');
+        fab.classList.remove('ebs-open'); fab.setAttribute('aria-expanded', 'false');
+        $('ebsChatBody').innerHTML = '';
+      }
+      function initChat() {
+        var fab = $('ebsChatFab');
+        if (!fab) return;
+        fab.addEventListener('click', function () { chat.open ? closeChat() : openChat(); });
+        $('ebsChatClose').addEventListener('click', closeChat);
+        $('ebsChatSend').addEventListener('click', function () { var i = $('ebsChatInput'); userSend(i.value); i.value = ''; });
+        $('ebsChatInput').addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); userSend(e.target.value); e.target.value = ''; }
+        });
+        $('ebsQuickRow').querySelectorAll('.ebs-chip').forEach(function (chip) {
+          chip.addEventListener('click', function () { userSend(chip.getAttribute('data-q')); });
+        });
+        var snd = $('ebsSoundToggle');
+        function syncSnd() {
+          snd.classList.toggle('ebs-muted', !soundOn);
+          snd.innerHTML = soundOn
+            ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
+            : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m16 9 5 5"/><path d="m21 9-5 5"/></svg>';
+          snd.setAttribute('aria-pressed', String(soundOn));
+        }
+        snd.addEventListener('click', function () { soundOn = !soundOn; store.set('ebs_chat_sound', soundOn); syncSnd(); });
+        syncSnd();
+      }
+
+      /* ============================================================
+         FEATURE 3, SMART NOTIFICATION BAR
+      ============================================================ */
+      function initNotifBar() {
+        var bar = $('ebsNotifBar'), msg = $('ebsNotifMsg');
+        if (!bar) return;
+        /* Place the bar as the FIRST element of <body> so it sits above the
+           navbar in normal document flow (no fixed offsets, no overlaps). */
+        try {
+          if (bar.parentElement && bar.parentElement !== document.body) {
+            document.body.insertBefore(bar, document.body.firstChild);
+          }
+        } catch (err) { /* non-fatal */ }
+        var dismissed = store.get('ebs_notif_dismissed', 0);
+        if (dismissed > Date.now()) { bar.classList.add('ebs-hidden'); return; }
+        var MSGS = [
+          { html: 'Book a 15-Min Call', href: CALENDLY, external: true }
+        ];
+        var i = 0, timer;
+        document.body.classList.add('ebs-bar-active');
+        function render(next) {
+          msg.classList.add('ebs-swap');
+          setTimeout(function () {
+            var m = MSGS[i];
+            msg.innerHTML = m.href && m.html.indexOf('<a') === -1
+              ? m.html + ' <a href="' + m.href + '"' + (m.external ? ' target="_blank" rel="noopener noreferrer"' : '') + '>→</a>'
+              : m.html;
+            msg.classList.remove('ebs-swap');
+            i = (i + 1) % MSGS.length;
+          }, 450);
+        }
+        render();
+        timer = setInterval(render, 8000);
+        $('ebsNotifX').addEventListener('click', function () {
+          clearInterval(timer);
+          store.set('ebs_notif_dismissed', Date.now() + 7 * 864e5);
+          bar.classList.add('ebs-out');
+          document.body.classList.remove('ebs-bar-active');
+          setTimeout(function () { bar.classList.add('ebs-hidden'); }, 500);
+        });
+      }
+
+      /* ============================================================
+         BONUS 1 + 2, SCROLL PROGRESS & BACK-TO-TOP
+      ============================================================ */
+      function initScrollTools() {
+        var bt = $('ebsBackTop');
+        if (!bt) return;
+        var onScroll = function () {
+          bt.classList.toggle('ebs-show', window.scrollY > 500);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        bt.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: REDUCE ? 'auto' : 'smooth' }); });
+      }
+
+      /* ============================================================
+         BONUS 3, DARK / LIGHT THEME TOGGLE
+      ============================================================ */
+      function initTheme() {
+        var btns = document.querySelectorAll('.ebs-theme-btn');
+        if (!btns.length) return;
+        var saved = store.get('ebs_theme', 'dark');
+        document.documentElement.setAttribute('data-theme', saved);
+        function sync() {
+          var light = document.documentElement.getAttribute('data-theme') === 'light';
+          btns.forEach(function (b) {
+            b.innerHTML = light
+              ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>'
+              : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+            b.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+          });
+        }
+        btns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            store.set('ebs_theme', next);
+            sync();
+          });
+        });
+        sync();
+      }
+
+      /* ============================================================
+         BONUS 5, PWA SERVICE WORKER
+      ============================================================ */
+      function initPWA() {
+        if (!('serviceWorker' in navigator)) return;
+        var proto = location.protocol;
+        if (proto !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () { /* offline cache only, safe to ignore */ });
+        });
+      }
+
+      /* ============================================================ */
+      initChat();
+      initNotifBar();
+      initScrollTools();
+      initTheme();
+      /* ============================================================
+         MOBILE MENU (all pages), #menuToggle + #mobileMenu
+         Bulletproof: first click opens, ESC/resize/link/backdrop close,
+         body scroll locked while open, aria synced, single binding.
+      ============================================================ */
+      function initMobileMenu() {
+        var tgl = document.getElementById('menuToggle');
+        var menu = document.getElementById('mobileMenu');
+        if (!tgl || !menu) return;
+        if (menu.getAttribute('data-ebs-bound') === '1') return;
+        menu.setAttribute('data-ebs-bound', '1');
+        function setOpen(open) {
+          tgl.classList.toggle('is-open', open);
+          menu.classList.toggle('is-open', open);
+          tgl.setAttribute('aria-expanded', String(open));
+          tgl.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          document.body.style.overflow = open ? 'hidden' : '';
+          document.body.classList.toggle('ebs-menu-open', open);
+        }
+        tgl.addEventListener('click', function () {
+          setOpen(!menu.classList.contains('is-open'));
+        });
+        menu.addEventListener('click', function (ev) {
+          var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+          if (a || ev.target === menu) setOpen(false);
+        });
+        document.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Escape' && menu.classList.contains('is-open')) setOpen(false);
+        });
+        window.addEventListener('resize', function () {
+          if (window.innerWidth > 1024 && menu.classList.contains('is-open')) setOpen(false);
+        });
+      }
+      initMobileMenu();
+
+      initPWA();
+    })();
+  </script>
+
+  <script>
+    /* ============================================================
+       PHASE 3, EBS GA4 ENTERPRISE EVENT TRACKING
+       Base config + advanced custom events (vanilla JS, no libs)
+
+       ▸ SWAP THE MEASUREMENT ID: change EBS_GA4_ID below (or
+         set window.EBS_GA4_ID (or EBS_CONFIG.ga4Id) to your real GA4 Measurement ID).
+       ▸ Event taxonomy documented in the deployment guide (§ GA4).
+       ▸ TODO (launch): enable Google Consent Mode v2 in the base
+         snippet once the cookie banner has accept/reject variants.
+    ============================================================ */
+    window.EBS_GA4_ID = window.EBS_GA4_ID || '';
+    window.EBS_LEAD_ENDPOINT = window.EBS_LEAD_ENDPOINT || ''; // CONFIG [ADD_REAL_INFO]: paste your deployed Google Apps Script /exec URL here (single quotes) // CONFIG [ADD_REAL_GA4_ID]: set a real GA4 Measurement ID to enable forwarding
+
+    /* ---- tracking utility (exact spec) ---- */
+    const trackEvent = (eventName, eventParams = {}) => {
+      console.log(`📊 [Analytics Log] ${eventName}`, eventParams);
+      if (window.EBS_GA4_ID && typeof gtag === 'function') {
+        gtag('event', eventName, eventParams);
+      }
+    };
+
+    (function () {
+      'use strict';
+      const GA4 = window.EBS_GA4_ID;
+      const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const store = {
+        get: (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+        set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+      };
+      const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      const PAGE = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '') || 'index';
+      const seen = { scroll: {}, io: {}, section: {} };
+      const fired = {};
+
+      /* ---- set user properties once (only when GA4 is configured) ---- */
+      try {
+        if (!GA4 || typeof gtag !== 'function') throw new Error('GA4 not configured');
+        gtag('set', 'user_properties', {
+          device_class: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          language: navigator.language || 'en',
+          page_name: PAGE
+        });
+      } catch (e) {}
+
+      /* ---- session + visit classification ---- */
+      const visited = store.get('ebs_ga_visited', false);
+      trackEvent(visited ? 'returning_visit' : 'first_visit');
+      store.set('ebs_ga_visited', true);
+
+      const once = (key, fn) => { if (fired[key]) return; fired[key] = true; fn(); };
+
+      const isExternal = (a) => {
+        try {
+          const u = new URL(a.href, location.href);
+          return u.origin !== location.origin;
+        } catch (e) { return false; }
+      };
+
+      /* ============================================================
+         1) UNIVERSAL, engagement & scroll
+      ============================================================ */
+      [5, 10, 30, 60].forEach(s => {
+        setTimeout(() => trackEvent('time_on_page', { seconds: s, page: PAGE }), s * 1000);
+      });
+
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (scrollTicking || REDUCE) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - window.innerHeight;
+          const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 100;
+          [25, 50, 75, 90, 100].forEach(mark => {
+            if (pct >= mark && !seen.scroll[mark]) {
+              seen.scroll[mark] = true;
+              trackEvent('scroll_depth', { percent: mark, page: PAGE });
+            }
+          });
+          scrollTicking = false;
+        });
+      }, { passive: true });
+
+      /* ============================================================
+         2) UNIVERSAL, clicks (delegated)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+
+        const a = t.closest('a');
+        if (a) {
+          const href = a.getAttribute('href') || '';
+          if (isExternal(a)) {
+            trackEvent('link_click', { link_url: href, link_domain: (() => { try { return new URL(href, location.href).hostname; } catch (e) { return ''; } })(), page: PAGE });
+          }
+          if (/\.(pdf|zip|docx?|xlsx?|pptx?|mp4|mp3|csv)(\?|$)/i.test(href)) {
+            trackEvent('file_download', { file_name: href.split('/').pop(), link_url: href });
+          }
+          if (a.closest('.ebs-notif-bar')) {
+            trackEvent('notif_cta_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.nav-links')) {
+            trackEvent('nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('#mobileMenu')) {
+            trackEvent('mobile_nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.footer-legal')) {
+            trackEvent('legal_link_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.toc')) {
+            trackEvent('article_toc_click', { link_url: href });
+          }
+          // ---- page-specific CTAs ----
+          if (PAGE === 'demo' && a.textContent.includes('Setup Call')) {
+            trackEvent('demo_cta_click', { destination: href });
+          }
+          if (PAGE === 'calculator' && a.closest('.cta-btns')) {
+            trackEvent('calculator_cta_click', { destination: href, amount_text: (document.getElementById('ctaAmount') || {}).textContent || '' });
+          }
+          if (PAGE === 'pricing' && /calendly/i.test(href)) {
+            trackEvent('pricing_cta_click', { destination: href });
+          }
+          if (PAGE === 'audit' && /calendly/i.test(href)) {
+            trackEvent('audit_cta_click', { destination: href });
+          }
+          if (PAGE === 'blog' && a.closest('.blog-card')) {
+            trackEvent('blog_article_open', { article_url: href });
+          }
+          if (PAGE === 'case-studies' && a.closest('.cs-card')) {
+            trackEvent('case_study_click', { link_url: href });
+          }
+          if (PAGE.startsWith('article') && a.closest('.article-cta')) {
+            trackEvent('article_cta_click', { page: PAGE });
+          }
+        }
+
+        const btn = t.closest('button');
+        if (btn) {
+          if (btn.id === 'ebsBackTop' || btn.classList.contains('ebs-backtop')) {
+            trackEvent('back_to_top_click', { scroll_y: Math.round(window.scrollY) });
+          }
+          if (btn.classList.contains('ebs-theme-btn')) {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            trackEvent('theme_changed', { mode: next });
+          }
+          if (btn.classList.contains('filter-chip')) {
+            trackEvent(PAGE === 'blog' ? 'blog_filter' : 'case_studies_filter', { category: btn.getAttribute('data-filter') });
+          }
+          if (btn.classList.contains('cs-read')) {
+            trackEvent('case_modal_open', { case_index: btn.getAttribute('data-cs') });
+          }
+          if (btn.classList.contains('modal-x') || (btn.hasAttribute && btn.hasAttribute('data-close'))) {
+            trackEvent('case_modal_close', {});
+          }
+          if (PAGE === 'demo' && btn.classList.contains('tab')) {
+            trackEvent('demo_tab_switch', { industry: btn.getAttribute('data-industry') });
+          }
+          if (PAGE === 'demo' && btn.id === 'sendBtn') {
+            trackEvent('demo_message_sent', {});
+          }
+          if (PAGE === 'pricing' && btn.classList.contains('faq-head')) {
+            trackEvent('pricing_faq_open', { question: (btn.textContent || '').trim().slice(0, 60) });
+          }
+          if (PAGE === 'audit' && btn.id === 'startBtn') {
+            trackEvent('audit_started', {});
+          }
+          if (PAGE === 'audit' && btn.closest('.option')) {
+            const opts = btn.closest('.q-screen') ? btn.closest('.q-screen').querySelectorAll('.option') : [];
+            let idx = -1;
+            opts.forEach((o, i) => { if (o === btn.closest('.option')) idx = i; });
+            trackEvent('audit_answer', { option_index: idx, option_text: (btn.textContent || '').trim().slice(0, 60) });
+          }
+        }
+      });
+
+      /* ============================================================
+         3) UNIVERSAL, forms (delegated focus/submit)
+      ============================================================ */
+      document.addEventListener('focusin', (e) => {
+        const input = e.target;
+        if (!input || !input.matches || !input.matches('input, textarea, select')) return;
+        const form = input.closest('form');
+        if (!form) return;
+        const key = 'form_' + (form.id || 'anon');
+        once(key, () => trackEvent('form_start', { form_id: form.id || 'anonymous', page: PAGE }));
+      });
+
+      document.addEventListener('submit', (e) => {
+        const form = e.target;
+        if (!form || !form.id) return;
+        const id = form.id;
+        if (id === 'contactForm') {
+          const email = ((document.getElementById('cfEmail') || {}).value || '').trim();
+          const name = ((document.getElementById('cfName') || {}).value || '').trim();
+          trackEvent('contact_form_submit', { valid_email: EMAIL_RX.test(email), has_name: name.length > 1 });
+        } else {
+          trackEvent('form_submit', { form_id: id, page: PAGE });
+        }
+      });
+
+      /* ============================================================
+         4) UNIVERSAL, PWA install
+      ============================================================ */
+      window.addEventListener('appinstalled', () => trackEvent('pwa_installed', {}));
+
+      /* ============================================================
+         5) CHATBOT EVENTS (widget present on every page)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        if (t.closest('#ebsChatFab')) {
+          const open = !!document.getElementById('ebsChatWindow') && document.getElementById('ebsChatWindow').classList.contains('ebs-open');
+          trackEvent(open ? 'chat_closed' : 'chat_opened', { page: PAGE });
+        }
+        if (t.closest('#ebsChatClose')) {
+          trackEvent('chat_closed', { page: PAGE });
+        }
+        if (t.closest('#ebsChatSend')) {
+          const input = document.getElementById('ebsChatInput');
+          const text = (input && input.value || '').trim();
+          trackEvent('chat_message_sent', { length: text.length, page: PAGE });
+        }
+        if (t.closest('.ebs-chip')) {
+          trackEvent('chat_quick_reply', { label: (t.closest('.ebs-chip').textContent || '').trim() });
+        }
+        if (t.closest('#ebsSoundToggle')) {
+          trackEvent('chat_sound_toggled', {});
+        }
+      });
+
+      /* email captured, poll localStorage for the engine's write */
+      let lastEmail = store.get('ebs_chat_email', null);
+      setInterval(() => {
+        const now = store.get('ebs_chat_email', null);
+        if (now && now !== lastEmail) {
+          lastEmail = now;
+          trackEvent('chat_email_captured', { page: PAGE });
+          // TODO: Send to backend/CRM webhook (shared with engagement engine)
+        }
+      }, 1500);
+
+      /* ============================================================
+         6) EXIT-INTENT / NOTIF BAR / TOASTS (observe class changes)
+      ============================================================ */
+      const observeClass = (id, cls, onAdd, onRemove) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const mo = new MutationObserver(() => {
+          const has = el.classList.contains(cls);
+          if (has && !el.__ebsHad) { el.__ebsHad = true; onAdd(); }
+          else if (!has && el.__ebsHad) { el.__ebsHad = false; onRemove && onRemove(); }
+        });
+        mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+      };
+
+      observeClass('ebsNotifBar', 'ebs-out',
+        () => trackEvent('notif_bar_dismissed', {}));
+
+      /* ============================================================
+         8) COOKIE CONSENT
+      ============================================================ */
+      const cookieBtn = document.getElementById('cookieAccept');
+      if (cookieBtn) {
+        cookieBtn.addEventListener('click', () => trackEvent('cookie_consent', { choice: 'accepted' }));
+      }
+
+      /* ============================================================
+         9) SECTION VIEWS (IntersectionObserver, once each)
+      ============================================================ */
+      const SECTION_SELECTORS = {
+        index: [['#home', 'hero_view'], ['#results', 'results_view'], ['#comparison', 'comparison_view'],
+                ['#faq', 'faq_view'], ['#booking', 'call_cta_view'], ['#services', 'services_view'],
+                ['#industries', 'industries_view']],
+        demo: [['.demo-grid', 'demo_dashboard_view'], ['#missed-call', 'demo_missedcall_view']],
+        calculator: [['#results', 'calculator_results_view'], ['.cta-section', 'calculator_cta_view']],
+        pricing: [['#what-we-build', 'pricing_what_we_build_view'], ['#how-it-works', 'pricing_process_view'], ['#investment', 'pricing_investment_view']],
+        audit: [['#results', 'audit_results_view']],
+        'case-studies': [['.page-hero', 'case_studies_view']],
+        blog: [['.page-hero', 'blog_view']]
+      };
+      const map = SECTION_SELECTORS[PAGE] || (PAGE.startsWith('article') ? [['.article-cta', 'article_read_complete']] : []);
+      const seenIO = {};
+      if ('IntersectionObserver' in window && map.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (!en.isIntersecting) return;
+            const key = en.target.id || en.target.className;
+            if (seenIO[key]) return;
+            seenIO[key] = true;
+            map.filter(([sel]) => {
+              const el = document.querySelector(sel);
+              return el === en.target;
+            }).forEach(([sel, evt]) => trackEvent(evt, { page: PAGE }));
+          });
+        }, { threshold: 0.35 });
+        map.forEach(([sel]) => {
+          const el = document.querySelector(sel);
+          if (el) io.observe(el);
+        });
+      }
+
+      /* ============================================================
+         10) PAGE-SPECIFIC, calculators & configurators
+      ============================================================ */
+      if (PAGE === 'calculator') {
+        const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+        const fire = debounce((el) => {
+          trackEvent('calculator_input', {
+            control: el.id || el.name || 'control',
+            value: el.value || el.textContent || ''
+          });
+        }, 800);
+        document.addEventListener('input', (e) => {
+          const t = e.target;
+          if (t && t.closest && (t.closest('.slider') || t.closest('.control') || t.closest('input') || t.closest('.calc'))) {
+            if (t.id) fire(t);
+          }
+        });
+      }
+      if (PAGE === 'pricing') {
+
+      }
+
+      console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
+    })();
+  </script>
+
+</body>
+</html>

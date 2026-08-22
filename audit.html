@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- ===== SEO META ===== -->
+  <title>Free AI Automation Audit, Elite Bot Studios</title>
+  <link rel="canonical" href="https://elitebotstudios.me/audit.html" />
+  <meta name="description" content="Answer 4 simple questions to discover exactly where your business is leaking leads, and get a personalized AI automation blueprint in 60 seconds." />
+  <meta name="theme-color" content="#050505" />
+  <meta property="og:title" content="Free AI Automation Audit, Elite Bot Studios" />
+  <meta property="og:description" content="Discover exactly where your business is leaking leads and how AI can fix it." />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://elitebotstudios.me/audit.html" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free AI Automation Audit, Elite Bot Studios" />
+  <meta name="twitter:description" content="Answer 4 simple questions to discover exactly where your business is leaking leads, and get a personalized AI automation blueprint in 60 seconds." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/twitter-image.jpg" />
+
+  <!-- Favicon (inline SVG) --><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- ===== FONTS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- ===== ICONS ===== -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <style>
+    /* Skip link */
+    .skip-link {
+      position: fixed; top: 12px; left: 12px; z-index: 12000;
+      padding: 12px 22px;
+      background: #c9a84c;
+      color: #0a0a0a;
+      font-weight: 600; font-size: 0.9rem;
+      border-radius: 2px;
+      transform: translateY(-200%);
+      transition: transform 0.3s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    /* ============================================================
+       DESIGN TOKENS (matches main site)
+    ============================================================ */
+    :root {
+      --bg: #050505;
+      --surface: #111111;
+      --border: #1a1a1a;
+      --accent: #c9a84c;
+      --accent-2: #a07c2a;
+      --gold-light: #e8d48b;
+      --gold-dark: #a07c2a;
+      --gradient: linear-gradient(100deg, #e8d48b 0%, #c9a84c 55%, #a07c2a 100%);
+      --text: #f5f0e8;
+      --text-2: #8a8578;
+      --success: #10b981;
+      --danger: #f87171;
+      --warn: #fbbf24;
+      --font-head: 'Playfair Display', 'Georgia', serif;
+      --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+      --topbar-h: 64px;
+      color-scheme: dark;
+    }
+
+    /* ============================================================
+       RESET / BASE
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { height: 100%; }
+    body {
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-body);
+      font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.7;
+      color: var(--text-2);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    ::selection { background: rgba(201, 168, 76, 0.28); color: #fff; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #222222; border-radius: 6px; }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+    .grad-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    /* ============================================================
+       APP BACKGROUND (dot grid + glows)
+    ============================================================ */
+    .app-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .app-bg::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1.5px);
+      background-size: 28px 28px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 75%);
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 75%);
+    }
+    .orb { position: absolute; border-radius: 50%; filter: blur(110px); animation: orbFloat 10s ease-in-out infinite alternate; }
+    .orb.o1 { width: 520px; height: 520px; top: -200px; left: 50%; transform: translateX(-50%); background: rgba(201, 168, 76, 0.11); }
+    .orb.o2 { width: 420px; height: 420px; bottom: -180px; right: -140px; background: rgba(160, 124, 42, 0.14); animation-delay: 2.5s; }
+    .orb.o3 { width: 360px; height: 360px; bottom: -140px; left: -120px; background: rgba(201, 168, 76, 0.08); animation-delay: 5s; }
+    @keyframes orbFloat { from { opacity: 0.7; transform: scale(1); } to { opacity: 1; transform: scale(1.1); } }
+
+    /* ============================================================
+       TOP BAR
+    ============================================================ */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: var(--topbar-h);
+      display: flex; align-items: center; gap: 20px;
+      padding: 0 22px;
+      background: rgba(5, 5, 5, 0.6);
+      -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .logo { display: inline-flex; align-items: baseline; gap: 10px; flex-shrink: 1; min-width: 0; }
+    .logo .elite {
+      font-family: var(--font-head);
+      font-weight: 700; font-size: 1.35rem; letter-spacing: 0.02em;
+      background: var(--gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      white-space: nowrap;
+    }
+    .logo .diamond { color: var(--accent); font-size: 0.55rem; align-self: center; opacity: 0.9; }
+    .logo .botstudios {
+      font-family: var(--font-body);
+      font-weight: 300; font-size: 0.95rem;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .progress-wrap { flex: 1; display: flex; align-items: center; gap: 14px; max-width: 460px; margin: 0 auto; }
+    .progress-track {
+      flex: 1; height: 5px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08); overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      border-radius: 999px;
+      background: var(--gradient);
+      box-shadow: 0 0 14px rgba(201, 168, 76, 0.5);
+      transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .progress-label {
+      flex-shrink: 0; font-size: 0.78rem; font-weight: 600;
+      color: var(--text-2); font-variant-numeric: tabular-nums; min-width: 64px; text-align: right;
+    }
+
+    .top-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .icon-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-2); font-size: 0.8rem; font-weight: 600;
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+    .icon-btn:hover { border-color: rgba(201, 168, 76, 0.45); color: var(--text); }
+    .icon-btn.off { color: #8a8578; }
+
+    /* ============================================================
+       STAGE / SCREENS
+    ============================================================ */
+    .stage {
+      position: fixed;
+      top: var(--topbar-h); left: 0; right: 0; bottom: 0;
+      z-index: 1;
+    }
+    .screen {
+      position: absolute; inset: 0;
+      overflow-y: auto;
+      opacity: 0; visibility: hidden;
+      transform: translateY(26px);
+      transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.45s;
+    }
+    .screen.active {
+      opacity: 1; visibility: visible; transform: none;
+      transition: opacity 0.45s ease 0.06s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.06s;
+    }
+    .screen-inner {
+      min-height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 24px 48px;
+    }
+
+    /* ============================================================
+       INTRO SCREEN
+    ============================================================ */
+    .intro-wrap { text-align: center; max-width: 640px; }
+    .intro-mark {
+      position: relative; width: 88px; height: 88px; margin: 0 auto 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 26px; font-size: 2.4rem;
+      background: var(--gradient);
+      box-shadow: 0 18px 50px rgba(201, 168, 76, 0.35), 0 0 70px rgba(160, 124, 42, 0.3);
+      animation: markFloat 4s ease-in-out infinite;
+    }
+    @keyframes markFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+    .intro-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08);
+      color: #6ee7b7; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--success);
+      animation: dotPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+      50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    }
+
+    .intro-wrap h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.1rem, 5vw, 3.2rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.12;
+      color: var(--text); margin-bottom: 18px;
+    }
+    .intro-sub { font-size: 1.1rem; max-width: 520px; margin: 0 auto 36px; }
+    .intro-meta {
+      display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
+      margin-bottom: 38px; font-size: 0.88rem; font-weight: 500;
+    }
+    .intro-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .intro-meta i { color: var(--accent); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-weight: 600; font-size: 1.02rem; border-radius: 14px; border: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--gradient); color: #0a0a0a; padding: 18px 44px;
+      box-shadow: 0 10px 30px rgba(201, 168, 76, 0.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 44px rgba(201, 168, 76, 0.42), 0 8px 30px rgba(160, 124, 42, 0.3); }
+    .intro-hint { margin-top: 22px; font-size: 0.82rem; color: #8a8578; }
+
+    /* ============================================================
+       QUIZ SCREEN
+    ============================================================ */
+    .q { display: none; width: 100%; max-width: 720px; }
+    .q.active { display: block; animation: qIn 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+    .q.active.q-back { animation-name: qInBack; }
+    @keyframes qIn { from { opacity: 0; transform: translateX(56px); } to { opacity: 1; transform: none; } }
+    @keyframes qInBack { from { opacity: 0; transform: translateX(-56px); } to { opacity: 1; transform: none; } }
+
+    .q-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+    }
+    .q-eyebrow::before { content: ''; width: 22px; height: 2px; border-radius: 2px; background: var(--gradient); }
+
+    .q h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+      color: var(--text); margin-bottom: 34px;
+    }
+
+    .q-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .option {
+      position: relative; display: flex; align-items: center; gap: 15px;
+      padding: 19px 20px; border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text); font-size: 0.98rem; font-weight: 600; text-align: left;
+      transition: transform 0.2s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+    .option:hover {
+      border-color: rgba(201, 168, 76, 0.5);
+      background: rgba(201, 168, 76, 0.045);
+      transform: translateY(-2px);
+    }
+    .option.focused {
+      border-color: rgba(201, 168, 76, 0.65);
+      box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.18);
+    }
+    .option.selected {
+      border-color: transparent;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.14), rgba(160, 124, 42, 0.14));
+      box-shadow: 0 0 30px rgba(201, 168, 76, 0.22);
+      transform: scale(1.02);
+    }
+    .opt-icon {
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px; border-radius: 12px; font-size: 1.25rem;
+      background: rgba(160, 124, 42, 0.1); border: 1px solid rgba(160, 124, 42, 0.28);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .option.selected .opt-icon { background: rgba(201, 168, 76, 0.12); border-color: rgba(201, 168, 76, 0.45); }
+    .opt-check {
+      margin-left: auto; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--gradient); color: #0a0a0a; font-size: 0.6rem;
+      opacity: 0; transform: scale(0.4);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .option.selected .opt-check { opacity: 1; transform: scale(1); }
+
+    .q-back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 28px; padding: 9px 16px; border-radius: 999px;
+      border: 1px solid transparent; background: transparent;
+      color: #8a8578; font-size: 0.82rem; font-weight: 600;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .q-back-btn:hover { color: var(--text-2); border-color: var(--border); }
+
+    .q-hint { margin-top: 34px; text-align: center; font-size: 0.78rem; color: #8a8578; }
+    .q-hint kbd {
+      display: inline-block; padding: 2px 8px; margin: 0 2px;
+      border-radius: 6px; border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2);
+    }
+
+    /* ============================================================
+       SCAN SCREEN
+    ============================================================ */
+    .scan-wrap { text-align: center; max-width: 620px; width: 100%; }
+    .scan-ring-box { position: relative; width: 150px; height: 150px; margin: 0 auto 36px; }
+    .scan-ring-box svg { transform: rotate(-90deg); }
+    .ring-track { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 8; }
+    .ring-progress {
+      fill: none; stroke: url(#ringGrad); stroke-width: 8; stroke-linecap: round;
+      filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.55));
+    }
+    .ring-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .ring-pct {
+      font-family: var(--font-head); font-size: 1.7rem; font-weight: 700;
+      color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.1;
+    }
+    .ring-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-2); margin-top: 3px; }
+
+    .scan-title { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 28px; }
+    .scan-title .cursor {
+      display: inline-block; width: 9px; height: 1.2em; margin-left: 4px;
+      background: var(--accent); vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .terminal {
+      width: 100%; text-align: left;
+      background: rgba(9, 9, 14, 0.85);
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 22px 24px;
+      font-family: var(--font-mono); font-size: 0.85rem; line-height: 2.1;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      min-height: 150px;
+    }
+    .term-line { display: flex; gap: 10px; color: #c9c9dd; white-space: nowrap; overflow: hidden; }
+    .term-line .t-prompt { color: var(--accent); flex-shrink: 0; }
+    .term-line .t-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .term-line .t-ok { color: var(--success); flex-shrink: 0; font-weight: 600; }
+    .term-cursor {
+      display: inline-block; width: 8px; height: 1.05em; margin-left: 3px;
+      background: var(--accent); vertical-align: text-bottom;
+      animation: blink 0.9s step-end infinite;
+    }
+
+    /* ============================================================
+       RESULTS SCREEN
+    ============================================================ */
+    .results-wrap { width: 100%; max-width: 840px; }
+    .res-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 9px 20px; border-radius: 999px;
+      border: 1px solid rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.08);
+      color: #6ee7b7; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em;
+      margin-bottom: 22px;
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .res-head {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+      color: var(--text); margin-bottom: 14px;
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+    }
+    .res-sub { font-size: 1.02rem; max-width: 560px; animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both; }
+    @keyframes resIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+    .answer-chips {
+      display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 8px;
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 16px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      font-size: 0.84rem; font-weight: 600; color: var(--text-2);
+    }
+    .chip b { color: var(--text); font-weight: 600; }
+
+    .risk-card {
+      display: flex; align-items: center; gap: 26px; flex-wrap: wrap;
+      margin-top: 24px; padding: 24px 28px;
+      border: 1px solid var(--border); border-radius: var(--radius, 18px);
+      background: var(--surface);
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+    }
+    .risk-num {
+      font-family: var(--font-head); font-size: 2.6rem; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .risk-num.high { color: var(--danger); text-shadow: 0 0 26px rgba(248, 113, 113, 0.45); }
+    .risk-num.med { color: var(--warn); text-shadow: 0 0 26px rgba(251, 191, 36, 0.4); }
+    .risk-num.low { color: var(--success); text-shadow: 0 0 26px rgba(16, 185, 129, 0.4); }
+    .risk-info { flex: 1; min-width: 220px; }
+    .risk-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-2); margin-bottom: 4px; }
+    .risk-title { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--text); }
+    .risk-bar { height: 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.07); overflow: hidden; margin-top: 14px; }
+    .risk-fill { height: 100%; width: 0; border-radius: 999px; transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+    .risk-fill.high { background: linear-gradient(90deg, #f87171, #fb923c); box-shadow: 0 0 16px rgba(248, 113, 113, 0.45); }
+    .risk-fill.med { background: linear-gradient(90deg, #fbbf24, #f59e0b); box-shadow: 0 0 16px rgba(251, 191, 36, 0.4); }
+    .risk-fill.low { background: linear-gradient(90deg, #10b981, #c9a84c); box-shadow: 0 0 16px rgba(16, 185, 129, 0.4); }
+
+    .res-plan-label {
+      margin: 38px 0 16px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent);
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+    }
+
+    .rec {
+      position: relative; display: flex; gap: 18px; align-items: flex-start;
+      padding: 24px 26px; margin-bottom: 14px;
+      border: 1px solid var(--border); border-radius: 18px;
+      background: var(--surface);
+      overflow: hidden;
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(0.46s + var(--d) * 0.14s);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .rec:hover { transform: translateY(-3px); }
+    .rec.sev-critical { border-color: rgba(248, 113, 113, 0.5); box-shadow: 0 0 30px rgba(248, 113, 113, 0.1); }
+    .rec.sev-critical:hover { box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(248, 113, 113, 0.16); }
+    .rec.sev-high { border-color: rgba(251, 191, 36, 0.4); }
+    .rec.sev-high:hover { box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), 0 0 32px rgba(251, 191, 36, 0.1); }
+    .rec.sev-recommended { border-color: rgba(201, 168, 76, 0.35); }
+    .rec.sev-recommended:hover { box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4), 0 0 32px rgba(201, 168, 76, 0.1); }
+
+    .rec-icon {
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; border-radius: 14px; font-size: 1.5rem;
+      background: rgba(160, 124, 42, 0.1); border: 1px solid rgba(160, 124, 42, 0.3);
+    }
+    .rec.sev-critical .rec-icon { background: rgba(248, 113, 113, 0.1); border-color: rgba(248, 113, 113, 0.35); }
+    .rec.sev-high .rec-icon { background: rgba(251, 191, 36, 0.08); border-color: rgba(251, 191, 36, 0.3); }
+    .rec.sev-recommended .rec-icon { background: rgba(201, 168, 76, 0.08); border-color: rgba(201, 168, 76, 0.3); }
+    .rec-body { flex: 1; min-width: 0; }
+    .rec-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+    .rec-title { font-family: var(--font-head); font-size: 1.12rem; font-weight: 700; color: var(--text); }
+    .rec-tag {
+      padding: 3px 11px; border-radius: 999px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+    }
+    .rec.sev-critical .rec-tag { color: #ffb3bd; border: 1px solid rgba(248, 113, 113, 0.45); background: rgba(248, 113, 113, 0.08); }
+    .rec.sev-high .rec-tag { color: #fde68a; border: 1px solid rgba(251, 191, 36, 0.45); background: rgba(251, 191, 36, 0.08); }
+    .rec.sev-recommended .rec-tag { color: var(--accent); border: 1px solid rgba(201, 168, 76, 0.4); background: rgba(201, 168, 76, 0.07); }
+    .rec-text { font-size: 0.92rem; }
+
+    /* CTA box */
+    .res-cta {
+      position: relative; text-align: center;
+      margin-top: 42px; padding: 46px 36px;
+      border-radius: 22px;
+      background: linear-gradient(var(--surface), var(--surface)) padding-box, var(--gradient) border-box;
+      border: 1.5px solid transparent;
+      box-shadow: 0 0 60px rgba(201, 168, 76, 0.12), 0 30px 70px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
+    }
+    .res-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(460px circle at 50% 0%, rgba(201, 168, 76, 0.1), transparent 60%);
+      pointer-events: none;
+    }
+    .res-cta h3 {
+      position: relative;
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 12px;
+    }
+    .res-cta p { position: relative; font-size: 0.98rem; margin-bottom: 30px; }
+    .res-cta .btn { position: relative; }
+    .cta-alt { position: relative; margin-top: 20px; font-size: 0.85rem; }
+    .cta-alt a { color: var(--accent); font-weight: 500; border-bottom: 1px solid rgba(201, 168, 76, 0.35); }
+    .cta-alt a:hover { color: #e8d48b; border-color: #e8d48b; }
+
+    .res-footer {
+      text-align: center; margin-top: 34px; font-size: 0.8rem; color: #8a8578;
+      animation: resIn 0.6s ease 1s both;
+    }
+    .res-footer button {
+      border: none; background: transparent; color: var(--text-2);
+      font-size: 0.8rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+    }
+    .res-footer button:hover { color: var(--accent); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 720px) {
+      .q-options { grid-template-columns: 1fr; }
+      .screen-inner { justify-content: flex-start; padding-top: 56px; }
+      #screenIntro .screen-inner { justify-content: center; }
+      .progress-label { min-width: 0; }
+      .topbar { padding: 0 14px; gap: 12px; }
+      .logo .elite { font-size: 0.95rem; }
+      .logo .botstudios { font-size: 0.68rem; }
+      .rec { flex-direction: column; }
+      .risk-card { gap: 18px; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .q-hint { display: none; }
+      .option:hover { transform: none; }
+    }
+    @media (max-width: 420px) {
+      #sfxBtn { display: none; }
+      .intro-meta { gap: 12px; font-size: 0.8rem; }
+      .btn-primary { padding: 16px 32px; width: 100%; }
+      .terminal { font-size: 0.74rem; padding: 18px; }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+    ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .screen { transition: none; }
+      .screen.active { transition: none; }
+    }
+
+
+
+
+
+    /* ---- Audit email gate + disclosures ---- */
+    .gate-wrap { max-width: 520px; margin: 0 auto; width: 100%; }
+    .gate-form { margin-top: 26px; display: flex; flex-direction: column; gap: 16px; }
+    .gate-row { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+    .gate-row label { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2, #8a8578); }
+    .gate-row input { padding: 14px 16px; border-radius: 10px; border: 1px solid #1a1a1a; background: #0d0d0d; color: #f5f0e8; font-size: 1rem; font-family: var(--font-body, 'Inter', sans-serif); }
+    .gate-row input:focus { outline: none; border-color: #c9a84c; }
+    .gate-note { font-size: 0.8rem; color: #8a8578; line-height: 1.6; margin-top: 4px; text-align: left; }
+    .gate-fail { color: #e05252; font-size: 0.85rem; margin: 0; }
+    .res-disclosure { font-size: 0.8rem; color: #8a8578; line-height: 1.6; max-width: 560px; margin: 18px auto 0; }
+    .res-note-fail { font-size: 0.85rem; color: #e8d48b; margin-top: 16px; line-height: 1.6; }
+    .res-note-fail a { color: #e8d48b; }
+
+    /* ============================================================
+       PHASE 2, EBS ENGAGEMENT LAYER (chatbot, toasts, notif bar,
+       shortcuts, theme, PWA bits)
+       Vanilla JS only · respects prefers-reduced-motion
+    ============================================================ */
+    .ebs-hidden { display: none !important; }
+
+    /* ---- Overflow safety (zero horizontal scroll, all pages) ---- */
+    html, body { overflow-x: clip; max-width: 100vw; }
+    @supports not (overflow-x: clip) { html, body { overflow-x: hidden; } }
+
+
+    /* ---- Smart notification bar ---- */
+    .ebs-notif-bar {
+      position: relative; z-index: 1200;
+      width: 100%; min-height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(90deg, #a07c2a 0%, #c9a84c 55%, #d9b95f 100%);
+      color: #0a0a0a; font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+      padding: 8px 56px; text-align: center;
+      box-sizing: border-box;
+      transform: translateY(0); transition: transform 0.45s ease;
+    }
+    .ebs-notif-bar.ebs-out { transform: translateY(-100%); }
+    .ebs-notif-msg {
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 100%;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    @media (max-width: 767px) {
+      .ebs-notif-bar { font-size: 12px; }
+      .ebs-notif-msg { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.4; }
+    }
+    .ebs-notif-msg.ebs-swap { opacity: 0; transform: translateY(6px); }
+    .ebs-notif-msg a {
+      color: #0a0a0a; text-decoration: underline; text-underline-offset: 2px;
+      margin-left: 8px; white-space: nowrap;
+    }
+    .ebs-notif-msg a:hover { background: rgba(10, 10, 10, 0.12); border-radius: 4px; }
+    .ebs-notif-x {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; min-width: 36px; min-height: 36px;
+      border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(10, 10, 10, 0.12); color: #0a0a0a;
+      font-size: 13px; line-height: 1; display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s ease;
+    }
+    .ebs-notif-x:hover { background: rgba(10, 10, 10, 0.25); }
+    /* audit.html app-shell: shift fixed topbar/stage below the in-flow bar */
+    body.ebs-bar-active .topbar { top: 40px; }
+    body.ebs-bar-active .stage { top: calc(var(--topbar-h, 64px) + 40px); }
+
+    /* ---- Back to top ---- */
+    .ebs-backtop {
+      position: fixed; right: 26px; bottom: 100px; z-index: 1140;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(17, 17, 17, 0.9);
+      border: 1px solid rgba(201, 168, 76, 0.5); color: var(--gold-light, #e8d48b);
+      cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(12px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, box-shadow 0.3s ease;
+    }
+    .ebs-backtop.ebs-show { opacity: 1; visibility: visible; transform: translateY(0); }
+    .ebs-backtop:hover { box-shadow: 0 0 20px rgba(201, 168, 76, 0.35); border-color: var(--gold-light, #e8d48b); }
+
+    /* ---- AI Chatbot ---- */
+    .ebs-chat-fab {
+      position: fixed; right: 24px; bottom: 24px; z-index: 1150;
+      width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 60%, #a07c2a);
+      color: #0a0a0a;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0.45);
+      animation: ebsFabPulse 2.6s ease-out infinite;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-fab:hover { transform: translateY(-3px) scale(1.04); }
+    .ebs-chat-fab.ebs-open { animation: none; transform: scale(0.9); opacity: 0; pointer-events: none; }
+    @keyframes ebsFabPulse {
+      0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0.5); }
+      70% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 22px rgba(201, 168, 76, 0); }
+      100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+    .ebs-chat-badge {
+      position: absolute; top: -4px; right: -4px;
+      min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px;
+      background: #e8d48b; color: #0a0a0a;
+      font-size: 11px; font-weight: 700; line-height: 20px; text-align: center;
+      border: 2px solid #050505;
+      display: none;
+    }
+    .ebs-chat-fab.ebs-unread .ebs-chat-badge { display: block; }
+
+    .ebs-chat-window {
+      position: fixed; right: 24px; bottom: 100px; z-index: 1150;
+      width: 400px; height: 600px; max-width: calc(100vw - 32px);
+      max-height: calc(100vh - 140px);
+      display: flex; flex-direction: column;
+      background: rgba(10, 10, 10, 0.88);
+      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(201, 168, 76, 0.08);
+      opacity: 0; transform: translateY(16px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ebs-chat-window.ebs-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .ebs-chat-head {
+      flex-shrink: 0;
+      padding: 16px 18px;
+      background: linear-gradient(100deg, rgba(232, 212, 139, 0.12), rgba(201, 168, 76, 0.04));
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    }
+    .ebs-chat-title-row { display: flex; align-items: center; gap: 9px; }
+    .ebs-chat-title {
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 1.12rem; font-weight: 600; color: var(--text, #f5f0e8);
+    }
+    .ebs-online {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      color: #22c55e; margin-top: 2px;
+    }
+    .ebs-online i {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: ebsPulse 1.8s ease-out infinite;
+    }
+    .ebs-chat-sub {
+      font-size: 11px; color: #8a8578; letter-spacing: 0.04em;
+      margin-top: 3px;
+    }
+    .ebs-chat-actions { display: flex; gap: 8px; position: absolute; right: 16px; top: 16px; }
+    .ebs-icon-btn {
+      width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(201, 168, 76, 0.3);
+      background: rgba(255, 255, 255, 0.03); color: var(--text-2, #8a8578);
+      cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .ebs-icon-btn:hover { color: var(--gold-light, #e8d48b); border-color: rgba(201, 168, 76, 0.7); }
+    .ebs-icon-btn.ebs-muted { opacity: 0.45; }
+
+    .ebs-chat-body {
+      flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain;
+      padding: 18px 16px; display: flex; flex-direction: column; gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .ebs-msg { max-width: 82%; padding: 11px 15px; font-size: 0.9rem; line-height: 1.55; }
+    .ebs-msg p { margin: 0 0 6px; }
+    .ebs-msg p:last-child { margin-bottom: 0; }
+    .ebs-msg a { color: inherit; text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+    .ebs-msg.ebs-ai {
+      align-self: flex-start; background: #151515;
+      border: 1px solid rgba(201, 168, 76, 0.18);
+      color: var(--text, #f5f0e8);
+      border-radius: 16px 16px 16px 5px;
+    }
+    .ebs-msg.ebs-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 70%, #a07c2a);
+      color: #0a0a0a; font-weight: 500;
+      border-radius: 16px 16px 5px 16px;
+      box-shadow: 0 6px 18px rgba(201, 168, 76, 0.18);
+    }
+    .ebs-typing { display: inline-flex; gap: 5px; padding: 14px 16px; }
+    .ebs-typing span {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--gold, #c9a84c);
+      animation: ebsTyping 1.2s ease-in-out infinite;
+    }
+    .ebs-typing span:nth-child(2) { animation-delay: 0.15s; }
+    .ebs-typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes ebsTyping {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+    .ebs-quick-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 16px 12px; }
+    .ebs-chip {
+      border: 1px solid rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.06);
+      color: var(--gold-light, #e8d48b); border-radius: 999px;
+      padding: 8px 14px; font-size: 12.5px; font-weight: 500; cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .ebs-chip:hover { background: rgba(201, 168, 76, 0.18); transform: translateY(-1px); }
+    .ebs-chat-foot {
+      flex-shrink: 0; display: flex; gap: 10px; align-items: center;
+      padding: 12px 14px 16px; border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .ebs-chat-input {
+      flex: 1; min-width: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(201, 168, 76, 0.28);
+      border-radius: 999px; color: var(--text, #f5f0e8);
+      padding: 12px 18px; font-size: 0.9rem; font-family: inherit;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-input::placeholder { color: #8a8578; }
+    .ebs-chat-input:focus {
+      outline: none; border-color: var(--gold, #c9a84c);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+    }
+    .ebs-chat-send {
+      flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; border: none;
+      background: linear-gradient(135deg, #e8d48b, #c9a84c 70%, #a07c2a);
+      color: #0a0a0a; cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+    .ebs-chat-send:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(201, 168, 76, 0.4); }
+    @media (max-width: 560px) {
+      .ebs-chat-window {
+        right: 0; bottom: 0; width: 100vw; height: 100dvh; max-width: 100vw;
+        max-height: 100dvh; border-radius: 0; border: none;
+      }
+      .ebs-chat-fab { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+    }
+
+    /* ---- Navbar theme toggle ---- */
+    .ebs-nav-tools { display: flex; align-items: center; gap: 10px; }
+    .ebs-theme-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(201, 168, 76, 0.45); background: transparent;
+      color: var(--gold-light, #e8d48b); cursor: pointer; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .ebs-theme-btn:hover { background: rgba(201, 168, 76, 0.12); }
+    @media (max-width: 1023px) {
+      .ebs-nav-tools { margin-left: auto; }
+    }
+
+    /* ---- Light theme (Bonus 3) ---- */
+    html[data-theme="light"] {
+      --bg: #f5f0e8; --bg-2: #ede5d4; --surface: #ffffff;
+      --border: #e2d7bf; --text: #1c1a16; --text-2: #6b6352;
+      --gold: #a07c2a; --gold-light: #8a6a1f; --gold-dark: #6d531a;
+    }
+    html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+    html[data-theme="light"] .navbar {
+      background: rgba(245, 240, 232, 0.8);
+      border-bottom: 1px solid rgba(160, 124, 42, 0.18);
+    }
+    html[data-theme="light"] .footer {
+      background: var(--bg-2); border-top: 1px solid rgba(160, 124, 42, 0.2);
+    }
+    html[data-theme="light"] .ebs-chat-window { background: rgba(255, 255, 255, 0.92); }
+    html[data-theme="light"] .ebs-msg.ebs-ai { background: #f2ecdd; border-color: rgba(160, 124, 42, 0.25); }
+    html[data-theme="light"] .ebs-chat-badge { border-color: #f5f0e8; }
+
+    /* ---- Reduced motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      .ebs-chat-fab, .ebs-online i { animation: none; }
+      .ebs-typing span { animation: none; opacity: 0.8; }
+      .ebs-chat-window { transition: opacity 0.2s ease; }
+    }
+
+    /* ---- Mobile menu (all pages): #menuToggle + #mobileMenu ---- */
+    /* World-class treatment: hairline gold bezel, swelling inner glow,
+       gold-hairline icon that morphs into a fine X, editorial full-screen
+       panel with indexed links, hairline separators, staggered entrance.  */
+    #menuToggle {
+      display: none;
+      width: 44px; height: 44px;
+      min-width: 44px; min-height: 44px;
+      border: 1px solid rgba(201, 168, 76, 0.38);
+      background: radial-gradient(130% 130% at 50% 0%, rgba(232, 212, 139, 0.10), transparent 58%),
+                  rgba(10, 10, 10, 0.55);
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 1100;
+      position: relative;
+      align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 4.5px;
+      flex-shrink: 0;
+      overflow: hidden;
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      transition: border-color .3s ease, box-shadow .4s ease, transform .25s ease;
+    }
+    #menuToggle::before { /* slow-swelling inner glow */
+      content: '';
+      position: absolute; inset: -60%;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(232, 212, 139, 0.16), transparent 70%);
+      opacity: 0;
+      transition: opacity .6s ease;
+      pointer-events: none;
+    }
+    #menuToggle:hover, #menuToggle:focus-visible {
+      border-color: rgba(232, 212, 139, 0.8);
+      box-shadow: 0 0 22px rgba(201, 168, 76, 0.22), inset 0 0 14px rgba(201, 168, 76, 0.10);
+      outline: none;
+    }
+    #menuToggle:hover::before, #menuToggle:focus-visible::before { opacity: 1; }
+    #menuToggle:active { transform: scale(0.94); }
+    #menuToggle .menu-line {
+      width: 18px; height: 1.5px;
+      background: linear-gradient(90deg, #e8d48b, #c9a84c);
+      border-radius: 999px;
+      box-shadow: 0 0 6px rgba(201, 168, 76, 0.45);
+      display: block;
+      position: relative;
+      transition: transform .45s cubic-bezier(.65,.05,.36,1), opacity .3s ease;
+    }
+    #menuToggle.is-open .menu-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    #menuToggle.is-open .menu-line:nth-child(2) { opacity: 0; transform: scaleX(0.3); }
+    #menuToggle.is-open .menu-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    #mobileMenu {
+      position: fixed; inset: 0;
+      width: 100%; height: 100vh; height: 100dvh;
+      background: radial-gradient(90% 60% at 50% 0%, rgba(201, 168, 76, 0.09), transparent 62%),
+                  rgba(5, 5, 5, 0.98);
+      -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+      z-index: 1050;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-start;
+      gap: 0;
+      padding: 96px 26px 52px;
+      box-sizing: border-box;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .45s ease, visibility .45s ease;
+      overflow-y: auto;
+      counter-reset: menuItem;
+    }
+    #mobileMenu::before { /* micro brand mark */
+      content: 'ELITE \25C6  BOT STUDIOS';
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.42em;
+      text-indent: 0.42em; /* optically center tracked type */
+      color: rgba(232, 212, 139, 0.9);
+      text-align: center;
+      padding-bottom: 24px;
+      margin-bottom: 26px;
+      width: min(340px, 86vw);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+      margin-top: auto;
+    }
+    #mobileMenu::after { /* top hairline of light */
+      content: '';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: min(560px, 82%); height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.55), transparent);
+    }
+    #mobileMenu.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+    #mobileMenu.is-open a { animation: menuLinkIn .5s cubic-bezier(.22,.61,.36,1) both; }
+    #mobileMenu.is-open a:nth-child(1) { animation-delay: .06s; }
+    #mobileMenu.is-open a:nth-child(2) { animation-delay: .11s; }
+    #mobileMenu.is-open a:nth-child(3) { animation-delay: .16s; }
+    #mobileMenu.is-open a:nth-child(4) { animation-delay: .21s; }
+    #mobileMenu.is-open a:nth-child(5) { animation-delay: .26s; }
+    #mobileMenu.is-open a:nth-child(6) { animation-delay: .31s; }
+    #mobileMenu.is-open a:nth-child(7) { animation-delay: .36s; }
+    #mobileMenu.is-open a:nth-child(8) { animation-delay: .41s; }
+    #mobileMenu.is-open a:nth-child(9) { animation-delay: .46s; }
+    @keyframes menuLinkIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #mobileMenu.is-open a { animation: none; }
+      #menuToggle, #menuToggle .menu-line { transition: none; }
+    }
+    #mobileMenu a {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 1.12rem; font-weight: 500;
+      color: #f5f0e8; text-decoration: none;
+      letter-spacing: 0.06em;
+      display: block;
+      width: min(340px, 86vw);
+      text-align: center;
+      padding: 15px 0;
+      position: relative;
+      transition: color .25s ease, letter-spacing .3s ease;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email) {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+      counter-increment: menuItem;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email)::before { /* gold index 01-07 */
+      content: '0' counter(menuItem);
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.35em; text-indent: 0.35em;
+      color: rgba(201, 168, 76, 0.55);
+      transition: color .25s ease;
+    }
+    #mobileMenu a:hover, #mobileMenu a:focus-visible {
+      color: #e8d48b;
+      letter-spacing: 0.1em;
+      outline: none;
+    }
+    #mobileMenu a:not(.menu-cta):not(.menu-email):hover::before,
+    #mobileMenu a:not(.menu-cta):not(.menu-email):focus-visible::before { color: #e8d48b; }
+    #mobileMenu .menu-cta {
+      margin-top: 38px;
+      margin-bottom: auto;
+      width: auto;
+      padding: 16px 46px; border-radius: 999px;
+      border: 1px solid rgba(232, 212, 139, 0.65);
+      background: linear-gradient(135deg, #ecd88f, #c9a84c 55%, #a07c2a);
+      color: #0a0a0a !important;
+      font-family: var(--font-body, 'Inter', sans-serif) !important;
+      font-size: 0.86rem !important; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      transition: transform .25s ease, box-shadow .3s ease;
+    }
+    #mobileMenu .menu-cta:hover, #mobileMenu .menu-cta:focus-visible {
+      color: #0a0a0a !important;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 38px rgba(201, 168, 76, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.14em;
+    }
+    #mobileMenu .menu-email {
+      margin-top: 30px;
+      padding: 4px 0;
+      font-size: 0.9rem !important;
+      color: var(--text-2, #8a8578) !important;
+      letter-spacing: 0.08em;
+    }
+    #mobileMenu .menu-email:hover { color: #c9a84c !important; }
+
+    /* ---- Hide floating chat while the mobile menu is open ---- */
+    body.ebs-menu-open .ebs-chat-fab,
+    body.ebs-menu-open .ebs-chat-window { display: none !important; }
+
+    @media (max-width: 1024px) {
+      #menuToggle { display: flex !important; }
+      .desktop-nav-links { display: none !important; }
+      .nav-title { display: none !important; }
+    }
+    @media (max-width: 640px) {
+      .navbar .nav-cta { display: none; }
+    }
+
+    /* ---- Navbar helper alignment (no overlap, all pages) ---- */
+    .navbar, .topbar { box-sizing: border-box; }
+    .navbar .logo, .topbar .logo { flex-shrink: 0; white-space: nowrap; z-index: 2; }
+    .nav-right, .top-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+    /* ---- Contact email note + About block (index) ---- */
+    .contact-email-note {
+      margin-top: 22px; padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.9rem; color: var(--text-2, #8a8578); text-align: center;
+    }
+    .about-note {
+      margin-bottom: 28px; padding: 26px 28px;
+      border-color: rgba(201, 168, 76, 0.3);
+      background: linear-gradient(140deg, rgba(201, 168, 76, 0.07), transparent 55%);
+    }
+    .about-note h3 {
+      font-family: var(--font-head, 'Playfair Display', serif);
+      font-size: 1.2rem; font-weight: 700; color: var(--text, #f5f0e8);
+      margin-bottom: 10px;
+    }
+    .about-note p { color: var(--text-2, #8a8578); font-size: 0.95rem; line-height: 1.75; max-width: 900px; }
+
+    /* ---- iOS: inputs at least 16px on mobile to prevent auto-zoom ---- */
+    @media (max-width: 767px) {
+      input, select, textarea { font-size: 16px !important; }
+    }
+
+    /* ---- Print ---- */
+    @media print {
+      .ebs-chat-fab, .ebs-chat-window,
+      .ebs-notif-bar, .ebs-backtop { display: none !important; }
+    }
+
+  </style>
+  <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
+       When you have a real GA4 Measurement ID, paste the standard
+       gtag.js loader + gtag('config') snippet here. The PHASE 3 event
+       tracker forwards automatically once the ID is set. No invalid
+       IDs load. -->
+</head>
+
+<body>
+  <a class="skip-link" href="#screenIntro">Skip to content</a>
+  <div class="app-bg" aria-hidden="true">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+  </div>
+
+  <!-- ============================================================
+       TOP BAR (logo + progress + actions)
+  ============================================================ -->
+  <header class="topbar">
+    <a href="/" class="logo" aria-label="Elite Bot Studios, main site">
+        <span class="elite">ELITE</span>
+        <span class="diamond" aria-hidden="true">◆</span>
+        <span class="botstudios">Bot Studios</span>
+      </a>
+
+    <div class="progress-wrap" aria-hidden="true">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-label" id="progressLabel">0%</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="icon-btn" id="sfxBtn" aria-label="Toggle sound effects"><span id="sfxText">Sound On</span></button>
+      <a href="/" class="icon-btn"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Exit</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></button>
+    </div>
+  </header>
+
+  <nav id="mobileMenu" aria-label="Mobile navigation">
+    <a href="/">Home</a>
+    <a href="/#services">Services</a>
+    <a href="demo.html">Demo</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="pricing.html">How We Engage</a>
+    <a href="audit.html" aria-current="page">Audit</a>
+    <a href="/#contact">Contact</a>
+    <a class="menu-email" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
+    <a class="menu-cta" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a>
+  </nav>
+
+  <!-- ============================================================
+       STAGE
+  ============================================================ -->
+  <div class="stage">
+
+    <!-- ===== INTRO ===== -->
+    <section class="screen active" id="screenIntro" aria-label="Introduction">
+      <div class="screen-inner">
+        <div class="intro-wrap">
+          <div class="intro-mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M8 14h.01M16 14h.01M9 20h6"/></svg></div>
+          <span class="intro-badge"><span class="live-dot"></span> FREE · 4 QUESTIONS · 60 SECONDS</span>
+          <h1>Free AI Automation <span class="grad-text">Audit</span></h1>
+          <p class="intro-sub">Answer 4 simple questions to discover exactly where your business is leaking leads and how AI can fix it.</p>
+          <div class="intro-meta">
+            <span><i class="fa-solid fa-bolt" aria-hidden="true"></i> Unlock your result with your email</span>
+            <span><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Instant blueprint</span>
+            <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 100% free</span>
+          </div>
+          <button class="btn btn-primary" id="startBtn">Start Audit</button>
+          <p class="intro-hint">Press <kbd style="display:inline-block;padding:2px 8px;border-radius:6px;border:1px solid var(--border);background:var(--surface);font-family:var(--font-mono);font-size:.72rem;color:var(--text-2);">Enter</kbd> to begin</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== QUIZ ===== -->
+    <section class="screen" id="screenQuiz" aria-label="Questionnaire">
+      <div class="screen-inner">
+
+        <!-- Q1 -->
+        <div class="q" id="q0" data-key="industry">
+          <span class="q-eyebrow">Question 1 of 4</span>
+          <h2>What industry are you in?</h2>
+          <div class="q-options">
+            <button class="option" data-value="home"><span class="opt-icon">◆</span> Home Services <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="realestate"><span class="opt-icon">◆</span> Real Estate <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="medical"><span class="opt-icon">◆</span> Medical/Dental <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="ecom"><span class="opt-icon">◆</span> E-Commerce <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="other"><span class="opt-icon">◆</span> Other <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+          </div>
+          <div style="text-align:center;">
+            <button class="q-back-btn" id="qBack0"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+          <p class="q-hint">Press <kbd>1</kbd>–<kbd>5</kbd> to answer · <kbd>Enter</kbd> to confirm · <kbd>⌫</kbd> to go back</p>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q" id="q1" data-key="source">
+          <span class="q-eyebrow">Question 2 of 4</span>
+          <h2>How do you currently receive most of your leads?</h2>
+          <div class="q-options">
+            <button class="option" data-value="calls"><span class="opt-icon">◆</span> Phone Calls <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="web"><span class="opt-icon">◆</span> Website Forms <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="whatsapp"><span class="opt-icon">◆</span> WhatsApp/Social Media <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="referrals"><span class="opt-icon">◆</span> Referrals <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+          </div>
+          <div style="text-align:center;">
+            <button class="q-back-btn" id="qBack1"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+          <p class="q-hint">Press <kbd>1</kbd>–<kbd>4</kbd> to answer · <kbd>Enter</kbd> to confirm · <kbd>⌫</kbd> to go back</p>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q" id="q2" data-key="response">
+          <span class="q-eyebrow">Question 3 of 4</span>
+          <h2>Honestly, what is your average response time to a new inquiry?</h2>
+          <div class="q-options">
+            <button class="option" data-value="fast"><span class="opt-icon">◆</span> Under 5 mins <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="hours"><span class="opt-icon">◆</span> 1-2 Hours <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="nextday"><span class="opt-icon">◆</span> Next Day <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="voicemail"><span class="opt-icon">◆</span> Missed Calls go to Voicemail <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+          </div>
+          <div style="text-align:center;">
+            <button class="q-back-btn" id="qBack2"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+          <p class="q-hint">Press <kbd>1</kbd>–<kbd>4</kbd> to answer · <kbd>Enter</kbd> to confirm · <kbd>⌫</kbd> to go back</p>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q" id="q3" data-key="bottleneck">
+          <span class="q-eyebrow">Final Question</span>
+          <h2>What is the biggest bottleneck in your business right now?</h2>
+          <div class="q-options">
+            <button class="option" data-value="basicqs"><span class="opt-icon">◆</span> Spending too much time on basic questions <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="noshows"><span class="opt-icon">◆</span> No-shows for appointments <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="cold"><span class="opt-icon">◆</span> Leads going cold <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+            <button class="option" data-value="manual"><span class="opt-icon">◆</span> Too much manual data entry <span class="opt-check" aria-hidden="true"><i class="fa-solid fa-check"></i></span></button>
+          </div>
+          <div style="text-align:center;">
+            <button class="q-back-btn" id="qBack3"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+          <p class="q-hint">Press <kbd>1</kbd>–<kbd>4</kbd> to answer · <kbd>Enter</kbd> to confirm · <kbd>⌫</kbd> to go back</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SCAN ===== -->
+    <section class="screen" id="screenScan" aria-label="Analyzing your lead flow">
+      <div class="screen-inner">
+        <div class="scan-wrap">
+          <div class="scan-ring-box">
+            <svg width="150" height="150" viewBox="0 0 150 150" aria-hidden="true">
+              <defs>
+                <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#c9a84c"/>
+                  <stop offset="1" stop-color="#a07c2a"/>
+                </linearGradient>
+              </defs>
+              <circle class="ring-track" cx="75" cy="75" r="62"/>
+              <circle class="ring-progress" id="ringProgress" cx="75" cy="75" r="62"/>
+            </svg>
+            <div class="ring-center">
+              <span class="ring-pct" id="ringPct">0%</span>
+              <span class="ring-label">Scanning</span>
+            </div>
+          </div>
+
+          <h2 class="scan-title">Analyzing your lead flow<span class="cursor" aria-hidden="true"></span></h2>
+
+          <div class="terminal" id="terminal" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== EMAIL GATE ===== -->
+    <section class="screen" id="screenGate" aria-label="Get your blueprint">
+      <div class="screen-inner">
+        <div class="gate-wrap">
+          <span class="res-badge"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> AUDIT COMPLETE</span>
+          <h2 class="res-head">Your blueprint is ready.</h2>
+          <p class="res-sub">Tell us who to send it to. Your result appears on the next screen.</p>
+          <form class="gate-form" id="gateForm" novalidate>
+            <div class="gate-row">
+              <label for="gateName">First name</label>
+              <input type="text" id="gateName" name="name" placeholder="Your first name" autocomplete="given-name" required />
+            </div>
+            <div class="gate-row">
+              <label for="gateEmail">Email</label>
+              <input type="email" id="gateEmail" name="email" placeholder="you@yourbusiness.com" autocomplete="email" required />
+            </div>
+            <div class="gate-row">
+              <label for="gateBiz">Business type</label>
+              <input type="text" id="gateBiz" name="businessType" placeholder="e.g. dental clinic, HVAC, real estate" required />
+            </div>
+            <p class="gate-note">This is an automated preliminary assessment based on your answers. A full audit requires reviewing your actual lead flow. Your email is used only to send your results. See our <a href="privacy.html" class="mail-link">Privacy Policy</a>.</p>
+            <button type="submit" class="btn btn-primary" id="gateSubmit">Show My Result</button>
+            <p class="gate-fail" id="gateFail" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- ===== RESULTS ===== -->
+    <section class="screen" id="screenResults" aria-label="Your automation blueprint">
+      <div class="screen-inner">
+        <div class="results-wrap">
+          <span class="res-badge"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> AUDIT COMPLETE</span>
+          <h2 class="res-head" id="resHead">Your Business is prime for AI Automation.</h2>
+          <p class="res-sub" id="resSub">Based on your answers, here is your personalized automation blueprint.</p>
+
+          <div class="answer-chips" id="answerChips"></div>
+
+          <div class="risk-card">
+            <div class="risk-num" id="riskNum">–%</div>
+            <div class="risk-info">
+              <div class="risk-label">Estimated Lead Leak Risk</div>
+              <div class="risk-title" id="riskTitle">Calculating…</div>
+              <div class="risk-bar"><div class="risk-fill" id="riskFill"></div></div>
+            </div>
+          </div>
+
+          <div class="res-plan-label">Your AI Automation Blueprint</div>
+
+          <div id="recList"></div>
+
+          <div class="res-cta">
+            <h3>Want us to build this exact system for you?</h3>
+            <p>We'll design, build, host, and manage everything, Most systems launch within 1-2 weeks, depending on complexity.</p>
+            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book a 15-Min Call</a>
+              <p style="margin-top:18px;font-size:0.88rem;color:var(--text-2);text-align:center;">
+                Prefer email? Reach us at <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
+              </p>
+          </div>
+          <p class="res-disclosure">This is an automated preliminary assessment based on your answers. A full audit requires reviewing your actual lead flow.</p>
+          <p class="res-note-fail" id="leadNote" hidden>We couldn't save your details right now. Please email <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a> or book a call and mention your audit result.</p>
+          <p class="res-footer">
+            <button id="restartBtn"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Restart Audit</button> &nbsp;·&nbsp; © 2026 Elite Bot Studios. All rights reserved. &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; <a href="cookies.html">Cookie Policy</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    'use strict';
+
+    /* ============================================================
+       HELPERS
+    ============================================================ */
+    const $ = id => document.getElementById(id);
+    const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ============================================================
+       SOUND FX (Web Audio, no external files)
+    ============================================================ */
+    const SFX = {
+      ctx: null, on: true,
+      ensure() {
+        if (!this.on) return false;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return false;
+        if (!this.ctx) this.ctx = new AC();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        return true;
+      },
+      tone(freq, delay, dur, vol = 0.07, type = 'sine') {
+        if (!this.ensure()) return;
+        const t0 = this.ctx.currentTime + delay;
+        const o = this.ctx.createOscillator();
+        const g = this.ctx.createGain();
+        o.type = type;
+        o.frequency.setValueAtTime(freq, t0);
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(vol, t0 + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        o.connect(g); g.connect(this.ctx.destination);
+        o.start(t0); o.stop(t0 + dur + 0.05);
+      },
+      pop() { this.tone(520, 0, 0.06, 0.06, 'triangle'); this.tone(780, 0.04, 0.08, 0.04, 'triangle'); },
+      tick() { this.tone(660, 0, 0.03, 0.03, 'square'); },
+      success() { [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => this.tone(f, i * 0.09, 0.26, 0.08, 'sine')); }
+    };
+
+    /* ============================================================
+       STATE
+    ============================================================ */
+    const state = { industry: null, source: null, response: null, bottleneck: null };
+    const KEYS = ['industry', 'source', 'response', 'bottleneck'];
+    let qIndex = -1;          // -1 = intro
+    let transitioning = false;
+    let focusedIdx = 0;
+
+    const LABELS = {
+      industry: { home: 'Home Services', realestate: 'Real Estate', medical: 'Medical/Dental', ecom: 'E-Commerce', other: 'Other' },
+      source: { calls: 'Phone Calls', web: 'Website Forms', whatsapp: 'WhatsApp/Social Media', referrals: 'Referrals' },
+      response: { fast: 'Under 5 mins', hours: '1-2 Hours', nextday: 'Next Day', voicemail: 'Missed Calls → Voicemail' },
+      bottleneck: { basicqs: 'Time lost on basic questions', noshows: 'No-shows for appointments', cold: 'Leads going cold', manual: 'Too much manual data entry' }
+    };
+
+    /* ============================================================
+       SCREEN MANAGER
+    ============================================================ */
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => {
+        s.classList.toggle('active', s.id === id);
+      });
+      // Scroll the newly-active screen back to top
+      const el = $(id);
+      if (el) el.scrollTop = 0;
+    }
+
+    function setProgress(pct, label) {
+      $('progressFill').style.width = pct + '%';
+      $('progressLabel').textContent = label;
+    }
+
+    /* ============================================================
+       QUIZ FLOW
+    ============================================================ */
+    function showQuestion(i, dir = 1) {
+      qIndex = i;
+      focusedIdx = 0;
+      document.querySelectorAll('.q').forEach(q => {
+        q.classList.toggle('active', q.id === 'q' + i);
+        q.classList.toggle('q-back', dir < 0);
+      });
+      setProgress(((i + 1) / 4) * 100, `Question ${i + 1} of 4`);
+      focusOption(i, 0);
+    }
+
+    function focusOption(qi, idx) {
+      const options = document.querySelectorAll(`#q${qi} .option`);
+      options.forEach((o, k) => o.classList.toggle('focused', k === idx));
+    }
+
+    function selectOption(qi, idx) {
+      if (transitioning) return;
+      transitioning = true;
+      const q = $(`q${qi}`);
+      const options = q.querySelectorAll('.option');
+      const opt = options[idx];
+      if (!opt) { transitioning = false; return; }
+
+      const key = KEYS[qi];
+      state[key] = opt.dataset.value;
+
+      opt.classList.add('selected');
+      SFX.pop();
+
+      setTimeout(() => {
+        if (qi < 3) {
+          showQuestion(qi + 1, 1);
+          transitioning = false;
+        } else {
+          // Final question answered → scan
+          setProgress(100, 'Complete');
+          startScan();
+          transitioning = false;
+        }
+      }, 340);
+    }
+
+    function prevQuestion() {
+      if (transitioning) return;
+      if (qIndex > 0) {
+        // Clear this question's selection in state (allow re-answer)
+        const key = KEYS[qIndex];
+        state[key] = null;
+        showQuestion(qIndex - 1, -1);
+      } else if (qIndex === 0) {
+        showScreen('screenIntro');
+        setProgress(0, '0%');
+        qIndex = -1;
+      }
+    }
+
+    /* ============================================================
+       SCAN (terminal + progress ring)
+    ============================================================ */
+    const SCAN_LINES = [
+      'connecting_data_points...',
+      'calculating_response_penalties...',
+      'identifying_automation_gaps...',
+      'generating_blueprint...'
+    ];
+    const RING_R = 62;
+    const RING_C = 2 * Math.PI * RING_R;
+    let scanTimers = [];
+
+    function typeLine(container, text, onDone) {
+      const line = document.createElement('div');
+      line.className = 'term-line';
+      line.innerHTML = '<span class="t-prompt">&gt;</span><span class="t-text"></span><span class="t-ok"></span>';
+      container.appendChild(line);
+      const txt = line.querySelector('.t-text');
+
+      if (reduceMotion()) {
+        txt.textContent = text;
+        line.querySelector('.t-ok').textContent = ' ✓ done';
+        SFX.tick();
+        onDone && onDone();
+        return;
+      }
+
+      let i = 0;
+      const iv = setInterval(() => {
+        i++;
+        txt.textContent = text.slice(0, i);
+        if (i >= text.length) {
+          clearInterval(iv);
+          line.querySelector('.t-ok').textContent = ' ✓ done';
+          SFX.tick();
+          onDone && onDone();
+        }
+      }, 26);
+      scanTimers.push(iv);
+    }
+
+    function animateRing(duration, onDone) {
+      const ring = $('ringProgress');
+      const pct = $('ringPct');
+      ring.style.strokeDasharray = RING_C;
+      ring.style.strokeDashoffset = RING_C;
+
+      if (reduceMotion()) {
+        ring.style.strokeDashoffset = 0;
+        pct.textContent = '100%';
+        onDone && onDone();
+        return;
+      }
+
+      const t0 = performance.now();
+      const step = t => {
+        const p = Math.min(1, (t - t0) / duration);
+        const e = 1 - Math.pow(1 - p, 3);
+        ring.style.strokeDashoffset = RING_C * (1 - e);
+        pct.textContent = Math.round(e * 100) + '%';
+        if (p < 1) requestAnimationFrame(step);
+        else onDone && onDone();
+      };
+      requestAnimationFrame(step);
+    }
+
+    function startScan() {
+      showScreen('screenScan');
+      const terminal = $('terminal');
+      terminal.innerHTML = '';
+
+      const lineDelay = reduceMotion() ? 120 : 950;
+      SCAN_LINES.forEach((text, i) => {
+        scanTimers.push(setTimeout(() => typeLine(terminal, text), 250 + i * lineDelay));
+      });
+
+      const ringDur = reduceMotion() ? 300 : 3400;
+      animateRing(ringDur, () => {
+        SFX.success();
+        scanTimers.push(setTimeout(showGate, reduceMotion() ? 350 : 600));
+      });
+    }
+
+    /* ============================================================
+       EMAIL GATE (name + email + business before the blueprint)
+    ============================================================ */
+    function showGate() {
+      window.__auditLeadSaved = null;
+      showScreen('screenGate');
+    }
+    $('gateForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = $('gateName').value.trim();
+      const email = $('gateEmail').value.trim();
+      const biz = $('gateBiz').value.trim();
+      const failEl = $('gateFail');
+      failEl.hidden = true;
+      const valid = name !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) && biz !== '';
+      if (!valid) {
+        failEl.textContent = 'Please fill in all three fields so we can prepare your result.';
+        failEl.hidden = false;
+        return;
+      }
+      const btn = $('gateSubmit');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      window.submitEBSLead({
+        name: name,
+        email: email,
+        businessType: biz,
+        planInterest: 'Audit',
+        leadType: 'Audit',
+        message: 'Lead Flow Audit submission',
+        auditAnswers: {
+          industry: state.industry,
+          source: state.source,
+          response: state.response,
+          bottleneck: state.bottleneck
+        },
+        auditResult: (LABELS.industry[state.industry] || 'Other') + ' | risk: ' + RISK[state.response].label
+      }).then((res) => {
+        btn.disabled = false;
+        btn.textContent = 'Show My Result';
+        window.__auditLeadSaved = !!(res && res.ok);
+        showResults();
+      });
+    });
+
+    /* ============================================================
+       RESULTS ENGINE
+    ============================================================ */
+    const RECS = {
+      missedcall: {
+        icon: '◆', sev: 'CRITICAL', title: 'Missed-Call Text-Back System',
+        text: a => a.response === 'voicemail'
+          ? 'Every missed call instantly triggers a personalized AI text that reopens the conversation and books the job, even at 2 AM. Calls that hit voicemail rarely call back. A text-back reopens the conversation while the caller is still looking.'
+          : 'Every missed call instantly triggers a personalized AI text that reopens the conversation and books the job. Since most of your leads come in by phone, this alone can recover thousands every month.'
+      },
+      instant: {
+        icon: '◆', sev: 'HIGH', title: 'Instant AI Lead Response',
+        text: () => 'Speed wins deals: the business that responds first usually gets the job. Our AI answers every inquiry in under 30 seconds, nights, weekends, and holidays included.'
+      },
+      qualify: {
+        icon: '◆', sev: 'RECOMMENDED', title: 'AI Qualification Engine',
+        text: () => "You're already fast, now let AI handle the repetitive back-and-forth so your team only spends time on ready-to-buy leads."
+      },
+      followup: {
+        icon: '◆', sev: 'HIGH', title: 'Automated Follow-Up Sequences',
+        text: () => 'Never let a lead go cold again. Automatic SMS and email follow-ups keep every inquiry warm until they book, no human effort required.'
+      },
+      webchat: {
+        icon: '◆', sev: 'HIGH', title: 'Website AI Chatbot',
+        text: () => 'Most of your leads come through your website, an AI chat agent captures and qualifies every visitor before they bounce to a competitor.'
+      },
+      whatsapp: {
+        icon: '◆', sev: 'HIGH', title: 'Messaging Automation',
+        text: () => 'Instant replies, qualification, and booking inside the messaging platforms your customers already use.'
+      },
+      faq: {
+        icon: '◆', sev: 'RECOMMENDED', title: 'AI FAQ & Qualification Bot',
+        text: () => "Your AI handles the repetitive questions that eat your team's day, freeing you to focus on closing deals instead of answering \"how much?\" 40 times a day."
+      },
+      reminders: {
+        icon: '◆', sev: 'HIGH', title: 'Smart Reminders & Rescheduling',
+        text: () => 'Automated appointment reminders and one-tap rescheduling reduce no-shows by up to 50%, keeping your calendar full and your revenue predictable.'
+      },
+      crm: {
+        icon: '◆', sev: 'RECOMMENDED', title: 'Zero-Touch CRM Logging',
+        text: () => 'Every lead, conversation, and booking is logged into your CRM automatically. No more manual data entry, ever.'
+      }
+    };
+
+    function buildRecs(a) {
+      const picks = [];
+      const used = new Set();
+      const add = key => {
+        if (RECS[key] && !used.has(key) && picks.length < 3) {
+          used.add(key);
+          picks.push(RECS[key]);
+        }
+      };
+
+      // 1) Response-time driven (top priority)
+      if (a.response === 'voicemail') { add('missedcall'); add('instant'); }
+      else if (a.response === 'nextday') { add('instant'); add('followup'); }
+      else if (a.response === 'hours') { add('instant'); }
+      else { add('qualify'); }
+
+      // 2) Lead-source driven
+      if (a.source === 'calls') add('missedcall');
+      else if (a.source === 'web') add('webchat');
+      else if (a.source === 'whatsapp') add('whatsapp');
+      else if (a.source === 'referrals') add('followup');
+
+      // 3) Bottleneck driven
+      if (a.bottleneck === 'basicqs') add('faq');
+      else if (a.bottleneck === 'noshows') add('reminders');
+      else if (a.bottleneck === 'cold') add('followup');
+      else if (a.bottleneck === 'manual') add('crm');
+
+      // Fill to 3
+      ['webchat', 'instant', 'missedcall'].forEach(k => add(k));
+      return picks.slice(0, 3);
+    }
+
+    const RISK = {
+      voicemail: { pct: 92, label: 'Severe Risk', cls: 'high' },
+      nextday:   { pct: 78, label: 'High Risk',   cls: 'high' },
+      hours:     { pct: 55, label: 'Medium Risk', cls: 'med' },
+      fast:      { pct: 20, label: 'Low Risk',    cls: 'low' }
+    };
+
+    function showResults() {
+      const a = state;
+      const industryLabel = LABELS.industry[a.industry] || 'Other';
+
+      // Personalized headline
+      $('resHead').innerHTML =
+        a.industry && a.industry !== 'other'
+          ? `Your <span class="grad-text">${industryLabel}</span> Business is prime for AI Automation.`
+          : 'Your <span class="grad-text">Business</span> is prime for AI Automation.';
+
+      $('resSub').textContent =
+        `Based on your answers, ${LABELS.source[a.source]}, ${LABELS.response[a.response].toLowerCase()} response time, and your ${LABELS.bottleneck[a.bottleneck].toLowerCase()} bottleneck, here's your blueprint.`;
+
+      // Answer chips
+      const chips = $('answerChips');
+      chips.innerHTML = '';
+      [
+        ['◆', 'Industry', industryLabel],
+        ['◆', 'Lead Source', LABELS.source[a.source]],
+        ['◆', 'Response Time', LABELS.response[a.response]],
+        ['◆', 'Bottleneck', LABELS.bottleneck[a.bottleneck]]
+      ].forEach(([ico, k, v]) => {
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.innerHTML = `${ico} ${k}: <b>${v}</b>`;
+        chips.appendChild(chip);
+      });
+
+      // Risk meter
+      const risk = RISK[a.response];
+      const riskNum = $('riskNum');
+      riskNum.textContent = risk.pct + '%';
+      riskNum.className = 'risk-num ' + risk.cls;
+      $('riskTitle').textContent = risk.label;
+      const fill = $('riskFill');
+      fill.className = 'risk-fill ' + risk.cls;
+      requestAnimationFrame(() => { fill.style.width = risk.pct + '%'; });
+
+      // Recommendations
+      const list = $('recList');
+      list.innerHTML = '';
+      buildRecs(a).forEach((r, i) => {
+        const card = document.createElement('div');
+        card.className = 'rec sev-' + r.sev.toLowerCase();
+        card.style.setProperty('--d', i);
+        card.innerHTML = `
+          <div class="rec-icon" aria-hidden="true">${r.icon}</div>
+          <div class="rec-body">
+            <div class="rec-top">
+              <span class="rec-title">${r.title}</span>
+              <span class="rec-tag">${r.sev}</span>
+            </div>
+            <p class="rec-text">${r.text(a)}</p>
+          </div>`;
+        list.appendChild(card);
+      });
+
+      const ln = $('leadNote');
+      if (ln) ln.hidden = window.__auditLeadSaved !== false;
+      showScreen('screenResults');
+    }
+
+    /* ============================================================
+       EVENTS, buttons
+    ============================================================ */
+    $('startBtn').addEventListener('click', () => {
+      SFX.pop();
+      showScreen('screenQuiz');
+      showQuestion(0, 1);
+    });
+
+    document.querySelectorAll('.q').forEach((q, qi) => {
+      q.querySelectorAll('.option').forEach((opt, idx) => {
+        opt.addEventListener('click', () => selectOption(qi, idx));
+      });
+      q.querySelector('.q-back-btn').addEventListener('click', prevQuestion);
+    });
+
+    $('restartBtn').addEventListener('click', () => {
+      SFX.pop();
+      scanTimers.forEach(clearTimeout);
+      scanTimers = [];
+      KEYS.forEach(k => { state[k] = null; });
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      qIndex = -1;
+      showScreen('screenIntro');
+      setProgress(0, '0%');
+    });
+
+    /* ============================================================
+       KEYBOARD SUPPORT (elite feel)
+    ============================================================ */
+    document.addEventListener('keydown', e => {
+      const activeScreen = document.querySelector('.screen.active');
+
+      if (activeScreen.id === 'screenIntro') {
+        if (e.key === 'Enter') { e.preventDefault(); $('startBtn').click(); }
+        return;
+      }
+
+      if (activeScreen.id === 'screenQuiz') {
+        if (transitioning) return;
+
+        // Number keys 1..n select an option
+        if (/^[1-5]$/.test(e.key)) {
+          const idx = parseInt(e.key, 10) - 1;
+          const options = document.querySelectorAll(`#q${qIndex} .option`);
+          if (options[idx]) { e.preventDefault(); selectOption(qIndex, idx); }
+          return;
+        }
+
+        // Arrows move focus
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          const n = document.querySelectorAll(`#q${qIndex} .option`).length;
+          focusedIdx = Math.min(n - 1, focusedIdx + 1);
+          focusOption(qIndex, focusedIdx);
+          return;
+        }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          focusedIdx = Math.max(0, focusedIdx - 1);
+          focusOption(qIndex, focusedIdx);
+          return;
+        }
+
+        // Enter selects the focused option
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          selectOption(qIndex, focusedIdx);
+          return;
+        }
+
+        // Backspace goes back
+        if (e.key === 'Backspace') {
+          e.preventDefault();
+          prevQuestion();
+          return;
+        }
+      }
+    });
+
+    /* ============================================================
+       SOUND TOGGLE
+    ============================================================ */
+    try { SFX.on = localStorage.getItem('ebs_audit_sfx') !== 'off'; } catch (e) { /* sandboxed */ }
+    function syncSfx() {
+      $('sfxBtn').classList.toggle('off', !SFX.on);
+      $('sfxBtn').innerHTML = '<span id="sfxText">' + (SFX.on ? 'Sound On' : 'Sound Off') + '</span>';
+    }
+    $('sfxBtn').addEventListener('click', () => {
+      SFX.on = !SFX.on;
+      try { localStorage.setItem('ebs_audit_sfx', SFX.on ? 'on' : 'off'); } catch (e) { /* sandboxed */ }
+      syncSfx();
+    });
+    syncSfx();
+
+    /* ============================================================
+       INIT
+    ============================================================ */
+    setProgress(0, '0%');
+  </script>
+    <!-- ============================================================
+       PHASE 2 WIDGETS, Elite AI Chatbot, notif bar, back-to-top
+  ============================================================ -->
+  <div class="ebs-notif-bar" id="ebsNotifBar" role="region" aria-label="Announcements">
+    <span class="ebs-notif-msg" id="ebsNotifMsg"></span>
+    <button class="ebs-notif-x" id="ebsNotifX" aria-label="Dismiss announcement">✕</button>
+  </div>
+
+  <button class="ebs-chat-fab" id="ebsChatFab" aria-label="Open Elite AI Assistant chat" aria-expanded="false" aria-controls="ebsChatWindow">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3C6.9 3 3 6.6 3 11c0 2.4 1.1 4.6 3 6.1V21l3.4-1.8c.8.2 1.7.3 2.6.3 5.1 0 9-3.6 9-8s-3.9-8-9-8z" fill="currentColor"/>
+      <path d="M8.5 12h.01M12 12h.01M15.5 12h.01" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <span class="ebs-chat-badge" id="ebsChatBadge" aria-hidden="true">1</span>
+  </button>
+
+  <section class="ebs-chat-window" id="ebsChatWindow" role="dialog" aria-label="Elite AI Assistant" aria-hidden="true">
+    <div class="ebs-chat-head">
+      <div class="ebs-chat-title-row">
+        <span class="ebs-chat-title">Elite AI Assistant</span>
+        <span class="ebs-online"><i aria-hidden="true"></i> Online</span>
+      </div>
+      <div class="ebs-chat-sub">Powered by Elite Bot Studios</div>
+      <div class="ebs-chat-actions">
+        <button class="ebs-icon-btn" id="ebsSoundToggle" aria-label="Toggle chat sounds" aria-pressed="true" title="Sound on/off"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+        <button class="ebs-icon-btn" id="ebsChatClose" aria-label="Close chat">✕</button>
+      </div>
+    </div>
+    <div class="ebs-chat-body" id="ebsChatBody" aria-live="polite"></div>
+    <div class="ebs-quick-row" id="ebsQuickRow">
+      <button class="ebs-chip" data-q="How pricing works">How Pricing Works</button>
+      <button class="ebs-chip" data-q="Watch demo">Watch Demo</button>
+      <button class="ebs-chip" data-q="Book a call">Book a 15-Min Call</button>
+    </div>
+    <div class="ebs-chat-foot">
+      <input type="text" class="ebs-chat-input" id="ebsChatInput"
+             placeholder="Type your message…" aria-label="Chat message" maxlength="400"
+             autocomplete="off" />
+      <button class="ebs-chat-send" id="ebsChatSend" aria-label="Send message">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2.5 12.5 21 3l-9 18-2.2-6.3L2.5 12.5z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <button class="ebs-backtop" id="ebsBackTop" aria-label="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script>
+    /* ============================================================
+       PHASE 2, EBS ENGAGEMENT ENGINE
+       Chatbot · live feed · notif bar · shortcuts · theme ·
+       PWA  (vanilla JS, no libraries)
+    ============================================================ */
+    (function () {
+      'use strict';
+      var CFG = window.EBS_CFG || {};
+      var $ = function (id) { return document.getElementById(id); };
+      var store = {
+        get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+        set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+        del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+      };
+      var EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var CALENDLY = 'https://calendly.com/elitebotstudios/15min';
+
+      /* ============================================================
+         LEAD WEBHOOK, shared by every lead form on the site
+         CONFIG [ADD_REAL_INFO]: set window.EBS_LEAD_ENDPOINT (page
+         EBS_CONFIG) to your deployed Google Apps Script URL.
+         Until configured, submissions return {ok:false} and the UI
+         shows an honest fallback. We never fake success.
+      ============================================================ */
+      function submitEBSLead(payload) {
+        var ENDPOINT = window.EBS_LEAD_ENDPOINT || '';
+        var body = {
+          name: (payload && payload.name) || '',
+          email: (payload && payload.email) || '',
+          phone: (payload && payload.phone) || '',
+          businessType: (payload && payload.businessType) || '',
+          website: (payload && payload.website) || '',
+          message: (payload && payload.message) || '',
+          sourcePage: (payload && payload.sourcePage) || window.location.pathname,
+          planInterest: (payload && payload.planInterest) || '',
+          leadType: (payload && payload.leadType) || 'General',
+          context: (payload && payload.context) || '',
+          auditAnswers: (payload && payload.auditAnswers) || null,
+          auditResult: (payload && payload.auditResult) || null,
+          timestamp: new Date().toISOString()
+        };
+        if (!ENDPOINT) return Promise.resolve({ ok: false, reason: 'no_endpoint' });
+        return fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(body)
+        }).then(function (res) {
+          if (!res.ok && !res.redirected) throw new Error('HTTP ' + res.status);
+          return { ok: true };
+        }).catch(function () {
+          return { ok: false, reason: 'network' };
+        });
+      }
+
+      window.submitEBSLead = submitEBSLead;
+
+
+
+
+      /* ---------- WebAudio "pop" (subtle, respects sound toggle) ---------- */
+      var audioCtx = null, soundOn = store.get('ebs_chat_sound', true) !== false;
+      function beep() {
+        if (!soundOn) return;
+        try {
+          audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+          var t = audioCtx.currentTime;
+          var o = audioCtx.createOscillator(), g = audioCtx.createGain();
+          o.type = 'sine'; o.frequency.setValueAtTime(660, t);
+          o.frequency.exponentialRampToValueAtTime(920, t + 0.07);
+          g.gain.setValueAtTime(0.05, t);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+          o.connect(g); g.connect(audioCtx.destination);
+          o.start(t); o.stop(t + 0.13);
+        } catch (e) {}
+      }
+
+
+      /* ============================================================
+         FEATURE 1, ELITE AI CHATBOT
+      ============================================================ */
+      var KNOWLEDGE = {
+        greetings: {
+          keys: ['hi', 'hello', 'hey', 'salam', 'assalam', 'greetings'],
+          reply: 'Hello, I\'m the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?'
+        },
+        pricing: {
+          keys: ['price', 'pricing', 'cost', 'how much', 'plans', 'subscription', 'fee'],
+          reply: 'We build custom systems, so we quote after a short 15-minute conversation instead of selling fixed packages. Book a free call and we will walk through your exact stack: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book a 15-Min Call →</a>'
+        },
+        services: {
+          keys: ['what do you do', 'services', 'offer', 'solutions', 'automation'],
+          reply: 'We build custom AI systems for instant lead response, missed-call text-back, appointment booking, and 24/7 customer support. Which one interests you most?'
+        },
+        demo: {
+          keys: ['demo', 'example', 'show me', 'try', 'test', 'simulate'],
+          reply: 'Absolutely. Try our live interactive demo where you can chat with an AI as if you were a customer: <a href="/demo.html">Launch the Interactive Demo →</a>'
+        },
+        roi: {
+          keys: ['roi', 'worth it', 'return', 'revenue', 'money', 'save', 'profit'],
+          reply: 'Good question. Try our ROI Calculator to see exactly how much revenue you\'re losing right now: <a href="/calculator.html">Open the ROI Calculator →</a>'
+        },
+        time: {
+          keys: ['how long', 'setup time', 'how fast', 'timeline', 'quick', 'launch'],
+          reply: 'Most systems are live within <strong>one to two weeks</strong> after our kickoff call. We handle everything; you just approve the flows.'
+        },
+        contact: {
+          keys: ['contact', 'call', 'book', 'talk', 'meeting', 'consult', 'speak', 'appointment', 'schedule', 'email', 'mail', 'reach'],
+          reply: 'You can reach us directly at <a href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>, or book a free 15-minute call: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book on Calendly →</a>'
+        },
+        industries: {
+          keys: ['industry', 'business type', 'work with', 'sector', 'niche', 'dentist', 'hvac', 'real estate', 'clinic', 'restaurant'],
+          reply: 'We build custom systems for businesses across industries, including HVAC, dental, real estate, legal, construction, e-commerce, restaurants, gyms, and professional services. What\'s your business?'
+        },
+        thanks: {
+          keys: ['thanks', 'thank you', 'shukriya', 'great', 'awesome', 'cool', 'nice'],
+          reply: 'You\'re welcome. Anything else I can help you with?'
+        },
+        fallback: {
+          keys: [],
+          reply: "Great question. I can pass it to the team so someone follows up within one business day. What's your email?"
+        }
+      };
+      function matchKB(text) {
+        var t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s$]/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+        var best = null, bestScore = 0;
+        for (var cat in KNOWLEDGE) {
+          if (!KNOWLEDGE[cat].keys) continue;
+          var score = 0;
+          KNOWLEDGE[cat].keys.forEach(function (k) {
+            if (k.indexOf(' ') > -1) { if (t.indexOf(' ' + k + ' ') > -1) score += 3; }
+            else { var rx = new RegExp('\\b' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b'); if (rx.test(t)) score += 2; }
+          });
+          if (score > bestScore) { bestScore = score; best = cat; }
+        }
+        return bestScore > 0 ? best : 'fallback';
+      }
+      var chat = {
+        history: store.get('ebs_chat_history', []),
+        open: false, msgCount: 0, emailCaptured: !!store.get('ebs_chat_email', '')
+      };
+      function addBubble(role, html) {
+        var body = $('ebsChatBody'); if (!body) return;
+        var el = document.createElement('div');
+        el.className = 'ebs-msg ' + (role === 'ai' ? 'ebs-ai' : 'ebs-user');
+        if (role === 'user') { el.textContent = html; }
+        else { el.innerHTML = html.replace(/\n/g, '<br>'); }
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+        return el;
+      }
+      function showTyping() {
+        var body = $('ebsChatBody');
+        var el = document.createElement('div');
+        el.className = 'ebs-msg ebs-ai ebs-typing' ;
+        el.setAttribute('aria-label', 'Elite AI is typing…');
+        el.innerHTML = '<span></span><span></span><span></span>';
+        body.appendChild(el);
+        body.scrollTop = body.scrollHeight;
+        return el;
+      }
+      function aiReply(text) {
+        var cat = matchKB(text);
+        var typing = showTyping();
+        setTimeout(function () {
+          if (typing && typing.parentNode) typing.parentNode.removeChild(typing);
+          var html = KNOWLEDGE[cat].reply;
+          if (cat === 'fallback' && !chat.emailCaptured) {
+            html = KNOWLEDGE.fallback.reply;
+          }
+          addBubble('ai', html);
+          chat.history.push({ role: 'ai', text: html });
+          store.set('ebs_chat_history', chat.history);
+          if (!chat.open) setBadge(chat.msgCount);
+          beep();
+          maybeAskEmail();
+        }, 1500);
+      }
+      function setBadge(n) {
+        var fab = $('ebsChatFab'), badge = $('ebsChatBadge');
+        if (!fab || !badge) return;
+        if (n > 0) { fab.classList.add('ebs-unread'); badge.textContent = n > 9 ? '9+' : String(n); }
+        else fab.classList.remove('ebs-unread');
+      }
+      function maybeAskEmail() {
+        if (chat.emailCaptured) return;
+        if (chat.msgCount >= 3 && !chat.askedEmail) {
+          chat.askedEmail = true;
+          setTimeout(function () {
+            addBubble('ai', "By the way, so the team can send you a short personalized summary: what's your email?");
+            chat.history.push({ role: 'ai', text: "By the way, so the team can send you a short personalized summary: what's your email?" });
+            store.set('ebs_chat_history', chat.history);
+          }, 1200);
+        }
+      }
+      function userSend(raw) {
+        var text = String(raw || '').trim();
+        if (!text) return;
+        var body = $('ebsChatBody');
+        if (body) { $('ebsQuickRow').classList.add('ebs-hidden'); }
+        addBubble('user', text);
+        chat.history.push({ role: 'user', text: text });
+        store.set('ebs_chat_history', chat.history);
+        chat.msgCount++;
+        if (!chat.emailCaptured && EMAIL_RX.test(text)) {
+          chat.emailCaptured = true;
+          store.set('ebs_chat_email', text);
+          var ctx = chat.history.slice(-6).map(function (m) { return m.role + ': ' + m.text; }).join(' | ');
+          submitEBSLead({ email: text, planInterest: 'Chat', leadType: 'Chat', context: ctx }).then(function (res) {
+            var okMsg = "Thanks. We'll get back to you within one business day. Meanwhile, would you like to see the <a href=\"/demo.html\">live demo</a>?";
+            var failMsg = "I couldn't save your details right now. Please try again later, or book a call: <a href=\"" + CALENDLY + "\" target=\"_blank\" rel=\"noopener noreferrer\">Book a 15-Min Call →</a>";
+            addBubble('ai', res && res.ok ? okMsg : failMsg);
+            chat.history.push({ role: 'ai', text: res && res.ok ? okMsg : failMsg });
+            store.set('ebs_chat_history', chat.history);
+          });
+          return;
+        }
+        aiReply(text);
+      }
+      function openChat() {
+        chat.open = true;
+        var win = $('ebsChatWindow'), fab = $('ebsChatFab');
+        if (!win) return;
+        win.classList.add('ebs-open'); win.setAttribute('aria-hidden', 'false');
+        fab.classList.add('ebs-open'); fab.setAttribute('aria-expanded', 'true');
+        setBadge(0);
+        if (chat.history.length === 0) {
+          addBubble('ai', "Hello, I'm the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?");
+          chat.history.push({ role: 'ai', text: "Hello, I'm the Elite AI Assistant. I can help you understand how AI automation can transform your business. What would you like to know?" });
+          store.set('ebs_chat_history', chat.history);
+        } else {
+          chat.history.forEach(function (m) { addBubble(m.role === 'ai' ? 'ai' : 'user', m.text); });
+        }
+        setTimeout(function () { var i = $('ebsChatInput'); if (i) i.focus(); }, 350);
+      }
+      function closeChat() {
+        chat.open = false;
+        var win = $('ebsChatWindow'), fab = $('ebsChatFab');
+        if (!win) return;
+        win.classList.remove('ebs-open'); win.setAttribute('aria-hidden', 'true');
+        fab.classList.remove('ebs-open'); fab.setAttribute('aria-expanded', 'false');
+        $('ebsChatBody').innerHTML = '';
+      }
+      function initChat() {
+        var fab = $('ebsChatFab');
+        if (!fab) return;
+        fab.addEventListener('click', function () { chat.open ? closeChat() : openChat(); });
+        $('ebsChatClose').addEventListener('click', closeChat);
+        $('ebsChatSend').addEventListener('click', function () { var i = $('ebsChatInput'); userSend(i.value); i.value = ''; });
+        $('ebsChatInput').addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); userSend(e.target.value); e.target.value = ''; }
+        });
+        $('ebsQuickRow').querySelectorAll('.ebs-chip').forEach(function (chip) {
+          chip.addEventListener('click', function () { userSend(chip.getAttribute('data-q')); });
+        });
+        var snd = $('ebsSoundToggle');
+        function syncSnd() {
+          snd.classList.toggle('ebs-muted', !soundOn);
+          snd.innerHTML = soundOn
+            ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
+            : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m16 9 5 5"/><path d="m21 9-5 5"/></svg>';
+          snd.setAttribute('aria-pressed', String(soundOn));
+        }
+        snd.addEventListener('click', function () { soundOn = !soundOn; store.set('ebs_chat_sound', soundOn); syncSnd(); });
+        syncSnd();
+      }
+
+      /* ============================================================
+         FEATURE 3, SMART NOTIFICATION BAR
+      ============================================================ */
+      function initNotifBar() {
+        var bar = $('ebsNotifBar'), msg = $('ebsNotifMsg');
+        if (!bar) return;
+        /* Place the bar as the FIRST element of <body> so it sits above the
+           navbar in normal document flow (no fixed offsets, no overlaps). */
+        try {
+          if (bar.parentElement && bar.parentElement !== document.body) {
+            document.body.insertBefore(bar, document.body.firstChild);
+          }
+        } catch (err) { /* non-fatal */ }
+        var dismissed = store.get('ebs_notif_dismissed', 0);
+        if (dismissed > Date.now()) { bar.classList.add('ebs-hidden'); return; }
+        var MSGS = [
+          { html: 'Book a 15-Min Call', href: CALENDLY, external: true }
+        ];
+        var i = 0, timer;
+        document.body.classList.add('ebs-bar-active');
+        function render(next) {
+          msg.classList.add('ebs-swap');
+          setTimeout(function () {
+            var m = MSGS[i];
+            msg.innerHTML = m.href && m.html.indexOf('<a') === -1
+              ? m.html + ' <a href="' + m.href + '"' + (m.external ? ' target="_blank" rel="noopener noreferrer"' : '') + '>→</a>'
+              : m.html;
+            msg.classList.remove('ebs-swap');
+            i = (i + 1) % MSGS.length;
+          }, 450);
+        }
+        render();
+        timer = setInterval(render, 8000);
+        $('ebsNotifX').addEventListener('click', function () {
+          clearInterval(timer);
+          store.set('ebs_notif_dismissed', Date.now() + 7 * 864e5);
+          bar.classList.add('ebs-out');
+          document.body.classList.remove('ebs-bar-active');
+          setTimeout(function () { bar.classList.add('ebs-hidden'); }, 500);
+        });
+      }
+
+      /* ============================================================
+         BONUS 1 + 2, SCROLL PROGRESS & BACK-TO-TOP
+      ============================================================ */
+      function initScrollTools() {
+        var bt = $('ebsBackTop');
+        if (!bt) return;
+        var onScroll = function () {
+          bt.classList.toggle('ebs-show', window.scrollY > 500);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        bt.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: REDUCE ? 'auto' : 'smooth' }); });
+      }
+
+      /* ============================================================
+         BONUS 3, DARK / LIGHT THEME TOGGLE
+      ============================================================ */
+      function initTheme() {
+        var btns = document.querySelectorAll('.ebs-theme-btn');
+        if (!btns.length) return;
+        var saved = store.get('ebs_theme', 'dark');
+        document.documentElement.setAttribute('data-theme', saved);
+        function sync() {
+          var light = document.documentElement.getAttribute('data-theme') === 'light';
+          btns.forEach(function (b) {
+            b.innerHTML = light
+              ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>'
+              : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+            b.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+          });
+        }
+        btns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            store.set('ebs_theme', next);
+            sync();
+          });
+        });
+        sync();
+      }
+
+      /* ============================================================
+         BONUS 5, PWA SERVICE WORKER
+      ============================================================ */
+      function initPWA() {
+        if (!('serviceWorker' in navigator)) return;
+        var proto = location.protocol;
+        if (proto !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () { /* offline cache only, safe to ignore */ });
+        });
+      }
+
+      /* ============================================================ */
+      initChat();
+      initNotifBar();
+      initScrollTools();
+      initTheme();
+      /* ============================================================
+         MOBILE MENU (all pages), #menuToggle + #mobileMenu
+         Bulletproof: first click opens, ESC/resize/link/backdrop close,
+         body scroll locked while open, aria synced, single binding.
+      ============================================================ */
+      function initMobileMenu() {
+        var tgl = document.getElementById('menuToggle');
+        var menu = document.getElementById('mobileMenu');
+        if (!tgl || !menu) return;
+        if (menu.getAttribute('data-ebs-bound') === '1') return;
+        menu.setAttribute('data-ebs-bound', '1');
+        function setOpen(open) {
+          tgl.classList.toggle('is-open', open);
+          menu.classList.toggle('is-open', open);
+          tgl.setAttribute('aria-expanded', String(open));
+          tgl.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          document.body.style.overflow = open ? 'hidden' : '';
+          document.body.classList.toggle('ebs-menu-open', open);
+        }
+        tgl.addEventListener('click', function () {
+          setOpen(!menu.classList.contains('is-open'));
+        });
+        menu.addEventListener('click', function (ev) {
+          var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+          if (a || ev.target === menu) setOpen(false);
+        });
+        document.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Escape' && menu.classList.contains('is-open')) setOpen(false);
+        });
+        window.addEventListener('resize', function () {
+          if (window.innerWidth > 1024 && menu.classList.contains('is-open')) setOpen(false);
+        });
+      }
+      initMobileMenu();
+
+      initPWA();
+    })();
+  </script>
+
+  <script>
+    /* ============================================================
+       PHASE 3, EBS GA4 ENTERPRISE EVENT TRACKING
+       Base config + advanced custom events (vanilla JS, no libs)
+
+       ▸ SWAP THE MEASUREMENT ID: change EBS_GA4_ID below (or
+         set window.EBS_GA4_ID (or EBS_CONFIG.ga4Id) to your real GA4 Measurement ID).
+       ▸ Event taxonomy documented in the deployment guide (§ GA4).
+       ▸ TODO (launch): enable Google Consent Mode v2 in the base
+         snippet once the cookie banner has accept/reject variants.
+    ============================================================ */
+    window.EBS_GA4_ID = window.EBS_GA4_ID || '';
+    window.EBS_LEAD_ENDPOINT = window.EBS_LEAD_ENDPOINT || ''; // CONFIG [ADD_REAL_INFO]: paste your deployed Google Apps Script /exec URL here (single quotes) // CONFIG [ADD_REAL_GA4_ID]: set a real GA4 Measurement ID to enable forwarding
+
+    /* ---- tracking utility (exact spec) ---- */
+    const trackEvent = (eventName, eventParams = {}) => {
+      console.log(`📊 [Analytics Log] ${eventName}`, eventParams);
+      if (window.EBS_GA4_ID && typeof gtag === 'function') {
+        gtag('event', eventName, eventParams);
+      }
+    };
+
+    (function () {
+      'use strict';
+      const GA4 = window.EBS_GA4_ID;
+      const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const store = {
+        get: (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+        set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+      };
+      const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      const PAGE = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '') || 'index';
+      const seen = { scroll: {}, io: {}, section: {} };
+      const fired = {};
+
+      /* ---- set user properties once (only when GA4 is configured) ---- */
+      try {
+        if (!GA4 || typeof gtag !== 'function') throw new Error('GA4 not configured');
+        gtag('set', 'user_properties', {
+          device_class: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+          language: navigator.language || 'en',
+          page_name: PAGE
+        });
+      } catch (e) {}
+
+      /* ---- session + visit classification ---- */
+      const visited = store.get('ebs_ga_visited', false);
+      trackEvent(visited ? 'returning_visit' : 'first_visit');
+      store.set('ebs_ga_visited', true);
+
+      const once = (key, fn) => { if (fired[key]) return; fired[key] = true; fn(); };
+
+      const isExternal = (a) => {
+        try {
+          const u = new URL(a.href, location.href);
+          return u.origin !== location.origin;
+        } catch (e) { return false; }
+      };
+
+      /* ============================================================
+         1) UNIVERSAL, engagement & scroll
+      ============================================================ */
+      [5, 10, 30, 60].forEach(s => {
+        setTimeout(() => trackEvent('time_on_page', { seconds: s, page: PAGE }), s * 1000);
+      });
+
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (scrollTicking || REDUCE) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - window.innerHeight;
+          const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 100;
+          [25, 50, 75, 90, 100].forEach(mark => {
+            if (pct >= mark && !seen.scroll[mark]) {
+              seen.scroll[mark] = true;
+              trackEvent('scroll_depth', { percent: mark, page: PAGE });
+            }
+          });
+          scrollTicking = false;
+        });
+      }, { passive: true });
+
+      /* ============================================================
+         2) UNIVERSAL, clicks (delegated)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+
+        const a = t.closest('a');
+        if (a) {
+          const href = a.getAttribute('href') || '';
+          if (isExternal(a)) {
+            trackEvent('link_click', { link_url: href, link_domain: (() => { try { return new URL(href, location.href).hostname; } catch (e) { return ''; } })(), page: PAGE });
+          }
+          if (/\.(pdf|zip|docx?|xlsx?|pptx?|mp4|mp3|csv)(\?|$)/i.test(href)) {
+            trackEvent('file_download', { file_name: href.split('/').pop(), link_url: href });
+          }
+          if (a.closest('.ebs-notif-bar')) {
+            trackEvent('notif_cta_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.nav-links')) {
+            trackEvent('nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('#mobileMenu')) {
+            trackEvent('mobile_nav_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.footer-legal')) {
+            trackEvent('legal_link_click', { link_url: href, page: PAGE });
+          }
+          if (a.closest('.toc')) {
+            trackEvent('article_toc_click', { link_url: href });
+          }
+          // ---- page-specific CTAs ----
+          if (PAGE === 'demo' && a.textContent.includes('Setup Call')) {
+            trackEvent('demo_cta_click', { destination: href });
+          }
+          if (PAGE === 'calculator' && a.closest('.cta-btns')) {
+            trackEvent('calculator_cta_click', { destination: href, amount_text: (document.getElementById('ctaAmount') || {}).textContent || '' });
+          }
+          if (PAGE === 'pricing' && /calendly/i.test(href)) {
+            trackEvent('pricing_cta_click', { destination: href });
+          }
+          if (PAGE === 'audit' && /calendly/i.test(href)) {
+            trackEvent('audit_cta_click', { destination: href });
+          }
+          if (PAGE === 'blog' && a.closest('.blog-card')) {
+            trackEvent('blog_article_open', { article_url: href });
+          }
+          if (PAGE === 'case-studies' && a.closest('.cs-card')) {
+            trackEvent('case_study_click', { link_url: href });
+          }
+          if (PAGE.startsWith('article') && a.closest('.article-cta')) {
+            trackEvent('article_cta_click', { page: PAGE });
+          }
+        }
+
+        const btn = t.closest('button');
+        if (btn) {
+          if (btn.id === 'ebsBackTop' || btn.classList.contains('ebs-backtop')) {
+            trackEvent('back_to_top_click', { scroll_y: Math.round(window.scrollY) });
+          }
+          if (btn.classList.contains('ebs-theme-btn')) {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            trackEvent('theme_changed', { mode: next });
+          }
+          if (btn.classList.contains('filter-chip')) {
+            trackEvent(PAGE === 'blog' ? 'blog_filter' : 'case_studies_filter', { category: btn.getAttribute('data-filter') });
+          }
+          if (btn.classList.contains('cs-read')) {
+            trackEvent('case_modal_open', { case_index: btn.getAttribute('data-cs') });
+          }
+          if (btn.classList.contains('modal-x') || (btn.hasAttribute && btn.hasAttribute('data-close'))) {
+            trackEvent('case_modal_close', {});
+          }
+          if (PAGE === 'demo' && btn.classList.contains('tab')) {
+            trackEvent('demo_tab_switch', { industry: btn.getAttribute('data-industry') });
+          }
+          if (PAGE === 'demo' && btn.id === 'sendBtn') {
+            trackEvent('demo_message_sent', {});
+          }
+          if (PAGE === 'pricing' && btn.classList.contains('faq-head')) {
+            trackEvent('pricing_faq_open', { question: (btn.textContent || '').trim().slice(0, 60) });
+          }
+          if (PAGE === 'audit' && btn.id === 'startBtn') {
+            trackEvent('audit_started', {});
+          }
+          if (PAGE === 'audit' && btn.closest('.option')) {
+            const opts = btn.closest('.q-screen') ? btn.closest('.q-screen').querySelectorAll('.option') : [];
+            let idx = -1;
+            opts.forEach((o, i) => { if (o === btn.closest('.option')) idx = i; });
+            trackEvent('audit_answer', { option_index: idx, option_text: (btn.textContent || '').trim().slice(0, 60) });
+          }
+        }
+      });
+
+      /* ============================================================
+         3) UNIVERSAL, forms (delegated focus/submit)
+      ============================================================ */
+      document.addEventListener('focusin', (e) => {
+        const input = e.target;
+        if (!input || !input.matches || !input.matches('input, textarea, select')) return;
+        const form = input.closest('form');
+        if (!form) return;
+        const key = 'form_' + (form.id || 'anon');
+        once(key, () => trackEvent('form_start', { form_id: form.id || 'anonymous', page: PAGE }));
+      });
+
+      document.addEventListener('submit', (e) => {
+        const form = e.target;
+        if (!form || !form.id) return;
+        const id = form.id;
+        if (id === 'contactForm') {
+          const email = ((document.getElementById('cfEmail') || {}).value || '').trim();
+          const name = ((document.getElementById('cfName') || {}).value || '').trim();
+          trackEvent('contact_form_submit', { valid_email: EMAIL_RX.test(email), has_name: name.length > 1 });
+        } else {
+          trackEvent('form_submit', { form_id: id, page: PAGE });
+        }
+      });
+
+      /* ============================================================
+         4) UNIVERSAL, PWA install
+      ============================================================ */
+      window.addEventListener('appinstalled', () => trackEvent('pwa_installed', {}));
+
+      /* ============================================================
+         5) CHATBOT EVENTS (widget present on every page)
+      ============================================================ */
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        if (t.closest('#ebsChatFab')) {
+          const open = !!document.getElementById('ebsChatWindow') && document.getElementById('ebsChatWindow').classList.contains('ebs-open');
+          trackEvent(open ? 'chat_closed' : 'chat_opened', { page: PAGE });
+        }
+        if (t.closest('#ebsChatClose')) {
+          trackEvent('chat_closed', { page: PAGE });
+        }
+        if (t.closest('#ebsChatSend')) {
+          const input = document.getElementById('ebsChatInput');
+          const text = (input && input.value || '').trim();
+          trackEvent('chat_message_sent', { length: text.length, page: PAGE });
+        }
+        if (t.closest('.ebs-chip')) {
+          trackEvent('chat_quick_reply', { label: (t.closest('.ebs-chip').textContent || '').trim() });
+        }
+        if (t.closest('#ebsSoundToggle')) {
+          trackEvent('chat_sound_toggled', {});
+        }
+      });
+
+      /* email captured, poll localStorage for the engine's write */
+      let lastEmail = store.get('ebs_chat_email', null);
+      setInterval(() => {
+        const now = store.get('ebs_chat_email', null);
+        if (now && now !== lastEmail) {
+          lastEmail = now;
+          trackEvent('chat_email_captured', { page: PAGE });
+          // TODO: Send to backend/CRM webhook (shared with engagement engine)
+        }
+      }, 1500);
+
+      /* ============================================================
+         6) EXIT-INTENT / NOTIF BAR / TOASTS (observe class changes)
+      ============================================================ */
+      const observeClass = (id, cls, onAdd, onRemove) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const mo = new MutationObserver(() => {
+          const has = el.classList.contains(cls);
+          if (has && !el.__ebsHad) { el.__ebsHad = true; onAdd(); }
+          else if (!has && el.__ebsHad) { el.__ebsHad = false; onRemove && onRemove(); }
+        });
+        mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+      };
+
+      observeClass('ebsNotifBar', 'ebs-out',
+        () => trackEvent('notif_bar_dismissed', {}));
+
+      /* ============================================================
+         8) COOKIE CONSENT
+      ============================================================ */
+      const cookieBtn = document.getElementById('cookieAccept');
+      if (cookieBtn) {
+        cookieBtn.addEventListener('click', () => trackEvent('cookie_consent', { choice: 'accepted' }));
+      }
+
+      /* ============================================================
+         9) SECTION VIEWS (IntersectionObserver, once each)
+      ============================================================ */
+      const SECTION_SELECTORS = {
+        index: [['#home', 'hero_view'], ['#results', 'results_view'], ['#comparison', 'comparison_view'],
+                ['#faq', 'faq_view'], ['#booking', 'call_cta_view'], ['#services', 'services_view'],
+                ['#industries', 'industries_view']],
+        demo: [['.demo-grid', 'demo_dashboard_view'], ['#missed-call', 'demo_missedcall_view']],
+        calculator: [['#results', 'calculator_results_view'], ['.cta-section', 'calculator_cta_view']],
+        pricing: [['#what-we-build', 'pricing_what_we_build_view'], ['#how-it-works', 'pricing_process_view'], ['#investment', 'pricing_investment_view']],
+        audit: [['#results', 'audit_results_view']],
+        'case-studies': [['.page-hero', 'case_studies_view']],
+        blog: [['.page-hero', 'blog_view']]
+      };
+      const map = SECTION_SELECTORS[PAGE] || (PAGE.startsWith('article') ? [['.article-cta', 'article_read_complete']] : []);
+      const seenIO = {};
+      if ('IntersectionObserver' in window && map.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (!en.isIntersecting) return;
+            const key = en.target.id || en.target.className;
+            if (seenIO[key]) return;
+            seenIO[key] = true;
+            map.filter(([sel]) => {
+              const el = document.querySelector(sel);
+              return el === en.target;
+            }).forEach(([sel, evt]) => trackEvent(evt, { page: PAGE }));
+          });
+        }, { threshold: 0.35 });
+        map.forEach(([sel]) => {
+          const el = document.querySelector(sel);
+          if (el) io.observe(el);
+        });
+      }
+
+      /* ============================================================
+         10) PAGE-SPECIFIC, calculators & configurators
+      ============================================================ */
+      if (PAGE === 'calculator') {
+        const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+        const fire = debounce((el) => {
+          trackEvent('calculator_input', {
+            control: el.id || el.name || 'control',
+            value: el.value || el.textContent || ''
+          });
+        }, 800);
+        document.addEventListener('input', (e) => {
+          const t = e.target;
+          if (t && t.closest && (t.closest('.slider') || t.closest('.control') || t.closest('input') || t.closest('.calc'))) {
+            if (t.id) fire(t);
+          }
+        });
+      }
+      if (PAGE === 'pricing') {
+
+      }
+
+      console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
+    })();
+  </script>
+
+</body>
+</html>
