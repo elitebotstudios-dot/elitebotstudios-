@@ -1159,6 +1159,97 @@
     }
     @media (max-width: 520px) { #sfxBtn { display: none; } }
 
+  
+
+    /* ============================================================
+       AUDIT MOBILE REGRESSION FIX (2026-08-22)
+       Single page scrollbar + non-squeezed topbar controls
+    ============================================================ */
+    html { min-height: 100%; height: auto; }
+    body {
+      min-height: 100%;
+      height: auto;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+    }
+    .stage {
+      position: relative;
+      top: auto; left: auto; right: auto; bottom: auto;
+      min-height: calc(100dvh - var(--topbar-h));
+      margin-top: var(--topbar-h);
+      overflow: visible;
+    }
+    .screen {
+      position: relative;
+      inset: auto;
+      display: none;
+      min-height: calc(100dvh - var(--topbar-h));
+      overflow: visible;
+    }
+    .screen.active { display: block; }
+    body.ebs-bar-active .stage {
+      top: auto;
+      margin-top: calc(var(--topbar-h, 64px) + 40px);
+    }
+    @media (max-width: 767px) {
+      .topbar {
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem !important;
+        overflow: visible !important;
+      }
+      .topbar .logo { flex: 0 1 auto; max-width: 96px; }
+      .topbar .logo .botstudios { display: none; }
+      .progress-wrap {
+        flex: 1 1 104px;
+        max-width: 126px !important;
+        min-width: 84px !important;
+        margin: 0 !important;
+        gap: 0.4rem !important;
+      }
+      .progress-track { min-width: 34px; }
+      .progress-label {
+        flex: 0 0 auto !important;
+        min-width: 2.35rem !important;
+        white-space: nowrap;
+        overflow: visible;
+        text-align: right;
+        font-size: 0.74rem !important;
+      }
+      .top-actions {
+        flex: 0 0 auto !important;
+        gap: 0.5rem !important;
+        margin-left: 0 !important;
+        min-width: max-content !important;
+      }
+      #sfxBtn { display: none !important; }
+      .top-actions .icon-btn {
+        flex: 0 0 auto;
+        max-width: none !important;
+        min-width: 0;
+        height: 38px;
+        padding: 0 0.7rem !important;
+        font-size: 0.76rem;
+        overflow: visible !important;
+      }
+      #menuToggle {
+        flex: 0 0 42px !important;
+        width: 42px !important;
+        height: 42px !important;
+        margin-left: 0 !important;
+      }
+      .screen-inner { min-height: calc(100dvh - var(--topbar-h)); }
+    }
+    @media (max-width: 390px) {
+      .topbar { padding-left: 12px !important; padding-right: 12px !important; }
+      .topbar .logo .elite { font-size: 0.9rem; }
+      .progress-wrap { max-width: 112px !important; min-width: 76px !important; }
+      .progress-label { min-width: 2rem !important; font-size: 0.7rem !important; }
+      .top-actions { gap: 0.35rem !important; }
+      .top-actions .icon-btn { height: 36px; padding: 0 0.58rem !important; font-size: 0.72rem; }
+      #menuToggle { flex-basis: 40px !important; width: 40px !important; height: 40px !important; }
+    }
+
   </style>
   <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
        When you have a real GA4 Measurement ID, paste the standard
