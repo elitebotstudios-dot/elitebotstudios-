@@ -276,6 +276,7 @@
       color: var(--text-2);
       background: var(--bg);
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
 
@@ -335,7 +336,8 @@
       pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
       background-size: 140px 140px;
-      opacity: 0.035;
+      opacity: 0.045;
+      mix-blend-mode: soft-light;
       animation: grainShift 1.2s steps(4) infinite;
     }
     @keyframes grainShift {
@@ -493,23 +495,42 @@
       max-width: 100%;
       font-family: var(--font-sans);
       font-size: 13px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
+      letter-spacing: 0.135em; text-transform: uppercase;
       border-radius: 2px;
       overflow: hidden;
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, color 0.3s ease;
       white-space: normal;
       text-align: center;
     }
-    .btn .btn-label { position: relative; z-index: 2; transition: color 0.3s ease; }
+    .btn .btn-label { position: relative; z-index: 2; transition: color 0.3s ease, letter-spacing 0.3s ease; }
 
     .btn-gold {
       background: var(--gold-gradient);
       color: #0a0a0a;
       box-shadow: 0 0 0 rgba(201, 168, 76, 0);
     }
+    .btn-gold::after {
+      content: '';
+      position: absolute;
+      top: -40%; bottom: -40%;
+      left: -80%;
+      width: 48%;
+      z-index: 1;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.34) 48%, transparent 100%);
+      transform: skewX(-18deg);
+      opacity: 0;
+      pointer-events: none;
+    }
     .btn-gold:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 14px 40px rgba(201, 168, 76, 0.28), 0 0 60px rgba(201, 168, 76, 0.12);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 40px rgba(201, 168, 76, 0.32), 0 0 70px rgba(201, 168, 76, 0.16);
+    }
+    .btn-gold:hover::after { animation: btnShine 0.85s cubic-bezier(0.16, 1, 0.3, 1); }
+    .btn-gold:hover .btn-label { letter-spacing: 0.155em; }
+    @keyframes btnShine {
+      0% { left: -80%; opacity: 0; }
+      18% { opacity: 0.55; }
+      100% { left: 132%; opacity: 0; }
     }
 
     .btn-outline {
@@ -610,7 +631,7 @@
     .hero h1 {
       font-size: clamp(2rem, 6.5vw, 5rem);
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.04em;
       line-height: 1.06;
       margin-bottom: 34px;
     }
@@ -833,11 +854,13 @@
 
     /* Generic reveal */
     html.js .reveal {
-      opacity: 0; transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       transition-delay: var(--d, 0s);
+      will-change: opacity, transform;
     }
-    html.js .reveal.in { opacity: 1; transform: none; }
+    html.js .reveal.in { opacity: 1; transform: translateY(0); }
 
     /* ============================================================
        CARDS (shared)
@@ -1203,8 +1226,13 @@
       display: flex; flex-direction: column; justify-content: flex-end;
       padding: clamp(24px, 2.6vw, 34px);
       overflow: hidden;
+      transition: all 0.4s ease;
     }
-    .ind-card:hover { transform: translateY(-4px); }
+    .ind-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 215, 0, 0.26);
+      box-shadow: 0 18px 48px rgba(201, 168, 76, 0.12), 0 0 56px rgba(201, 168, 76, 0.06);
+    }
     .ind-card h3 { font-size: 1.45rem; font-weight: 600; margin-bottom: 10px; }
     .ind-card p { font-size: 0.9rem; }
     .ind-card .ind-tag {
@@ -1229,6 +1257,12 @@
       align-items: center;
       text-align: center;
       background: radial-gradient(circle at center, rgba(255, 215, 0, 0.04) 0%, rgba(10, 10, 10, 1) 70%);
+    }
+    .ind-home:hover,
+    .ind-healthcare:hover,
+    .ind-construction:hover,
+    .ind-more:hover {
+      background: radial-gradient(circle at center, rgba(255, 215, 0, 0.075) 0%, rgba(10, 10, 10, 1) 72%);
     }
     .ind-home h3,
     .ind-healthcare h3,
@@ -2519,7 +2553,7 @@
       <!-- ============================================================
            SECTION 2: HERO
       ============================================================ -->
-      <section class="hero" id="home">
+      <section class="hero reveal" id="home">
         <div class="hero-radial" aria-hidden="true"></div>
         <div class="hero-grid-lines" aria-hidden="true"></div>
         <div class="hero-line" style="top:22%;" data-parallax="0.25" aria-hidden="true"></div>
@@ -2582,7 +2616,7 @@
             <!-- ============================================================
            SECTION 2b: FREE LEAD FLOW AUDIT CTA
       ============================================================ -->
-      <section class="section audit-band" id="audit">
+      <section class="section audit-band reveal" id="audit">
         <div class="container">
           <div class="audit-band-card reveal">
             <div class="audit-band-copy">
@@ -2600,7 +2634,7 @@
       <!-- ============================================================
            SECTION 4: THE PROBLEM
       ============================================================ -->
-      <section class="section" id="problem">
+      <section class="section reveal" id="problem">
         <div class="container">
           <span class="sec-label reveal">The Problem</span>
           <h2 class="sec-title split">Why So Many Leads Never Become Customers</h2>
@@ -2654,7 +2688,7 @@
       <!-- ============================================================
            SECTION 6: WHAT YOUR AUTOMATION CAN DO
       ============================================================ -->
-      <section class="section" id="results">
+      <section class="section reveal" id="results">
         <div class="container">
           <div class="sec-head-center">
             <span class="sec-label center reveal">Capabilities</span>
@@ -2823,7 +2857,7 @@
       <!-- ============================================================
            SECTION 8: INDUSTRIES
       ============================================================ -->
-      <section class="section" id="industries">
+      <section class="section reveal" id="industries">
         <div class="container">
           <div class="sec-head-center">
             <span class="sec-label center reveal">Industries We Serve</span>
@@ -2887,7 +2921,7 @@
       <!-- ============================================================
            SECTION 7b: COMPARISON, "The Cost of Doing Nothing"
       ============================================================ -->
-      <section class="section" id="comparison">
+      <section class="section reveal" id="comparison">
         <div class="container">
           <div class="sec-head-center">
             <span class="sec-label center reveal">Comparison</span>
@@ -2938,7 +2972,7 @@
             <!-- ============================================================
            SECTION 7: PROCESS
       ============================================================ -->
-      <section class="section" id="process">
+      <section class="section reveal" id="process">
         <div class="container">
           <div class="sec-head-center">
             <span class="sec-label center reveal">Our Process</span>
@@ -3126,7 +3160,7 @@
       <!-- ============================================================
            SECTION 10: FINAL CTA + CONTACT FORM
       ============================================================ -->
-      <section class="final-cta" id="contact">
+      <section class="final-cta reveal" id="contact">
         <div class="final-inner">
           <span class="sec-label center reveal">Get Started</span>
           <h2 class="split">
@@ -3222,7 +3256,7 @@
            SECTION 10c: BOOKING / CALENDAR (Feature 5, fake Calendly
            UI; TODO: swap for real Calendly embed or Cal.com)
       ============================================================ -->
-      <section class="section booking-section" id="booking">
+      <section class="section booking-section reveal" id="booking">
         <div class="container">
           <div class="sec-head-center">
             <span class="sec-label center reveal">Book Your Call</span>
@@ -3518,7 +3552,8 @@
           const dy = e.clientY - (r.top + r.height / 2);
           const tx = Math.max(-12, Math.min(12, dx * 0.3));
           const ty = Math.max(-12, Math.min(12, dy * 0.3));
-          btn.style.transform = `translate(${tx}px, ${ty}px)`;
+          const scale = btn.classList.contains('btn-gold') ? ' scale(1.03)' : '';
+          btn.style.transform = `translate(${tx}px, ${ty}px)${scale}`;
         });
         btn.addEventListener('mouseleave', () => {
           btn.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
@@ -3538,7 +3573,8 @@
           const py = (e.clientY - r.top) / r.height;
           const rX = (0.5 - py) * max * 2;
           const rY = (px - 0.5) * max * 2;
-          el.style.transform = `perspective(1000px) rotateX(${rX.toFixed(2)}deg) rotateY(${rY.toFixed(2)}deg) translateY(-4px)`;
+          const lift = el.classList.contains('ind-card') ? -6 : -4;
+          el.style.transform = `perspective(1000px) rotateX(${rX.toFixed(2)}deg) rotateY(${rY.toFixed(2)}deg) translateY(${lift}px)`;
           el.style.setProperty('--mx', (px * 100) + '%');
           el.style.setProperty('--my', (py * 100) + '%');
         });
