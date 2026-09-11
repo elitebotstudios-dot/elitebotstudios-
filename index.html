@@ -828,6 +828,181 @@
       white-space: nowrap;
     }
 
+
+
+    /* ============================================================
+       LIVE AGENT SIMULATOR, hackathon proof-of-concept
+    ============================================================ */
+    .agent-sim-section {
+      background:
+        radial-gradient(circle at 18% 20%, rgba(201, 168, 76, 0.07), transparent 34%),
+        radial-gradient(circle at 78% 42%, rgba(232, 212, 139, 0.055), transparent 35%),
+        var(--bg-2);
+      border-top: 1px solid #101010;
+      border-bottom: 1px solid #101010;
+      overflow: hidden;
+    }
+    .agent-sim-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: clamp(32px, 5vw, 70px);
+      align-items: center;
+      margin-top: 64px;
+    }
+    .agent-steps {
+      display: grid;
+      gap: 16px;
+      min-width: 0;
+    }
+    .agent-step {
+      position: relative;
+      width: 100%;
+      min-height: 126px;
+      padding: 22px 22px 22px 92px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.018);
+      color: var(--text-2);
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+    }
+    .agent-step::before {
+      content: attr(data-step-index);
+      position: absolute;
+      top: 22px; left: 22px;
+      width: 48px; height: 48px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--gold-light);
+      border: 1px solid rgba(201,168,76,0.36);
+      background: rgba(201,168,76,0.055);
+      box-shadow: inset 0 0 18px rgba(201,168,76,0.06);
+    }
+    .agent-step::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--mx, 22%) var(--my, 30%), rgba(201,168,76,0.11), transparent 48%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .agent-step:hover { transform: translateY(-3px); border-color: rgba(201,168,76,0.3); }
+    .agent-step:hover::after, .agent-step.is-active::after { opacity: 1; }
+    .agent-step.is-active {
+      border-color: rgba(201,168,76,0.48);
+      background: linear-gradient(145deg, rgba(201,168,76,0.09), rgba(255,255,255,0.018) 62%);
+      box-shadow: 0 18px 48px rgba(0,0,0,0.32), 0 0 45px rgba(201,168,76,0.08);
+      color: var(--text);
+    }
+    .agent-step-kicker {
+      display: block;
+      margin-bottom: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .agent-step-title { display: block; font-family: var(--font-serif); font-size: 1.2rem; color: var(--text); line-height: 1.25; margin-bottom: 7px; }
+    .agent-step-copy { display: block; font-size: 0.92rem; line-height: 1.65; color: var(--text-2); }
+
+    .agent-console {
+      position: relative;
+      min-height: 560px;
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, rgba(17,17,17,0.92), rgba(5,5,5,0.98)),
+        radial-gradient(circle at 50% 0%, rgba(201,168,76,0.12), transparent 45%);
+      box-shadow: 0 40px 110px rgba(0,0,0,0.58), inset 0 1px 0 rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .agent-console::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at 50% 45%, #000 10%, transparent 82%);
+      pointer-events: none;
+    }
+    .agent-console-top {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .agent-console-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-2); }
+    .agent-live-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(16,185,129,0.35);
+      background: rgba(16,185,129,0.075);
+      color: #6ee7b7;
+      font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .agent-live-pill i { width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 14px rgba(16,185,129,0.85); animation: agentPulse 1.6s ease-in-out infinite; }
+    @keyframes agentPulse { 0%,100%{ transform: scale(1); opacity: 0.8; } 50%{ transform: scale(1.45); opacity: 1; } }
+
+    .agent-stage {
+      position: relative; z-index: 1;
+      min-height: 438px;
+      padding: clamp(24px, 3vw, 34px);
+    }
+    .agent-panel { display: none; height: 100%; animation: agentPanelIn 0.48s cubic-bezier(0.16, 1, 0.3, 1); }
+    .agent-panel.is-active { display: block; }
+    @keyframes agentPanelIn { from { opacity: 0; transform: translateY(14px) scale(0.985); } to { opacity: 1; transform: none; } }
+
+    .agent-trigger-card, .agent-result-card {
+      height: 100%; min-height: 380px;
+      display: flex; flex-direction: column; justify-content: center;
+      max-width: 420px; margin: 0 auto;
+    }
+    .agent-phone-shell {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 34px;
+      padding: 12px;
+      background: #080808;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.45);
+    }
+    .agent-phone-screen { border-radius: 25px; padding: 22px 18px; background: #0d0d0d; min-height: 292px; border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+    .agent-time { text-align: center; font-family: var(--font-mono); color: var(--text-2); font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase; }
+    .agent-alert { padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.055); border: 1px solid rgba(255,255,255,0.08); color: var(--text); font-size: 0.95rem; line-height: 1.55; }
+    .agent-alert b { color: var(--gold-light); }
+    .agent-sms { align-self: flex-start; max-width: 90%; padding: 14px 16px; border-radius: 18px 18px 18px 5px; background: rgba(255,255,255,0.07); color: var(--text); border: 1px solid rgba(255,255,255,0.08); }
+
+    .agent-ai-core { min-height: 380px; display: grid; place-items: center; }
+    .agent-orbit { position: relative; width: min(360px, 82vw); aspect-ratio: 1; display: grid; place-items: center; }
+    .agent-orbit::before, .agent-orbit::after { content: ''; position: absolute; border-radius: 50%; border: 1px solid rgba(201,168,76,0.18); inset: 6%; animation: agentSpin 18s linear infinite; }
+    .agent-orbit::after { inset: 18%; border-style: dashed; animation-duration: 28s; animation-direction: reverse; opacity: 0.75; }
+    @keyframes agentSpin { to { transform: rotate(360deg); } }
+    .agent-core-card { position: relative; z-index: 2; width: 74%; padding: 26px 24px; border-radius: 22px; border: 1px solid rgba(201,168,76,0.34); background: rgba(17,17,17,0.76); backdrop-filter: blur(12px); text-align: center; box-shadow: 0 0 60px rgba(201,168,76,0.08); }
+    .agent-core-card h3 { font-size: 1.35rem; margin-bottom: 8px; color: var(--text); }
+    .agent-core-card p { font-size: 0.86rem; line-height: 1.6; color: var(--text-2); margin-bottom: 18px; }
+    .agent-code-lines { display: grid; gap: 8px; text-align: left; font-family: var(--font-mono); font-size: 0.68rem; color: var(--gold-light); }
+    .agent-code-lines span { display: block; height: 9px; border-radius: 999px; background: linear-gradient(90deg, rgba(232,212,139,0.8), rgba(201,168,76,0.22), transparent); animation: agentScan 1.4s ease-in-out infinite alternate; }
+    .agent-code-lines span:nth-child(2) { width: 78%; animation-delay: .15s; }
+    .agent-code-lines span:nth-child(3) { width: 92%; animation-delay: .3s; }
+    @keyframes agentScan { from { opacity: .32; transform: scaleX(.7); transform-origin: left; } to { opacity: 1; transform: scaleX(1); transform-origin: left; } }
+
+    .agent-result-grid { display: grid; gap: 14px; }
+    .agent-result-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 18px; border-radius: 16px; background: rgba(255,255,255,0.045); border: 1px solid rgba(255,255,255,0.075); }
+    .agent-result-row span:first-child { color: var(--text-2); font-size: 0.85rem; }
+    .agent-result-row span:last-child { color: var(--gold-light); font-family: var(--font-mono); font-size: 0.82rem; text-align: right; }
+    .agent-calendar { margin-top: 18px; border-radius: 18px; padding: 18px; border: 1px solid rgba(201,168,76,0.25); background: linear-gradient(135deg, rgba(201,168,76,0.09), rgba(255,255,255,0.02)); color: var(--text); }
+    .agent-calendar b { color: var(--gold-light); }
+
+    .agent-progress { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0 20px 20px; }
+    .agent-progress i { display: block; height: 2px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .agent-progress i::before { content: ''; display: block; height: 100%; width: 0; background: var(--gold-gradient); transition: width .35s ease; }
+    .agent-progress i.is-active::before { width: 100%; }
+
     /* ============================================================
        SECTION SCAFFOLDING
     ============================================================ */
@@ -1875,6 +2050,15 @@
       }
       .ind-card { min-height: 170px; }
 
+      /* Live agent simulator */
+      .agent-sim-wrap { grid-template-columns: 1fr; margin-top: 44px; gap: 28px; }
+      .agent-step { min-height: 0; padding: 22px 18px 22px 78px; }
+      .agent-step::before { left: 18px; width: 42px; height: 42px; }
+      .agent-console { min-height: 0; }
+      .agent-stage { min-height: 390px; padding: 22px 18px; }
+      .agent-trigger-card, .agent-result-card, .agent-ai-core { min-height: 330px; }
+      .agent-console-top { align-items: flex-start; flex-direction: column; }
+
       /* Demo preview */
       .demo-grid { gap: 44px; }
       .phone { height: 540px; }
@@ -1900,6 +2084,10 @@
       .loader-word { letter-spacing: 0.1em; }
       .btn { letter-spacing: 0.08em; font-size: 12px; }
       .cmp-table th[scope="row"] { font-size: 0.75rem; }
+      .agent-step-title { font-size: 1.05rem; }
+      .agent-step-copy { font-size: 0.86rem; }
+      .agent-result-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .agent-result-row span:last-child { text-align: left; }
       /* Remove the label's decorative line entirely on very small screens */
       .hero-label::before { display: none; }
     }
@@ -2690,6 +2878,85 @@
             </div>
             <div class="audit-band-cta">
               <a href="audit.html" class="btn btn-gold magnetic"><span class="btn-label">Get Your Free Lead Flow Audit</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 3: LIVE AGENT SIMULATOR
+      ============================================================ -->
+      <section class="section agent-sim-section reveal" id="live-agent">
+        <div class="container">
+          <div class="sec-head-center">
+            <span class="sec-label center reveal">Live Agent Simulator</span>
+            <h2 class="sec-title split">How Elite Bot Works</h2>
+            <p class="sec-sub reveal" style="--d:.15s">
+              A frontend-only simulation of the core automation loop: detect the lead, understand intent, and push the next step into your calendar and CRM.
+            </p>
+          </div>
+
+          <div class="agent-sim-wrap">
+            <div class="agent-steps reveal" style="--d:.2s" role="tablist" aria-label="Live agent simulator steps">
+              <button class="agent-step is-active" type="button" role="tab" aria-selected="true" data-agent-step="0" data-step-index="01">
+                <span class="agent-step-kicker">The Trigger</span>
+                <span class="agent-step-title">A lead appears when your team is offline.</span>
+                <span class="agent-step-copy">A missed call, form fill, chat message, or midnight SMS arrives while competitors are still waiting for morning.</span>
+              </button>
+              <button class="agent-step" type="button" role="tab" aria-selected="false" data-agent-step="1" data-step-index="02">
+                <span class="agent-step-kicker">AI Processing</span>
+                <span class="agent-step-title">The agent understands intent and drafts the next move.</span>
+                <span class="agent-step-copy">It identifies urgency, service type, availability, and the fastest route to qualification without pretending to be human.</span>
+              </button>
+              <button class="agent-step" type="button" role="tab" aria-selected="false" data-agent-step="2" data-step-index="03">
+                <span class="agent-step-kicker">The Result</span>
+                <span class="agent-step-title">The lead is secured, booked, and logged.</span>
+                <span class="agent-step-copy">Your team gets a clean summary while the prospect receives a clear appointment or next step.</span>
+              </button>
+            </div>
+
+            <div class="agent-console reveal" style="--d:.3s" aria-live="polite">
+              <div class="agent-console-top">
+                <span class="agent-console-label" id="agentConsoleLabel">Missed-call recovery flow</span>
+                <span class="agent-live-pill"><i aria-hidden="true"></i> Live Simulation</span>
+              </div>
+              <div class="agent-stage">
+                <div class="agent-panel is-active" data-agent-panel="0">
+                  <div class="agent-trigger-card">
+                    <div class="agent-phone-shell">
+                      <div class="agent-phone-screen">
+                        <div class="agent-time">12:43 AM · Incoming lead</div>
+                        <div class="agent-alert"><b>Missed call detected</b><br>New customer tried to reach you after hours.</div>
+                        <div class="agent-sms">“Hi, I need help today. Do you have availability?”</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-panel" data-agent-panel="1">
+                  <div class="agent-ai-core">
+                    <div class="agent-orbit">
+                      <div class="agent-core-card">
+                        <h3>Intent matched</h3>
+                        <p>Urgent lead · booking request · qualified for same-day follow-up.</p>
+                        <div class="agent-code-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-panel" data-agent-panel="2">
+                  <div class="agent-result-card">
+                    <div class="agent-result-grid">
+                      <div class="agent-result-row"><span>Lead status</span><span>Qualified</span></div>
+                      <div class="agent-result-row"><span>AI reply</span><span>Sent in 28s</span></div>
+                      <div class="agent-result-row"><span>CRM record</span><span>Created</span></div>
+                      <div class="agent-result-row"><span>Team alert</span><span>Summary delivered</span></div>
+                    </div>
+                    <div class="agent-calendar"><b>Calendar slot held:</b> Today · 2:00 PM consultation</div>
+                  </div>
+                </div>
+              </div>
+              <div class="agent-progress" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
             </div>
           </div>
         </div>
@@ -3886,6 +4153,56 @@
       el.addEventListener('input', () => el.closest('.field')?.classList.remove('invalid'));
     });
 
+
+
+    /* ============================================================
+       LIVE AGENT SIMULATOR, frontend-only interaction
+    ============================================================ */
+    (function initLiveAgentSimulator() {
+      const root = document.getElementById('live-agent');
+      if (!root) return;
+      const steps = Array.from(root.querySelectorAll('[data-agent-step]'));
+      const panels = Array.from(root.querySelectorAll('[data-agent-panel]'));
+      const bars = Array.from(root.querySelectorAll('.agent-progress i'));
+      const label = document.getElementById('agentConsoleLabel');
+      const labels = ['Missed-call recovery flow', 'AI intent engine', 'Calendar + CRM handoff'];
+      let active = 0;
+      let timer = null;
+
+      function showStep(index, manual) {
+        active = (index + steps.length) % steps.length;
+        steps.forEach((step, i) => {
+          const on = i === active;
+          step.classList.toggle('is-active', on);
+          step.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panels.forEach((panel, i) => panel.classList.toggle('is-active', i === active));
+        bars.forEach((bar, i) => bar.classList.toggle('is-active', i <= active));
+        if (label) label.textContent = labels[active] || labels[0];
+        if (manual && typeof trackEvent === 'function') trackEvent('live_agent_step', { step: active + 1 });
+      }
+
+      function start() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        stop();
+        timer = setInterval(() => showStep(active + 1, false), 3600);
+      }
+      function stop() { if (timer) clearInterval(timer); timer = null; }
+
+      steps.forEach((step) => {
+        step.addEventListener('click', () => { showStep(parseInt(step.dataset.agentStep, 10) || 0, true); start(); });
+        step.addEventListener('mousemove', (e) => {
+          const r = step.getBoundingClientRect();
+          step.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+          step.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+        });
+      });
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      showStep(0, false);
+      start();
+    })();
+
     /* ============================================================
        COOKIE BANNER (first visit, localStorage)
     ============================================================ */
@@ -4674,7 +4991,7 @@
       const SECTION_SELECTORS = {
         index: [['#home', 'hero_view'], ['#results', 'results_view'], ['#comparison', 'comparison_view'],
                 ['#faq', 'faq_view'], ['#booking', 'call_cta_view'], ['#services', 'services_view'],
-                ['#industries', 'industries_view']],
+                ['#industries', 'industries_view'], ['#live-agent', 'live_agent_view']],
         demo: [['.demo-grid', 'demo_dashboard_view'], ['#missed-call', 'demo_missedcall_view']],
         calculator: [['#results', 'calculator_results_view'], ['.cta-section', 'calculator_cta_view']],
         pricing: [['#what-we-build', 'pricing_what_we_build_view'], ['#how-it-works', 'pricing_process_view'], ['#investment', 'pricing_investment_view']],
