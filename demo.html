@@ -2134,14 +2134,33 @@
     /* ============================================================
        TEXT EXTRACTION ("AI" parsing)
     ============================================================ */
+    const GREETING_RX = /^(hi|hello|hey|hiya|yo|salaam|salam|assalamualaikum|how are you|how r u|how're you|kesy ho|kaise ho|kaisay ho|kese ho|how is it going|what's up|whats up)[\s!?.,]*$/i;
+    const NAME_PREFIX_RX = /(?:^|\b)(?:i'?m|i am|this is|call me|my name is|name's|name is)\s+([A-Za-z][A-Za-z'-]{1,28})(?:\s+([A-Za-z][A-Za-z'-]{1,28}))?/i;
+    const SERVICE_INTENT_RX = /(appointment|book|booking|schedule|visit|slot|available|availability|need|want|looking|how much|price|cost|charge|fee|rate|tooth|ache|pain|hurt|clean|cleaning|check[\s-]?up|exam|whiten|insurance|insur|ac|a\/c|cool|cooling|heat|furnace|repair|install|tune[\s-]?up|maintenance|property|view|tour|showing|house|home|sell|buy|valuation|listing|rent|emergency|urgent|today|tomorrow|weekend)/i;
+
+    function isGreetingOnly(text) {
+      return GREETING_RX.test(String(text || '').trim().toLowerCase());
+    }
+
+    function hasActionableIntent(text) {
+      return SERVICE_INTENT_RX.test(String(text || '').toLowerCase()) || !!extractSlot(text);
+    }
+
     function extractName(text) {
-      const m = text.match(/(?:i'?m|i am|this is|call me|my name is|name's|name is)\s+([A-Z][A-Za-z'-]+)/i);
-      if (m) return cap(m[1]);
-      const STOP = ['no', 'nope', 'yes', 'yep', 'yeah', 'ok', 'okay', 'hi', 'hey', 'hello', 'thanks', 'thank', 'sure', 'maybe', 'please', 'test', 'none', 'nothing', 'later'];
-      const words = text.trim().split(/\s+/);
-      if (words.length <= 2 && !/\d/.test(text) && /^[A-Za-z][A-Za-z'-]+$/.test(words[0]) && !STOP.includes(words[0].toLowerCase())) {
-        return cap(words[0]);
+      const raw = String(text || '').trim();
+      const prefixed = raw.match(NAME_PREFIX_RX);
+      if (prefixed) {
+        const first = prefixed[1];
+        const second = prefixed[2] || '';
+        const badNameWords = ['looking', 'trying', 'having', 'here', 'calling', 'asking', 'interested', 'needing', 'need', 'want'];
+        if (badNameWords.includes(first.toLowerCase())) return null;
+        return cap((first + (second ? ' ' + second : '')).trim());
       }
+      if (isGreetingOnly(raw) || hasActionableIntent(raw) || /[?!.:,;@#0-9]/.test(raw)) return null;
+      const STOP = ['no', 'nope', 'yes', 'yep', 'yeah', 'ok', 'okay', 'hi', 'hey', 'hello', 'hiya', 'yo', 'salam', 'salaam', 'kesy', 'kese', 'kaisay', 'kaise', 'ho', 'thanks', 'thank', 'sure', 'maybe', 'please', 'test', 'none', 'nothing', 'later'];
+      const words = raw.split(/\s+/).filter(Boolean);
+      const looksLikeName = words.length >= 1 && words.length <= 2 && words.every(w => /^[A-Za-z][A-Za-z'-]{1,28}$/.test(w) && !STOP.includes(w.toLowerCase()));
+      if (looksLikeName) return words.map(cap).join(' ');
       return null;
     }
 
@@ -2183,9 +2202,12 @@
     }
 
     function extractFrom(text) {
+      const actionable = hasActionableIntent(text);
       return {
-        service: INDUSTRIES[session.industry].detectService(text),
-        urgency: detectUrgency(text),
+        greeting: isGreetingOnly(text),
+        actionable,
+        service: actionable ? INDUSTRIES[session.industry].detectService(text) : null,
+        urgency: actionable ? detectUrgency(text) : null,
         name: extractName(text),
         slot: extractSlot(text)
       };
@@ -2417,6 +2439,14 @@
       const priceQ = /(how much|price|cost|charge|fee|rate|expensive)/.test(t);
       const insQ = /insur/.test(t);
 
+      if (ex.greeting) {
+        return { text: `I'm doing great, thanks for asking! How can I help you with ${cfg.business} today?` };
+      }
+
+      if (!ex.actionable && !ex.name && session.stage === 'idle') {
+        return { text: `I'm here for ${cfg.business}. Tell me what you need help with, for example booking an appointment, asking about availability, or describing the issue.` };
+      }
+
       /*, Post-booking follow-ups, */
       if (session.stage === 'post') {
         if (priceQ) return { text: cfg.price + ' Anything else I can help you with?' };
@@ -2426,8 +2456,15 @@
         return { text: "Got it, I've noted that for the team. Is there anything else you need today?" };
       }
 
-      /*, First inbound message, */
+      /*, First inbound message with real intent, */
       if (session.stage === 'idle') {
+        if (ex.name && !ex.actionable) {
+          session.name = ex.name;
+          setField('ldName', formatName(ex.name));
+          feed(`Name captured: ${ex.name}`);
+          session.stage = 'idle';
+          return { text: `Nice to meet you, ${formatName(ex.name)}. How can I help you with ${cfg.business} today?` };
+        }
         session.stage = 'name';
         const parts = [cfg.ack(ex.service)];
         if (ex.urgency === 'High') parts.push("I've flagged this as HIGH priority so we can get to you fast.");
@@ -2512,12 +2549,12 @@
 
       const ex = extractFrom(text);
 
-      if (!session.service) {
+      if (!session.service && ex.service) {
         session.service = ex.service;
         setField('ldService', ex.service);
         feed(`Service detected: "${ex.service}"`, '•');
       }
-      if (!session.urgencySet) {
+      if (!session.urgencySet && ex.urgency) {
         session.urgency = ex.urgency;
         session.urgencySet = true;
         const cls = ex.urgency === 'High' ? 'urg-high' : ex.urgency === 'Medium' ? 'urg-med' : 'urg-low';
