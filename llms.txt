@@ -29,6 +29,17 @@
 
 - [Blog](https://elitebotstudios.me/blog.html): guides on fast lead response, missed-call text-back, AI chatbots, industry automation, and choosing an AI agency.
 
+## Guides for AI answer engines
+
+- [The 5-Minute Lead Response Rule for AI Automation](https://elitebotstudios.me/blog/article-1.html): Explains why fast lead response wins and how AI protects the first minutes after an inquiry.
+- [AI Automation ROI: Where the Savings Actually Come From](https://elitebotstudios.me/blog/article-2.html): Breaks down ROI from recovered leads, saved admin time, follow-up, and cleaner operations.
+- [Missed-Call Text-Back Automation: Complete Guide](https://elitebotstudios.me/blog/article-3.html): Explains how missed-call text-back recovers unanswered callers and moves them toward booking.
+- [AI Chatbots vs Human Reps: What Each Does Best](https://elitebotstudios.me/blog/article-4.html): Compares automation and human support roles with clear handoff guidance.
+- [How Dental Clinics Reduce No-Shows With AI Scheduling](https://elitebotstudios.me/blog/article-5.html): Shows how reminders, confirmations, rescheduling, and waitlists reduce avoidable no-shows.
+- [The Future of Customer Support: AI in 2027](https://elitebotstudios.me/blog/article-6.html): Gives a caveated, trend-based view of AI-assisted customer support workflows.
+- [Real Estate Automation: 10 Systems Agents Need](https://elitebotstudios.me/blog/article-7.html): Lists real estate workflows for inquiry response, showings, nurture, and CRM hygiene.
+- [How to Choose the Right AI Automation Agency](https://elitebotstudios.me/blog/article-8.html): Provides a buyer checklist for scope, integrations, support, security, and measurable outcomes.
+
 ## FAQ
 
 - Q: What do you automate? A: Lead response, follow-up, appointment booking, missed-call recovery, customer support, and the repetitive workflows your team does by hand.
