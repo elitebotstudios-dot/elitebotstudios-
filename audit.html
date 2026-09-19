@@ -1320,7 +1320,7 @@
     <a href="audit.html" aria-current="page">Audit</a>
     <a href="/#contact">Contact</a>
     <a class="menu-email" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
-    <a class="menu-cta" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a>
+    <a class="menu-cta" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Lead Flow Call</a>
   </nav>
 
   <!-- ============================================================
@@ -1504,7 +1504,7 @@
           <div class="res-cta">
             <h3>Want us to build this exact system for you?</h3>
             <p>We'll design, build, host, and manage everything, Most systems launch within 1-2 weeks, depending on complexity.</p>
-            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book a 15-Min Call</a>
+            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Book a 15-Min Lead Flow Call</a>
               <p style="margin-top:18px;font-size:0.88rem;color:var(--text-2);text-align:center;">
                 Prefer email? Reach us at <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
               </p>
@@ -2074,7 +2074,7 @@
     <div class="ebs-quick-row" id="ebsQuickRow">
       <button class="ebs-chip" data-q="How pricing works">How Pricing Works</button>
       <button class="ebs-chip" data-q="Watch demo">Watch Demo</button>
-      <button class="ebs-chip" data-q="Book a call">Book a 15-Min Call</button>
+      <button class="ebs-chip" data-q="Book a call">Book a 15-Min Lead Flow Call</button>
     </div>
     <div class="ebs-chat-foot">
       <input type="text" class="ebs-chat-input" id="ebsChatInput"
@@ -2179,7 +2179,7 @@
         },
         pricing: {
           keys: ['price', 'pricing', 'cost', 'how much', 'plans', 'subscription', 'fee'],
-          reply: 'We build custom systems, so we quote after a short 15-minute conversation instead of selling fixed packages. Book a free call and we will walk through your exact stack: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book a 15-Min Call →</a>'
+          reply: 'We build custom systems, so we quote after a short 15-minute conversation instead of selling fixed packages. Book a free call and we will walk through your exact stack: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book a 15-Min Lead Flow Call →</a>'
         },
         services: {
           keys: ['what do you do', 'services', 'offer', 'solutions', 'automation'],
@@ -2301,7 +2301,7 @@
           var ctx = chat.history.slice(-6).map(function (m) { return m.role + ': ' + m.text; }).join(' | ');
           submitEBSLead({ email: text, planInterest: 'Chat', leadType: 'Chat', context: ctx }).then(function (res) {
             var okMsg = "Thanks. We'll get back to you within one business day. Meanwhile, would you like to see the <a href=\"/demo.html\">live demo</a>?";
-            var failMsg = "I couldn't save your details right now. Please try again later, or book a call: <a href=\"" + CALENDLY + "\" target=\"_blank\" rel=\"noopener noreferrer\">Book a 15-Min Call →</a>";
+            var failMsg = "I couldn't save your details right now. Please try again later, or book a call: <a href=\"" + CALENDLY + "\" target=\"_blank\" rel=\"noopener noreferrer\">Book a 15-Min Lead Flow Call →</a>";
             addBubble('ai', res && res.ok ? okMsg : failMsg);
             chat.history.push({ role: 'ai', text: res && res.ok ? okMsg : failMsg });
             store.set('ebs_chat_history', chat.history);
@@ -2374,7 +2374,7 @@
         var dismissed = store.get('ebs_notif_dismissed', 0);
         if (dismissed > Date.now()) { bar.classList.add('ebs-hidden'); return; }
         var MSGS = [
-          { html: 'Book a 15-Min Call', href: CALENDLY, external: true }
+          { html: 'Book a 15-Min Lead Flow Call', href: CALENDLY, external: true }
         ];
         var i = 0, timer;
         document.body.classList.add('ebs-bar-active');

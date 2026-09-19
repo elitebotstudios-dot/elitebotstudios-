@@ -34,7 +34,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Elite Bot Studios" />
   <meta property="og:title" content="Elite Bot Studios, AI Business Automation Agency" />
-  <meta property="og:description" content="Custom AI systems that turn lost leads into revenue. Book a 15-Min Call." />
+  <meta property="og:description" content="Custom AI systems that turn lost leads into revenue. Book a 15-Min Lead Flow Call." />
   <meta property="og:url" content="https://elitebotstudios.me/" />
   <meta property="og:image" content="https://elitebotstudios.me/assets/logo-512.png" />
   <meta property="og:image:width" content="512" />
@@ -1774,13 +1774,6 @@
     .walkthrough-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 26px; }
     .walkthrough-btn { border: 1px solid rgba(201,168,76,0.48); color: var(--gold-light); border-radius: 999px; padding: 13px 22px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.78rem; transition: transform .25s ease, background .25s ease; }
     .walkthrough-btn:hover { transform: translateY(-2px); background: rgba(201,168,76,0.08); }
-    .walkthrough-modal { position: fixed; inset: 0; z-index: 12000; display: none; place-items: center; padding: 24px; background: rgba(0,0,0,0.74); backdrop-filter: blur(16px); }
-    .walkthrough-modal.open { display: grid; }
-    .walkthrough-box { width: min(860px, 100%); border: 1px solid rgba(201,168,76,0.32); border-radius: 22px; background: #080808; padding: clamp(24px, 4vw, 42px); box-shadow: 0 40px 120px rgba(0,0,0,0.7); position: relative; }
-    .walkthrough-close { position: absolute; top: 16px; right: 16px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light); }
-    .walkthrough-frame { aspect-ratio: 16 / 9; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; display: grid; place-items: center; text-align: center; padding: 28px; background: radial-gradient(circle at center, rgba(201,168,76,0.14), transparent 60%), #0d0d0d; margin-top: 18px; }
-    .walkthrough-frame strong { display: block; color: var(--text); font-family: var(--font-serif); font-size: clamp(1.3rem, 3vw, 2rem); margin-bottom: 10px; }
-    .walkthrough-frame p { max-width: 560px; color: var(--text-2); margin: 0 auto; }
 
     /* Form */
     .form-card {
@@ -3231,7 +3224,7 @@
               </p>
               <div class="walkthrough-actions reveal" style="--d:.25s">
                 <a href="demo.html" class="btn btn-gold magnetic"><span class="btn-label">Explore Interactive Demo →</span></a>
-                <button type="button" class="walkthrough-btn" id="walkthroughOpen">Watch 2-Min Live Walkthrough</button>
+                <a href="#demo" class="walkthrough-btn">Watch 2-Min Live Walkthrough</a>
                 <a href="demo.html" class="demo-link">Try it yourself</a>
               </div>
             </div>
@@ -3521,8 +3514,8 @@
             <p>Elite Bot Studios is an automation and AI integration team focused on revenue recovery for high-ticket service businesses. We design systems that answer leads fast, qualify intent, book appointments, and sync the full conversation back into the tools your team already uses.</p>
             <p>Our work is intentionally narrow: fix lead leakage, reduce response delays, and turn repeatable front-office workflows into measurable operating systems. We do not publish fake testimonials or invented client logos; live case studies will be added only when real clients approve them.</p>
             <div class="studio-proof">
-              <span>Founder LinkedIn: available once verified</span>
-              <a href="mailto:elitebotstudios@gmail.com">Direct support: elitebotstudios@gmail.com</a>
+              <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Schedule an Architecture Review</a>
+              <a href="mailto:elitebotstudios@gmail.com">Get in touch: elitebotstudios@gmail.com</a>
             </div>
           </div>
         </div>
@@ -4341,22 +4334,6 @@
 
 
     /* ============================================================
-       WALKTHROUGH MODAL, honest video placeholder
-    ============================================================ */
-    (function initWalkthroughModal() {
-      const open = document.getElementById('walkthroughOpen');
-      const modal = document.getElementById('walkthroughModal');
-      const close = document.getElementById('walkthroughClose');
-      if (!open || !modal || !close) return;
-      function show() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); close.focus(); if (typeof trackEvent === 'function') trackEvent('walkthrough_modal_open', {}); }
-      function hide() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); open.focus(); }
-      open.addEventListener('click', show);
-      close.addEventListener('click', hide);
-      modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) hide(); });
-    })();
-
-    /* ============================================================
        COOKIE BANNER (first visit, localStorage)
     ============================================================ */
     (function cookieConsent() {
@@ -4445,7 +4422,7 @@
     <div class="ebs-quick-row" id="ebsQuickRow">
       <button class="ebs-chip" data-q="How pricing works">How Pricing Works</button>
       <button class="ebs-chip" data-q="Watch demo">Watch Demo</button>
-      <button class="ebs-chip" data-q="Book a call">Book a 15-Min Call</button>
+      <button class="ebs-chip" data-q="Book a call">Book a 15-Min Lead Flow Call</button>
     </div>
     <div class="ebs-chat-foot">
       <input type="text" class="ebs-chat-input" id="ebsChatInput"
@@ -4745,7 +4722,7 @@
         var dismissed = store.get('ebs_notif_dismissed', 0);
         if (dismissed > Date.now()) { bar.classList.add('ebs-hidden'); return; }
         var MSGS = [
-          { html: 'Book a 15-Min Call', href: CALENDLY, external: true }
+          { html: 'Book a 15-Min Lead Flow Call', href: CALENDLY, external: true }
         ];
         var i = 0, timer;
         document.body.classList.add('ebs-bar-active');
@@ -5199,17 +5176,6 @@
     })();
   </script>
 
-
-  <div class="walkthrough-modal" id="walkthroughModal" role="dialog" aria-modal="true" aria-labelledby="walkthroughTitle" aria-hidden="true">
-    <div class="walkthrough-box">
-      <button class="walkthrough-close" id="walkthroughClose" aria-label="Close walkthrough">✕</button>
-      <span class="sec-label">Product Walkthrough</span>
-      <h2 class="sec-title" id="walkthroughTitle">2-Min Live Walkthrough Placeholder</h2>
-      <div class="walkthrough-frame">
-        <div><strong>Real CRM + SMS walkthrough coming soon</strong><p>This space is reserved for a Loom/YouTube/Vimeo walkthrough showing the end-to-end lead capture, qualification, CRM sync, and calendar booking pipeline.</p></div>
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>
