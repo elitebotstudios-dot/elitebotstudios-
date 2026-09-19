@@ -53,6 +53,9 @@
     .article-footer-cta{margin-top:32px;text-align:center}.back-blog{display:inline-flex;margin-top:18px;color:var(--gold-light);font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
 
 </style>
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -116,6 +119,20 @@
   btn.addEventListener('click',function(){menu.classList.contains('open')?close():open();});
   menu.addEventListener('click',function(e){if(e.target.tagName==='A') close();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape') close();});
+})();
+</script>
+
+<script>
+(function initCalendlyPopupLinks() {
+  var CALENDLY_URL = 'https://calendly.com/elitebotstudios/15min';
+  document.addEventListener('click', function (event) {
+    var link = event.target && event.target.closest ? event.target.closest('a[href="https://calendly.com/elitebotstudios/15min"], .btn-calendly') : null;
+    if (!link) return;
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      event.preventDefault();
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    }
+  });
 })();
 </script>
 </body></html>
