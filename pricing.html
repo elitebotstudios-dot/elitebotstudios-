@@ -978,6 +978,9 @@
     ]
   }
   </script>
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 
 <body>
@@ -2132,6 +2135,21 @@
       }
 
       console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
+    })();
+  </script>
+
+
+  <script>
+    (function initCalendlyPopupLinks() {
+      var CALENDLY_URL = 'https://calendly.com/elitebotstudios/15min';
+      document.addEventListener('click', function (event) {
+        var link = event.target && event.target.closest ? event.target.closest('a[href="https://calendly.com/elitebotstudios/15min"], .btn-calendly') : null;
+        if (!link) return;
+        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+          event.preventDefault();
+          window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+        }
+      });
     })();
   </script>
 
