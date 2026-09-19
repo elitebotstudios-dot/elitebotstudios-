@@ -1707,6 +1707,81 @@
     }
     .booking-cta-alt + .booking-cta-alt { margin-top: 12px; }
 
+
+
+    /* ============================================================
+       CONVERSION/TRUST ENHANCEMENTS
+    ============================================================ */
+    .cta-risk-badge {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: center;
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+    .cta-risk-badge span { color: var(--gold-light); opacity: 0.92; }
+    .implementation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      margin-top: 58px;
+    }
+    .implementation-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 4vw, 46px);
+      border: 1px solid rgba(201,168,76,0.26);
+      border-radius: 22px;
+      background: radial-gradient(circle at 28% 16%, rgba(201,168,76,0.11), transparent 38%), rgba(17,17,17,0.72);
+      min-height: 430px;
+      display: flex;
+      flex-direction: column;
+    }
+    .implementation-card::after {
+      content: '';
+      position: absolute;
+      right: -90px; top: -90px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.18);
+      box-shadow: 0 0 70px rgba(201,168,76,0.08);
+      pointer-events: none;
+    }
+    .impl-label { font-family: var(--font-mono); color: var(--gold); font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 18px; }
+    .implementation-card h3 { font-size: clamp(1.45rem, 2.4vw, 2rem); margin-bottom: 16px; color: var(--text); }
+    .impl-result { margin: 22px 0; padding: 20px; border-left: 1px solid rgba(201,168,76,0.55); background: rgba(201,168,76,0.045); color: var(--gold-light); font-size: 1.02rem; line-height: 1.7; }
+    .impl-note { margin-top: auto; color: var(--text-2); font-size: 0.86rem; line-height: 1.65; }
+    .impl-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .impl-tags span { border: 1px solid rgba(201,168,76,0.28); color: var(--gold-light); border-radius: 999px; padding: 7px 11px; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; }
+    .studio-card {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: clamp(34px, 5vw, 62px);
+      border: 1px solid rgba(201,168,76,0.28);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(201,168,76,0.08), rgba(255,255,255,0.015) 58%), rgba(17,17,17,0.64);
+      text-align: center;
+    }
+    .studio-card h2 { margin-bottom: 18px; }
+    .studio-card p { max-width: 760px; margin: 0 auto 18px; color: var(--text-2); line-height: 1.85; }
+    .studio-proof { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+    .studio-proof a, .studio-proof span { border: 1px solid rgba(201,168,76,0.3); border-radius: 999px; padding: 10px 16px; color: var(--gold-light); font-size: 0.85rem; }
+    .walkthrough-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 26px; }
+    .walkthrough-btn { border: 1px solid rgba(201,168,76,0.48); color: var(--gold-light); border-radius: 999px; padding: 13px 22px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.78rem; transition: transform .25s ease, background .25s ease; }
+    .walkthrough-btn:hover { transform: translateY(-2px); background: rgba(201,168,76,0.08); }
+    .walkthrough-modal { position: fixed; inset: 0; z-index: 12000; display: none; place-items: center; padding: 24px; background: rgba(0,0,0,0.74); backdrop-filter: blur(16px); }
+    .walkthrough-modal.open { display: grid; }
+    .walkthrough-box { width: min(860px, 100%); border: 1px solid rgba(201,168,76,0.32); border-radius: 22px; background: #080808; padding: clamp(24px, 4vw, 42px); box-shadow: 0 40px 120px rgba(0,0,0,0.7); position: relative; }
+    .walkthrough-close { position: absolute; top: 16px; right: 16px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.35); color: var(--gold-light); }
+    .walkthrough-frame { aspect-ratio: 16 / 9; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; display: grid; place-items: center; text-align: center; padding: 28px; background: radial-gradient(circle at center, rgba(201,168,76,0.14), transparent 60%), #0d0d0d; margin-top: 18px; }
+    .walkthrough-frame strong { display: block; color: var(--text); font-family: var(--font-serif); font-size: clamp(1.3rem, 3vw, 2rem); margin-bottom: 10px; }
+    .walkthrough-frame p { max-width: 560px; color: var(--text-2); margin: 0 auto; }
+
     /* Form */
     .form-card {
       max-width: 640px;
@@ -2058,6 +2133,13 @@
       .agent-stage { min-height: 390px; padding: 22px 18px; }
       .agent-trigger-card, .agent-result-card, .agent-ai-core { min-height: 330px; }
       .agent-console-top { align-items: flex-start; flex-direction: column; }
+
+      /* Conversion/trust sections */
+      .implementation-grid { grid-template-columns: 1fr; gap: 22px; margin-top: 42px; }
+      .implementation-card { min-height: 0; }
+      .walkthrough-actions { align-items: stretch; flex-direction: column; }
+      .walkthrough-actions .btn, .walkthrough-btn { width: 100%; text-align: center; }
+      .cta-risk-badge { justify-content: center; }
 
       /* Demo preview */
       .demo-grid { gap: 44px; }
@@ -2758,7 +2840,7 @@
     <a href="audit.html">Audit</a>
     <a href="/#contact">Contact</a>
     <a class="menu-email" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
-    <a class="menu-cta" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a>
+    <a class="menu-cta" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Lead Flow Call</a>
   </nav>
 
   <!-- ===== COOKIE BANNER ===== -->
@@ -2795,7 +2877,7 @@
           <button class="ebs-theme-btn" aria-label="Switch to light mode"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
         </div>
 
-        <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-outline nav-cta magnetic"><span class="btn-label">Book a 15-Min Call</span></a>
+        <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-outline nav-cta magnetic"><span class="btn-label">Book a 15-Min Lead Flow Call</span></a>
 
         <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></button>
       </div>
@@ -2829,10 +2911,11 @@
               </p>
 
               <div class="hero-ctas h-rev" style="--d:.35s">
-                <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold magnetic"><span class="btn-label">Book a 15-Min Call →</span></a>
-                <a href="audit.html" class="btn btn-outline magnetic"><span class="btn-label">Get Your Free Lead Flow Audit</span></a>
+                <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold magnetic"><span class="btn-label">Book a 15-Min Lead Flow Call →</span></a>
+                <a href="audit.html" class="btn btn-outline magnetic"><span class="btn-label">Get a Free 60-Sec Lead Leak Audit</span></a>
                 <a href="#process" class="hero-inline-link">See How It Works →</a>
               </div>
+              <div class="cta-risk-badge h-rev" style="--d:.42s"><span>✓ No sales pitch.</span><span>✓ 60-Day ROI Safety Net.</span><span>✓ Custom architecture review.</span></div>
 
               <div class="hero-caps h-rev" style="--d:.45s">
                 <span class="hero-cap"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Under 30s Response</span>
@@ -3144,17 +3227,17 @@
               <span class="sec-label reveal">Interactive Demo</span>
               <h2 class="sec-title split">See the Automation Before You Buy It</h2>
               <p class="hero-sub reveal" style="--d:.15s">
-                Explore working demonstrations of the systems we build for lead response,
-                qualification and customer workflows. These are simulations, not client conversations.
+                Interactive Architecture Preview: Demonstrating our sub-30s lead capture, qualification, and automated CRM sync pipeline.
               </p>
-              <div class="demo-links reveal" style="--d:.25s">
+              <div class="walkthrough-actions reveal" style="--d:.25s">
                 <a href="demo.html" class="btn btn-gold magnetic"><span class="btn-label">Explore Interactive Demo →</span></a>
+                <button type="button" class="walkthrough-btn" id="walkthroughOpen">Watch 2-Min Live Walkthrough</button>
                 <a href="demo.html" class="demo-link">Try it yourself</a>
               </div>
             </div>
 
             <div class="phone-scene reveal" style="--d:.2s">
-              <span class="sim-badge">SIMULATED DEMO</span>
+              <span class="sim-badge">ARCHITECTURE PREVIEW</span>
               <div class="phone tilt" data-tilt-max="7">
                 <div class="phone-screen">
                   <div class="p-status">11:47 PM</div>
@@ -3244,6 +3327,38 @@
               <span class="ind-tag">09</span>
               <h3>Professional Services</h3>
               <p>Intake, follow-ups, and admin workflows on autopilot.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 8b: FEATURED IMPLEMENTATION MODELS
+      ============================================================ -->
+      <section class="section reveal" id="implementations">
+        <div class="container">
+          <div class="sec-head-center">
+            <span class="sec-label center reveal">Featured Implementations</span>
+            <h2 class="sec-title split">Focused Systems for High-Ticket Service Businesses</h2>
+            <p class="sec-sub reveal" style="--d:.15s">These are modeled implementation targets, not published client results. They show the measurable architecture we design for the niches where speed-to-lead matters most.</p>
+          </div>
+          <div class="implementation-grid">
+            <article class="implementation-card reveal" style="--d:.1s">
+              <span class="impl-label">Home Services / HVAC</span>
+              <h3>24/7 Emergency Dispatch &amp; Missed-Call Recovery</h3>
+              <p>For high-intent repair calls, the system detects missed calls, texts back immediately, qualifies urgency, and routes booked jobs into the dispatch calendar.</p>
+              <div class="impl-result"><strong>Modeled target:</strong> Recover 18 otherwise-lost weekend leads in month 1 and reduce first response from 3.5 hours to 22 seconds.</div>
+              <div class="impl-tags"><span>Twilio SMS</span><span>CRM Sync</span><span>WhatsApp Business</span><span>OpenAI</span></div>
+              <p class="impl-note">Final estimates are validated against your actual call volume, close rate, average ticket size, and team capacity.</p>
+            </article>
+            <article class="implementation-card reveal" style="--d:.2s">
+              <span class="impl-label">Clinics &amp; Real Estate</span>
+              <h3>Automated Qualification &amp; Direct Calendar Booking</h3>
+              <p>For appointment-driven teams, the agent captures intent, asks the right qualifiers, offers approved time slots, and sends reminders across SMS or WhatsApp.</p>
+              <div class="impl-result"><strong>Modeled target:</strong> Lift booked consultations by 34% and reduce no-shows by 40% using multi-channel reminders and one-tap rescheduling.</div>
+              <div class="impl-tags"><span>Twilio SMS</span><span>CRM Sync</span><span>WhatsApp Business</span><span>OpenAI</span></div>
+              <p class="impl-note">These are implementation models for demo planning; real client case studies will replace them once permission and data are available.</p>
             </article>
           </div>
         </div>
@@ -3363,7 +3478,7 @@
               If the system does not deliver the lead recovery we model in your ROI plan
               within 60 days, we refund what you paid. Details are in your proposal.
             </p>
-            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold magnetic"><span class="btn-label">Book a 15-Min Call</span></a>
+            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold magnetic"><span class="btn-label">Book a 15-Min Lead Flow Call</span></a>
           </div>
         </div>
       </section>
@@ -3391,6 +3506,25 @@
             We select the right platforms and integrations based on your workflow.
             No lock-in to a single vendor.
           </p>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 9ba: ABOUT THE STUDIO
+      ============================================================ -->
+      <section class="section reveal" id="studio">
+        <div class="container">
+          <div class="studio-card reveal">
+            <span class="sec-label center">Behind Elite Bot Studios</span>
+            <h2 class="sec-title split">Engineering Automations That Pay for Themselves</h2>
+            <p>Elite Bot Studios is an automation and AI integration team focused on revenue recovery for high-ticket service businesses. We design systems that answer leads fast, qualify intent, book appointments, and sync the full conversation back into the tools your team already uses.</p>
+            <p>Our work is intentionally narrow: fix lead leakage, reduce response delays, and turn repeatable front-office workflows into measurable operating systems. We do not publish fake testimonials or invented client logos; live case studies will be added only when real clients approve them.</p>
+            <div class="studio-proof">
+              <span>Founder LinkedIn: available once verified</span>
+              <a href="mailto:elitebotstudios@gmail.com">Direct support: elitebotstudios@gmail.com</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -3573,7 +3707,7 @@
               Prefer email? Reach us directly at
               <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
               <br><br>
-              <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top:8px;">Book a 15-Min Call →</a>
+              <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top:8px;">Book a 15-Min Lead Flow Call →</a>
             </p>
           </div>
 
@@ -3601,9 +3735,10 @@
               <li>The exact AI systems that fit your business</li>
               <li>A plain-language ROI estimate for your situation</li>
             </ul>
-            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold magnetic"><span class="btn-label">Book a 15-Min Call →</span></a>
+            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold magnetic"><span class="btn-label">Book a 15-Min Lead Flow Call →</span></a>
+            <div class="cta-risk-badge" id="bookingRiskBadge"><span>✓ No sales pitch.</span><span>✓ 60-Day ROI Safety Net.</span><span>✓ Custom architecture review.</span></div>
             <p class="booking-cta-alt">Prefer email? <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a></p>
-            <p class="booking-cta-alt">Not ready for a call? <a class="mail-link" href="audit.html">Take the free lead flow audit first →</a></p>
+            <p class="booking-cta-alt">Not ready for a call? <a class="mail-link" href="audit.html">Get a Free 60-Sec Lead Leak Audit →</a></p>
           </div>
         </div>
       </section>
@@ -3646,7 +3781,7 @@
             <h4>Get In Touch</h4>
             <div class="footer-contact">
               <a class="mail-link" href="mailto:elitebotstudios@gmail.com">elitebotstudios@gmail.com</a>
-              <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Call</a>
+              <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book a 15-Min Lead Flow Call</a>
             </div>
             <div class="footer-social">
               <a href="https://www.facebook.com/profile.php?id=61593294846704" aria-label="Elite Bot Studios on Facebook" rel="noopener noreferrer">
@@ -4136,7 +4271,7 @@
         if (leadBtnLabel) leadBtnLabel.textContent = originalLabel;
         const status = $('cfStatus');
         if (status) {
-          status.innerHTML = 'Something went wrong while sending your message. Please try again, or book a 15-minute call: <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" style="color:#e8d48b;">Book a 15-Min Call</a> or email <a href="mailto:elitebotstudios@gmail.com" style="color:#e8d48b;">elitebotstudios@gmail.com</a>';
+          status.innerHTML = 'Something went wrong while sending your message. Please try again, or book a 15-minute call: <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" style="color:#e8d48b;">Book a 15-Min Lead Flow Call</a> or email <a href="mailto:elitebotstudios@gmail.com" style="color:#e8d48b;">elitebotstudios@gmail.com</a>';
           status.style.display = 'block';
         }
       });
@@ -4203,6 +4338,24 @@
       start();
     })();
 
+
+
+    /* ============================================================
+       WALKTHROUGH MODAL, honest video placeholder
+    ============================================================ */
+    (function initWalkthroughModal() {
+      const open = document.getElementById('walkthroughOpen');
+      const modal = document.getElementById('walkthroughModal');
+      const close = document.getElementById('walkthroughClose');
+      if (!open || !modal || !close) return;
+      function show() { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); close.focus(); if (typeof trackEvent === 'function') trackEvent('walkthrough_modal_open', {}); }
+      function hide() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); open.focus(); }
+      open.addEventListener('click', show);
+      close.addEventListener('click', hide);
+      modal.addEventListener('click', (e) => { if (e.target === modal) hide(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) hide(); });
+    })();
+
     /* ============================================================
        COOKIE BANNER (first visit, localStorage)
     ============================================================ */
@@ -4240,7 +4393,7 @@
        (placeholder until a dedicated 404 page is built)
     ============================================================ */
     const knownSections = ['home', 'problem', 'definition', 'services', 'why', 'results',
-      'wins', 'process', 'comparison', 'industries', 'demo', 'trust', 'faq', 'contact', 'booking'];
+      'wins', 'process', 'comparison', 'industries', 'implementations', 'demo', 'trust', 'studio', 'faq', 'contact', 'booking'];
     if (location.hash) {
       const id = location.hash.slice(1);
       if (!knownSections.includes(id)) {
@@ -4397,7 +4550,7 @@
         },
         pricing: {
           keys: ['price', 'pricing', 'cost', 'how much', 'plans', 'subscription', 'fee'],
-          reply: 'We build custom systems, so we quote after a short 15-minute conversation instead of selling fixed packages. Book a free call and we will walk through your exact stack: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book a 15-Min Call →</a>'
+          reply: 'We build custom systems, so we quote after a short 15-minute conversation instead of selling fixed packages. Book a free call and we will walk through your exact stack: <a href="' + CALENDLY + '" target="_blank" rel="noopener noreferrer">Book a 15-Min Lead Flow Call →</a>'
         },
         services: {
           keys: ['what do you do', 'services', 'offer', 'solutions', 'automation'],
@@ -4519,7 +4672,7 @@
           var ctx = chat.history.slice(-6).map(function (m) { return m.role + ': ' + m.text; }).join(' | ');
           submitEBSLead({ email: text, planInterest: 'Chat', leadType: 'Chat', context: ctx }).then(function (res) {
             var okMsg = "Thanks. We'll get back to you within one business day. Meanwhile, would you like to see the <a href=\"/demo.html\">live demo</a>?";
-            var failMsg = "I couldn't save your details right now. Please try again later, or book a call: <a href=\"" + CALENDLY + "\" target=\"_blank\" rel=\"noopener noreferrer\">Book a 15-Min Call →</a>";
+            var failMsg = "I couldn't save your details right now. Please try again later, or book a call: <a href=\"" + CALENDLY + "\" target=\"_blank\" rel=\"noopener noreferrer\">Book a 15-Min Lead Flow Call →</a>";
             addBubble('ai', res && res.ok ? okMsg : failMsg);
             chat.history.push({ role: 'ai', text: res && res.ok ? okMsg : failMsg });
             store.set('ebs_chat_history', chat.history);
@@ -5045,6 +5198,18 @@
       console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
     })();
   </script>
+
+
+  <div class="walkthrough-modal" id="walkthroughModal" role="dialog" aria-modal="true" aria-labelledby="walkthroughTitle" aria-hidden="true">
+    <div class="walkthrough-box">
+      <button class="walkthrough-close" id="walkthroughClose" aria-label="Close walkthrough">✕</button>
+      <span class="sec-label">Product Walkthrough</span>
+      <h2 class="sec-title" id="walkthroughTitle">2-Min Live Walkthrough Placeholder</h2>
+      <div class="walkthrough-frame">
+        <div><strong>Real CRM + SMS walkthrough coming soon</strong><p>This space is reserved for a Loom/YouTube/Vimeo walkthrough showing the end-to-end lead capture, qualification, CRM sync, and calendar booking pipeline.</p></div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

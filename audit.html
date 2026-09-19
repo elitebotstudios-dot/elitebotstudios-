@@ -501,6 +501,19 @@
     .risk-fill.med { background: linear-gradient(90deg, #fbbf24, #f59e0b); box-shadow: 0 0 16px rgba(251, 191, 36, 0.4); }
     .risk-fill.low { background: linear-gradient(90deg, #10b981, #c9a84c); box-shadow: 0 0 16px rgba(16, 185, 129, 0.4); }
 
+
+    .revenue-card {
+      margin-top: 22px;
+      padding: 22px 24px;
+      border: 1px solid rgba(201, 168, 76, 0.28);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(201, 168, 76, 0.08), rgba(255,255,255,0.02));
+      animation: resIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+    }
+    .revenue-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .revenue-value { font-family: var(--font-head); font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1; color: var(--gold-light); font-variant-numeric: tabular-nums; }
+    .revenue-note { margin-top: 10px; font-size: 0.86rem; color: var(--text-2); line-height: 1.65; }
+
     .res-plan-label {
       margin: 38px 0 16px;
       font-size: 0.78rem; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent);
@@ -1478,6 +1491,12 @@
             </div>
           </div>
 
+          <div class="revenue-card" id="revenueCard">
+            <div class="revenue-label">Estimated Monthly Revenue at Risk</div>
+            <div class="revenue-value" id="revenueValue">–</div>
+            <div class="revenue-note" id="revenueNote">Calculated from your lead source and response-time risk using conservative default assumptions. Validate with the ROI calculator for exact numbers.</div>
+          </div>
+
           <div class="res-plan-label">Your AI Automation Blueprint</div>
 
           <div id="recList"></div>
@@ -1847,6 +1866,16 @@
       fast:      { pct: 20, label: 'Low Risk',    cls: 'low' }
     };
 
+
+    function estimateMonthlyLoss(a, risk) {
+      const ticket = { home: 650, realestate: 2500, medical: 350, ecom: 120, other: 500 }[a.industry] || 500;
+      const monthlyLeads = { calls: 55, web: 42, whatsapp: 36, referrals: 24 }[a.source] || 36;
+      const closeRate = { voicemail: 0.18, nextday: 0.16, hours: 0.14, fast: 0.08 }[a.response] || 0.12;
+      const riskFactor = risk.pct / 100;
+      return Math.round(monthlyLeads * closeRate * ticket * riskFactor);
+    }
+    function money(n) { return '$' + Math.max(0, n).toLocaleString(); }
+
     function showResults() {
       const a = state;
       const industryLabel = LABELS.industry[a.industry] || 'Other';
@@ -1884,6 +1913,10 @@
       const fill = $('riskFill');
       fill.className = 'risk-fill ' + risk.cls;
       requestAnimationFrame(() => { fill.style.width = risk.pct + '%'; });
+
+      const estimatedLoss = estimateMonthlyLoss(a, risk);
+      $('revenueValue').textContent = money(estimatedLoss) + ' / mo';
+      $('revenueNote').textContent = 'Estimate based on conservative defaults for ' + industryLabel + ', ' + LABELS.source[a.source].toLowerCase() + ', and ' + LABELS.response[a.response].toLowerCase() + ' response time. Use the ROI calculator for your exact ticket size and lead volume.';
 
       // Recommendations
       const list = $('recList');
