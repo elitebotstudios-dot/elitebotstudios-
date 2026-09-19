@@ -1824,6 +1824,30 @@
     .integration-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .integration-tags span { padding: 8px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.08); color: var(--text); background: rgba(255,255,255,0.035); font-size: .82rem; }
 
+
+    .roi-teaser-card {
+      margin-top: 58px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+      gap: clamp(28px, 4vw, 54px);
+      align-items: center;
+      padding: clamp(28px, 4vw, 52px);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 24px;
+      background: radial-gradient(circle at 18% 18%, rgba(201,168,76,0.12), transparent 38%), rgba(17,17,17,0.72);
+      box-shadow: 0 28px 90px rgba(0,0,0,0.32);
+    }
+    .roi-teaser-copy h3 { font-family: var(--font-serif); font-size: clamp(1.55rem, 3vw, 2.4rem); color: var(--text); margin-bottom: 14px; }
+    .roi-teaser-copy p { color: var(--text-2); line-height: 1.75; max-width: 650px; }
+    .roi-mini { display: grid; gap: 18px; }
+    .roi-control label { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 8px; color: var(--text); font-size: .9rem; }
+    .roi-control label span:last-child { color: var(--gold-light); font-family: var(--font-mono); }
+    .roi-control input[type="range"] { width: 100%; accent-color: var(--gold); }
+    .roi-output { padding: 22px; border-radius: 18px; border: 1px solid rgba(201,168,76,0.26); background: rgba(5,5,5,0.35); text-align: center; }
+    .roi-output span { display: block; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-2); margin-bottom: 10px; }
+    .roi-output strong { display: block; font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3.2rem); color: var(--gold-light); line-height: 1; }
+    .roi-output small { display: block; color: var(--text-2); margin-top: 10px; line-height: 1.5; }
+
     .implementation-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2229,6 +2253,8 @@
       /* Conversion/trust sections */
       .ai-answer-grid { grid-template-columns: 1fr; }
       .proof-banner { grid-template-columns: 1fr; text-align: left; }
+      .roi-teaser-card { grid-template-columns: 1fr; padding: 24px 20px; }
+
       .proof-banner .btn { width: 100%; }
       .integration-matrix { grid-template-columns: 1fr; }
       .implementation-grid { grid-template-columns: 1fr; gap: 22px; margin-top: 42px; }
@@ -3475,6 +3501,38 @@
               <div class="impl-tags"><span>Twilio SMS</span><span>CRM Sync</span><span>WhatsApp Business</span><span>OpenAI</span></div>
               <p class="impl-note">These are implementation models for demo planning; real client case studies will replace them once permission and data are available.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+           SECTION 8c: MINI ROI TEASER
+      ============================================================ -->
+      <section class="section reveal" id="roi-teaser">
+        <div class="container">
+          <div class="roi-teaser-card reveal">
+            <div class="roi-teaser-copy">
+              <span class="sec-label">Revenue Bleed Estimator</span>
+              <h3>How much revenue could slow follow-up leak each month?</h3>
+              <p>Use this quick model to estimate the cost of missed calls and slow follow-up. It assumes 25% of inquiries are exposed to after-hours or slow-response leakage, then points you to the full calculator for exact lead volume, close rate, and ticket size.</p>
+              <a href="/calculator.html" class="btn btn-outline magnetic" style="margin-top:20px;"><span class="btn-label">Open Full Detailed ROI Calculator →</span></a>
+            </div>
+            <div class="roi-mini" aria-label="Interactive revenue bleed estimator">
+              <div class="roi-control">
+                <label for="miniInquiries">Monthly Inquiries / Calls <span id="miniInquiriesValue">80</span></label>
+                <input id="miniInquiries" type="range" min="20" max="500" value="80" step="5" />
+              </div>
+              <div class="roi-control">
+                <label for="miniValue">Average Customer Value <span id="miniValueLabel">$1,200</span></label>
+                <input id="miniValue" type="range" min="100" max="5000" value="1200" step="100" />
+              </div>
+              <div class="roi-output">
+                <span>Estimated Monthly Revenue Lost to Slow Follow-Up</span>
+                <strong id="miniLoss">$24,000</strong>
+                <small>Model: monthly inquiries × 25% leakage × average customer value.</small>
+              </div>
+            </div>
           </div>
         </div>
       </section>
