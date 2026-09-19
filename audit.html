@@ -514,6 +514,11 @@
     .revenue-value { font-family: var(--font-head); font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1; color: var(--gold-light); font-variant-numeric: tabular-nums; }
     .revenue-note { margin-top: 10px; font-size: 0.86rem; color: var(--text-2); line-height: 1.65; }
 
+
+    .audit-booking-card { margin-top:22px; padding:24px 26px; border:1px solid rgba(201,168,76,.34); border-radius:18px; background:linear-gradient(135deg, rgba(201,168,76,.1), rgba(255,255,255,.02)); text-align:center; animation:resIn .6s cubic-bezier(.22,1,.36,1) .38s both; }
+    .audit-booking-card h3 { font-family:var(--font-head); color:var(--text); font-size:clamp(1.25rem,3vw,1.75rem); margin-bottom:10px; }
+    .audit-booking-card p { max-width:620px; margin:0 auto 20px; color:var(--text-2); line-height:1.7; }
+
     .res-plan-label {
       margin: 38px 0 16px;
       font-size: 0.78rem; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent);
@@ -1279,6 +1284,9 @@
        gtag.js loader + gtag('config') snippet here. The PHASE 3 event
        tracker forwards automatically once the ID is set. No invalid
        IDs load. -->
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 
 <body>
@@ -1495,6 +1503,13 @@
             <div class="revenue-label">Estimated Monthly Revenue at Risk</div>
             <div class="revenue-value" id="revenueValue">–</div>
             <div class="revenue-note" id="revenueNote">Calculated from your lead source and response-time risk using conservative default assumptions. Validate with the ROI calculator for exact numbers.</div>
+          </div>
+
+
+          <div class="audit-booking-card" id="auditBookingCard">
+            <h3>Stop The Leak: Book Your 15-Min Lead Flow Architecture Review</h3>
+            <p>We will review these exact numbers on a screen-share and show you the working system that fixes this leak within 14 days.</p>
+            <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-calendly">Claim Your Custom Blueprint on a 15-Min Call →</a>
           </div>
 
           <div class="res-plan-label">Your AI Automation Blueprint</div>
@@ -2826,6 +2841,21 @@
       }
 
       console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
+    })();
+  </script>
+
+
+  <script>
+    (function initCalendlyPopupLinks() {
+      var CALENDLY_URL = 'https://calendly.com/elitebotstudios/15min';
+      document.addEventListener('click', function (event) {
+        var link = event.target && event.target.closest ? event.target.closest('a[href="https://calendly.com/elitebotstudios/15min"], .btn-calendly') : null;
+        if (!link) return;
+        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+          event.preventDefault();
+          window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+        }
+      });
     })();
   </script>
 

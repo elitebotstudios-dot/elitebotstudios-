@@ -582,6 +582,11 @@
     /* ============================================================
        CTA
     ============================================================ */
+
+    .pilot-apply-card { margin-top:24px; padding:24px 26px; border:1px solid rgba(201,168,76,.32); border-radius:18px; background:linear-gradient(135deg,rgba(201,168,76,.09),rgba(255,255,255,.02)); text-align:center; }
+    .pilot-apply-card h3 { font-family:var(--font-head); color:var(--text); font-size:1.35rem; margin-bottom:8px; }
+    .pilot-apply-card p { color:var(--text-2); margin:0 auto 18px; max-width:620px; line-height:1.65; }
+
     .cta-section { overflow: hidden; }
     .cta-glow {
       position: absolute; bottom: -280px; left: 50%; transform: translateX(-50%);
@@ -1171,12 +1176,27 @@
       .ebs-chat-foot { padding-bottom: max(18px, env(safe-area-inset-bottom)) !important; }
     }
 
-  </style>
+  
+    .mobile-sticky-cta { display:none; }
+    @media (max-width:768px){
+      body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+      .mobile-sticky-cta { position:fixed; left:0; right:0; bottom:0; z-index:1140; display:flex; gap:10px; align-items:center; padding:10px 14px max(10px, env(safe-area-inset-bottom)); background:rgba(5,5,5,.92); -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); border-top:1px solid rgba(201,168,76,.28); box-shadow:0 -16px 50px rgba(0,0,0,.45); }
+      .mobile-sticky-cta a { flex:1; min-height:46px; display:inline-flex; align-items:center; justify-content:center; border-radius:999px; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; text-align:center; }
+      .mobile-sticky-cta .sticky-book { background:var(--gradient, linear-gradient(100deg,#e8d48b 0%,#c9a84c 55%,#a07c2a 100%)); color:#0a0a0a; }
+      .mobile-sticky-cta .sticky-audit { border:1px solid rgba(201,168,76,.48); color:var(--gold-light,#e8d48b); }
+      .ebs-chat-fab { bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
+      .ebs-backtop { bottom: calc(156px + env(safe-area-inset-bottom)) !important; }
+    }
+
+</style>
   <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
        When you have a real GA4 Measurement ID, paste the standard
        gtag.js loader + gtag('config') snippet here. The PHASE 3 event
        tracker forwards automatically once the ID is set. No invalid
        IDs load. -->
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 
 <body>
@@ -1423,6 +1443,13 @@
             Actual results vary by business.
           </p>
         </div>
+
+        <div class="pilot-apply-card glass reveal" style="--d:.35s" id="pilotApplyCard">
+          <h3>Apply These Numbers to a Free 14-Day Pilot</h3>
+          <p>Recover your estimated <strong id="pilotLossText">$3,600</strong> with our 14-day zero-risk implementation.</p>
+          <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-calendly">Apply These Numbers to a Free 14-Day Pilot →</a>
+        </div>
+
       </div>
     </section>
 
@@ -1549,6 +1576,7 @@
       aiBar: $('aiBar'),
       deltaChip: $('deltaChip'),
       ctaAmount: $('ctaAmount'),
+      pilotLossText: $('pilotLossText'),
       realityCard: $('realityCard'),
       impactCard: $('impactCard')
     };
@@ -1588,6 +1616,7 @@
 
       // CTA
       tween(el.ctaAmount, v.recRev, money, 750);
+      if (el.pilotLossText) tween(el.pilotLossText, v.recRev, money, 750);
 
       // Pulse cards on change
       [el.realityCard, el.impactCard].forEach(card => {
@@ -2522,6 +2551,27 @@
       console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
     })();
   </script>
+
+
+  <script>
+    (function initCalendlyPopupLinks() {
+      var CALENDLY_URL = 'https://calendly.com/elitebotstudios/15min';
+      document.addEventListener('click', function (event) {
+        var link = event.target && event.target.closest ? event.target.closest('a[href="https://calendly.com/elitebotstudios/15min"], .btn-calendly') : null;
+        if (!link) return;
+        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+          event.preventDefault();
+          window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+        }
+      });
+    })();
+  </script>
+
+
+  <div class="mobile-sticky-cta" id="mobileStickyCta" aria-label="Mobile conversion actions">
+    <a class="sticky-book btn-calendly" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book 15-Min Call</a>
+    <a class="sticky-audit" href="/audit.html">Free Audit</a>
+  </div>
 
 </body>
 </html>

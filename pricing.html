@@ -944,7 +944,19 @@
       .ebs-chat-foot { padding-bottom: max(18px, env(safe-area-inset-bottom)) !important; }
     }
 
-  </style>
+  
+    .mobile-sticky-cta { display:none; }
+    @media (max-width:768px){
+      body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+      .mobile-sticky-cta { position:fixed; left:0; right:0; bottom:0; z-index:1140; display:flex; gap:10px; align-items:center; padding:10px 14px max(10px, env(safe-area-inset-bottom)); background:rgba(5,5,5,.92); -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); border-top:1px solid rgba(201,168,76,.28); box-shadow:0 -16px 50px rgba(0,0,0,.45); }
+      .mobile-sticky-cta a { flex:1; min-height:46px; display:inline-flex; align-items:center; justify-content:center; border-radius:999px; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; text-align:center; }
+      .mobile-sticky-cta .sticky-book { background:var(--gradient, linear-gradient(100deg,#e8d48b 0%,#c9a84c 55%,#a07c2a 100%)); color:#0a0a0a; }
+      .mobile-sticky-cta .sticky-audit { border:1px solid rgba(201,168,76,.48); color:var(--gold-light,#e8d48b); }
+      .ebs-chat-fab { bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
+      .ebs-backtop { bottom: calc(156px + env(safe-area-inset-bottom)) !important; }
+    }
+
+</style>
   <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
        When you have a real GA4 Measurement ID, paste the standard
        gtag.js loader + gtag('config') snippet here. The PHASE 3 event
@@ -2152,6 +2164,12 @@
       });
     })();
   </script>
+
+
+  <div class="mobile-sticky-cta" id="mobileStickyCta" aria-label="Mobile conversion actions">
+    <a class="sticky-book btn-calendly" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book 15-Min Call</a>
+    <a class="sticky-audit" href="/audit.html">Free Audit</a>
+  </div>
 
 </body>
 </html>

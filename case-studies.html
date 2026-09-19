@@ -224,6 +224,10 @@
     }
 
     /* ---- Case study cards ---- */
+
+    .case-proof-badge { display:inline-flex; margin:0 auto 22px; padding:9px 14px; border:1px solid rgba(201,168,76,.34); border-radius:999px; color:var(--gold-light); background:rgba(201,168,76,.07); font-family:var(--font-mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; }
+    .modal-build-cta { margin:24px 0 6px; display:inline-flex; }
+
     .cs-card { overflow: hidden; display: flex; flex-direction: column; }
     .cs-top {
       padding: 22px 24px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
@@ -969,7 +973,19 @@
       .ebs-chat-foot { padding-bottom: max(18px, env(safe-area-inset-bottom)) !important; }
     }
 
-  </style>
+  
+    .mobile-sticky-cta { display:none; }
+    @media (max-width:768px){
+      body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+      .mobile-sticky-cta { position:fixed; left:0; right:0; bottom:0; z-index:1140; display:flex; gap:10px; align-items:center; padding:10px 14px max(10px, env(safe-area-inset-bottom)); background:rgba(5,5,5,.92); -webkit-backdrop-filter:blur(18px); backdrop-filter:blur(18px); border-top:1px solid rgba(201,168,76,.28); box-shadow:0 -16px 50px rgba(0,0,0,.45); }
+      .mobile-sticky-cta a { flex:1; min-height:46px; display:inline-flex; align-items:center; justify-content:center; border-radius:999px; font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; text-align:center; }
+      .mobile-sticky-cta .sticky-book { background:var(--gradient, linear-gradient(100deg,#e8d48b 0%,#c9a84c 55%,#a07c2a 100%)); color:#0a0a0a; }
+      .mobile-sticky-cta .sticky-audit { border:1px solid rgba(201,168,76,.48); color:var(--gold-light,#e8d48b); }
+      .ebs-chat-fab { bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
+      .ebs-backtop { bottom: calc(156px + env(safe-area-inset-bottom)) !important; }
+    }
+
+</style>
   <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
        When you have a real GA4 Measurement ID, paste the standard
        gtag.js loader + gtag('config') snippet here. The PHASE 3 event
@@ -1015,6 +1031,9 @@
   ]
 }
   </script>
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </head>
 <body>
   <!-- Accessibility: skip straight to content -->
@@ -1070,10 +1089,11 @@
 
     <section class="section" style="padding-top:0;">
       <div class="container">
-        <div class="filters" role="tablist" aria-label="Filter case studies">
+        <div style="text-align:center;"><span class="case-proof-badge">Modeled Architectures Designed for Immediate Deployment</span></div>
+        <div class="filters" role="tablist" aria-label="Filter by Industry">
           <button class="filter-chip active" data-filter="All" role="tab" aria-selected="true">All</button>
-          <button class="filter-chip" data-filter="Home Services" role="tab" aria-selected="false">Home Services</button>
-          <button class="filter-chip" data-filter="Healthcare" role="tab" aria-selected="false">Healthcare</button>
+          <button class="filter-chip" data-filter="Home Services" role="tab" aria-selected="false">HVAC &amp; Home Services</button>
+          <button class="filter-chip" data-filter="Healthcare" role="tab" aria-selected="false">Healthcare &amp; Dental</button>
           <button class="filter-chip" data-filter="Real Estate" role="tab" aria-selected="false">Real Estate</button>
           <button class="filter-chip" data-filter="Legal" role="tab" aria-selected="false">Legal</button>
           <button class="filter-chip" data-filter="E-Commerce" role="tab" aria-selected="false">E-Commerce</button>
@@ -1237,6 +1257,7 @@
         <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Discovery call + system map</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 3</span>: <span class="d">AI responses live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 7</span>: <span class="d">Calendar booking live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 21</span>: <span class="d">First full ROI report</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">$47K recovered</span></div></div></div>
       </div>
 
+      <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-build-cta btn-calendly">Build This System For My Business →</a>
       <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
     </div>
   </div>
@@ -1283,6 +1304,7 @@
         <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Discovery + compliance review</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 4</span>: <span class="d">AI receptionist live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 10</span>: <span class="d">Calendar sync</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">Reminders + rebooking</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 60</span>: <span class="d">-62% no-shows</span></div></div></div>
       </div>
 
+      <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-build-cta btn-calendly">Build This System For My Business →</a>
       <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
     </div>
   </div>
@@ -1329,6 +1351,7 @@
         <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Portal + CRM audit</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 3</span>: <span class="d">AI response live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 8</span>: <span class="d">Routing + calendars</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 14</span>: <span class="d">Nurture sequences</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 90</span>: <span class="d">$310K closed</span></div></div></div>
       </div>
 
+      <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-build-cta btn-calendly">Build This System For My Business →</a>
       <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
     </div>
   </div>
@@ -1375,6 +1398,7 @@
         <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Intake compliance review</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 3</span>: <span class="d">AI intake live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 10</span>: <span class="d">Calendar sync</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">+52% intakes</span></div></div></div>
       </div>
 
+      <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-build-cta btn-calendly">Build This System For My Business →</a>
       <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
     </div>
   </div>
@@ -1421,6 +1445,7 @@
         <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Policy + FAQ ingestion</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 4</span>: <span class="d">AI support live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 12</span>: <span class="d">Cart-recovery flows</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">+19% recovered carts</span></div></div></div>
       </div>
 
+      <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-build-cta btn-calendly">Build This System For My Business →</a>
       <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
     </div>
   </div>
@@ -1467,6 +1492,7 @@
         <div class="m-timeline"><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 1</span>: <span class="d">Catalog + pricing session</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 4</span>: <span class="d">AI answering live</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 10</span>: <span class="d">Calendar sync</span></div></div><div class="m-tl-item"><span class="m-tl-dot"></span><div><span class="t">Day 30</span>: <span class="d">+29% booked jobs</span></div></div></div>
       </div>
 
+      <a href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-build-cta btn-calendly">Build This System For My Business →</a>
       <div class="modal-note">Demo Case Studies. Names, figures, and quotes on this page are illustrative examples, not client results. Real client stories will replace them once engagements go live.</div>
     </div>
   </div>
@@ -2425,6 +2451,27 @@
       console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
     })();
   </script>
+
+
+  <script>
+    (function initCalendlyPopupLinks() {
+      var CALENDLY_URL = 'https://calendly.com/elitebotstudios/15min';
+      document.addEventListener('click', function (event) {
+        var link = event.target && event.target.closest ? event.target.closest('a[href="https://calendly.com/elitebotstudios/15min"], .btn-calendly') : null;
+        if (!link) return;
+        if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+          event.preventDefault();
+          window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+        }
+      });
+    })();
+  </script>
+
+
+  <div class="mobile-sticky-cta" id="mobileStickyCta" aria-label="Mobile conversion actions">
+    <a class="sticky-book btn-calendly" href="https://calendly.com/elitebotstudios/15min" target="_blank" rel="noopener noreferrer">Book 15-Min Call</a>
+    <a class="sticky-audit" href="/audit.html">Free Audit</a>
+  </div>
 
 </body>
 </html>
