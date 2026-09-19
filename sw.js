@@ -4,7 +4,7 @@
    Precaching is resilient: a missing file (e.g. an icon not yet
    uploaded to the web root) cannot break the whole cache install.
 ============================================================ */
-const CACHE_VERSION = 'ebs-v21';
+const CACHE_VERSION = 'ebs-v22';
 const PRECACHE = [
   '/',
   '/index.html',
@@ -22,6 +22,9 @@ const PRECACHE = [
   '/blog/article-6.html',
   '/blog/article-7.html',
   '/blog/article-8.html',
+  '/blog/article-9.html',
+  '/blog/article-10.html',
+  '/blog/article-11.html',
   '/privacy.html',
   '/terms.html',
   '/cookies.html',
@@ -37,7 +40,10 @@ const PRECACHE = [
   '/blog/img/article-5.svg',
   '/blog/img/article-6.svg',
   '/blog/img/article-7.svg',
-  '/blog/img/article-8.svg'
+  '/blog/img/article-8.svg',
+  '/blog/img/article-9.svg',
+  '/blog/img/article-10.svg',
+  '/blog/img/article-11.svg'
 ];
 
 self.addEventListener('install', (event) => {

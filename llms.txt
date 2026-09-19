@@ -40,6 +40,11 @@
 - [Real Estate Automation: 10 Systems Agents Need](https://elitebotstudios.me/blog/article-7.html): Lists real estate workflows for inquiry response, showings, nurture, and CRM hygiene.
 - [How to Choose the Right AI Automation Agency](https://elitebotstudios.me/blog/article-8.html): Provides a buyer checklist for scope, integrations, support, security, and measurable outcomes.
 
+
+- [HVAC After-Hours Revenue Bleed](https://elitebotstudios.me/blog/article-9.html): Models how missed weekend calls create revenue leakage for home-service contractors and how missed-call text-back recovers them.
+- [GoHighLevel vs Custom n8n AI Pipelines](https://elitebotstudios.me/blog/article-10.html): Compares CRM-native automation with custom n8n AI workflows for speed-to-lead buyers.
+- [Dental Practice No-Show Elimination](https://elitebotstudios.me/blog/article-11.html): Explains two-way SMS reminders, rescheduling, and clinic scheduling automation for no-show reduction.
+
 ## FAQ
 
 - Q: What do you automate? A: Lead response, follow-up, appointment booking, missed-call recovery, customer support, and the repetitive workflows your team does by hand.
