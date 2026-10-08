@@ -55,17 +55,41 @@ build step — pushing to `main` deploys the files as they are.
 
 ### Cache behaviour
 
+The stylesheet, the scripts, the hero assets and the favicons are **not**
+served under fixed filenames. The page generator appends a content hash:
+
+```html
+<link rel="stylesheet" href="/assets/site.css?v=a0ceec94" />
+```
+
+`build.asset(path)` computes the first 8 hex characters of the file's SHA-256
+and appends them. A changed file therefore gets a new URL and is fetched
+immediately; an unchanged file is never re-downloaded, which is what makes the
+long TTLs below safe.
+
 | Path | Policy |
 |---|---|
-| `/assets/*` | 7 days, `stale-while-revalidate` |
-| `/assets/hero-atlas.webp` | 1 year, immutable |
+| `/assets/site.css?v=…` | 1 day, `stale-while-revalidate` 7 days |
+| `/assets/site.js?v=…`, `hero3d.js?v=…` | 1 day |
+| `/assets/hero-atlas.webp?v=…`, posters | 1 day |
+| other `/assets/*` | 1 day |
 | `/projects.json` | 5 minutes |
 | `/sw.js` | `no-store`, so updates always land |
 | HTML | network first via the service worker |
 
+`og:image` and the `schema.org` logo are deliberately left unversioned: they
+are read by crawlers, and schema.org expects a stable logo URL.
+
+**This matters more than it looks.** Shortening a TTL does not evict what a
+CDN has already stored. Before fingerprinting was added, a stylesheet fix
+deployed correctly to the origin while remaining invisible to anyone with a
+warm cache — the header said 7 days, so the edge held the old file for 7 days.
+If you ever add a new asset that pages reference directly, give it a `?v=`
+too via `build.asset()`, or it will have the same problem.
+
 Because the service worker is network-first for navigation, edited pages
 appear on reload. If a stale page ever sticks, bump `CACHE_VERSION` in
-`sw.js` (`ebs-v27` → `ebs-v28`).
+`sw.js` (`ebs-v28` → `ebs-v29`).
 
 ---
 
@@ -97,6 +121,24 @@ Everything published must be **actually built and actually measured**.
   ```
 
 ---
+
+## Regenerating the pages
+
+The HTML files are generated, so edit the generator and rebuild rather than
+editing a page by hand — a hand edit is lost the next time the generator runs.
+
+```bash
+python3 ../tools/pages.py          # services, projects, lab, about, contact, legal, 404
+python3 ../tools/build_index.py    # homepage — carries the hero across
+```
+
+`tools/` sits outside the repo on purpose: it is a build system, not something
+the deployed site should ship. Running both scripts twice produces
+byte-identical output, so it is safe to re-run.
+
+`build_index.py` asserts that the hero canvas, the JSON-LD block, the image
+alt text and every fingerprinted reference are present before it writes. If a
+future edit drops one, the build fails instead of shipping a broken homepage.
 
 ## Local development
 
