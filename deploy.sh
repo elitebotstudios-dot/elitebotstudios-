@@ -1,24 +1,38 @@
 #!/usr/bin/env bash
-# Push the site to GitHub without ever writing the token to disk.
+# Push the site to GitHub. The token is read from a file outside the repo and
+# is never written into the repository, logged, or committed.
 #
-#   1. Create a token at https://github.com/settings/tokens
-#      Scope needed: repo  (classic), or Contents: Read and write (fine-grained)
-#   2. Run:
-#        GITHUB_TOKEN=<your-token> ./deploy.sh
+#   ./deploy.sh                  uses ~/.deploy-token
+#   GITHUB_TOKEN=xxx ./deploy.sh uses the token from the environment instead
 #
-# The token is read from the environment, used for this one push, and the
-# temporary askpass helper is removed on exit. Nothing is logged.
+# The token needs: repo (classic) or Contents: Read and write (fine-grained).
 set -euo pipefail
 
+REPO_URL="https://github.com/elitebotstudios-dot/elitebotstudios-.git"
+TOKEN_FILE="${HOME}/.deploy-token"
+
 if [ -z "${GITHUB_TOKEN:-}" ]; then
-  echo "GITHUB_TOKEN is not set. Run:  GITHUB_TOKEN=xxx ./deploy.sh" >&2
-  exit 1
+  if [ -f "$TOKEN_FILE" ]; then
+    GITHUB_TOKEN="$(tr -d '\n\r' < "$TOKEN_FILE")"
+  else
+    echo "No token. Either create ${TOKEN_FILE} (mode 600) or run:" >&2
+    echo "  GITHUB_TOKEN=xxx ./deploy.sh" >&2
+    exit 1
+  fi
+fi
+export GITHUB_TOKEN
+
+# The origin remote is not stored in this workspace's snapshot, so re-add it if
+# it has gone missing rather than failing with a confusing git error.
+if ! git remote get-url origin >/dev/null 2>&1; then
+  echo "→ restoring the origin remote…"
+  git remote add origin "$REPO_URL"
 fi
 
 ASKPASS="$(mktemp)"
 trap 'rm -f "$ASKPASS"' EXIT
-# git asks for a username first, then a password. GitHub wants any non-empty
-# username with the token as the password, so answer each prompt correctly.
+# git prompts for a username, then a password. GitHub accepts any non-empty
+# username with the token as the password.
 cat > "$ASKPASS" <<'EOS'
 #!/bin/sh
 case "$1" in
@@ -28,18 +42,33 @@ esac
 EOS
 chmod 700 "$ASKPASS"
 
-echo "→ pushing main…"
-GIT_ASKPASS="$ASKPASS" \
-GIT_TERMINAL_PROMPT=0 \
-  git -c credential.helper= \
-      push origin main
+echo "→ fetching…"
+GIT_ASKPASS="$ASKPASS" GIT_TERMINAL_PROMPT=0 git -c credential.helper= \
+  fetch origin main --quiet
 
-echo "→ pushed. Vercel will build from main."
+BEHIND="$(git rev-list --count HEAD..origin/main 2>/dev/null || echo 0)"
+AHEAD="$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)"
+echo "   $AHEAD to push, $BEHIND to pull"
+
+if [ "$BEHIND" != "0" ]; then
+  echo "→ remote has commits we do not have; fast-forwarding…"
+  git merge --ff-only origin/main
+fi
+
+if [ "$AHEAD" = "0" ] && [ "$BEHIND" = "0" ]; then
+  echo "→ nothing to push. Production is already at $(git rev-parse --short HEAD)"
+  exit 0
+fi
+
+echo "→ pushing main…"
+GIT_ASKPASS="$ASKPASS" GIT_TERMINAL_PROMPT=0 git -c credential.helper= \
+  push origin main
+
+echo "→ pushed $(git rev-parse --short HEAD). Vercel builds from main."
 echo
-echo "If the deployment does not appear within a couple of minutes, the Hobby-plan"
-echo "author check has blocked it. Fix with an empty deploy-trigger commit by the"
-echo "Vercel-authorised account:"
+echo "If no deployment appears within a few minutes, the Hobby-plan author check"
+echo "blocked it. Fix with an empty commit by the Vercel-authorised account:"
 echo
-echo "  git commit --allow-empty -m 'chore: trigger deployment' \\"
+echo "  git commit --allow-empty -q -m 'chore: trigger deployment' \\"
 echo "    --author='elitebotstudios-dot <317663787+elitebotstudios-dot@users.noreply.github.com>'"
-echo "  GITHUB_TOKEN=<token> ./deploy.sh"
+echo "  ./deploy.sh"
