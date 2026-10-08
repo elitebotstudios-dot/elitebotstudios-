@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>Terms of Use | Elite Bot Studios</title>
-  <meta name="description" content="Terms covering use of elitebotstudios.me and published engineering content." />
-  <link rel="canonical" href="https://elitebotstudios.me/terms.html" />
+  <title>From simulation to silicon: how every build starts | Elite Bot Studios Lab Log</title>
+  <meta name="description" content="Why a working simulation is the beginning of the work, not the end of it." />
+  <link rel="canonical" href="https://elitebotstudios.me/lab/simulation-to-silicon.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Elite Bot Studios" />
-  <meta property="og:title" content="Terms of Use | Elite Bot Studios" />
-  <meta property="og:description" content="Terms covering use of elitebotstudios.me and published engineering content." />
-  <meta property="og:url" content="https://elitebotstudios.me/terms.html" />
+  <meta property="og:title" content="From simulation to silicon: how every build starts | Elite Bot Studios Lab Log" />
+  <meta property="og:description" content="Why a working simulation is the beginning of the work, not the end of it." />
+  <meta property="og:url" content="https://elitebotstudios.me/lab/simulation-to-silicon.html" />
   <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Terms of Use | Elite Bot Studios" />
-  <meta name="twitter:description" content="Terms covering use of elitebotstudios.me and published engineering content." />
+  <meta name="twitter:title" content="From simulation to silicon: how every build starts | Elite Bot Studios Lab Log" />
+  <meta name="twitter:description" content="Why a working simulation is the beginning of the work, not the end of it." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
 
   <link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" />
@@ -36,7 +36,25 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-HLQ4G5HBMZ');
-  </script></head>
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "From simulation to silicon: how every build starts",
+  "datePublished": "2026-10-04",
+  "author": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "mainEntityOfPage": "https://elitebotstudios.me/lab/simulation-to-silicon.html"
+}
+  </script>
+</head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -49,7 +67,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="/services.html">Services</a>
         <a href="/projects.html">Projects</a>
-        <a href="/lab.html">Lab Log</a>
+        <a href="/lab.html" aria-current="page">Lab Log</a>
         <a href="/about.html">About</a>
       </nav>
       <div class="nav-actions">
@@ -64,7 +82,7 @@
         <ul>
           <li><a href="/services.html">Services</a></li>
           <li><a href="/projects.html">Projects</a></li>
-          <li><a href="/lab.html">Lab Log</a></li>
+          <li><a href="/lab.html" aria-current="page">Lab Log</a></li>
           <li><a href="/about.html">About</a></li>
           <li><a href="/contact.html">Contact</a></li>
         </ul>
@@ -74,52 +92,52 @@
 
   <main id="main">
 
-    <section class="page-head">
-      <div class="wrap">
-        <span class="eyebrow">Legal</span>
-        <h1>Terms of Use</h1>
-        <p>Last updated: 8 October 2026.</p>
+    <article>
+      <header class="post-head">
+        <div class="wrap">
+          <a class="backlink" href="/lab.html">&larr; Lab Log</a>
+          <h1>From simulation to silicon: how every build starts</h1>
+          <div class="post-meta"><time datetime="2026-10-04">2026-10-04</time><span>Elite Bot Studios</span></div>
+          <div class="chips"><span class="chip">method</span><span class="chip">kicad</span><span class="chip">bench</span></div>
+        </div>
+      </header>
+      <div class="section">
+        <div class="wrap">
+          <div class="prose reveal">
+<p>A simulation is a set of assumptions that are convenient to believe. It is also the cheapest place
+to be wrong. So every build here starts in a simulator — and none of them ends there.</p>
+
+<p>The first pass happens on paper and in SPICE. For a power stage that means the topology, the switching
+frequency, the inductor value, and the expected duty cycle. For a digital design it means the pin map, the bus
+assignments, and the timing budget. This stage is fast and almost free, and it eliminates the mistakes that would
+otherwise cost a board spin.</p>
+
+<p>The second pass happens in the schematic. Every part gets a real manufacturer part number, a package, a
+derating check, and a supplier with stock. A design that works only with parts nobody can buy is not a design.
+This is also where the schematic is reviewed as a drawing by someone trying to find the error, not as a
+description of intent.</p>
+
+<p>The third pass is the bench, and this is the one that actually decides whether a build ships. Real converters
+warm up, real transients ring, and real grounds are not equipotential. Measurements go into the log with the
+conditions they were taken under: input voltage, load, ambient temperature, instrument.</p>
+
+<p>Only then does a build get published. The rule is simple: if it has not been measured on the bench, it does not
+appear as a result. Expected numbers are labelled as expected.</p>
+          </div>
+        </div>
       </div>
-    </section>
+    </article>
+
     <section class="section">
       <div class="wrap">
-        <div class="prose">
-          <p>These terms cover use of elitebotstudios.me. They are not the contract for engineering work — that is
-             a separate written agreement covering scope, price, and deliverables.</p>
-
-          <h2>Using this site</h2>
-          <p>The content here is provided for information. You may read it, link to it, and quote short extracts
-             with attribution.</p>
-
-          <h2>Content accuracy</h2>
-          <p>Technical content reflects work actually performed and measured by the studio. Where a figure is
-             expected or simulated rather than measured, it is labelled as such. Nothing here is a guarantee that
-             a design will behave identically in your environment; results depend on your board, components,
-             power supply, and operating conditions.</p>
-
-          <h2>No warranty on published designs</h2>
-          <p>Schematics, firmware, and calculations published on this site are shared for reference. If you build
-             from them, you do so at your own risk, and you are responsible for verifying safety, regulatory
-             compliance, and suitability for your application.</p>
-
-          <h2>Engineering work</h2>
-          <p>Client engagements are governed by a separate written agreement. Nothing on this website constitutes
-             an offer, a quotation, or a binding commitment to deliver work.</p>
-
-          <h2>Intellectual property</h2>
-          <p>Site content, branding, and the studio's own reference designs belong to Elite Bot Studios. Client
-             work is owned as set out in the relevant agreement.</p>
-
-          <h2>Limitation of liability</h2>
-          <p>To the extent permitted by law, Elite Bot Studios is not liable for indirect or consequential loss
-             arising from use of this website or of any material published on it.</p>
-
-          <h2>Governing law</h2>
-          <p data-owner="TODO">Owner to confirm the governing jurisdiction with a qualified adviser. Do not
-             publish a jurisdiction that has not been legally confirmed.</p>
-
-          <h2>Contact</h2>
-          <p><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></p>
+        <div class="reveal" style="max-width:600px">
+          <span class="label">Next</span>
+          <h2 style="font-size:clamp(1.4rem,3.6vw,1.8rem);margin:12px 0 14px">Have a build in mind?</h2>
+          <p style="color:var(--muted)">Describe the problem and you will get a scope, a parts list, and a fixed price.</p>
+          <div class="hero-ctas" style="margin-top:24px">
+            <a class="btn btn-primary" href="/contact.html">Start a Project</a>
+            <a class="btn btn-ghost" href="/lab.html">More Lab Notes</a>
+          </div>
         </div>
       </div>
     </section>

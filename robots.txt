@@ -1,12 +1,12 @@
 # Elite Bot Studios — robots.txt
-# Generated 2026-08-21 · updated 2026-08-22 (AI crawler policy)
+# Updated 2026-10-08 (studio direction change)
 
 User-agent: *
 Allow: /
 
-# Block nothing — the whole site is indexable
+# The whole site is indexable. No paths are disallowed.
 
-# Explicitly allow AI answer-engine crawlers (visibility policy)
+# AI answer-engine crawlers are explicitly welcome.
 User-agent: GPTBot
 Allow: /
 

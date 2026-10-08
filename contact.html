@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Contact — Start an Embedded Hardware Project | Elite Bot Studios</title>
+  <meta name="description" content="Send a project brief for firmware, PCB design, IoT prototyping, or power electronics. Replies within 48 hours, usually faster with a clear description." />
+  <link rel="canonical" href="https://elitebotstudios.me/contact.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="Contact — Start an Embedded Hardware Project | Elite Bot Studios" />
+  <meta property="og:description" content="Send a project brief for firmware, PCB design, IoT prototyping, or power electronics. Replies within 48 hours, usually faster with a clear description." />
+  <meta property="og:url" content="https://elitebotstudios.me/contact.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact — Start an Embedded Hardware Project | Elite Bot Studios" />
+  <meta name="twitter:description" content="Send a project brief for firmware, PCB design, IoT prototyping, or power electronics. Replies within 48 hours, usually faster with a clear description." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+
+  <link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0A0E13" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <script>
+    /* Client-side validation only. The handler below is a placeholder: the owner
+       must point it at a real endpoint before this form can deliver mail. */
+    (function contactForm(){
+      var form = document.getElementById('contactForm');
+      if (!form) return;
+      var status = document.getElementById('formStatus');
+
+      function fieldOf(el){ return el.closest('.field'); }
+      function setError(el, msg){
+        var f = fieldOf(el);
+        if (!f) return;
+        var e = f.querySelector('.err');
+        el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+        if (e) e.textContent = msg || '';
+      }
+      function validate(el){
+        var v = (el.value || '').trim();
+        if (el.required && !v) { setError(el, 'This field is required.'); return false; }
+        if (el.type === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+          setError(el, 'Enter a valid email address.'); return false;
+        }
+        if (el.tagName === 'TEXTAREA' && v && v.length < 20) {
+          setError(el, 'Please give at least a sentence or two (20+ characters).'); return false;
+        }
+        setError(el, ''); return true;
+      }
+
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name) return;
+        el.addEventListener('blur', function () { validate(el); });
+        el.addEventListener('input', function () {
+          if (el.getAttribute('aria-invalid') === 'true') validate(el);
+        });
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var ok = true, first = null;
+        Array.prototype.forEach.call(form.elements, function (el) {
+          if (!el.name) return;
+          if (!validate(el)) { ok = false; if (!first) first = el; }
+        });
+        if (!ok) {
+          status.textContent = 'Please correct the highlighted fields.';
+          status.style.color = '#E5726B';
+          if (first) first.focus();
+          return;
+        }
+        /* data-owner="TODO": replace with a real submission endpoint, e.g.
+           fetch('https://…', {method:'POST', body:new FormData(form)}) */
+        status.style.color = 'var(--amber)';
+        status.textContent = 'Validated. Delivery is not connected yet — please email ' + EMAIL
+                           + ' directly and your details will be answered within 48 hours.';
+      });
+    }());
+  </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HLQ4G5HBMZ');
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Elite Bot Studios",
+  "url": "https://elitebotstudios.me",
+  "email": "contact@elitebotstudios.me",
+  "description": "An engineering studio that designs, builds, and tests embedded hardware \u2014 from firmware to finished PCB \u2014 delivered fully remotely.",
+  "areaServed": "Worldwide",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Rawalpindi",
+    "addressRegion": "Punjab",
+    "addressCountry": "PK"
+  },
+  "knowsAbout": [
+    "Embedded firmware",
+    "PCB design",
+    "IoT prototyping",
+    "Power electronics",
+    "ESP32",
+    "STM32",
+    "FreeRTOS",
+    "KiCad"
+  ],
+  "foundingDate": "2026-10"
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/" aria-label="Elite Bot Studios — home">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#2DD4BF">EB</text></svg>
+        <span class="brand-word">EliteBotStudios</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/services.html">Services</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/lab.html">Lab Log</a>
+        <a href="/about.html">About</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-amber" href="/contact.html">Contact</a>
+        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" data-open="false">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/lab.html">Lab Log</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head">
+      <div class="wrap">
+        <span class="eyebrow">Contact</span>
+        <h1>Describe the problem. Get a scope.</h1>
+        <p>Replies within 48 hours — usually much faster with a clear project description.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="notice" data-owner="TODO">
+          <div>
+            <b>Form handler pending</b>
+            <p>The form below validates your input but is not yet connected to a mail service. Until it is,
+               please send the same details directly to <!--email_off--><a href="mailto:contact@elitebotstudios.me"
+               style="color:var(--teal)">contact@elitebotstudios.me</a><!--/email_off-->. The owner must set a real
+               endpoint in <code>contact.html</code> (marked <code>data-owner="TODO"</code>).</p>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div>
+            <form id="contactForm" novalidate data-owner="TODO">
+              <div class="field">
+                <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+                <input id="name" name="name" type="text" autocomplete="name" required />
+                <span class="err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+                <span class="err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="ptype">Project type <span class="req" aria-hidden="true">*</span></label>
+                <select id="ptype" name="project_type" required>
+                  <option value="">Select one…</option>
+                  <option>Firmware</option>
+                  <option>PCB</option>
+                  <option>IoT</option>
+                  <option>Power</option>
+                  <option>Other</option>
+                </select>
+                <span class="err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="budget">Budget range</label>
+                <select id="budget" name="budget">
+                  <option value="">Prefer not to say</option>
+                  <option>Under $500</option>
+                  <option>$500 – $1,500</option>
+                  <option>$1,500 – $5,000</option>
+                  <option>$5,000+</option>
+                </select>
+                <span class="err" role="alert" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="desc">Project description <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="desc" name="description" required
+                  placeholder="What should the device do, what does it connect to, and what does done look like?"></textarea>
+                <span class="err" role="alert" aria-live="polite"></span>
+              </div>
+              <button class="btn btn-primary" type="submit">Send Project Brief</button>
+              <p class="form-note" id="formStatus" role="status" aria-live="polite">
+                Replies within 48 hours. Your details are used only to answer this enquiry.
+              </p>
+            </form>
+          </div>
+
+          <aside class="contact-aside">
+            <div class="info-block">
+              <h3>Direct email</h3>
+              <p><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></p>
+              <p style="margin-top:10px;font-size:13px;color:var(--faint)">Fastest route if the form is unavailable.</p>
+            </div>
+            <div class="info-block">
+              <h3>What to include</h3>
+              <p>The behaviour the device must have, any constraints (size, power, cost, existing hardware), and
+                 your target date. A rough sketch or photo of an existing setup helps.</p>
+            </div>
+            <div class="info-block">
+              <h3>What you get back</h3>
+              <p>A written scope, a bill of materials with supplier links, a fixed price, and a delivery date.
+                 No obligation until you approve it.</p>
+            </div>
+            <div class="info-block">
+              <h3>Where we are</h3>
+              <p>Rawalpindi, Pakistan — working worldwide. All delivery is remote, including the handover call.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-tag">Embedded Systems · Power Electronics · IoT</p>
+        <p>An engineering studio that designs, builds, and tests embedded hardware — from firmware to finished PCB — delivered fully remotely.</p>
+        <div class="social">
+          <!-- data-owner="TODO": real profile URLs required -->
+          <a href="#" data-owner="TODO" aria-label="GitHub profile — link pending" title="GitHub link pending"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" data-owner="TODO" aria-label="LinkedIn profile — link pending" title="LinkedIn link pending"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.45-2.16 2.96V21H9z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3>Studio</h3>
+        <ul class="footer-links">
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/lab.html">Lab Log</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul class="footer-links">
+          <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
+        </ul>
+        <h3 style="margin-top:22px">Legal</h3>
+        <ul class="footer-links">
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Rawalpindi, Pakistan — working worldwide.</span>
+      <span>&copy; 2026 Elite Bot Studios</span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js" defer></script>
+</body>
+</html>

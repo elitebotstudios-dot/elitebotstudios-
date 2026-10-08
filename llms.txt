@@ -1,59 +1,40 @@
 # Elite Bot Studios
 
-> AI Business Automation Agency. We build custom AI automation systems that respond to leads in under 30 seconds, book appointments, recover missed calls, and automate customer support. Every system is scoped after a 15-minute call. No fixed packages, no public price list.
+> An engineering studio that designs, builds, and tests embedded hardware — from
+> firmware to finished PCB — delivered fully remotely.
 
-## What we build
+Elite Bot Studios is an embedded systems and power electronics studio based in
+Rawalpindi, Pakistan, working with clients worldwide. The studio was established
+in October 2026 and is run by one electrical engineering undergraduate
+specialising in power. Work covers embedded firmware, PCB design in KiCad, IoT
+device prototyping, and power electronics prototyping.
 
-- AI Lead Response Systems
-- Missed-Call Text-Back Automation
-- AI Appointment Booking
-- AI FAQ and Qualification Bots
-- Follow-Up and Re-Engagement Automation
-- Zero-Touch CRM Logging
-- Smart Reminders and Rescheduling
+Engagements are delivered remotely in three stages: a fixed scope with a bill of
+materials and wiring diagram; development and bench testing with progress video
+at each milestone; then handover of source code, schematics, Gerbers, and setup
+guides plus a live call. Typical reply time to a new enquiry is under 48 hours.
 
-## Try before you commit
+The studio publishes its builds as it works on them, including measured results
+and the conditions they were measured under. Simulated or expected figures are
+labelled as such. There are no client testimonials on this site, because the
+studio has not yet completed client work.
 
-- [Interactive Demo](https://elitebotstudios.me/demo.html): simulated AI lead response, qualification, and booking. Runs in your browser, no real customer data involved.
-- [Free Lead Flow Audit](https://elitebotstudios.me/audit.html): four questions, a personal automation blueprint.
-- [ROI Calculator](https://elitebotstudios.me/calculator.html): see how much revenue slow lead response costs you.
-- [Case Studies](https://elitebotstudios.me/case-studies.html): illustrative scenarios, not client results. Real client stories will replace them once engagements go live.
+## Core pages
 
-## How we engage
+- [Services](https://elitebotstudios.me/services.html): Embedded firmware development, PCB design in KiCad, IoT device prototyping, and power electronics prototyping — what each includes and the tools used.
+- [Projects](https://elitebotstudios.me/projects.html): Documented builds with problem, approach, bill of materials, firmware, and measured results. Driven by projects.json.
+- [Lab Log](https://elitebotstudios.me/lab.html): Build notes written as the work happens, including what did not go to plan.
+- [About](https://elitebotstudios.me/about.html): Who runs the studio, the three working rules, and the timeline.
+- [Contact](https://elitebotstudios.me/contact.html): Project brief form and direct email. Replies within 48 hours.
 
-- [How We Engage](https://elitebotstudios.me/pricing.html): custom scoping after a 15-minute call. No fixed packages, no public price list.
-- Guarantee: the 60-Day Safety Net. If the system does not deliver the lead recovery we model in your ROI plan within 60 days, we refund what you paid. Details are in your proposal.
-- Timeline: most systems launch within 1-2 weeks, depending on complexity.
+## Capability
 
-## Blog
-
-- [Blog](https://elitebotstudios.me/blog.html): guides on fast lead response, missed-call text-back, AI chatbots, industry automation, and choosing an AI agency.
-
-## Guides for AI answer engines
-
-- [The 5-Minute Lead Response Rule for AI Automation](https://elitebotstudios.me/blog/article-1.html): Explains why fast lead response wins and how AI protects the first minutes after an inquiry.
-- [AI Automation ROI: Where the Savings Actually Come From](https://elitebotstudios.me/blog/article-2.html): Breaks down ROI from recovered leads, saved admin time, follow-up, and cleaner operations.
-- [Missed-Call Text-Back Automation: Complete Guide](https://elitebotstudios.me/blog/article-3.html): Explains how missed-call text-back recovers unanswered callers and moves them toward booking.
-- [AI Chatbots vs Human Reps: What Each Does Best](https://elitebotstudios.me/blog/article-4.html): Compares automation and human support roles with clear handoff guidance.
-- [How Dental Clinics Reduce No-Shows With AI Scheduling](https://elitebotstudios.me/blog/article-5.html): Shows how reminders, confirmations, rescheduling, and waitlists reduce avoidable no-shows.
-- [The Future of Customer Support: AI in 2027](https://elitebotstudios.me/blog/article-6.html): Gives a caveated, trend-based view of AI-assisted customer support workflows.
-- [Real Estate Automation: 10 Systems Agents Need](https://elitebotstudios.me/blog/article-7.html): Lists real estate workflows for inquiry response, showings, nurture, and CRM hygiene.
-- [How to Choose the Right AI Automation Agency](https://elitebotstudios.me/blog/article-8.html): Provides a buyer checklist for scope, integrations, support, security, and measurable outcomes.
-
-
-- [HVAC After-Hours Revenue Bleed](https://elitebotstudios.me/blog/article-9.html): Models how missed weekend calls create revenue leakage for home-service contractors and how missed-call text-back recovers them.
-- [GoHighLevel vs Custom n8n AI Pipelines](https://elitebotstudios.me/blog/article-10.html): Compares CRM-native automation with custom n8n AI workflows for speed-to-lead buyers.
-- [Dental Practice No-Show Elimination](https://elitebotstudios.me/blog/article-11.html): Explains two-way SMS reminders, rescheduling, and clinic scheduling automation for no-show reduction.
-
-## FAQ
-
-- Q: What do you automate? A: Lead response, follow-up, appointment booking, missed-call recovery, customer support, and the repetitive workflows your team does by hand.
-- Q: How much does it cost? A: Every system is scoped after a 15-minute call. We publish no fixed prices. The audit, calculator, and demo are free to use.
-- Q: How fast do you launch? A: Most systems launch within 1-2 weeks, depending on complexity.
-- Q: What if it does not work? A: The 60-Day Safety Net refunds what you paid if the system does not deliver the lead recovery we model in your ROI plan.
+- Embedded firmware: ESP32, STM32, C/C++, FreeRTOS, PlatformIO, ESP-IDF
+- PCB design: KiCad, two and four layer layout, design-rule checks, Gerber and Excellon output
+- IoT: Wi-Fi, BLE, MQTT, TLS, device provisioning, reconnect behaviour, local buffering
+- Power electronics: buck and boost conversion, linear regulation, battery charging and protection, load switching, efficiency and thermal measurement
 
 ## Contact
 
-- Book a call: https://calendly.com/elitebotstudios/15min
-- Email: contact@elitebotstudios.me
-- Website: https://elitebotstudios.me
+Email: contact@elitebotstudios.me
+Location: Rawalpindi, Punjab, Pakistan — working worldwide

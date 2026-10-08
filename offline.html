@@ -2,410 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Offline | Elite Bot Studios</title>
+  <meta name="description" content="You are offline. Previously visited pages are still available from the cache." />
+  <link rel="canonical" href="https://elitebotstudios.me/offline.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="Offline | Elite Bot Studios" />
+  <meta property="og:description" content="You are offline. Previously visited pages are still available from the cache." />
+  <meta property="og:url" content="https://elitebotstudios.me/offline.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Offline | Elite Bot Studios" />
+  <meta name="twitter:description" content="You are offline. Previously visited pages are still available from the cache." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+
+  <link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0A0E13" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-HLQ4G5HBMZ');
-  </script>
-<title>You're Offline, Elite Bot Studios</title>
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
-  <meta name="robots" content="noindex" />
-  <style>
-    :root { --bg:#050505; --gold:#c9a84c; --gold-light:#e8d48b; --text:#f5f0e8; --text-2:#8a8578; }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      min-height:100dvh; display:flex; align-items:center; justify-content:center;
-      background:var(--bg); color:var(--text);
-      font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-      text-align:center; padding:24px;
-    }
-    .wrap { max-width:520px; }
-    .mark {
-      width:76px; height:76px; margin:0 auto 26px; border-radius:50%;
-      border:1px solid rgba(201,168,76,0.6);
-      display:flex; align-items:center; justify-content:center;
-      font-family:Georgia,serif; font-size:34px; font-weight:700; color:var(--gold);
-      box-shadow:0 0 40px rgba(201,168,76,0.25);
-    }
-    h1 { font-family:Georgia,'Playfair Display',serif; font-size:clamp(1.6rem,5vw,2.4rem); margin-bottom:14px; }
-    h1 span { background:linear-gradient(100deg,#e8d48b,#c9a84c 55%,#a07c2a); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
-    p { color:var(--text-2); line-height:1.7; margin-bottom:28px; }
-    .btn {
-      display:inline-block; padding:15px 32px; border-radius:8px;
-      background:linear-gradient(135deg,#e8d48b,#c9a84c 60%,#a07c2a);
-      color:#0a0a0a; font-weight:700; text-decoration:none; letter-spacing:0.04em;
-      box-shadow:0 10px 28px rgba(201,168,76,0.35);
-    }
-    .hint { margin-top:22px; font-size:12.5px; color:#8a8578; }
-  
-
-    /* ============================================================
-       MOBILE RESPONSIVENESS HARDENING (2026-08-22)
-    ============================================================ */
-    html, body { overflow-x: hidden !important; max-width: 100vw !important; }
-    *, *::before, *::after { box-sizing: border-box; }
-    img, svg, video, canvas, iframe { max-width: 100%; }
-    body, main, section, header, footer, .container, .shell, .wrap { min-width: 0; }
-    .container, .shell, .wrap { max-width: 100%; }
-
-    @media (max-width: 560px) {
-      .shell, .wrap { width: 100%; padding-left: 16px !important; padding-right: 16px !important; }
-      .topbar { max-width: 100%; gap: 12px; }
-      h1 { font-size: clamp(2rem, 11vw, 2.8rem); }
-    }
-
-  </style>
-  <!-- ANALYTICS CONFIG [ADD_REAL_GA4_ID]:
-       When you have a real GA4 Measurement ID, paste the standard
-       gtag.js loader + gtag('config') snippet here. The PHASE 3 event
-       tracker forwards automatically once the ID is set. No invalid
-       IDs load. -->
-</head>
+  </script></head>
 <body>
-  <div class="wrap">
-    <div class="mark" aria-hidden="true">E</div>
-    <h1>You're <span>Offline</span></h1>
-    <p>No connection detected. The AI never sleeps, but your internet does. Reconnect and the full experience will be waiting.</p>
-    <a class="btn" href="/" onclick="try{location.reload();}catch(e){}">Try Again</a>
-    <p class="hint">Elite Bot Studios · AI Business Automation</p>
-  </div>
-  <script>
-    /* ============================================================
-       PHASE 3, EBS GA4 ENTERPRISE EVENT TRACKING
-       Base config + advanced custom events (vanilla JS, no libs)
+  <a class="skip-link" href="#main">Skip to content</a>
 
-       ▸ SWAP THE MEASUREMENT ID: change EBS_GA4_ID below (or
-         set window.EBS_GA4_ID (or EBS_CONFIG.ga4Id) to your real GA4 Measurement ID).
-       ▸ Event taxonomy documented in the deployment guide (§ GA4).
-       ▸ TODO (launch): enable Google Consent Mode v2 in the base
-         snippet once the cookie banner has accept/reject variants.
-    ============================================================ */
-    window.EBS_GA4_ID = window.EBS_GA4_ID || 'G-HLQ4G5HBMZ'; // CONFIG [ADD_REAL_GA4_ID]: set a real GA4 Measurement ID to enable forwarding
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/" aria-label="Elite Bot Studios — home">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#2DD4BF">EB</text></svg>
+        <span class="brand-word">EliteBotStudios</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/services.html">Services</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/lab.html">Lab Log</a>
+        <a href="/about.html">About</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-amber" href="/contact.html">Contact</a>
+        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" data-open="false">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/lab.html">Lab Log</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    /* ---- tracking utility (exact spec) ---- */
-    const trackEvent = (eventName, eventParams = {}) => {
-      console.log(`📊 [Analytics Log] ${eventName}`, eventParams);
-      if (window.EBS_GA4_ID && typeof gtag === 'function') {
-        gtag('event', eventName, eventParams);
-      }
-    };
+  <main id="main">
 
-    (function () {
-      'use strict';
-      const GA4 = window.EBS_GA4_ID;
-      const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const store = {
-        get: (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
-        set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
-      };
-      const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-      const PAGE = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '') || 'index';
-      const seen = { scroll: {}, io: {}, section: {} };
-      const fired = {};
+    <section class="error-page">
+      <div class="wrap">
+        <span class="error-code">OFFLINE</span>
+        <h1 style="font-size:clamp(1.4rem,4.4vw,2rem);margin:18px 0 14px">No connection right now.</h1>
+        <p style="color:var(--muted);max-width:52ch;margin:0 auto 30px">
+           This page was served from the cache. Pages you have already visited should still open; anything new
+           needs a network connection.</p>
+        <div class="hero-ctas" style="justify-content:center">
+          <a class="btn btn-primary" href="/">Try Home</a>
+          <a class="btn btn-ghost" href="/projects.html">Projects</a>
+        </div>
+        <p style="color:var(--faint);font-size:13px;margin-top:26px">
+          Urgent? Email <!--email_off--><a href="mailto:contact@elitebotstudios.me" style="color:var(--teal)">contact@elitebotstudios.me</a><!--/email_off-->.
+        </p>
+      </div>
+    </section>
+  </main>
 
-      /* ---- set user properties once (only when GA4 is configured) ---- */
-      try {
-        if (!GA4 || typeof gtag !== 'function') throw new Error('GA4 not configured');
-        gtag('set', 'user_properties', {
-          device_class: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-          language: navigator.language || 'en',
-          page_name: PAGE
-        });
-      } catch (e) {}
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-tag">Embedded Systems · Power Electronics · IoT</p>
+        <p>An engineering studio that designs, builds, and tests embedded hardware — from firmware to finished PCB — delivered fully remotely.</p>
+        <div class="social">
+          <!-- data-owner="TODO": real profile URLs required -->
+          <a href="#" data-owner="TODO" aria-label="GitHub profile — link pending" title="GitHub link pending"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" data-owner="TODO" aria-label="LinkedIn profile — link pending" title="LinkedIn link pending"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.45-2.16 2.96V21H9z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3>Studio</h3>
+        <ul class="footer-links">
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/lab.html">Lab Log</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul class="footer-links">
+          <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
+        </ul>
+        <h3 style="margin-top:22px">Legal</h3>
+        <ul class="footer-links">
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Rawalpindi, Pakistan — working worldwide.</span>
+      <span>&copy; 2026 Elite Bot Studios</span>
+    </div>
+  </footer>
 
-      /* ---- session + visit classification ---- */
-      const visited = store.get('ebs_ga_visited', false);
-      trackEvent(visited ? 'returning_visit' : 'first_visit');
-      store.set('ebs_ga_visited', true);
-
-      const once = (key, fn) => { if (fired[key]) return; fired[key] = true; fn(); };
-
-      const isExternal = (a) => {
-        try {
-          const u = new URL(a.href, location.href);
-          return u.origin !== location.origin;
-        } catch (e) { return false; }
-      };
-
-      /* ============================================================
-         1) UNIVERSAL, engagement & scroll
-      ============================================================ */
-      [5, 10, 30, 60].forEach(s => {
-        setTimeout(() => trackEvent('time_on_page', { seconds: s, page: PAGE }), s * 1000);
-      });
-
-      let scrollTicking = false;
-      window.addEventListener('scroll', () => {
-        if (scrollTicking || REDUCE) return;
-        scrollTicking = true;
-        requestAnimationFrame(() => {
-          const h = document.documentElement;
-          const max = h.scrollHeight - window.innerHeight;
-          const pct = max > 0 ? Math.round((window.scrollY / max) * 100) : 100;
-          [25, 50, 75, 90, 100].forEach(mark => {
-            if (pct >= mark && !seen.scroll[mark]) {
-              seen.scroll[mark] = true;
-              trackEvent('scroll_depth', { percent: mark, page: PAGE });
-            }
-          });
-          scrollTicking = false;
-        });
-      }, { passive: true });
-
-      /* ============================================================
-         2) UNIVERSAL, clicks (delegated)
-      ============================================================ */
-      document.addEventListener('click', (e) => {
-        const t = e.target;
-        if (!t || !t.closest) return;
-
-        const a = t.closest('a');
-        if (a) {
-          const href = a.getAttribute('href') || '';
-          if (isExternal(a)) {
-            trackEvent('link_click', { link_url: href, link_domain: (() => { try { return new URL(href, location.href).hostname; } catch (e) { return ''; } })(), page: PAGE });
-          }
-          if (/\.(pdf|zip|docx?|xlsx?|pptx?|mp4|mp3|csv)(\?|$)/i.test(href)) {
-            trackEvent('file_download', { file_name: href.split('/').pop(), link_url: href });
-          }
-          if (a.closest('.ebs-notif-bar')) {
-            trackEvent('notif_cta_click', { link_url: href, page: PAGE });
-          }
-          if (a.closest('.nav-links')) {
-            trackEvent('nav_click', { link_url: href, page: PAGE });
-          }
-          if (a.closest('#mobileMenu')) {
-            trackEvent('mobile_nav_click', { link_url: href, page: PAGE });
-          }
-          if (a.closest('.footer-legal')) {
-            trackEvent('legal_link_click', { link_url: href, page: PAGE });
-          }
-          if (a.closest('.toc')) {
-            trackEvent('article_toc_click', { link_url: href });
-          }
-          // ---- page-specific CTAs ----
-          if (PAGE === 'demo' && a.textContent.includes('Setup Call')) {
-            trackEvent('demo_cta_click', { destination: href });
-          }
-          if (PAGE === 'calculator' && a.closest('.cta-btns')) {
-            trackEvent('calculator_cta_click', { destination: href, amount_text: (document.getElementById('ctaAmount') || {}).textContent || '' });
-          }
-          if (PAGE === 'pricing' && /calendly/i.test(href)) {
-            trackEvent('pricing_cta_click', { destination: href });
-          }
-          if (PAGE === 'audit' && /calendly/i.test(href)) {
-            trackEvent('audit_cta_click', { destination: href });
-          }
-          if (PAGE === 'blog' && a.closest('.blog-card')) {
-            trackEvent('blog_article_open', { article_url: href });
-          }
-          if (PAGE === 'case-studies' && a.closest('.cs-card')) {
-            trackEvent('case_study_click', { link_url: href });
-          }
-          if (PAGE.startsWith('article') && a.closest('.article-cta')) {
-            trackEvent('article_cta_click', { page: PAGE });
-          }
-        }
-
-        const btn = t.closest('button');
-        if (btn) {
-          if (btn.id === 'ebsBackTop' || btn.classList.contains('ebs-backtop')) {
-            trackEvent('back_to_top_click', { scroll_y: Math.round(window.scrollY) });
-          }
-          if (btn.classList.contains('ebs-theme-btn')) {
-            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            trackEvent('theme_changed', { mode: next });
-          }
-          if (btn.classList.contains('filter-chip')) {
-            trackEvent(PAGE === 'blog' ? 'blog_filter' : 'case_studies_filter', { category: btn.getAttribute('data-filter') });
-          }
-          if (btn.classList.contains('cs-read')) {
-            trackEvent('case_modal_open', { case_index: btn.getAttribute('data-cs') });
-          }
-          if (btn.classList.contains('modal-x') || (btn.hasAttribute && btn.hasAttribute('data-close'))) {
-            trackEvent('case_modal_close', {});
-          }
-          if (PAGE === 'demo' && btn.classList.contains('tab')) {
-            trackEvent('demo_tab_switch', { industry: btn.getAttribute('data-industry') });
-          }
-          if (PAGE === 'demo' && btn.id === 'sendBtn') {
-            trackEvent('demo_message_sent', {});
-          }
-          if (PAGE === 'pricing' && btn.classList.contains('faq-head')) {
-            trackEvent('pricing_faq_open', { question: (btn.textContent || '').trim().slice(0, 60) });
-          }
-          if (PAGE === 'audit' && btn.id === 'startBtn') {
-            trackEvent('audit_started', {});
-          }
-          if (PAGE === 'audit' && btn.closest('.option')) {
-            const opts = btn.closest('.q-screen') ? btn.closest('.q-screen').querySelectorAll('.option') : [];
-            let idx = -1;
-            opts.forEach((o, i) => { if (o === btn.closest('.option')) idx = i; });
-            trackEvent('audit_answer', { option_index: idx, option_text: (btn.textContent || '').trim().slice(0, 60) });
-          }
-        }
-      });
-
-      /* ============================================================
-         3) UNIVERSAL, forms (delegated focus/submit)
-      ============================================================ */
-      document.addEventListener('focusin', (e) => {
-        const input = e.target;
-        if (!input || !input.matches || !input.matches('input, textarea, select')) return;
-        const form = input.closest('form');
-        if (!form) return;
-        const key = 'form_' + (form.id || 'anon');
-        once(key, () => trackEvent('form_start', { form_id: form.id || 'anonymous', page: PAGE }));
-      });
-
-      document.addEventListener('submit', (e) => {
-        const form = e.target;
-        if (!form || !form.id) return;
-        const id = form.id;
-        if (id === 'contactForm') {
-          const email = ((document.getElementById('cfEmail') || {}).value || '').trim();
-          const name = ((document.getElementById('cfName') || {}).value || '').trim();
-          trackEvent('contact_form_submit', { valid_email: EMAIL_RX.test(email), has_name: name.length > 1 });
-        } else {
-          trackEvent('form_submit', { form_id: id, page: PAGE });
-        }
-      });
-
-      /* ============================================================
-         4) UNIVERSAL, PWA install
-      ============================================================ */
-      window.addEventListener('appinstalled', () => trackEvent('pwa_installed', {}));
-
-      /* ============================================================
-         5) CHATBOT EVENTS (widget present on every page)
-      ============================================================ */
-      document.addEventListener('click', (e) => {
-        const t = e.target;
-        if (!t || !t.closest) return;
-        if (t.closest('#ebsChatFab')) {
-          const open = !!document.getElementById('ebsChatWindow') && document.getElementById('ebsChatWindow').classList.contains('ebs-open');
-          trackEvent(open ? 'chat_closed' : 'chat_opened', { page: PAGE });
-        }
-        if (t.closest('#ebsChatClose')) {
-          trackEvent('chat_closed', { page: PAGE });
-        }
-        if (t.closest('#ebsChatSend')) {
-          const input = document.getElementById('ebsChatInput');
-          const text = (input && input.value || '').trim();
-          trackEvent('chat_message_sent', { length: text.length, page: PAGE });
-        }
-        if (t.closest('.ebs-chip')) {
-          trackEvent('chat_quick_reply', { label: (t.closest('.ebs-chip').textContent || '').trim() });
-        }
-        if (t.closest('#ebsSoundToggle')) {
-          trackEvent('chat_sound_toggled', {});
-        }
-      });
-
-      /* email captured, poll localStorage for the engine's write */
-      let lastEmail = store.get('ebs_chat_email', null);
-      setInterval(() => {
-        const now = store.get('ebs_chat_email', null);
-        if (now && now !== lastEmail) {
-          lastEmail = now;
-          trackEvent('chat_email_captured', { page: PAGE });
-          // TODO: Send to backend/CRM webhook (shared with engagement engine)
-        }
-      }, 1500);
-
-      /* ============================================================
-         6) EXIT-INTENT / NOTIF BAR / TOASTS (observe class changes)
-      ============================================================ */
-      const observeClass = (id, cls, onAdd, onRemove) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        const mo = new MutationObserver(() => {
-          const has = el.classList.contains(cls);
-          if (has && !el.__ebsHad) { el.__ebsHad = true; onAdd(); }
-          else if (!has && el.__ebsHad) { el.__ebsHad = false; onRemove && onRemove(); }
-        });
-        mo.observe(el, { attributes: true, attributeFilter: ['class'] });
-      };
-
-      observeClass('ebsNotifBar', 'ebs-out',
-        () => trackEvent('notif_bar_dismissed', {}));
-
-      /* ============================================================
-         8) COOKIE CONSENT
-      ============================================================ */
-      const cookieBtn = document.getElementById('cookieAccept');
-      if (cookieBtn) {
-        cookieBtn.addEventListener('click', () => trackEvent('cookie_consent', { choice: 'accepted' }));
-      }
-
-      /* ============================================================
-         9) SECTION VIEWS (IntersectionObserver, once each)
-      ============================================================ */
-      const SECTION_SELECTORS = {
-        index: [['#home', 'hero_view'], ['#results', 'results_view'], ['#comparison', 'comparison_view'],
-                ['#faq', 'faq_view'], ['#booking', 'call_cta_view'], ['#services', 'services_view'],
-                ['#industries', 'industries_view']],
-        demo: [['.demo-grid', 'demo_dashboard_view'], ['#missed-call', 'demo_missedcall_view']],
-        calculator: [['#results', 'calculator_results_view'], ['.cta-section', 'calculator_cta_view']],
-        pricing: [['#what-we-build', 'pricing_what_we_build_view'], ['#how-it-works', 'pricing_process_view'], ['#investment', 'pricing_investment_view']],
-        audit: [['#results', 'audit_results_view']],
-        'case-studies': [['.page-hero', 'case_studies_view']],
-        blog: [['.page-hero', 'blog_view']]
-      };
-      const map = SECTION_SELECTORS[PAGE] || (PAGE.startsWith('article') ? [['.article-cta', 'article_read_complete']] : []);
-      const seenIO = {};
-      if ('IntersectionObserver' in window && map.length) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach((en) => {
-            if (!en.isIntersecting) return;
-            const key = en.target.id || en.target.className;
-            if (seenIO[key]) return;
-            seenIO[key] = true;
-            map.filter(([sel]) => {
-              const el = document.querySelector(sel);
-              return el === en.target;
-            }).forEach(([sel, evt]) => trackEvent(evt, { page: PAGE }));
-          });
-        }, { threshold: 0.35 });
-        map.forEach(([sel]) => {
-          const el = document.querySelector(sel);
-          if (el) io.observe(el);
-        });
-      }
-
-      /* ============================================================
-         10) PAGE-SPECIFIC, calculators & configurators
-      ============================================================ */
-      if (PAGE === 'calculator') {
-        const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
-        const fire = debounce((el) => {
-          trackEvent('calculator_input', {
-            control: el.id || el.name || 'control',
-            value: el.value || el.textContent || ''
-          });
-        }, 800);
-        document.addEventListener('input', (e) => {
-          const t = e.target;
-          if (t && t.closest && (t.closest('.slider') || t.closest('.control') || t.closest('input') || t.closest('.calc'))) {
-            if (t.id) fire(t);
-          }
-        });
-      }
-      if (PAGE === 'pricing') {
-
-      }
-
-      console.info(`📊 [Analytics] GA4 tracking active, measurement ID ${GA4} (page: ${PAGE})`);
-    })();
-  </script>
-
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>

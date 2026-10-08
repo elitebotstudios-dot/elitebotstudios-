@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "esp32-energy-monitor",
+    "title": "ESP32-Based Energy Monitor",
+    "status": "in-progress",
+    "tags": ["esp32", "power", "energy-monitoring", "mqtt"],
+    "problem": "Household and small-installation energy use is usually only visible on a monthly bill, which is far too late to act on. The goal is a clamp-on monitor that reads real power, logs it continuously, and survives the network dropping.",
+    "approach": "Split-core current transformer into a burden resistor, sampled by the ESP32 ADC with a proper anti-alias front end and a calibrated phase correction. RMS and real power are computed on-device rather than streaming raw samples, then published over MQTT with local buffering for outages.",
+    "bom": [
+      { "part": "ESP32-WROOM-32E", "detail": "MCU + Wi-Fi" },
+      { "part": "SCT-013-030", "detail": "30 A split-core CT" },
+      { "part": "Burden + anti-alias network", "detail": "1% film, 0603" },
+      { "part": "Hi-Link/mean-well 5 V 3 A", "detail": "mains-derived supply" },
+      { "part": "TVS + MOV front end", "detail": "transient protection" }
+    ],
+    "firmware_repo": "",
+    "media": [],
+    "results": "",
+    "results_note": "Not yet measured. Accuracy figures will be published as a bench test against a calibrated reference meter, with the conditions stated.",
+    "owner_todo": "Repo + test video pending",
+    "date": "2026-10"
+  }
+]
