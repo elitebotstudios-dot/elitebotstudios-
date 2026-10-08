@@ -29,6 +29,20 @@
     if (window.innerWidth > 900) setOpen(false);
   });
 
+  /* close when the pointer goes down outside the menu and the toggle */
+  document.addEventListener('pointerdown', function (e) {
+    if (menu.getAttribute('data-open') !== 'true') return;
+    if (menu.contains(e.target) || toggle.contains(e.target)) return;
+    setOpen(false);
+  });
+
+  /* a tap on the page background should also dismiss it on touch devices */
+  document.addEventListener('click', function (e) {
+    if (menu.getAttribute('data-open') !== 'true') return;
+    if (menu.contains(e.target) || toggle.contains(e.target)) return;
+    setOpen(false);
+  });
+
   /* mark the current section for assistive tech */
   var here = location.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '');
   Array.prototype.forEach.call(document.querySelectorAll('.nav-links a, .mobile-menu a'), function (a) {
@@ -118,6 +132,9 @@ window.EBS.renderProjectCard = ebsProjectCard;
   var mount = document.getElementById('projectsGrid');
   if (!mount) return;
 
+  /* Shipped visible. If the fetch fails, this honest "no builds yet" state is
+     what the visitor sees — an empty grid with no explanation was the old
+     behaviour and it was wrong. */
   var EMPTY = document.getElementById('projectsEmpty');
 
   function afterInject() {

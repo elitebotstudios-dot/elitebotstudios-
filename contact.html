@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>Contact — Start an Embedded Hardware Project | Elite Bot Studios</title>
+  <title>Contact — Start an Embedded Project | Elite Bot Studios</title>
   <meta name="description" content="Send a project brief for firmware, PCB design, IoT prototyping, or power electronics. Replies within 48 hours, usually faster with a clear description." />
-  <link rel="canonical" href="https://elitebotstudios.me/contact.html" />
+<link rel="canonical" href="https://elitebotstudios.me/contact.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Elite Bot Studios" />
-  <meta property="og:title" content="Contact — Start an Embedded Hardware Project | Elite Bot Studios" />
+  <meta property="og:title" content="Contact — Start an Embedded Project | Elite Bot Studios" />
   <meta property="og:description" content="Send a project brief for firmware, PCB design, IoT prototyping, or power electronics. Replies within 48 hours, usually faster with a clear description." />
-  <meta property="og:url" content="https://elitebotstudios.me/contact.html" />
+<meta property="og:url" content="https://elitebotstudios.me/contact.html" />
   <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Contact — Start an Embedded Hardware Project | Elite Bot Studios" />
+  <meta name="twitter:title" content="Contact — Start an Embedded Project | Elite Bot Studios" />
   <meta name="twitter:description" content="Send a project brief for firmware, PCB design, IoT prototyping, or power electronics. Replies within 48 hours, usually faster with a clear description." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
 
@@ -36,6 +36,7 @@
       var form = document.getElementById('contactForm');
       if (!form) return;
       var status = document.getElementById('formStatus');
+      var CONTACT_EMAIL = 'contact@elitebotstudios.me';
 
       function fieldOf(el){ return el.closest('.field'); }
       function setError(el, msg){
@@ -81,7 +82,7 @@
         /* data-owner="TODO": replace with a real submission endpoint, e.g.
            fetch('https://…', {method:'POST', body:new FormData(form)}) */
         status.style.color = 'var(--amber)';
-        status.textContent = 'Validated. Delivery is not connected yet — please email ' + EMAIL
+        status.textContent = 'Validated. Delivery is not connected yet — please email ' + CONTACT_EMAIL
                            + ' directly and your details will be answered within 48 hours.';
       });
     }());
@@ -254,18 +255,19 @@
           </div>
         </div>
 
+        <h2 class="sr-only">Project enquiry</h2>
         <div class="contact-grid">
           <div>
             <form id="contactForm" novalidate data-owner="TODO">
               <div class="field">
                 <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
                 <input id="name" name="name" type="text" autocomplete="name" required />
-                <span class="err" role="alert" aria-live="polite"></span>
+                <span class="err" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
                 <input id="email" name="email" type="email" autocomplete="email" required />
-                <span class="err" role="alert" aria-live="polite"></span>
+                <span class="err" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="ptype">Project type <span class="req" aria-hidden="true">*</span></label>
@@ -277,7 +279,7 @@
                   <option>Power</option>
                   <option>Other</option>
                 </select>
-                <span class="err" role="alert" aria-live="polite"></span>
+                <span class="err" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="budget">Budget range</label>
@@ -288,16 +290,16 @@
                   <option>$1,500 – $5,000</option>
                   <option>$5,000+</option>
                 </select>
-                <span class="err" role="alert" aria-live="polite"></span>
+                <span class="err" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="desc">Project description <span class="req" aria-hidden="true">*</span></label>
                 <textarea id="desc" name="description" required
                   placeholder="What should the device do, what does it connect to, and what does done look like?"></textarea>
-                <span class="err" role="alert" aria-live="polite"></span>
+                <span class="err" aria-live="polite"></span>
               </div>
               <button class="btn btn-primary" type="submit">Send Project Brief</button>
-              <p class="form-note" id="formStatus" role="status" aria-live="polite">
+              <p class="form-note" id="formStatus" role="status">
                 Replies within 48 hours. Your details are used only to answer this enquiry.
               </p>
             </form>
