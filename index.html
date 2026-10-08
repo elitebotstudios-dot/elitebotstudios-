@@ -18,19 +18,19 @@
   <meta name="twitter:description" content="An engineering studio that designs, builds, and tests embedded hardware — from firmware to finished PCB — delivered fully remotely." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
 
-  <link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" href="/assets/favicon-16x16.png" sizes="16x16" />
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="icon" href="/assets/favicon-32x32.png?v=1783ac86" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=a55df251" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1fdebc5c" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#0A0E13" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/site.css" />
+  <link rel="stylesheet" href="/assets/site.css?v=a0ceec94" />
 
-  <link rel="preload" as="image" href="/assets/hero-poster.webp" type="image/webp"
-        imagesrcset="/assets/hero-poster-1200.webp 1200w, /assets/hero-poster.webp 1600w"
+  <link rel="preload" as="image" href="/assets/hero-poster.webp?v=3fa1083c" type="image/webp"
+        imagesrcset="/assets/hero-poster-1200.webp?v=07bcf348 1200w, /assets/hero-poster.webp?v=3fa1083c 1600w"
         imagesizes="(min-width:1000px) 52vw, 92vw" fetchpriority="high" />
 
   <!-- Google tag (gtag.js) -->
@@ -214,8 +214,8 @@
           <figure class="board-figure reveal" style="--d:.12s">
             <div class="stage" id="stage">
               <div class="stage-glow" aria-hidden="true"></div>
-              <img class="stage-poster" id="heroPoster" src="/assets/hero-poster.webp"
-                   srcset="/assets/hero-poster-1200.webp 1200w, /assets/hero-poster.webp 1600w"
+              <img class="stage-poster" id="heroPoster" src="/assets/hero-poster.webp?v=3fa1083c"
+                   srcset="/assets/hero-poster-1200.webp?v=07bcf348 1200w, /assets/hero-poster.webp?v=3fa1083c 1600w"
                    sizes="(min-width:1000px) 52vw, 92vw"
                    width="1600" height="1000" decoding="async" fetchpriority="high"
                    alt="Rendered view of the EB-01 carrier board, a 100 by 75 millimetre four-layer PCB with an ESP32 module, a relay, a buck converter stage and gold-plated screw terminals." />
@@ -311,7 +311,7 @@
     </div>
   </footer>
 
-  <script src="/assets/site.js" defer></script>
+  <script src="/assets/site.js?v=798ce74d" defer></script>
   <script>
     /* ============================================================
        HERO 3D — progressive enhancement.
@@ -355,9 +355,9 @@
       if (!probeCanvas.getContext('webgl2')) { giveUp(); return; }
 
       function start() {
-        import('/assets/hero3d.js').then(function (mod) {
+        import('/assets/hero3d.js?v=3f0d93bb').then(function (mod) {
           var scene = mod.boot(canvas, {
-            atlas: '/assets/hero-atlas.webp',
+            atlas: '/assets/hero-atlas.webp?v=96302e6a',
             motes: 150,
             onReady: function () { stage.setAttribute('data-live', 'true'); }
           });
