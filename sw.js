@@ -5,7 +5,7 @@
    Precaching is resilient: a missing file cannot break the whole
    cache install, so a new icon or asset never takes the site down.
    ============================================================ */
-const CACHE_VERSION = 'ebs-v29';
+const CACHE_VERSION = 'ebs-v31';
 const PRECACHE = [
   '/',
   /* '/index.html' is deliberately absent: it 308-redirects to '/', so
@@ -13,8 +13,9 @@ const PRECACHE = [
   '/services.html',
   '/projects.html',
   '/lab.html',
-  '/lab/why-this-studio-exists.html',
-  '/lab/simulation-to-silicon.html',
+  '/lab/why-document-the-process.html',
+  '/lab/simulation-is-not-measurement.html',
+  '/expertise.html',
   '/about.html',
   '/tools.html',
   '/tools/trace-width.html',
@@ -29,23 +30,16 @@ const PRECACHE = [
   '/cookies.html',
   '/offline.html',
   '/projects.json',
+  '/project-template.md',
   '/assets/site.css',
   '/assets/site.js',
   '/assets/calc.js',
-  '/assets/hero-poster.webp',
-  '/assets/hero-poster-1200.webp',
   '/assets/chip-mark.svg',
   '/assets/favicon-16x16.png',
   '/assets/favicon-32x32.png',
   '/assets/apple-touch-icon.png',
   '/assets/logo-512.png',
   '/site.webmanifest'
-];
-
-/* Assets that are fetched lazily and only need caching once used. */
-const RUNTIME = [
-  '/assets/hero3d.js',
-  '/assets/hero-atlas.webp'
 ];
 
 self.addEventListener('install', (event) => {

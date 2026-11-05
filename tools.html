@@ -18,16 +18,13 @@
   <meta name="twitter:description" content="Free client-side engineering calculators: IPC-2221 trace width, buck converter design, linear regulator thermals, voltage dividers, LED resistors and RC time constants." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
 
-  <link rel="icon" href="/assets/favicon-32x32.png?v=1783ac86" sizes="32x32" />
-  <link rel="icon" href="/assets/favicon-16x16.png?v=a55df251" sizes="16x16" />
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=1fdebc5c" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=7ad827f1" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
+  <link rel="manifest" href="/site.webmanifest?v=620f6022" />
   <meta name="theme-color" content="#0A0E13" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/site.css?v=70e6bf1f" />
+  <link rel="stylesheet" href="/assets/site.css?v=89af0bc9" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ"></script>
@@ -57,15 +54,15 @@
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="/" aria-label="Elite Bot Studios — home">
-        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#2DD4BF" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#2DD4BF">EB</text></svg>
-        <span class="brand-word">EliteBotStudios</span>
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>
+        <span class="brand-word">Elite Bot Studios</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="/services.html">Services</a>
         <a href="/projects.html">Projects</a>
-        <a href="/tools.html" aria-current="page">Tools</a>
-        <a href="/lab.html">Lab Log</a>
+        <a href="/expertise.html">Expertise</a>
+        <a href="/lab.html">Engineering Lab</a>
         <a href="/about.html">About</a>
+        <a href="/tools.html" aria-current="page">Tools</a>
       </nav>
       <div class="nav-actions">
         <a class="btn btn-amber" href="/contact.html">Contact</a>
@@ -77,11 +74,11 @@
     <div class="mobile-menu" id="mobileMenu" data-open="false">
       <nav aria-label="Mobile">
         <ul>
-          <li><a href="/services.html">Services</a></li>
           <li><a href="/projects.html">Projects</a></li>
-          <li><a href="/tools.html" aria-current="page">Tools</a></li>
-          <li><a href="/lab.html">Lab Log</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
           <li><a href="/about.html">About</a></li>
+          <li><a href="/tools.html" aria-current="page">Tools</a></li>
           <li><a href="/contact.html">Contact</a></li>
         </ul>
       </nav>
@@ -163,32 +160,25 @@
   <footer class="footer">
     <div class="wrap footer-grid">
       <div>
-        <p class="footer-tag">Embedded Systems · Power Electronics · IoT</p>
-        <p>An engineering studio that designs, builds, and tests embedded hardware — from firmware to finished PCB — delivered fully remotely.</p>
-        <div class="social">
-          <!-- data-owner="TODO": real profile URLs required -->
-          <a href="#" data-owner="TODO" aria-label="GitHub profile — link pending" title="GitHub link pending"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.4 9.4 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
-          <a href="#" data-owner="TODO" aria-label="LinkedIn profile — link pending" title="LinkedIn link pending"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.45-2.16 2.96V21H9z"/></svg></a>
-        </div>
+        <p class="footer-tag">Embedded Intelligence · Real-World Power</p>
+        <p>An independent engineering initiative exploring embedded systems, power electronics, and intelligent hardware through practical designs, simulations, prototypes, and documented projects.</p>
       </div>
       <div>
-        <h3>Studio</h3>
+        <h3>Explore</h3>
         <ul class="footer-links">
-          <li><a href="/services.html">Services</a></li>
           <li><a href="/projects.html">Projects</a></li>
-          <li><a href="/tools.html">Tools</a></li>
-          <li><a href="/lab.html">Lab Log</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/tools.html">Engineering Tools</a></li>
+          <li><a href="/services.html">Capabilities &amp; collaboration</a></li>
           <li><a href="/about.html">About</a></li>
-          <li><a href="/contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
-        <h3>Contact</h3>
+        <h3>Connect</h3>
         <ul class="footer-links">
+          <li><a href="/contact.html">Contact</a></li>
           <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
-        </ul>
-        <h3 style="margin-top:22px">Legal</h3>
-        <ul class="footer-links">
           <li><a href="/privacy.html">Privacy</a></li>
           <li><a href="/terms.html">Terms</a></li>
           <li><a href="/cookies.html">Cookies</a></li>
@@ -196,11 +186,11 @@
       </div>
     </div>
     <div class="wrap footer-bottom">
-      <span>Rawalpindi, Pakistan — working worldwide.</span>
+      <span>Pakistan · Independent engineering initiative</span>
       <span>&copy; 2026 Elite Bot Studios</span>
     </div>
   </footer>
 
-  <script src="/assets/site.js?v=798ce74d" defer></script>
+  <script src="/assets/site.js?v=e1ff3c6f" defer></script>
 </body>
 </html>

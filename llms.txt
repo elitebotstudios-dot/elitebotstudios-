@@ -1,41 +1,26 @@
 # Elite Bot Studios
 
-> An engineering studio that designs, builds, and tests embedded hardware — from
-> firmware to finished PCB — delivered fully remotely.
+> Embedded Intelligence. Real-World Power.
 
-Elite Bot Studios is an embedded systems and power electronics studio based in
-Rawalpindi, Pakistan, working with clients worldwide. The studio was established
-in October 2026 and is run by one electrical engineering undergraduate
-specialising in power. Work covers embedded firmware, PCB design in KiCad, IoT
-device prototyping, and power electronics prototyping.
+Elite Bot Studios is an independent engineering initiative and portfolio by Muhammad Shahzaib Abbas, an Electrical Engineering undergraduate at the National University of Sciences and Technology (NUST), Pakistan. His academic direction emphasizes power engineering, with complementary interests in embedded systems, electronics, microcontrollers, control, and intelligent energy systems.
 
-Engagements are delivered remotely in three stages: a fixed scope with a bill of
-materials and wiring diagram; development and bench testing with progress video
-at each milestone; then handover of source code, schematics, Gerbers, and setup
-guides plus a live call. Typical reply time to a new enquiry is under 48 hours.
+The site is an evolving professional identity and technical notebook, not an established corporation or a claim of professional licensure. Concepts, learning topics, simulation, prototypes, and measured work are kept distinct. At present, the public project list contains a concept entry; no completed hardware case study or bench result is being claimed.
 
-The studio publishes its builds as it works on them, including measured results
-and the conditions they were measured under. Simulated or expected figures are
-labelled as such. There are no client testimonials on this site, because the
-studio has not yet completed client work.
+## Pages
 
-## Core pages
-
-- [Services](https://elitebotstudios.me/services.html): Embedded firmware development, PCB design in KiCad, IoT device prototyping, and power electronics prototyping — what each includes and the tools used.
-- [Projects](https://elitebotstudios.me/projects.html): Documented builds with problem, approach, bill of materials, firmware, and measured results. Driven by projects.json.
-- [Tools](https://elitebotstudios.me/tools.html): Six free calculator tools — IPC-2221 trace width, buck converter design, linear regulator thermals, voltage divider, LED series resistor, RC time constant. All run client-side, no account required.
-- [Lab Log](https://elitebotstudios.me/lab.html): Build notes written as the work happens, including what did not go to plan.
-- [About](https://elitebotstudios.me/about.html): Who runs the studio, the three working rules, and the timeline.
-- [Contact](https://elitebotstudios.me/contact.html): Project brief form and direct email. Replies within 48 hours.
-
-## Capability
-
-- Embedded firmware: ESP32, STM32, C/C++, FreeRTOS, PlatformIO, ESP-IDF
-- PCB design: KiCad, two and four layer layout, design-rule checks, Gerber and Excellon output
-- IoT: Wi-Fi, BLE, MQTT, TLS, device provisioning, reconnect behaviour, local buffering
-- Power electronics: buck and boost conversion, linear regulation, battery charging and protection, load switching, efficiency and thermal measurement
+- [Home](https://elitebotstudios.me/): engineering identity, focus areas, conceptual interactive power-system diagram, portfolio preview, and founder profile.
+- [Projects](https://elitebotstudios.me/projects.html): evidence-labelled project records, currently including a concept only.
+- [Expertise](https://elitebotstudios.me/expertise.html): academic focus, developing areas, and research interests; no proficiency percentages.
+- [Engineering Lab](https://elitebotstudios.me/lab.html): Markdown-authored educational notes on documentation and simulation versus measurement.
+- [Capabilities & collaboration](https://elitebotstudios.me/services.html): areas of study and possible collaboration, scoped responsibly.
+- [Engineering tools](https://elitebotstudios.me/tools.html): six client-side calculators for PCB trace width, buck conversion, regulator thermal estimates, voltage dividers, LED resistors, and RC time constants.
+- [About](https://elitebotstudios.me/about.html): founder background and research interests.
+- [Contact](https://elitebotstudios.me/contact.html): a browser form that prepares an email draft; the visitor must send it from their own email application.
 
 ## Contact
 
 Email: contact@elitebotstudios.me
-Location: Rawalpindi, Punjab, Pakistan — working worldwide
+
+## Technical notes
+
+The website is a static HTML/CSS/vanilla JavaScript project. Lab note sources are in `content/lab-notes/`; project records are in `projects.json`. Calculators provide estimates only and are not design approval or safety certification.

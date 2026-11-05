@@ -1,5 +1,5 @@
 # Elite Bot Studios — robots.txt
-# Updated 2026-10-08 (studio direction change)
+# Updated 2026-11-05 (engineering portfolio refresh)
 
 User-agent: *
 Allow: /
