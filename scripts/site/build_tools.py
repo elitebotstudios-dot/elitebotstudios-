@@ -310,9 +310,7 @@ def hub():
       <div class="wrap">
         <span class="eyebrow">Tools</span>
         <h1>Small tools for early estimates.</h1>
-        <p>Six tools for the questions that come up on every board: how wide the copper has to be, how hot the
-           regulator will run, how much ripple the inductor will pass. They run entirely in your browser —
-           nothing you type is sent anywhere.</p>
+        <p>Six browser-based calculators for common early estimates: copper width, regulator dissipation, converter ripple, resistor selection, and first-order RC behaviour. Inputs are processed in your browser; they are not sent to a calculation API.</p>
       </div>
     </section>
 
