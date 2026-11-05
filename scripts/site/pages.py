@@ -2,6 +2,7 @@
 """Page bodies. Content is either verbatim from the approved brief or marked
 data-owner="TODO" — nothing is invented."""
 import json, sys
+from html import escape as html_escape
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build import page, EMAIL, write, SCHEMA_GRAPH
@@ -18,6 +19,20 @@ AREAS = [
     ("Control, instrumentation & IoT", "04", "Control and sensing link electrical behaviour with embedded computation. Connected-energy systems remain a direction of exploration, not a claim of deployed products.", ["Feedback and control fundamentals", "Sensors and signal conditioning", "Connected-device and energy-monitoring concepts"]),
 ]
 
+SITE_ROOT=Path(__file__).resolve().parents[2]
+PROJECT_RECORDS=json.loads((SITE_ROOT/'projects.json').read_text(encoding='utf-8'))
+PROJECT_STATUS={'concept':('Concept','chip-amber'),'simulation':('In simulation','chip-amber'),'design-completed':('Design completed','chip-amber'),'prototype-in-progress':('Prototype in progress','chip-amber'),'bench-tested':('Bench tested','chip-teal'),'complete':('Completed','chip-teal')}
+
+def render_project(p):
+    slug=p.get('slug','')
+    if not __import__('re').fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',slug): raise ValueError('Unsafe project slug: '+slug)
+    status,cls=PROJECT_STATUS.get(p.get('status'),('Unclassified','chip-amber'))
+    def block(label,value): return '<div><dt>%s</dt><dd>%s</dd></div>'%(label,html_escape(str(value),quote=True)) if value else ''
+    tags=''.join('<span class="chip">%s</span>'%html_escape(str(x),quote=True) for x in p.get('tags',[]))
+    body=''.join([block('Objective',p.get('objective')),block('Context',p.get('problem')),block('Approach',p.get('approach')),block('Evidence',p.get('measured_results') or p.get('results') or p.get('results_note'))])
+    return '<article class="card proj-card reveal" id="%s"><div class="post-meta"><span class="chip %s">%s</span><span>%s</span></div><h3>%s</h3><dl class="proj-body" style="margin:0">%s</dl>%s</article>'%(slug,cls,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('title','')),quote=True),body,('<div class="chips">%s</div>'%tags) if tags else '')
+
+
 def services():
     cards=[]
     for title,num,desc,items in AREAS:
@@ -25,24 +40,28 @@ def services():
         cards.append('''<article class="card reveal"><span class="card-num">%s / FOCUS</span><h2>%s</h2><p>%s</p><ul class="prose">%s</ul></article>'''%(num,title,desc,lis))
     body='''
     <section class="page-head"><div class="wrap"><span class="eyebrow">Capabilities &amp; collaboration</span><h1>Areas to explore together.</h1><p>Elite Bot Studios is an independent, evolving engineering initiative—not an established consultancy. These topics describe current academic focus and collaboration interests; they are not a promise of qualifications, certification, or unsupervised delivery.</p></div></section>
-    <section class="section"><div class="wrap"><div class="grid grid-2">%s</div>
+    <section class="section"><div class="wrap"><div class="grid grid-2">AREA_CARDS</div>
       <div class="notice" style="margin-top:24px"><div><b>Scope responsibly</b><p>Any practical engagement is discussed case by case against demonstrated experience. High-voltage, mains-connected, regulated, and safety-critical work is not offered for unsupervised commissioning. The portfolio distinguishes academic study, concepts, simulation, and measured hardware.</p></div></div>
       <p style="margin-top:24px"><a class="btn btn-ghost" href="/expertise.html">View the expertise map</a> <a class="btn btn-primary" href="/contact.html">Start a conversation</a></p>
     </div></section>'''
+    body=body.replace('AREA_CARDS','\n'.join(cards))
     page('Capabilities &amp; Collaboration | Elite Bot Studios','Engineering areas of study and collaboration interest: embedded systems, power electronics, electronics and PCB design, control, instrumentation, and IoT.','/services.html',body,jsonld=SCHEMA_GRAPH)
 
 
 # ---------------------------------------------------------------- projects --
 def projects():
+    cards='\n'.join(render_project(p) for p in PROJECT_RECORDS)
+    empty_attr=' hidden' if PROJECT_RECORDS else ''
     body = '''
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Projects</span><h1>A portfolio that earns its claims.</h1><p>Concepts are labelled as concepts. Simulations and measurements will be published with their assumptions, methods, and limitations. There are no completed hardware case studies to claim today.</p></div></section>
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Projects</span><h1>A portfolio that earns its claims.</h1><p>Concepts are labelled as concepts. Simulations and measurements are published with assumptions, methods, and limitations. Each record shows the evidence that exists—and what does not.</p></div></section>
     <section class="section"><div class="wrap">
-      <div class="notice reveal"><div><b>Current portfolio status</b><p>One project track is recorded as a concept. It has no published prototype, repository, simulation, or bench results. Future project pages will only be expanded when actual evidence is available.</p></div></div>
-      <h2 class="sr-only">Project records</h2><div id="projectsGrid" class="grid grid-2" aria-live="polite"></div>
-      <div class="empty-state" id="projectsEmpty"><h3>Evidence is still being developed.</h3><p>The portfolio is intentionally small rather than padded with imagined case studies. The lab log records technical learning; project records will grow with verified work.</p><a class="btn btn-ghost" href="/lab.html">Visit the Engineering Lab</a></div>
-      <div class="section-head" style="margin-top:52px"><span class="label">Case-study standard</span><h2>What a project record will contain</h2><p>System objective, architecture, verified hardware and software, design decisions, simulations, test conditions, measured results, limitations, lessons, and supporting files—only where those artifacts exist.</p><a class="text-link" href="/project-template.md">Open the reusable project template →</a></div>
+      <div class="notice reveal"><div><b>Evidence first</b><p>Project status is explicit. No concept, design render, or simulation is presented as a completed hardware result. Detailed case studies will be expanded as verified files and test evidence become available.</p></div></div>
+      <h2 class="sr-only">Project records</h2><div id="projectsGrid" class="grid grid-2">PROJECT_CARDS</div>
+      <div class="empty-state" id="projectsEmpty"EMPTY_ATTR><h3>The project record is still being built.</h3><p>There are no public project records yet. The portfolio is intentionally small rather than padded with imagined case studies.</p><a class="btn btn-ghost" href="/lab.html">Visit the Engineering Lab</a></div>
+      <div class="section-head" style="margin-top:52px"><span class="label">Case-study standard</span><h2>What a project record will contain</h2><p>Objective, architecture, verified hardware and software, design decisions, simulations, test conditions, measured results, limitations, lessons, and supporting resources—only where the relevant artifacts exist.</p><a class="text-link" href="/project-template.md">Open the reusable project template →</a></div>
     </div></section>
 '''
+    body=body.replace('PROJECT_CARDS',cards).replace('EMPTY_ATTR',empty_attr)
     page('Engineering Projects &amp; Case Studies | Elite Bot Studios','Evidence-led project records in embedded systems, power electronics, PCB design, and control. Concepts are separated from simulations, prototypes, and measured work.','/projects.html',body,jsonld=SCHEMA_GRAPH)
 
 
@@ -65,8 +84,8 @@ def lab_index():
     <section class="page-head">
       <div class="wrap">
         <span class="eyebrow">Lab Log</span>
-        <h1>Notes from the bench.</h1>
-        <p>What is being built, what broke, and what the measurements said. Written as the work happens.</p>
+        <h1>Engineering notes and models.</h1>
+        <p>Educational explanations and method notes. Bench observations will be labelled as such and published only with real test conditions and evidence.</p>
       </div>
     </section>
 
@@ -81,7 +100,7 @@ def lab_index():
 ''' % '\n'.join(cards)
 
     page('Lab Log — Build Notes from the Bench | Elite Bot Studios',
-         'Build notes from the bench: what is being built, what broke, and what the measurements said.',
+         'Engineering notes on embedded systems, simulation, documentation, and evidence—separating educational explanations from bench observations.',
          '/lab.html', body, jsonld=SCHEMA_GRAPH)
 
 
@@ -111,11 +130,11 @@ def lab_posts():
       <div class="wrap">
         <div class="reveal" style="max-width:600px">
           <span class="label">Next</span>
-          <h2 style="font-size:clamp(1.4rem,3.6vw,1.8rem);margin:12px 0 14px">Have a build in mind?</h2>
-          <p style="color:var(--muted)">Describe the problem and you will get a scope, a parts list, and a fixed price.</p>
+          <h2 style="font-size:clamp(1.4rem,3.6vw,1.8rem);margin:12px 0 14px">Have a technical question?</h2>
+          <p style="color:var(--muted)">Read a project record, explore an engineering calculator, or use the contact page for an academic or technical discussion.</p>
           <div class="hero-ctas" style="margin-top:24px">
-            <a class="btn btn-primary" href="/contact.html">Start a Project</a>
-            <a class="btn btn-ghost" href="/lab.html">More Lab Notes</a>
+            <a class="btn btn-primary" href="/projects.html">Explore projects</a>
+            <a class="btn btn-ghost" href="/contact.html">Contact</a>
           </div>
         </div>
       </div>

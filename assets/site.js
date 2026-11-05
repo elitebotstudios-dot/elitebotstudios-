@@ -181,6 +181,12 @@ window.EBS.renderProjectCard = ebsProjectCard;
     });
   }
 
+  if (mount.children && mount.children.length) {
+    if (EMPTY) EMPTY.hidden = true;
+    afterInject();
+    return;
+  }
+
   fetch('/projects.json', { cache: 'no-cache' })
     .then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
     .then(function (list) {
