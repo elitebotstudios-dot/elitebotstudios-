@@ -28,6 +28,6 @@ The public portfolio separates concepts and educational models from project evid
 
 Lab-note Markdown: `content/lab-notes/`
 Project index: `projects.json`
-Project authoring checklist: `project-template.md`
+Project record standard: https://elitebotstudios.me/project-template.html (downloadable Markdown checklist: `/project-template.md`)
 
-Contact: contact@elitebotstudios.me
+Contact form: posts to the site's own /api/contact endpoint; if mail delivery is not configured on a deployment, the page opens a local email draft and says so. Direct address: contact@elitebotstudios.me
