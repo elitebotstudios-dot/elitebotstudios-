@@ -1,8 +1,10 @@
-# Content authoring
+# Lab-note authoring
 
-## Engineering Lab notes
+Repository documentation for maintainers. This file is not linked from the public site.
 
-Add a Markdown file under `content/lab-notes/` with this front matter:
+## File format
+
+One Markdown file per note in `content/lab-notes/`:
 
 ```yaml
 ---
@@ -10,23 +12,27 @@ slug: example-note
 title: A short technical title
 date: 2026-11-05
 tags: [embedded systems, testing]
-description: One factual sentence used in the lab index and search metadata.
+description: One factual sentence used in the index and metadata.
 ---
 ```
 
-Write the article below the closing `---`. A dependency-free renderer supports headings (`##`/`###`), paragraphs, lists, blockquotes, fenced code, inline code/links/emphasis, inline and display equations, same-site asset images (`![alt](/assets/file.png)`), horizontal rules, and simple pipe tables. Raw HTML is escaped. Keep claims tied to real files, a stated model, or documented measurements; distinguish simulation from bench results.
+The body follows the closing `---`. The dependency-free renderer supports headings (`##`, `###`), paragraphs, ordered and unordered lists, blockquotes, fenced code with language-aware highlighting (`c`, `cpp`, `js`, `python`), inline code, links, emphasis, inline equations (`$...$` or `\(...\)`), display equations (`$$`), same-site images (`![alt](/assets/plot.png)`), horizontal rules and pipe tables. Raw HTML is escaped.
 
-Build from the website repository root:
+`slug` must be lowercase-hyphenated and becomes `/lab/<slug>.html`. `date` must be `YYYY-MM-DD`. Reading time is derived from the rendered body.
+
+## Publishing
 
 ```sh
 python3 scripts/site/pages.py
 python3 scripts/site/build_index.py
-python3 scripts/site/build_tools.py
 python3 scripts/build_sitemap.py
+python3 scripts/audit_site.py
 ```
 
-Edit Markdown for an article; do not hand-edit generated `lab/*.html` pages.
+The note then appears in the lab index, the sitemap and — if listed in `featured` in `build_index.py` — the homepage preview, all from the same source.
 
-## Engineering projects
+## Rules
 
-Use `project-template.md` and `HOW-TO-ADD-A-PROJECT.md`. `projects.json` is the published index; prepare new project data as a local draft until the status and supporting evidence are ready. Do not describe a concept as a prototype or fill in missing hardware/results by inference.
+- Separate educational explanation, simulation/calculation, and measurement. Never present a model result as a bench result.
+- Give units, stated assumptions, and references where a claim depends on an external source.
+- Prefer one accurate note over several thin ones. Do not fabricate experiments.

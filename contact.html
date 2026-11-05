@@ -4,18 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>Contact | Elite Bot Studios</title>
-  <meta name="description" content="Contact Muhammad Shahzaib Abbas about engineering collaboration, internships, research discussion, hardware project inquiries, or general questions." />
+  <meta name="description" content="Contact Muhammad Shahzaib Abbas about engineering collaboration, academic research discussion, research opportunities, internships, hardware project inquiries, or general questions." />
 <link rel="canonical" href="https://elitebotstudios.me/contact.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Elite Bot Studios" />
   <meta property="og:title" content="Contact | Elite Bot Studios" />
-  <meta property="og:description" content="Contact Muhammad Shahzaib Abbas about engineering collaboration, internships, research discussion, hardware project inquiries, or general questions." />
+  <meta property="og:description" content="Contact Muhammad Shahzaib Abbas about engineering collaboration, academic research discussion, research opportunities, internships, hardware project inquiries, or general questions." />
 <meta property="og:url" content="https://elitebotstudios.me/contact.html" />
   <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Contact | Elite Bot Studios" />
-  <meta name="twitter:description" content="Contact Muhammad Shahzaib Abbas about engineering collaboration, internships, research discussion, hardware project inquiries, or general questions." />
+  <meta name="twitter:description" content="Contact Muhammad Shahzaib Abbas about engineering collaboration, academic research discussion, research opportunities, internships, hardware project inquiries, or general questions." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
 
   <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
@@ -23,24 +23,99 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
   <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.05-R3" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R4" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=fa9d9a84" />
+  <link rel="stylesheet" href="/assets/site.css?v=15e1f9c5" />
 
   <script>
     (function(){
-      function initContactComposer(){
-      var form=document.getElementById('contactForm');if(!form)return;var status=document.getElementById('formStatus');
-      function field(el,msg){var box=el.closest('.field');if(!box)return false;var error=box.querySelector('.err');el.setAttribute('aria-invalid',msg?'true':'false');if(error)error.textContent=msg||'';return !msg;}
-      function validate(el){var v=(el.value||'').trim();if(el.required&&!v)return field(el,'This field is required.');if(el.type==='email'&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return field(el,'Enter a valid email address.');if(el.tagName==='TEXTAREA'&&v.length<20)return field(el,'Please add at least 20 characters.');return field(el,'');}
-      Array.prototype.forEach.call(form.elements,function(el){if(!el.name)return;el.addEventListener('blur',function(){validate(el);});el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true')validate(el);});});
-      form.addEventListener('submit',function(ev){ev.preventDefault();var ok=true,first=null;Array.prototype.forEach.call(form.elements,function(el){if(!el.name)return;if(!validate(el)){ok=false;if(!first)first=el;}});if(!ok){status.textContent='Please review the highlighted fields.';if(first)first.focus();return;}
-        var data=new FormData(form);var lines=['Name: '+data.get('name'),'Email: '+data.get('email'),'Organization / university: '+(data.get('organization')||'Not provided'),'Inquiry: '+data.get('category'),'','Message:',data.get('message')];
-        window.location.href='mailto:contact@elitebotstudios.me?subject='+encodeURIComponent('Elite Bot Studios — '+data.get('category'))+'&body='+encodeURIComponent(lines.join('\n'));
-        status.textContent='Your email app should open with a draft. Review it and press Send there; this website has not received or sent your message.';
-      });
+      function initContact(){
+        var form=document.getElementById('contactForm');
+        if(!form)return;
+        var status=document.getElementById('formStatus');
+        var submit=form.querySelector('button[type="submit"]');
+        var EMAIL='contact@elitebotstudios.me';
+
+        function field(el,msg){
+          var box=el.closest('.field');
+          if(!box)return false;
+          var error=box.querySelector('.err');
+          el.setAttribute('aria-invalid',msg?'true':'false');
+          if(error)error.textContent=msg||'';
+          return !msg;
+        }
+        function validate(el){
+          var v=(el.value||'').trim();
+          if(el.required&&!v)return field(el,'This field is required.');
+          if(el.type==='email'&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return field(el,'Enter a valid email address.');
+          if(el.tagName==='TEXTAREA'&&v.length<20)return field(el,'Please add at least 20 characters.');
+          return field(el,'');
+        }
+        Array.prototype.forEach.call(form.elements,function(el){
+          if(!el.name)return;
+          el.addEventListener('blur',function(){validate(el);});
+          el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true')validate(el);});
+        });
+
+        function draft(){
+          var data=new FormData(form);
+          var lines=['Name: '+data.get('name'),'Email: '+data.get('email'),
+                     'Organization / university: '+(data.get('organization')||'Not provided'),
+                     'Inquiry: '+data.get('category'),'','Message:',data.get('message')];
+          window.location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('Elite Bot Studios — '+data.get('category'))+'&body='+encodeURIComponent(lines.join('\n'));
+          status.style.color='var(--teal)';
+          status.textContent='Direct delivery is not configured on this deployment yet, so your email app has been opened with the message ready to send. Nothing was transmitted by this website.';
+        }
+
+        form.addEventListener('submit',function(ev){
+          ev.preventDefault();
+          var ok=true,first=null;
+          Array.prototype.forEach.call(form.elements,function(el){
+            if(!el.name||!el.closest('.field'))return;
+            if(!validate(el)){ok=false;if(!first)first=el;}
+          });
+          if(!ok){status.style.color='#E5726B';status.textContent='Please review the highlighted fields.';if(first)first.focus();return;}
+
+          var payload={name:form.elements['name'].value,email:form.elements['email'].value,
+                       organization:form.elements['organization'].value,category:form.elements['category'].value,
+                       message:form.elements['message'].value,website:form.elements['website'].value};
+          var original='Send message';
+          if(submit){submit.disabled=true;submit.textContent='Sending…';}
+          status.style.color='var(--muted)';status.textContent='Sending your message…';
+
+          function restore(){if(submit){submit.disabled=false;submit.textContent=original;}}
+
+          fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+            .then(function(res){
+              return res.json().catch(function(){return null;}).then(function(body){return {status:res.status,body:body};});
+            })
+            .then(function(result){
+              restore();
+              if(result.status===200&&result.body&&result.body.delivered){
+                form.reset();
+                status.style.color='var(--teal)';
+                status.textContent='Message sent. It has been delivered to the studio inbox; you will get a reply at the address you provided.';
+                return;
+              }
+              if(result.status===422&&result.body&&result.body.fields){
+                Object.keys(result.body.fields).forEach(function(key){
+                  var el=form.elements[key];
+                  if(el)field(el,result.body.fields[key]);
+                });
+                status.style.color='#E5726B';status.textContent='Please review the highlighted fields.';
+                return;
+              }
+              if(result.status===502){
+                status.style.color='#E5726B';
+                status.textContent='The mail service did not accept the message. Please email '+EMAIL+' directly.';
+                return;
+              }
+              draft();
+            })
+            .catch(function(){restore();draft();});
+        });
       }
-      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initContactComposer,{once:true});else initContactComposer();
+      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initContact,{once:true});else initContact();
     }());
   </script>
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
@@ -129,18 +204,19 @@
 
   <main id="main">
 
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Contact</span><h1>Start a technical conversation.</h1><p>Choose the kind of discussion and share enough context for a useful reply.</p></div></section>
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Contact</span><h1>Start a technical conversation.</h1><p>Share the kind of discussion you have in mind and enough context for a useful reply.</p></div></section>
     <section class="section"><div class="wrap contact-layout"><div>
-      <form id="contactForm" action="mailto:contact@elitebotstudios.me" method="post" enctype="text/plain" novalidate>
+      <form id="contactForm" action="/api/contact" method="post" novalidate>
+        <div class="hp-field" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field"><label for="name">Full name <span aria-hidden="true">*</span></label><input id="name" name="name" autocomplete="name" required maxlength="100"><span class="err" aria-live="polite"></span></div>
         <div class="field"><label for="email">Email <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254"><span class="err" aria-live="polite"></span></div>
         <div class="field"><label for="organization">Organization / university <span class="muted-small">(optional)</span></label><input id="organization" name="organization" autocomplete="organization" maxlength="120"><span class="err" aria-live="polite"></span></div>
-        <div class="field"><label for="category">Inquiry type <span aria-hidden="true">*</span></label><select id="category" name="category" required><option value="">Choose a category</option><option>Engineering collaboration</option><option>Internship or job opportunity</option><option>Academic or research discussion</option><option>Hardware project inquiry</option><option>General question</option></select><span class="err" aria-live="polite"></span></div>
+        <div class="field"><label for="category">Inquiry type <span aria-hidden="true">*</span></label><select id="category" name="category" required><option value="">Choose a category</option><option>Engineering collaboration</option><option>Academic or research discussion</option><option>Research opportunity</option><option>Internship or job opportunity</option><option>Hardware project inquiry</option><option>General question</option></select><span class="err" aria-live="polite"></span></div>
         <div class="field"><label for="message">Message <span aria-hidden="true">*</span></label><textarea id="message" name="message" required minlength="20" maxlength="1200" rows="7" placeholder="What are you working on or hoping to discuss?"></textarea><span class="err" aria-live="polite"></span></div>
-        <button class="btn btn-primary" type="submit">Prepare email draft</button>
-        <p class="form-note" id="formStatus" role="status" aria-live="polite">The form opens your own email application with a draft. Nothing is submitted to this website.</p>
+        <button class="btn btn-primary" type="submit">Send message</button>
+        <p class="form-note" id="formStatus" role="status" aria-live="polite">The status line reports what actually happened: a delivered message, a validation problem, or an email draft. Direct email is always available on the right.</p>
       </form>
-    </div><aside class="contact-aside"><div class="info-block"><h2>Direct email</h2><p><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a></p><p class="muted-small">If your device has no email app configured, write directly from any email service.</p></div><div class="info-block"><h2>Good context to include</h2><p>For a technical discussion, mention the system or research question, relevant constraints, and what kind of feedback or collaboration you are seeking.</p></div><div class="info-block"><h2>Privacy note</h2><p>Submitting this page does not transmit your information. The draft is created in your email application; it is sent only if you press Send there.</p></div></aside></div></section>
+    </div><aside class="contact-aside"><div class="info-block"><h2>Direct email</h2><p><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a></p><p class="muted-small">Use this if your device has no email app configured, or if you prefer not to use the form.</p></div><div class="info-block"><h2>Good context to include</h2><p>For a technical discussion, mention the system or research question, relevant constraints, and what kind of feedback or collaboration you are seeking.</p></div><div class="info-block"><h2>How the form handles your data</h2><p>If server delivery is configured, your message is sent through the site's own endpoint to the studio inbox. If it is not configured, nothing is transmitted and your email application opens with a draft instead. The form never reports a success it cannot verify.</p></div></aside></div></section>
 
   </main>
 

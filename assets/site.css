@@ -655,3 +655,49 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
 .founder-section .founder-copy h2 em,.founder-section .section-index,.founder-section .text-link{color:#765A22}.founder-section .founder-note>span{color:#24636B}.founder-section .founder-note>a{color:#765A22}
 .journal-section .section-heading h2 em,.journal-section .section-index,.journal-section .text-link{color:#765A22}.journal-section .section-heading .text-link b,.journal-section .journal-entry>b{color:#765A22}.journal-section .section-heading>p{color:#4F5C66}.journal-section .section-tail{color:#4F5C66}.journal-section .section-tail .text-link{color:#765A22}
 .technical-article .article-meta,.technical-article .article-meta time{color:#4B5963}.technical-article .section-index,.technical-article .article-kicker{color:#24636B}.technical-article .article-prose p,.technical-article .article-prose li{color:#3E4A53}.technical-article .article-prose .inline-equation{color:#62491B}.technical-article .article-prose h2,.technical-article .article-prose h3{color:#151B20}
+
+/* Lab reading room: featured note, topic rail */
+.lab-index-intro{grid-template-columns:220px minmax(0,640px)}
+.lab-feature{display:grid;grid-template-columns:1.05fr .95fr;border:1px solid #2F3B45;border-radius:10px;overflow:hidden;background:linear-gradient(140deg,#151E27,#0C1218);margin-bottom:26px}
+.lab-feature-copy{padding:clamp(22px,3.4vw,38px);display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.lab-feature-copy .section-index{color:var(--cyan)}
+.lab-feature-copy h2{font-size:clamp(1.5rem,2.8vw,2.15rem);line-height:1.08;letter-spacing:-.04em}
+.lab-feature-copy h2 a{color:#F4F6F8;text-decoration:none}
+.lab-feature-copy h2 a:hover{color:var(--teal);text-decoration:underline;text-underline-offset:4px}
+.lab-feature-copy>p{color:#A9B4BE;font-size:.94rem;line-height:1.62;max-width:46ch}
+.lab-feature-meta{display:flex;gap:16px;color:#8794A0;font:500 .62rem var(--font-mono);letter-spacing:.08em;text-transform:uppercase}
+.lab-feature-copy .btn{margin-top:6px}
+.lab-feature-visual{display:grid;place-items:center;background:radial-gradient(ellipse at center,rgba(89,217,232,.07),transparent 66%),#0A1016;border-left:1px solid #2C3742;padding:18px}
+.lab-feature-visual svg{width:100%;height:auto}
+.lab-viz-grid{fill:none;stroke:#2E3A45;stroke-width:1;stroke-dasharray:2 6}
+.lab-viz-gold{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linejoin:round}
+.lab-viz-cyan{fill:none;stroke:var(--cyan);stroke-width:2.5;stroke-linejoin:round}
+.lab-viz-dash{stroke:#C6D0D8;stroke-width:1;stroke-dasharray:3 5}
+.lab-feature-visual text{fill:#93A1AC;font:500 9px var(--font-mono);letter-spacing:.08em}
+.lab-topics{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 22px;padding:14px 0;border-top:1px solid #26313B;border-bottom:1px solid #26313B}
+.lab-topics .section-index{color:var(--cyan)}
+.lab-topics ul{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.lab-topics .chip{text-transform:capitalize}
+@media(max-width:760px){.lab-feature{grid-template-columns:1fr}.lab-feature-visual{border-left:0;border-top:1px solid #2C3742;order:-1;padding:10px}.lab-index-intro{grid-template-columns:1fr}.lab-topics{gap:8px}}
+
+/* Project record standard */
+.template-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,70px);align-items:start}
+.template-intro{position:sticky;top:calc(var(--nav-h) + 24px)}
+.template-intro .section-index{color:var(--cyan)}
+.template-intro h2{font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.06;margin:13px 0 14px}
+.template-intro p{color:#A9B4BE;line-height:1.68}
+.template-intro .btn{margin:18px 0 10px}
+.template-intro .muted-small{font-size:.78rem;color:#8794A0}
+.template-sections{list-style:none;margin:0;padding:0;border-top:1px solid #2F3B45}
+.template-sections li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px 4px;border-bottom:1px solid #2A353F}
+.template-sections li>span{color:var(--teal);font:500 .66rem var(--font-mono)}
+.template-sections h3{font-size:1.02rem;margin-bottom:6px}
+.template-sections p{color:#9DAAB8;font-size:.88rem;line-height:1.6}
+.template-key{margin:0}
+@media(max-width:760px){.template-grid{grid-template-columns:1fr}.template-intro{position:static}}
+
+/* Honeypot: hidden from sight and from the accessibility tree */
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.template-scale-section{padding-top:clamp(30px,4vw,46px)}
+.template-scale-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:22px}
+.template-scale-actions .text-link{margin:0}

@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = str(ROOT)
 SITE = 'https://elitebotstudios.me'
-SITE_BUILD = 'EBS-2026.11.05-R3'
+SITE_BUILD = 'EBS-2026.11.05-R4'
 EMAIL = 'contact@elitebotstudios.me'
 TAGLINE = 'Embedded Intelligence · Real-World Power'
 ONELINER = ('An independent engineering initiative exploring embedded systems, power electronics, and '

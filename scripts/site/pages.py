@@ -66,11 +66,38 @@ def projects():
         <p class="concept-caption">Illustrative system roles only · not a schematic, component selection, or prototype description.</p>
       </div>
       <div class="roadmap-section"><div class="project-section-label"><span class="section-index">02 / POSSIBLE EXPLORATIONS</span><span>ROADMAP · NOT COMPLETED PROJECTS</span></div><div class="roadmap-grid"><article><span>POWER</span><h3>Digitally controlled buck converter</h3><p>A possible study of switch behavior, inductor ripple, and digital control assumptions.</p></article><article><span>CONTROL</span><h3>Embedded motor control</h3><p>A future direction connecting sensing, actuation, and feedback fundamentals.</p></article><article><span>ENERGY</span><h3>Battery monitoring</h3><p>A possible exploration of measurement, state estimation, and protection concepts.</p></article></div></div>
-      <div class="project-template-link"><div><span class="section-index">CASE STUDY WORKFLOW</span><h2>Record the method as well as the result.</h2><p>A reusable structure for objectives, architecture, software, simulation, measurements, limitations, and resources.</p></div><a class="btn btn-ghost" href="/project-template.md">Open project template ↗</a></div>
+      <div class="project-template-link"><div><span class="section-index">CASE STUDY WORKFLOW</span><h2>Record the method as well as the result.</h2><p>A reusable structure for objectives, architecture, software, simulation, measurements, limitations, and resources.</p></div><a class="btn btn-ghost" href="/project-template.html">Open project template ↗</a></div>
     </div></section>
 '''
     body=body.replace('PROJECT_CARDS',cards).replace('EMPTY_ATTR',empty_attr)
     page('Engineering Projects &amp; Case Studies | Elite Bot Studios','Evidence-led project records in embedded systems, power electronics, PCB design, and control. Concepts are separated from simulations, prototypes, and measured work.','/projects.html',body,jsonld=SCHEMA_GRAPH)
+
+
+def project_template_page():
+    body = '''
+    <section class="page-head"><div class="wrap"><a class="backlink" href="/projects.html">&larr; Projects</a><span class="eyebrow">Documentation / Case-study standard</span><h1>How a project record is built.</h1><p>Every engineering record on this site follows the same structure, so a reader can compare a concept, a simulation, and a measured system on equal terms. Sections only appear when they contain real content.</p></div></section>
+    <section class="section"><div class="wrap template-grid">
+      <div class="template-intro">
+        <span class="section-index">01 / STRUCTURE</span>
+        <h2>Objective, method, evidence, limits.</h2>
+        <p>A record answers four questions in order: what problem is being addressed, how it was approached, what evidence exists, and where the work stops. Status labels keep those stages honest.</p>
+        <a class="btn btn-ghost" href="/project-template.md" download>Download the Markdown template &#8599;</a>
+        <p class="muted-small">The download is the blank authoring template kept in the repository. It is a starting structure, not a completed project.</p>
+      </div>
+      <ol class="template-sections">
+        <li><span>01</span><div><h3>Overview and objective</h3><p>The system, the engineering question, and the conditions the design must respect.</p></div></li>
+        <li><span>02</span><div><h3>Architecture</h3><p>Signal and power flow, drawn as a diagram only when a real design or an explicitly labelled concept exists.</p></div></li>
+        <li><span>03</span><div><h3>Hardware and software</h3><p>Confirmed parts, revisions, firmware structure, interfaces, and toolchain.</p></div></li>
+        <li><span>04</span><div><h3>Design decisions</h3><p>Trade-offs considered, calculations used, and alternatives rejected.</p></div></li>
+        <li><span>05</span><div><h3>Simulation</h3><p>Model, inputs, assumptions, and outputs, always identified as simulated.</p></div></li>
+        <li><span>06</span><div><h3>Testing and validation</h3><p>Fixture, instruments, operating conditions, method, and acceptance criteria.</p></div></li>
+        <li><span>07</span><div><h3>Results and limitations</h3><p>Measured values kept separate from expected and simulated ones, with the limits stated plainly.</p></div></li>
+        <li><span>08</span><div><h3>Resources</h3><p>Repositories, documents, images, and demonstrations&mdash;only when they exist and can be shared.</p></div></li>
+      </ol>
+    </div></section>
+    <section class="section template-scale-section"><div class="wrap"><div class="evidence-key template-key"><span class="section-index">STATUS SCALE</span><span><i>Concept</i> A direction and open questions</span><span><i>Simulation</i> Model output with stated assumptions</span><span><i>Design completed</i> Reviewed schematic or architecture</span><span><i>Prototype</i> Hardware exists</span><span><i>Bench tested</i> Measurements with conditions</span></div><div class="template-scale-actions"><a class="btn btn-ghost" href="/projects.html">Back to project records &#8599;</a><a class="text-link" href="/lab.html">Read the engineering notes <b>&#8599;</b></a></div></div></section>
+'''
+    page('Project Record Standard | Elite Bot Studios','How Elite Bot Studios structures engineering case studies: objective, architecture, decisions, simulation, testing, results, limitations, and resources.','/project-template.html',body,jsonld=SCHEMA_GRAPH)
 
 
 def project_detail_pages():
@@ -114,14 +141,32 @@ def project_detail_pages():
 # Lab-note content is authored in content/lab-notes/*.md and parsed by notes.py.
 
 def lab_index():
+    featured=next((x for x in POSTS if x['slug']=='buck-converter-ccm-model'),POSTS[0])
+    others=[x for x in POSTS if x['slug']!=featured['slug']]
+    feat_tags=''.join('<span class="chip">%s</span>'%t for t in featured['tags'])
+    featured_html='<article class="lab-feature"><div class="lab-feature-copy"><span class="section-index">FEATURED NOTE</span><h2><a href="/lab/%s.html">%s</a></h2><p>%s</p><div class="chips">%s</div><p class="lab-feature-meta"><time datetime="%s">%s</time><span>%d min read</span></p><a class="btn btn-primary" href="/lab/%s.html">Read the note <span aria-hidden="true">&#8599;</span></a></div><div class="lab-feature-visual" aria-hidden="true"><svg viewBox="0 0 520 300"><path class="lab-viz-grid" d="M40 40h440M40 100h440M40 160h440M40 220h440M40 280h440M40 30v260M150 30v260M260 30v260M370 30v260M480 30v260"/><path class="lab-viz-gold" d="M40 120V70h150v50h330"/><path class="lab-viz-cyan" d="M40 235 190 195 340 235 490 195"/><path class="lab-viz-dash" d="M190 50v210"/><text x="46" y="60">IDEAL PWM</text><text x="46" y="186">INDUCTOR CURRENT</text><text x="200" y="62">D &middot; T</text></svg></div></article>'%(
+        featured['slug'],featured['title'],featured['desc'],feat_tags,featured['date'],featured['date'],featured['read_time'],featured['slug'])
     cards=[]
-    for p in POSTS:
-        tags=''.join('<span class="chip">%s</span>'%t for t in p['tags'][:3])
-        cards.append('''<a class="journal-entry reveal" href="/lab/%s.html"><div class="journal-entry-meta"><span>%s</span><span>%d MIN READ</span></div><h3>%s</h3><p>%s</p><div class="chips">%s</div><b>OPEN NOTE ↗</b></a>'''%(p['slug'],p['date'],p['read_time'],p['title'],p['desc'],tags))
+    for note in others:
+        tags=''.join('<span class="chip">%s</span>'%t for t in note['tags'][:3])
+        cards.append('<a class="journal-entry reveal" href="/lab/%s.html"><div class="journal-entry-meta"><span>%s</span><span>%d MIN READ</span></div><h3>%s</h3><p>%s</p><div class="chips">%s</div><b>OPEN NOTE &#8599;</b></a>'%(
+            note['slug'],note['date'],note['read_time'],note['title'],note['desc'],tags))
+    topics=[]
+    for note in POSTS:
+        for tag in note['tags']:
+            if tag.lower() not in [t.lower() for t in topics]:
+                topics.append(tag)
+    topic_html=''.join('<li><span class="chip">%s</span></li>'%html_escape(t,quote=True) for t in topics[:8])
     body='''
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Engineering Lab / Notebook</span><h1>Ideas become clearer<br><em>when written down.</em></h1><p>Educational notes on embedded systems, power conversion, models, and engineering method. Explanations are distinct from measured observations.</p></div></section>
-    <section class="section"><div class="wrap"><h2 class="sr-only">Engineering note index</h2><div class="lab-index-intro"><span class="section-index">READ / MODEL / QUESTION</span><p>Each note explains a concept with stated assumptions, useful equations, and references where appropriate. No simulated curve is presented as a bench result.</p></div><div class="journal-list">%s</div><div class="section-tail"><span>MARKDOWN-AUTHORED · STATICALLY PUBLISHED</span><a class="text-link" href="/content/README.md">How notes are authored <b>↗</b></a></div></div></section>
-'''%''.join(cards)
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Engineering Lab / Notebook</span><h1>Ideas become clearer<br><em>when written down.</em></h1><p>Technical notes on embedded systems, power conversion, models, and engineering method. Each note states its assumptions, and calculated or simulated results are labelled separately from measured ones.</p></div></section>
+    <section class="section"><div class="wrap"><h2 class="sr-only">Engineering note index</h2>
+      <div class="lab-index-intro"><span class="section-index">%d PUBLISHED NOTES</span><p>Written and reviewed as part of the studio's own study. Long pieces include a contents list; notes link to related calculators or project records where they exist.</p></div>
+      %s
+      <div class="lab-topics"><span class="section-index">TOPICS</span><ul>%s</ul></div>
+      <div class="journal-list">%s</div>
+      <div class="section-tail"><span>READING ROOM &middot; ENGINEERING NOTES</span><a class="text-link" href="/tools.html">Try the engineering tools <b>&#8599;</b></a></div>
+    </div></section>
+'''%(len(POSTS),featured_html,topic_html,''.join(cards))
     page('Engineering Lab &amp; Technical Notes | Elite Bot Studios','Engineering notes on embedded systems, PWM, power conversion, simulation, measurement, and practical design concepts. Educational content clearly labels assumptions and evidence.','/lab.html',body,jsonld=SCHEMA_GRAPH)
 
 
@@ -187,37 +232,114 @@ def about():
 CONTACT_FORM_JS = r'''
   <script>
     (function(){
-      function initContactComposer(){
-      var form=document.getElementById('contactForm');if(!form)return;var status=document.getElementById('formStatus');
-      function field(el,msg){var box=el.closest('.field');if(!box)return false;var error=box.querySelector('.err');el.setAttribute('aria-invalid',msg?'true':'false');if(error)error.textContent=msg||'';return !msg;}
-      function validate(el){var v=(el.value||'').trim();if(el.required&&!v)return field(el,'This field is required.');if(el.type==='email'&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return field(el,'Enter a valid email address.');if(el.tagName==='TEXTAREA'&&v.length<20)return field(el,'Please add at least 20 characters.');return field(el,'');}
-      Array.prototype.forEach.call(form.elements,function(el){if(!el.name)return;el.addEventListener('blur',function(){validate(el);});el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true')validate(el);});});
-      form.addEventListener('submit',function(ev){ev.preventDefault();var ok=true,first=null;Array.prototype.forEach.call(form.elements,function(el){if(!el.name)return;if(!validate(el)){ok=false;if(!first)first=el;}});if(!ok){status.textContent='Please review the highlighted fields.';if(first)first.focus();return;}
-        var data=new FormData(form);var lines=['Name: '+data.get('name'),'Email: '+data.get('email'),'Organization / university: '+(data.get('organization')||'Not provided'),'Inquiry: '+data.get('category'),'','Message:',data.get('message')];
-        window.location.href='mailto:contact@elitebotstudios.me?subject='+encodeURIComponent('Elite Bot Studios — '+data.get('category'))+'&body='+encodeURIComponent(lines.join('\n'));
-        status.textContent='Your email app should open with a draft. Review it and press Send there; this website has not received or sent your message.';
-      });
+      function initContact(){
+        var form=document.getElementById('contactForm');
+        if(!form)return;
+        var status=document.getElementById('formStatus');
+        var submit=form.querySelector('button[type="submit"]');
+        var EMAIL='contact@elitebotstudios.me';
+
+        function field(el,msg){
+          var box=el.closest('.field');
+          if(!box)return false;
+          var error=box.querySelector('.err');
+          el.setAttribute('aria-invalid',msg?'true':'false');
+          if(error)error.textContent=msg||'';
+          return !msg;
+        }
+        function validate(el){
+          var v=(el.value||'').trim();
+          if(el.required&&!v)return field(el,'This field is required.');
+          if(el.type==='email'&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return field(el,'Enter a valid email address.');
+          if(el.tagName==='TEXTAREA'&&v.length<20)return field(el,'Please add at least 20 characters.');
+          return field(el,'');
+        }
+        Array.prototype.forEach.call(form.elements,function(el){
+          if(!el.name)return;
+          el.addEventListener('blur',function(){validate(el);});
+          el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true')validate(el);});
+        });
+
+        function draft(){
+          var data=new FormData(form);
+          var lines=['Name: '+data.get('name'),'Email: '+data.get('email'),
+                     'Organization / university: '+(data.get('organization')||'Not provided'),
+                     'Inquiry: '+data.get('category'),'','Message:',data.get('message')];
+          window.location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('Elite Bot Studios — '+data.get('category'))+'&body='+encodeURIComponent(lines.join('\n'));
+          status.style.color='var(--teal)';
+          status.textContent='Direct delivery is not configured on this deployment yet, so your email app has been opened with the message ready to send. Nothing was transmitted by this website.';
+        }
+
+        form.addEventListener('submit',function(ev){
+          ev.preventDefault();
+          var ok=true,first=null;
+          Array.prototype.forEach.call(form.elements,function(el){
+            if(!el.name||!el.closest('.field'))return;
+            if(!validate(el)){ok=false;if(!first)first=el;}
+          });
+          if(!ok){status.style.color='#E5726B';status.textContent='Please review the highlighted fields.';if(first)first.focus();return;}
+
+          var payload={name:form.elements['name'].value,email:form.elements['email'].value,
+                       organization:form.elements['organization'].value,category:form.elements['category'].value,
+                       message:form.elements['message'].value,website:form.elements['website'].value};
+          var original='Send message';
+          if(submit){submit.disabled=true;submit.textContent='Sending…';}
+          status.style.color='var(--muted)';status.textContent='Sending your message…';
+
+          function restore(){if(submit){submit.disabled=false;submit.textContent=original;}}
+
+          fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+            .then(function(res){
+              return res.json().catch(function(){return null;}).then(function(body){return {status:res.status,body:body};});
+            })
+            .then(function(result){
+              restore();
+              if(result.status===200&&result.body&&result.body.delivered){
+                form.reset();
+                status.style.color='var(--teal)';
+                status.textContent='Message sent. It has been delivered to the studio inbox; you will get a reply at the address you provided.';
+                return;
+              }
+              if(result.status===422&&result.body&&result.body.fields){
+                Object.keys(result.body.fields).forEach(function(key){
+                  var el=form.elements[key];
+                  if(el)field(el,result.body.fields[key]);
+                });
+                status.style.color='#E5726B';status.textContent='Please review the highlighted fields.';
+                return;
+              }
+              if(result.status===502){
+                status.style.color='#E5726B';
+                status.textContent='The mail service did not accept the message. Please email '+EMAIL+' directly.';
+                return;
+              }
+              draft();
+            })
+            .catch(function(){restore();draft();});
+        });
       }
-      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initContactComposer,{once:true});else initContactComposer();
+      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initContact,{once:true});else initContact();
     }());
   </script>'''
 
+
 def contact():
     body = '''
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Contact</span><h1>Start a technical conversation.</h1><p>Choose the kind of discussion and share enough context for a useful reply.</p></div></section>
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Contact</span><h1>Start a technical conversation.</h1><p>Share the kind of discussion you have in mind and enough context for a useful reply.</p></div></section>
     <section class="section"><div class="wrap contact-layout"><div>
-      <form id="contactForm" action="mailto:contact@elitebotstudios.me" method="post" enctype="text/plain" novalidate>
+      <form id="contactForm" action="/api/contact" method="post" novalidate>
+        <div class="hp-field" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field"><label for="name">Full name <span aria-hidden="true">*</span></label><input id="name" name="name" autocomplete="name" required maxlength="100"><span class="err" aria-live="polite"></span></div>
         <div class="field"><label for="email">Email <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254"><span class="err" aria-live="polite"></span></div>
         <div class="field"><label for="organization">Organization / university <span class="muted-small">(optional)</span></label><input id="organization" name="organization" autocomplete="organization" maxlength="120"><span class="err" aria-live="polite"></span></div>
-        <div class="field"><label for="category">Inquiry type <span aria-hidden="true">*</span></label><select id="category" name="category" required><option value="">Choose a category</option><option>Engineering collaboration</option><option>Internship or job opportunity</option><option>Academic or research discussion</option><option>Hardware project inquiry</option><option>General question</option></select><span class="err" aria-live="polite"></span></div>
+        <div class="field"><label for="category">Inquiry type <span aria-hidden="true">*</span></label><select id="category" name="category" required><option value="">Choose a category</option><option>Engineering collaboration</option><option>Academic or research discussion</option><option>Research opportunity</option><option>Internship or job opportunity</option><option>Hardware project inquiry</option><option>General question</option></select><span class="err" aria-live="polite"></span></div>
         <div class="field"><label for="message">Message <span aria-hidden="true">*</span></label><textarea id="message" name="message" required minlength="20" maxlength="1200" rows="7" placeholder="What are you working on or hoping to discuss?"></textarea><span class="err" aria-live="polite"></span></div>
-        <button class="btn btn-primary" type="submit">Prepare email draft</button>
-        <p class="form-note" id="formStatus" role="status" aria-live="polite">The form opens your own email application with a draft. Nothing is submitted to this website.</p>
+        <button class="btn btn-primary" type="submit">Send message</button>
+        <p class="form-note" id="formStatus" role="status" aria-live="polite">The status line reports what actually happened: a delivered message, a validation problem, or an email draft. Direct email is always available on the right.</p>
       </form>
-    </div><aside class="contact-aside"><div class="info-block"><h2>Direct email</h2><p><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a></p><p class="muted-small">If your device has no email app configured, write directly from any email service.</p></div><div class="info-block"><h2>Good context to include</h2><p>For a technical discussion, mention the system or research question, relevant constraints, and what kind of feedback or collaboration you are seeking.</p></div><div class="info-block"><h2>Privacy note</h2><p>Submitting this page does not transmit your information. The draft is created in your email application; it is sent only if you press Send there.</p></div></aside></div></section>
+    </div><aside class="contact-aside"><div class="info-block"><h2>Direct email</h2><p><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a></p><p class="muted-small">Use this if your device has no email app configured, or if you prefer not to use the form.</p></div><div class="info-block"><h2>Good context to include</h2><p>For a technical discussion, mention the system or research question, relevant constraints, and what kind of feedback or collaboration you are seeking.</p></div><div class="info-block"><h2>How the form handles your data</h2><p>If server delivery is configured, your message is sent through the site's own endpoint to the studio inbox. If it is not configured, nothing is transmitted and your email application opens with a draft instead. The form never reports a success it cannot verify.</p></div></aside></div></section>
 '''
-    page('Contact | Elite Bot Studios','Contact Muhammad Shahzaib Abbas about engineering collaboration, internships, research discussion, hardware project inquiries, or general questions.','/contact.html',body,jsonld=SCHEMA_GRAPH,extra_head=CONTACT_FORM_JS)
+    page('Contact | Elite Bot Studios','Contact Muhammad Shahzaib Abbas about engineering collaboration, academic research discussion, research opportunities, internships, hardware project inquiries, or general questions.','/contact.html',body,jsonld=SCHEMA_GRAPH,extra_head=CONTACT_FORM_JS)
 
 
 # ------------------------------------------------------------ legal + errors --
@@ -240,7 +362,7 @@ def privacy():
           <ul>
             <li><b>Analytics.</b> The site uses Google Analytics 4 (measurement ID <code>G-HLQ4G5HBMZ</code>) to
                 record aggregate usage: pages viewed, approximate region, device type, and referring site.</li>
-            <li><b>Contact enquiries.</b> The contact page creates a draft in your own email application. The site does not transmit or store form fields. If you choose to send the email, the site operator receives the information you include.</li>
+            <li><b>Contact enquiries.</b> When message delivery is configured on this deployment, the contact form sends your name, email address, optional organization, inquiry category, and message through a serverless endpoint to the studio inbox. When delivery is not configured, nothing is transmitted: your email application opens with a draft that you choose whether to send. The form reports which of these two paths actually occurred.</li>
             <li><b>Server logs.</b> Our host (Vercel) records standard request logs, including IP address, for
                 security and abuse prevention.</li>
           </ul>
@@ -399,6 +521,6 @@ def offline():
 
 if __name__ == '__main__':
     print('building pages…')
-    services(); projects(); project_detail_pages(); lab_index(); lab_posts(); expertise(); about(); contact()
+    services(); projects(); project_detail_pages(); project_template_page(); lab_index(); lab_posts(); expertise(); about(); contact()
     privacy(); terms(); cookies(); notfound(); offline()
     print('done.')

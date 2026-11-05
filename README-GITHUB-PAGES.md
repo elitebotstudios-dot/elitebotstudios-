@@ -2,42 +2,82 @@
 
 Static, accessible engineering portfolio for **Elite Bot Studios**. The site documents the development of Muhammad Shahzaib Abbas, an Electrical Engineering undergraduate at NUST, Pakistan, with academic focus in power engineering and interests in embedded systems and intelligent hardware.
 
-**Live:** <https://elitebotstudios.me>
+**Live:** <https://elitebotstudios.me> (primary). The Vercel alias <https://elitebotstudios.vercel.app> serves the same build and is not a canonical target.
 
 ## Site structure
 
 - `index.html` — studio identity, interactive conceptual power-control system, engineering disciplines, project direction, founder profile, and lab preview.
-- `projects.html` + `projects.json` — evidence-labelled project records; nested `case_study` data generates dedicated `/projects/<slug>.html` pages. The current Smart Energy Monitoring record is explicitly a concept.
-- `expertise.html` — academic focus, current learning, and research interests, without proficiency percentages.
-- `lab.html` and `content/lab-notes/*.md` — four Markdown-authored technical notes with equations, code highlighting, tables, references, reading progress, and generated tables of contents.
-- `services.html` — capabilities and collaboration areas; not a claim of established consultancy delivery.
-- `tools.html` and `tools/*.html` — six client-side engineering models, including an interactive ideal-CCM buck explorer with synchronized controls, live PWM/current plots, and an explicit DCM boundary.
-- `about.html`, `contact.html`, legal pages, `404.html`, and `offline.html`.
-- `assets/site.css`, `assets/site.js`, and `assets/calc.js` — shared design and browser behaviour.
-- `sw.js`, `sitemap.xml`, `robots.txt`, `llms.txt`, and `vercel.json` — discoverability, offline support, and hosting configuration.
+- `projects.html` + `projects.json` — evidence-labelled project records; a nested `case_study` object generates `/projects/<slug>.html`. The current Smart Energy Monitoring record is explicitly a concept.
+- `project-template.html` — the public case-study standard, with a download of the blank Markdown template (`project-template.md`).
+- `expertise.html` — connected knowledge areas with evidence labels, no proficiency percentages.
+- `lab.html` and `content/lab-notes/*.md` — Markdown-authored technical notes. The index, homepage previews, sitemap and reading times are all generated from the same files.
+- `services.html` — collaboration areas, scoped honestly.
+- `tools.html` and `tools/*.html` — six client-side engineering models, including the interactive ideal-CCM buck explorer.
+- `about.html`, `contact.html`, legal pages, `404.html`, `offline.html`.
+- `api/contact.js` — optional Vercel serverless function for contact delivery (see below).
+- `assets/site.css`, `assets/site.js`, `assets/calc.js` — shared design and behaviour.
+- `sw.js`, `sitemap.xml`, `robots.txt`, `llms.txt`, `vercel.json` — discovery, offline support, hosting config.
 
-## Edit and regenerate
+## Local development
 
-Content sources live in `content/lab-notes/`, `projects.json`, and the page generator scripts in `scripts/site/`. Run from the repository root:
+There is no bundler or framework. Serve the repository root and open the pages:
 
 ```sh
-python3 scripts/site/pages.py
-python3 scripts/site/build_index.py
-python3 scripts/site/build_tools.py
-python3 scripts/build_sitemap.py
-node --check assets/site.js
-node --check assets/calc.js
-node tests/projects.test.js
-node tests/calculators.test.js
-python3 tests/notes.test.py
+python3 -m http.server 8080 --bind 0.0.0.0
 ```
 
-Use `HOW-TO-ADD-A-PROJECT.md` and `project-template.md` for project records. Read `content/README.md` to author a lab note. New notes are authored in Markdown, not in generated HTML.
+## Build and regenerate
 
-## Contact behaviour
+All HTML is generated. Edit content or templates, then rebuild:
 
-The contact page validates the form in the browser and opens a prefilled `mailto:` draft. The visitor must press Send in their own email client. The website does **not** transmit the form or confirm email delivery. A server-side form provider can be added later after the owner selects and authorizes one.
+```sh
+python3 scripts/site/pages.py        # inner pages, project records, template page
+python3 scripts/site/build_index.py  # homepage
+python3 scripts/site/build_tools.py  # tools hub + six calculators
+python3 scripts/build_sitemap.py     # sitemap from canonical tags
+```
+
+## Tests
+
+```sh
+python3 scripts/audit_site.py            # routes, nav, metadata, links, sitemap, content sync
+node --check assets/site.js
+node --check assets/calc.js
+node --check sw.js
+node tests/projects.test.js              # project renderer + hero system tabs
+node tests/calculators.test.js           # calculator maths and boundaries
+node tests/contact-api.test.js           # contact endpoint validation and fallback
+python3 tests/notes.test.py              # Markdown pipeline
+```
+
+Browser tests (Playwright, optional, not a repository dependency) live outside the repo in the QA workspace: interactive behaviour, all six calculators, axe accessibility, responsive overflow, and Lighthouse.
+
+## Adding content
+
+- **Project:** copy the JSON shape from `project-template.md` into `projects.json`. Add a nested `case_study` object to generate a detail page; only populated sections render. Rebuild and run `scripts/audit_site.py`.
+- **Lab note:** add a Markdown file to `content/lab-notes/` with `slug`, `title`, `date`, `tags`, `description` front matter. Rebuild; index, homepage previews, sitemap and read time update automatically.
+- **Calculator:** add an entry to `scripts/site/build_tools.py`, a pure function and DOM wiring in `assets/calc.js`, then rebuild and add a reference case to `tests/calculators.test.js`.
+
+## Contact delivery
+
+The form posts JSON to `/api/contact`. The endpoint:
+
+- validates name, email, category and message server-side;
+- silently discards honeypot submissions;
+- sends through Resend when `RESEND_API_KEY` and `CONTACT_TO` are set in the Vercel project;
+
+To enable delivery, set these environment variables in Vercel (Project → Settings → Environment Variables) and redeploy:
+
+| Variable | Purpose |
+|---|---|
+| `RESEND_API_KEY` | API key from resend.com |
+| `CONTACT_TO` | inbox that receives enquiries |
+| `CONTACT_FROM` | optional verified sender, e.g. `Elite Bot Studios <website@elitebotstudios.me>` |
+
+Until they exist the endpoint returns `503 not_configured` and the page opens a local email draft instead, stating plainly that nothing was transmitted. The form never reports delivery it cannot verify. The destination mailbox itself must also be confirmed by the owner as receiving mail.
 
 ## Deploy
 
-The site is deployed to Vercel from the private GitHub repository's `main` branch. Use the existing authorized `deploy.sh` workflow. Never commit credentials, force-push, or change repository visibility.
+Vercel builds from the private GitHub repository's `main` branch. Use the authorized `deploy.sh` workflow. Never commit credentials, force-push, or change repository visibility.
+
+After deploying, verify beyond the homepage: request every route on both hosts and compare the `ebs-build` meta tag, then confirm legacy URLs still return 404.
