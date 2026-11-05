@@ -15,6 +15,8 @@ script, and one hand-written WebGL renderer for the homepage hero.
 ├── index.html                      Home — hero, toolchain, delivery pipeline
 ├── services.html                   4 service blocks + how delivery works
 ├── projects.html                   Renders from projects.json
+├── tools.html                      Engineering calculator hub
+├── tools/                          Six standalone calculator pages
 ├── lab.html                        Build log index
 ├── lab/
 │   ├── why-this-studio-exists.html
@@ -28,6 +30,7 @@ script, and one hand-written WebGL renderer for the homepage hero.
 ├── assets/
 │   ├── site.css                    shared design system (all pages)
 │   ├── site.js                     nav, scroll reveal, project loader
+│   ├── calc.js                     engineering maths + calculator UI
 │   ├── hero3d.js                   WebGL2 hero scene (~45 KB, no libraries)
 │   ├── hero-atlas.webp             soldermask/copper/silkscreen texture
 │   ├── hero-poster.webp            1600px hero still (LCP + no-WebGL fallback)
@@ -121,6 +124,31 @@ Everything published must be **actually built and actually measured**.
   ```
 
 ---
+
+## Engineering calculators
+
+Six tools, each a standalone page so it can rank and be linked on its own.
+The maths lives in `assets/calc.js` as pure functions (`traceWidth`, `buck`,
+`linear`, `divider`, `led`, `rc`) with the DOM wiring below them, which means
+the formulas can be tested in Node without a browser:
+
+```bash
+node -e "const c=require('./assets/calc.js'); console.log(c.traceWidth({current:3,rise:10,copper:1}).widthMil)"
+# 53.85 — matches published IPC-2221 references
+```
+
+**If you change a formula, change the `caveat` text on that page too.** Every
+calculator claims a specific model with specific limits. A number without its
+limits stated is the kind of thing this studio exists to avoid.
+
+Regenerate with:
+
+```bash
+python3 ../tools/build_tools.py
+```
+
+`assets/calc.js` is content-hashed like every other asset, so an edit reaches
+browsers immediately.
 
 ## Regenerating the pages
 
