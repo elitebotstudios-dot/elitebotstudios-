@@ -309,7 +309,7 @@ def hub():
     <section class="page-head">
       <div class="wrap">
         <span class="eyebrow">Tools</span>
-        <h1>Calculators we actually use.</h1>
+        <h1>Small tools for early estimates.</h1>
         <p>Six tools for the questions that come up on every board: how wide the copper has to be, how hot the
            regulator will run, how much ripple the inductor will pass. They run entirely in your browser —
            nothing you type is sent anywhere.</p>
@@ -329,8 +329,7 @@ def hub():
       <div class="wrap">
         <div class="prose reveal" style="max-width:760px">
           <h2>Why these are free</h2>
-          <p>They are the same calculations used when scoping a build, and putting them in the open is the
-             cheapest way to show how the work is done. No account, no email gate, no tracking.</p>
+          <p>These lightweight educational calculators make common engineering equations easier to inspect and test. Inputs stay in the browser and are not sent to a calculation API. No account or email gate is required.</p>
           <h2>What they are not</h2>
           <p>Every one of these is a closed-form estimate. None of them replaces a field solver, a thermal
              test on a real board, or the datasheet of the part you actually bought. Each page says exactly
