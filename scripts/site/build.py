@@ -7,17 +7,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = str(ROOT)
 SITE = 'https://elitebotstudios.me'
-SITE_BUILD = 'EBS-2026.11.05-R6'
+SITE_BUILD = 'EBS-2026.11.05-R7'
 EMAIL = 'contact@elitebotstudios.me'
 TAGLINE = 'Embedded Intelligence · Real-World Power'
 ONELINER = ('An independent engineering initiative exploring embedded systems, power electronics, and '
             'intelligent hardware through practical designs, simulations, prototypes, and documented projects.')
-
-CHIP = ('<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">'
-        '<path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" '
-        'stroke-width="3" stroke-linejoin="round"/>'
-        '<text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" '
-        'font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>')
 
 GH_ICON = ('<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
            '<path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34'
@@ -172,6 +166,8 @@ def header(current):
     desktop = '\n'.join(link(h, l) for h, l in NAV_LINKS)
     mobile = '\n'.join('          <li>%s</li>' % link(h, l).strip()
                        for h, l in NAV_LINKS + [('/contact.html', 'Contact')])
+    mark = ('<img class="brand-mark" src="%s" alt="" width="42" height="48" '
+            'decoding="async" />' % asset('assets/logo-mark.webp'))
     return '''
   <header class="nav">
     <div class="wrap nav-inner">
@@ -197,7 +193,7 @@ def header(current):
       </nav>
     </div>
   </header>
-''' % (CHIP, desktop, mobile)
+''' % (mark, desktop, mobile)
 
 
 def footer():

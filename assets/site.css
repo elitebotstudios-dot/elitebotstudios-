@@ -84,6 +84,7 @@
     .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:var(--nav-h)}
     .brand{display:inline-flex;align-items:center;gap:11px}
     .brand svg{width:32px;height:32px;flex:0 0 auto;filter:drop-shadow(0 0 12px rgba(212,175,55,.35))}
+    .brand-mark{width:auto;height:46px;flex:0 0 auto;display:block}
     .brand-word{font-family:var(--font-mono);font-weight:700;font-size:var(--fs-14);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
     .nav-links{display:flex;align-items:center;gap:2px}
     .nav-links a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 11px;color:var(--muted);font-size:var(--fs-14);font-weight:500;border-radius:8px;transition:color .2s ease,background .2s ease}
@@ -456,7 +457,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
 .nav{border-bottom-color:#202B35;background:rgba(8,11,16,.88)}
 .nav::after{background:linear-gradient(90deg,transparent,rgba(216,182,106,.55),rgba(89,217,232,.22),transparent)}
 .brand-word{font-family:var(--font-display);font-size:.79rem;font-weight:680;letter-spacing:.11em}
-.brand svg{filter:none}
+.brand svg{filter:none}.brand-mark{height:40px}
 .nav-links a{font-size:.82rem;color:#B2BCC6}.nav-links a[aria-current="page"]{color:var(--text)}
 .nav-links a::after{background:linear-gradient(90deg,var(--teal),var(--cyan))}
 .btn{border-radius:7px;min-height:50px;padding-inline:21px;font-size:.83rem;letter-spacing:.015em}
@@ -615,7 +616,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
 .core-tagline{margin-top:19px;color:#8E99A3;font:500 .65rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase}
 .core-hero-copy .hero-ctas{margin:27px 0 22px;gap:10px}.core-hero-copy .hero-ctas .btn{flex:0 0 auto}
 .core-identity{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:#75818B;font:500 .57rem var(--font-mono);letter-spacing:.1em}.core-identity b{color:var(--teal);font-weight:500}
-.core-artwork{position:relative;z-index:1;margin:0;align-self:stretch;min-width:0;display:grid;align-items:center;overflow:visible}.core-artwork img{display:block;width:calc(100% + 4vw);max-width:none;height:100%;max-height:690px;object-fit:cover;object-position:58% center;mix-blend-mode:screen;mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 90%,transparent 100%);filter:saturate(.9) contrast(1.02)}
+.core-artwork{position:relative;z-index:1;margin:0;align-self:stretch;min-width:0;display:grid;align-items:center;overflow:visible}.core-artwork img{display:block;width:calc(100% + 4vw);max-width:none;height:100%;max-height:690px;object-fit:cover;object-position:58% center;mix-blend-mode:screen;mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 88%,transparent 100%);filter:saturate(.92) contrast(1.03)}
 .core-artwork figcaption{position:absolute;right:2%;bottom:7%;color:#CFD5DA;font:500 .56rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 8px #080B10}
 .core-artwork figcaption span{color:var(--teal);padding:0 5px}
 .core-hotspot{position:absolute;z-index:2;left:64%;top:32%;width:38px;height:38px;transform:translate(-50%,-50%);border:1px solid var(--cyan);border-radius:50%;box-shadow:0 0 0 6px rgba(89,217,232,.08),0 0 30px rgba(89,217,232,.35);transition:left .35s ease,top .35s ease,opacity .2s;pointer-events:none}
@@ -806,3 +807,7 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
   .table-scroll th,.table-scroll td{padding:8px 9px}
   .detail-section table th{width:40%}
 }
+
+/* Article blockquotes sit on the light reading surface, so keep the text dark. */
+.technical-article .article-prose blockquote{background:#DFE5E6;border-left-color:#A9873F;color:#2C3841}
+.technical-article .article-prose blockquote p{color:#2C3841}

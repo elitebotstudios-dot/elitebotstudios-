@@ -19,6 +19,17 @@ Static, accessible engineering portfolio for **Elite Bot Studios**. The site doc
 - `assets/site.css`, `assets/site.js`, `assets/calc.js` — shared design and behaviour.
 - `sw.js`, `sitemap.xml`, `robots.txt`, `llms.txt`, `vercel.json` — discovery, offline support, hosting config.
 
+## Brand assets
+
+The logo and favicons are generated from the owner's master artwork by a scripted pipeline, so every size stays consistent:
+
+```sh
+python3 scripts/build_brand_assets.py /path/to/master-logo.png
+python3 scripts/build_social_preview.py
+```
+
+That writes `assets/logo-mark.webp` (transparent header mark), `favicon-32x32.png`, `favicon-16x16.png` (cropped to the monogram so the letters survive at 16 px), `apple-touch-icon.png`, `logo-192.png`, `logo-512.png` (opaque tiles for the manifest) and `social-preview.png`. Never edit those by hand.
+
 ## Local development
 
 There is no bundler or framework. Serve the repository root and open the pages:
