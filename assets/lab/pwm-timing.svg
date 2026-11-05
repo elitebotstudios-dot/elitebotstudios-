@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-labelledby="pwTitle pwDesc">
+  <title id="pwTitle">PWM timing: two duty cycles on a fixed period</title>
+  <desc id="pwDesc">Two square waves with the same period. The upper trace has a 25 percent duty cycle, the lower a 60 percent duty cycle. Dashed lines mark the mathematical average of each trace.</desc>
+  <path d="M70 40H860M70 90H860M70 140H860M70 190H860M70 240H860M70 30V250M268 30V250M466 30V250M664 30V250M860 30V250" fill="none" stroke="#2E3A45" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M70 30V250H860" fill="none" stroke="#5B6873" stroke-width="1.2"/>
+  <g font-family="ui-monospace, monospace" font-size="11" fill="#93A1AC" letter-spacing="1">
+    <text x="70" y="22">V_HIGH</text><text x="70" y="272">0 V</text>
+    <text x="560" y="22">PERIOD T (fixed for both traces)</text>
+    <text x="86" y="112" fill="#D8B66A">D = 25 %</text>
+    <text x="86" y="212" fill="#59D9E8">D = 60 %</text>
+  </g>
+  <path d="M70 90V55H119V90H268V55H317V90H466V55H515V90H664V55H713V90H860V55" fill="none" stroke="#D8B66A" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M70 190V155H189V190H268V155H387V190H466V155H585V190H664V155H783V190H860V155" fill="none" stroke="#59D9E8" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M70 81H860" fill="none" stroke="#D8B66A" stroke-width="1.2" stroke-dasharray="4 6" opacity=".75"/>
+  <path d="M70 169H860" fill="none" stroke="#59D9E8" stroke-width="1.2" stroke-dasharray="4 6" opacity=".75"/>
+  <g font-family="ui-monospace, monospace" font-size="11" fill="#77848F" letter-spacing="1">
+    <text x="268" y="264">t_on</text><text x="317" y="264">t_off</text>
+    <text x="70" y="290">Both traces share T = 1/f_sw. Only the on-time changes, so the average changes with duty, not with frequency.</text>
+  </g>
+</svg>

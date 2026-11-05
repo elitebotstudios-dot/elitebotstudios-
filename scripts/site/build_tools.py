@@ -167,8 +167,8 @@ TOOLS = [
             </div>
           </div>''',
         outputs=[('vout', 'Output voltage', True), ('current', 'Standing current', False),
-                 ('ratio', 'Divider ratio', False), ('p1', 'Power in R1', False),
-                 ('p2', 'Power in R2', False)],
+                 ('ratio', 'Divider ratio', False), ('zout', 'Output impedance R1 ‖ R2', False),
+                 ('p1', 'Power in R1', False), ('p2', 'Power in R2', False)],
         formula='V<sub>out</sub> = V<sub>in</sub> · R2 / (R1 + R2)   ·   I = V<sub>in</sub> / (R1 + R2)   ·   Z<sub>out</sub> = R1 ‖ R2',
         caveat='The output is not a stiff voltage source — its impedance is R1 in parallel with R2. If this feeds an ADC, keep the standing current well above the input leakage and make sure the impedance is low enough for the sample-and-hold to settle.',
     ),
@@ -200,9 +200,47 @@ TOOLS = [
             </div>
           </div>''',
         outputs=[('resistance', 'Series resistor', True), ('nearest', 'Nearest E12', False),
+                 ('currentsel', 'Current with E12 value', False),
                  ('powerr', 'Power in resistor', False), ('powerled', 'Power in LEDs', False)],
         formula='R = (V<sub>supply</sub> − n · V<sub>f</sub>) / I   ·   P<sub>R</sub> = I² · R   ·   P<sub>LED</sub> = n · V<sub>f</sub> · I',
         caveat='V<sub>f</sub> varies part to part and falls as the LED warms, so the current is not as precise as it looks. For anything beyond an indicator, drive the LED from a constant-current source and check the datasheet curve at your actual current.',
+    ),
+    dict(
+        slug='pwm-lab', name='PWM Signal Laboratory',
+        title='PWM Signal Laboratory — Duty, Frequency and Average | Elite Bot Studios',
+        desc='Interactive pulse-width modulation laboratory: set frequency, duty cycle, high level and time window, then read period, on/off time, duty percentage, time-average and RMS, with a live waveform.',
+        blurb='Build a square wave from frequency and duty, then read its timing, average and RMS values against a live waveform.',
+        tags=['embedded', 'PWM', 'instrument'],
+        calc='pwm',
+        form='''          <p class="range-help">Every value updates as you type. Sliders and numeric fields stay in sync.</p>
+          <div class="calc-row">
+            <div class="calc-field">
+              <label for="freq">Switching frequency <span class="unit">kHz</span></label>
+              <input id="freq" name="freq" type="number" value="1" min="0.001" max="100" step="0.1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>FREQUENCY</span><output id="freqRangeValue">1 kHz</output></div><input type="range" min="0.01" max="50" step="0.01" value="1" data-sync-range="freq" data-range-display="freqRangeValue" data-unit="kHz" aria-label="Adjust switching frequency"></div>
+            </div>
+            <div class="calc-field">
+              <label for="duty">Duty cycle <span class="unit">%</span></label>
+              <input id="duty" name="duty" type="number" value="25" min="0" max="100" step="1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>DUTY</span><output id="dutyRangeValue">25 %</output></div><input type="range" min="0" max="100" step="1" value="25" data-sync-range="duty" data-range-display="dutyRangeValue" data-unit="%" aria-label="Adjust duty cycle"></div>
+            </div>
+          </div>
+          <div class="calc-row">
+            <div class="calc-field">
+              <label for="high">High level <span class="unit">V</span></label>
+              <input id="high" name="high" type="number" value="3.3" min="0.1" max="48" step="0.1" inputmode="decimal">
+            </div>
+            <div class="calc-field">
+              <label for="span">Scope window <span class="unit">µs</span></label>
+              <input id="span" name="span" type="number" value="3000" min="0.1" step="100" inputmode="decimal">
+              <small class="range-help">How much time the waveform should show. The plot stays stable instead of animating.</small>
+            </div>
+          </div>''',
+        outputs=[('period', 'Period T', True), ('ontime', 'On-time t<sub>on</sub>', False),
+                 ('offtime', 'Off-time t<sub>off</sub>', False), ('dutypct', 'Duty D', False),
+                 ('avg', 'Time-average voltage', False), ('rms', 'RMS voltage', False)],
+        formula='T = 1/f<sub>sw</sub> · t<sub>on</sub> = D · T · t<sub>off</sub> = T − t<sub>on</sub><br>Ideal square wave between 0 V and V<sub>H</sub>: V<sub>avg</sub> = D · V<sub>H</sub> · V<sub>RMS</sub> = V<sub>H</sub> · √D',
+        caveat='This is an ideal two-level waveform with zero rise and fall time. Real GPIO outputs have finite edges, driver delay, and loading; a gate driver, LED string, motor or RC filter each responds to the waveform differently. The average is what a slow load integrates, not what a fast one sees. Nothing here is a measurement.',
     ),
     dict(
         slug='rc-time-constant', name='RC Time Constant',
@@ -251,6 +289,24 @@ def calc_page(t):
                 <text x="60" y="24">SWITCH NODE / IDEAL PWM</text><text x="60" y="138">INDUCTOR CURRENT iL</text><text x="293" y="48">D·T</text><text id="buckPeriodLabel" x="420" y="282">T = 2.00 µs · ton = 0.83 µs</text><text x="615" y="265">t</text>
               </svg>
               <figcaption class="buck-boundary" id="buckPlotBoundary" aria-live="polite">Ideal continuous-conduction estimate; the triangular ripple is centered on the selected load current.</figcaption>
+            </figure>'''
+
+    if t['calc']=='pwm':
+        visualization='''
+            <figure class="buck-explorer pwm-lab" id="pwmLab" aria-labelledby="pwmPlotTitle">
+              <div class="buck-explorer-head"><span id="pwmPlotTitle">Waveform &amp; time-average</span><span>IDEAL SQUARE WAVE</span></div>
+              <svg class="buck-plot" viewBox="0 0 660 200" role="img" aria-labelledby="pwmSvgTitle pwmSvgDesc">
+                <title id="pwmSvgTitle">Live ideal PWM waveform with its mathematical time-average</title>
+                <desc id="pwmSvgDesc">A two-level square wave drawn for the selected frequency and duty cycle, with a dashed line at the duty-weighted average voltage.</desc>
+                <path id="pwmGrid" class="buck-plot-grid" d="M64 62H596M64 100H596M64 138H596M64 40V160M196 40V160M328 40V160M460 40V160M596 40V160"/>
+                <path class="buck-plot-axis" d="M64 40V160H596"/>
+                <path class="buck-current-trace" id="pwmTrace" d="M64 138V62H190V138H316V62H442V138H568V62H596V62"/>
+                <path class="buck-dash" id="pwmAverage" d="M64 119H596"/>
+                <text x="66" y="34">V_HIGH</text><text x="66" y="176">0 V</text>
+                <text id="pwmPeriodLabel" x="404" y="190">window 3.00 ms · 3 cycles</text>
+                <text x="600" y="152" text-anchor="end">dashed = average</text>
+              </svg>
+              <figcaption class="buck-boundary" id="pwmPlotCaption" aria-live="polite">One cycle: 250 µs high, 750 µs low. The dashed line is the mathematical time-average.</figcaption>
             </figure>'''
 
     body = '''
@@ -328,16 +384,18 @@ def hub():
       'linear-regulator':'<path d="M22 78V28h110v50z"/><path d="m50 68 18-32 20 32"/><path d="M138 35v37"/><circle cx="138" cy="28" r="4"/>',
       'voltage-divider':'<path d="M78 18v18m0 42v18M54 36h48v14H54zm0 22h48v14H54z"/><path d="M30 50h24m48 0h36M30 64h24m48 0h36"/>',
       'led-resistor':'<path d="M20 57h35m33 0h49"/><path d="M55 42v30h33V42z"/><path d="m102 44 24 13-24 13z"/><path d="m105 34 8-8m-1 17 9-9"/>',
-      'rc-time-constant':'<path d="M18 24v66m0-33h28m0-20v40m14-40v40m0-20h72"/><path d="M82 38c13 0 16 6 20 15s10 15 30 15"/>'
+      'rc-time-constant':'<path d="M18 24v66m0-33h28m0-20v40m14-40v40m0-20h72"/><path d="M82 38c13 0 16 6 20 15s10 15 30 15"/>',
+      'pwm-lab':'<path d="M18 86V45h40v41h40V45h40v41h24"/><path d="M18 96h126"/><path d="M56 34v72" stroke-dasharray="3 5"/>'
     }
     cards=[]
     for i,t in enumerate(TOOLS):
         tags=''.join('<span class="chip">%s</span>'%x for x in t['tags'])
         cards.append('''<a class="tool-card reveal" href="/tools/%s.html"><div class="tool-card-top"><span>MODEL / %02d</span><svg viewBox="0 0 180 110" aria-hidden="true">%s</svg></div><h3>%s</h3><p>%s</p><div class="chips">%s</div><span class="tool-go">OPEN TOOL <b>↗</b></span></a>'''%(t['slug'],i+1,art.get(t['slug'],''),t['name'],t['blurb'],tags))
     body='''
-    <section class="page-head tools-head"><div class="wrap"><span class="eyebrow">Engineering tools / browser-based</span><h1>Make the first estimate<br><em>inspectable.</em></h1><p>Six small models for checking units, exploring sensitivities, and understanding assumptions. They are learning and early-design aids—not design approval.</p></div></section>
+    <section class="page-head tools-head"><div class="wrap"><span class="eyebrow">Engineering tools / browser-based</span><h1>Make the first estimate<br><em>inspectable.</em></h1><p>Seven working models for checking units, exploring sensitivities and seeing switching behaviour. Each one states its assumptions and has reference tests behind it; they are learning and early-design aids, not design approval.</p></div></section>
     <section class="section tools-feature-section"><div class="wrap"><article class="tools-featured"><div class="tools-feature-copy"><span class="section-index">FEATURED / POWER CONVERSION</span><h2>Move the operating point.<br><em>See what changes.</em></h2><p>An interactive ideal CCM buck model with adjustable inputs, live inductor-current and PWM plots, and an explicit operating-region boundary.</p><div class="feature-chips"><span>IDEAL CCM</span><span>LIVE MODEL</span><span>EFFICIENCY ≠ DUTY CORRECTION</span></div><a class="btn btn-primary" href="/tools/buck-converter.html">Explore the buck converter ↗</a></div><div class="tools-feature-graphic" aria-hidden="true"><svg viewBox="0 0 540 260"><path d="M26 35h488M26 82h488M26 129h488M26 176h488M26 223h488M60 20v218m95-218v218m95-218v218m95-218v218m95-218v218m95-218v218" class="feature-gridline"/><path d="M26 113V59h184v54h304" class="feature-wave-gold"/><path d="M26 198 210 167 394 198 578 167" class="feature-wave-cyan"/><path d="M210 28v208" class="feature-wave-mark"/><text x="32" y="52">PWM</text><text x="32" y="158">iL</text><text x="218" y="50">D · T</text></svg></div></article></div></section>
-    <section class="section tools-library"><div class="wrap"><div class="section-heading split-heading"><div><span class="section-index">MODEL LIBRARY / 06</span><h2>Useful equations.<br><em>Clear boundaries.</em></h2></div><p>Each calculator explains the model it applies, shows a worked output, and points out where real components, board layout, and operating conditions can change the answer.</p></div><div class="tool-library-grid">%s</div></div></section>
+    <section class="section tools-feature-section"><div class="wrap"><article class="tools-featured tools-featured-alt"><div class="tools-feature-copy"><span class="section-index">FEATURED / EMBEDDED SIGNALS</span><h2>Draw the waveform.<br><em>Read the average.</em></h2><p>A PWM signal laboratory: set frequency, duty cycle, high level and scope window, then read the timing, the time-average and the RMS value against the live trace.</p><div class="feature-chips"><span>IDEAL SQUARE WAVE</span><span>LIVE WAVEFORM</span><span>DUTY ≠ FREQUENCY</span></div><a class="btn btn-primary" href="/tools/pwm-lab.html">Open the PWM laboratory &#8599;</a></div><div class="tools-feature-graphic" aria-hidden="true"><svg viewBox="0 0 540 260"><path d="M26 35h488M26 82h488M26 129h488M26 176h488M26 223h488M60 20v218m95-218v218m95-218v218m95-218v218m95-218v218m95-218v218" class="feature-gridline"/><path d="M26 120V70h96v50h96V70h96v50h96V70h130" class="feature-wave-gold"/><path d="M26 167H514" class="feature-wave-mark"/><text x="32" y="60">V_HIGH</text><text x="32" y="186">AVERAGE = D · V_HIGH</text></svg></div></article></div></section>
+    <section class="section tools-library"><div class="wrap"><div class="section-heading split-heading"><div><span class="section-index">MODEL LIBRARY / 07</span><h2>Useful equations.<br><em>Clear boundaries.</em></h2></div><p>Each calculator explains the model it applies, shows a worked output, and points out where real components, board layout, and operating conditions can change the answer.</p></div><div class="tool-library-grid">%s</div></div></section>
     <section class="section tool-principles"><div class="wrap"><div class="tool-principles-grid"><div><span class="section-index">HOW TO USE THESE</span><h2>A starting point,<br>not a sign-off.</h2></div><div><p>Inputs are calculated in your browser and are not sent to a calculation API. Use the result to inspect a relationship or frame a first estimate; then check component datasheets, tolerances, thermal paths, layout, and the relevant design standard.</p><a class="text-link" href="/lab/buck-converter-ccm-model.html">Read the CCM model note <b>↗</b></a></div></div></div></section>
 '''.replace('%s','TOOLS_CARDS')
     body=body.replace('TOOLS_CARDS','\n'.join(cards))

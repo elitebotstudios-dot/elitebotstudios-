@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" role="img" aria-labelledby="btTitle btDesc">
+  <title id="btTitle">Ideal buck converter, on-state and off-state</title>
+  <desc id="btDesc">Two panels. In the on-state the switch connects the input to the inductor, which stores energy while feeding the load. In the off-state the switch opens and the inductor current continues through the freewheel path.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#59D9E8"/>
+    </marker>
+  </defs>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#9DAAB8">
+    <text x="24" y="26" fill="#D8B66A" font-size="12" letter-spacing="2">ON-STATE / SWITCH CLOSED</text>
+    <text x="484" y="26" fill="#D8B66A" font-size="12" letter-spacing="2">OFF-STATE / SWITCH OPEN</text>
+  </g>
+  <g fill="none" stroke="#8C99A5" stroke-width="1.6" stroke-linejoin="round">
+    <!-- Panel 1 -->
+    <path d="M40 90h96M40 90v96M40 186h96"/>
+    <path d="M136 90h60M196 90v-18M196 72h34M230 72v18M230 90h30"/>
+    <path d="M260 90h70l14-16 14 32 14-32 14 32 14-32 14 32 14-16h0"/>
+    <path d="M428 90h40M468 90v96M468 186h-40"/>
+    <path d="M136 186h60M196 186v18M196 204h34M230 204v-18M230 186h30"/>
+    <path d="M40 186h96"/>
+    <!-- Panel 2 -->
+    <path d="M500 90h96M500 90v96M500 186h96"/>
+    <path d="M596 90h60M596 186h60M656 90v24M656 114h34M690 114v-24M690 90h20"/>
+    <path d="M736 90h60l14-16 14 32 14-32 14 32 14-32 14 32 14-16"/>
+    <path d="M888 90"/>
+    <path d="M500 186h96M596 186h60"/>
+  </g>
+  <!-- labels -->
+  <g fill="#8C99A5" font-family="ui-monospace, monospace" font-size="11" letter-spacing="1">
+    <text x="46" y="82">V_IN</text><text x="150" y="66">SWITCH</text><text x="278" y="60">L</text>
+    <text x="440" y="140">C</text><text x="300" y="140">LOAD</text>
+    <text x="506" y="82">V_IN</text><text x="606" y="66">SWITCH OPEN</text><text x="754" y="60">L</text>
+  </g>
+  <!-- current paths -->
+  <path d="M40 186h96M136 186v-96M136 90h124" fill="none" stroke="#59D9E8" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M260 90h168" fill="none" stroke="#59D9E8" stroke-width="2.6" marker-end="url(#arrow)"/>
+  <path d="M500 186h96M596 186h60M656 186v-96" fill="none" stroke="#59D9E8" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M656 90h20M676 90h60" fill="none" stroke="#59D9E8" stroke-width="2.6" marker-end="url(#arrow)"/>
+  <g fill="#D8B66A" font-family="ui-monospace, monospace" font-size="11" letter-spacing="1">
+    <text x="40" y="236">inductor current rises: (V_IN − V_OUT) / L</text>
+    <text x="500" y="236">inductor current falls: −V_OUT / L through the freewheel path</text>
+    <text x="40" y="262" fill="#77848F">Ideal devices only. Real converters add switch and diode drops, dead time,</text>
+    <text x="40" y="280" fill="#77848F">winding resistance, capacitor ESR and control-loop behaviour.</text>
+  </g>
+</svg>

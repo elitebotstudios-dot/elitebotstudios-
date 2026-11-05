@@ -170,6 +170,54 @@ for slug in note_slugs:
     if slug not in (ROOT / 'lab.html').read_text(encoding='utf-8'):
         errors.append('lab note missing from index: ' + slug)
 
+# --- reading-time consistency ---------------------------------------------
+index_html = (ROOT / 'index.html').read_text(encoding='utf-8')
+lab_html = (ROOT / 'lab.html').read_text(encoding='utf-8')
+def minutes(pattern, text, label):
+    found = dict()
+    for slug, value in re.findall(pattern, text):
+        found[slug] = int(value)
+    return found
+
+article_times = {}
+for slug in note_slugs:
+    page = ROOT / 'lab' / (slug + '.html')
+    m = re.search(r'(\d+) min read', page.read_text(encoding='utf-8'))
+    if m:
+        article_times[slug] = int(m.group(1))
+
+def card_times(text):
+    found = {}
+    for slug in note_slugs:
+        i = text.find('/lab/%s.html' % slug)
+        if i == -1:
+            continue
+        window = text[i:i + 1400]
+        m = re.search(r'(\d+)\s*(?:MIN READ|MIN\b|min read)', window, re.I)
+        if m:
+            found[slug] = int(m.group(1))
+    return found
+
+home_times = card_times(index_html)
+lab_times = card_times(lab_html)
+if not home_times:
+    errors.append('no reading-time cards found on the homepage')
+if len(lab_times) != len(note_slugs):
+    errors.append('lab index shows %d of %d notes' % (len(lab_times), len(note_slugs)))
+for slug, minutes_value in article_times.items():
+    if slug in home_times and home_times[slug] != minutes_value:
+        errors.append('reading time mismatch for %s: homepage %s vs article %s' % (slug, home_times[slug], minutes_value))
+    if slug in lab_times and lab_times[slug] != minutes_value:
+        errors.append('reading time mismatch for %s: lab %s vs article %s' % (slug, lab_times[slug], minutes_value))
+notes.append('reading times checked: %d articles, %d home cards, %d lab cards' % (len(article_times), len(home_times), len(lab_times)))
+
+# --- calculator page wiring ----------------------------------------------
+for route in [r for r in pages if r.startswith('/tools/')]:
+    text = (ROOT / route.lstrip('/')).read_text(encoding='utf-8')
+    for required in ('id="calcOut"', 'id="calcNote"', 'data-calc=', 'assets/calc.js'):
+        if required not in text:
+            errors.append('calculator page %s missing %s' % (route, required))
+
 # --- sitemap ---------------------------------------------------------------
 sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
 locs = re.findall(r'<loc>([^<]+)</loc>', sitemap)

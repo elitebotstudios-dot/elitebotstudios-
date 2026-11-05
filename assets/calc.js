@@ -78,7 +78,8 @@ function divider(o) {
   return {
     vout: vout, current: cur,
     p1: cur * cur * r1, p2: cur * cur * r2,
-    ratio: r2 / (r1 + r2)
+    ratio: r2 / (r1 + r2),
+    zout: (r1 * r2) / (r1 + r2)
   };
 }
 
@@ -88,9 +89,13 @@ function led(o) {
   var drop = n * vf;
   if (drop >= vs) return null;
   var r = (vs - drop) / i, near = nearestE12(r);
+  var iActual = near ? (vs - drop) / near : null;
   return {
     resistance: r, nearest: near, powerR: i * i * r,
-    powerLed: drop * i, totalPower: vs * i, drop: drop
+    powerLed: drop * i, totalPower: vs * i, drop: drop,
+    currentSelected: iActual,
+    currentErrorPct: iActual ? ((iActual - i) / i) * 100 : null,
+    powerSelected: iActual ? iActual * iActual * near : null
   };
 }
 
@@ -101,6 +106,25 @@ function rc(o) {
   return {
     tau: tau, t63: tau, t95: 3 * tau, t99: 5 * tau,
     cutoff: 1 / (2 * Math.PI * tau), rise: 2.197 * tau
+  };
+}
+
+function pwm(o) {
+  var freq = o.freq, duty = o.duty, high = o.high;
+  if (!(freq > 0) || !isFinite(freq)) return null;
+  if (!(duty >= 0) || !(duty <= 1) || !isFinite(duty)) return null;
+  if (!(high > 0) || !isFinite(high)) return null;
+  var period = 1 / freq;
+  var ton = duty * period;
+  var toff = period - ton;
+  var average = duty * high;
+  var rms = high * Math.sqrt(duty);
+  return {
+    period: period, ton: ton, toff: toff,
+    dutyPct: duty * 100, average: average, rms: rms,
+    high: high, low: 0,
+    /* counts available in a 16-bit timer at this period, for context only */
+    maxCounts: 65535
   };
 }
 
@@ -127,6 +151,7 @@ function sig(v, digits) {
 }
 function eng(v, unit) {
   if (!isFinite(v)) return '—';
+  if (v === 0) return '0 ' + unit;
   var a = Math.abs(v);
   var scales = [[1e9, 'G'], [1e6, 'M'], [1e3, 'k'], [1, ''], [1e-3, 'm'], [1e-6, 'µ'], [1e-9, 'n'], [1e-12, 'p']];
   for (var i = 0; i < scales.length; i++) {
@@ -138,7 +163,7 @@ function eng(v, unit) {
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = { traceWidth, buck, linear, divider, led, rc, nearestE12, E12, sig, eng };
+  module.exports = { traceWidth, buck, linear, divider, led, rc, pwm, nearestE12, E12, sig, eng };
 }
 
 /* ============================================================ DOM wiring ==
@@ -190,6 +215,41 @@ if (typeof document !== 'undefined') {
         current.setAttribute('d','');
         boundary.textContent='The CCM boundary is not met at this load. Ripple and peak values above are CCM extrapolations; the DCM waveform and duty ratio are not solved by this model.';
       }
+    }
+
+    function drawPwmPlot(root, r, form) {
+      var plot = document.getElementById('pwmLab') || root.parentNode;
+      var trace = plot.querySelector('#pwmTrace');
+      var avgLine = plot.querySelector('#pwmAverage');
+      var grid = plot.querySelector('#pwmGrid');
+      var caption = plot.querySelector('#pwmPlotCaption');
+      var periodLabel = plot.querySelector('#pwmPeriodLabel');
+      if (!trace || !avgLine || !caption) return;
+      if (!r) {
+        trace.setAttribute('d', '');
+        avgLine.setAttribute('d', '');
+        caption.textContent = 'Enter a positive frequency, duty between 0 % and 100 %, and a positive high level.';
+        return;
+      }
+      var windowSeconds = parseFloat(form.querySelector('[name="span"]').value) * 1e-6;
+      if (!(windowSeconds > 0)) windowSeconds = r.period * 3;
+      var x0 = 64, x1 = 596, yHigh = 62, yLow = 138;
+      var cycles = Math.max(1, Math.min(6, windowSeconds / r.period));
+      var span = cycles * r.period;
+      var pxPerSecond = (x1 - x0) / span;
+      var d = 'M' + x0 + ' ' + yLow;
+      for (var i = 0; i < cycles; i += 1) {
+        var start = x0 + (i * r.period) * pxPerSecond;
+        var edge = start + r.ton * pxPerSecond;
+        var end = x0 + ((i + 1) * r.period) * pxPerSecond;
+        d += 'V' + yHigh.toFixed(1) + 'H' + edge.toFixed(1) + 'V' + yLow + 'H' + end.toFixed(1);
+      }
+      trace.setAttribute('d', d);
+      var yAvg = yLow - (r.average / r.high) * (yLow - yHigh);
+      avgLine.setAttribute('d', 'M' + x0 + ' ' + yAvg.toFixed(1) + 'H' + x1);
+      if (periodLabel) periodLabel.textContent = 'window ' + eng(span, 's') + ' · ' + cycles.toFixed(cycles < 2 ? 2 : 1) + ' cycles';
+      var edgeNote = r.ton > 0 && r.toff > 0 ? 'One cycle: ' + eng(r.ton, 's') + ' high, ' + eng(r.toff, 's') + ' low.' : 'A 0 % or 100 % duty gives a constant level, not a switching waveform.';
+      caption.textContent = edgeNote + ' The dashed line is the mathematical time-average, ' + eng(r.average, 'V') + ' — only a real filter or load dynamics turn that average into a smooth voltage.';
     }
 
     var CALCS = {
@@ -275,6 +335,7 @@ if (typeof document !== 'undefined') {
         put(out, 'ratio', (r.ratio * 100).toFixed(2) + ' %');
         put(out, 'p1', eng(r.p1, 'W'));
         put(out, 'p2', eng(r.p2, 'W'));
+        put(out, 'zout', eng(r.zout, 'Ω'));
         put(out, 'note', 'Output impedance of this divider is R1 in parallel with R2, which loads whatever it feeds. Keep the standing current at least 10× the ADC leakage if this is a sense divider.');
       },
 
@@ -290,11 +351,37 @@ if (typeof document !== 'undefined') {
         }
         put(out, 'resistance', r.resistance.toFixed(1) + ' Ω');
         put(out, 'nearest', r.nearest ? r.nearest + ' Ω (E12)' : '—');
+        put(out, 'currentsel', r.currentSelected ? (r.currentSelected * 1000).toFixed(1) + ' mA' : '—');
         put(out, 'powerr', (r.powerR * 1000).toFixed(1) + ' mW');
         put(out, 'powerled', (r.powerLed * 1000).toFixed(1) + ' mW');
-        put(out, 'note', r.powerR > 0.125
-          ? 'The resistor dissipates over 1/8 W — use a 1/4 W or larger part.'
-          : 'A standard 1/8 W resistor is adequate here.');
+        var direction = r.currentErrorPct > 0 ? 'above' : 'below';
+        put(out, 'note',
+          (r.nearest
+            ? 'The E12 value of ' + r.nearest + ' Ω sets the current ' + Math.abs(r.currentErrorPct).toFixed(1) + ' % ' + direction +
+              ' the target (' + (r.currentSelected * 1000).toFixed(1) + ' mA), and dissipates ' + (r.powerSelected * 1000).toFixed(1) + ' mW. '
+            : '') +
+          (r.powerR > 0.125
+            ? 'That is over 1/8 W, so use a 1/4 W or larger part.'
+            : 'A standard 1/8 W resistor is adequate here.') +
+          ' Always step to the next higher resistor if driving the LED above its rated current is a risk.');
+      },
+
+      pwm: function (form, out) {
+        var r = pwm({ freq: num(form, 'freq') * 1e3, duty: num(form, 'duty') / 100, high: num(form, 'high') });
+        if (!r) {
+          clearReadouts(out, ['period','ontime','offtime','dutypct','avg','rms']);
+          put(out, 'note', 'Duty must sit between 0 % and 100 %, and frequency and high level must be greater than zero.', 'warn');
+          drawPwmPlot(out, null, form);
+          return;
+        }
+        put(out, 'period', eng(r.period, 's'));
+        put(out, 'ontime', eng(r.ton, 's'));
+        put(out, 'offtime', eng(r.toff, 's'));
+        put(out, 'dutypct', r.dutyPct.toFixed(1) + ' %');
+        put(out, 'avg', eng(r.average, 'V'));
+        put(out, 'rms', eng(r.rms, 'V'));
+        put(out, 'note', 'Time-average = D · V_high and RMS = V_high · √D for an ideal 0 V / V_high square wave. A real load only sees the average if its own filtering is fast enough; a MOSFET gate, an LED and a motor each respond differently to the same waveform.');
+        drawPwmPlot(out, r, form);
       },
 
       rc: function (form, out) {

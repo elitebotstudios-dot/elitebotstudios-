@@ -130,6 +130,7 @@ def load_posts():
         meta['desc']=meta.pop('description');meta['body']=render_markdown(body.strip())
         words=len(re.findall(r'\b[\w-]+\b',re.sub(r'<[^>]+>',' ',meta['body'])))
         meta['read_time']=max(1,round(words/220));posts.append(meta)
+    posts.sort(key=lambda x: (x['date'], x['slug']), reverse=True)
     return posts
 
 POSTS=load_posts()

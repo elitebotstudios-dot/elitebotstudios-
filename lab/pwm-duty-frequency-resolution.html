@@ -23,9 +23,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
   <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.05-R4" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R5" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=15e1f9c5" />
+  <link rel="stylesheet" href="/assets/site.css?v=74d969d8" />
 
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
@@ -108,10 +108,12 @@
 
     <article class="technical-article">
       <div class="article-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="readingProgress"></span></div>
-      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>PWM: duty cycle, frequency, and timer resolution</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>2 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">microcontrollers</span><span class="chip">PWM</span><span class="chip">embedded systems</span></div></div></header>
-      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#what-a-pwm-signal-controls">What a PWM signal controls</a></li><li><a href="#timer-counts-set-the-available-resolution">Timer counts set the available resolution</a></li><li><a href="#small-timer-example">Small timer example</a></li><li><a href="#when-pwm-becomes-a-power-control-signal">When PWM becomes a power-control signal</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="what-a-pwm-signal-controls">What a PWM signal controls</h2>
+      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>PWM: duty cycle, frequency, and timer resolution</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>3 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">microcontrollers</span><span class="chip">PWM</span><span class="chip">embedded systems</span></div></div></header>
+      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#what-a-pwm-signal-controls">What a PWM signal controls</a></li><li><a href="#timer-counts-set-the-available-resolution">Timer counts set the available resolution</a></li><li><a href="#a-worked-timer-calculation">A worked timer calculation</a></li><li><a href="#small-timer-example">Small timer example</a></li><li><a href="#when-pwm-becomes-a-power-control-signal">When PWM becomes a power-control signal</a></li><li><a href="#try-it">Try it</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="what-a-pwm-signal-controls">What a PWM signal controls</h2>
 <p>Pulse-width modulation (PWM) represents a control command with a repeating digital waveform. The <strong>period</strong> <code>T</code> is the time for one cycle, the <strong>frequency</strong> <code>f</code> is its reciprocal, and the <strong>duty ratio</strong> <code>D</code> is the fraction of a cycle spent in the active state.</p>
 <div class="equation-block"><code>f = 1/T,     D = ton/T</code></div>
+<p><img src="/assets/lab/pwm-timing.svg" alt="Two PWM traces with the same period and different duty cycles" loading="lazy" decoding="async"></p>
+<p><em>Both traces share the same period. Changing duty moves the falling edge; changing frequency moves the whole pattern.</em></p>
 <p>For an ideal pulse that switches between zero and <code>VH</code>, the time-average at the switching node is <code>D·VH</code>. That does <strong>not</strong> mean every load receives a smooth DC voltage: the load, filter, driver, and switching network determine the actual current and voltage.</p>
 <h2 id="timer-counts-set-the-available-resolution">Timer counts set the available resolution</h2>
 <p>A common timer implementation counts through <code>N</code> time steps per period and changes the output when the compare count is reached. A useful approximation is:</p>
@@ -122,6 +124,14 @@
 <tr><td>Increase period counts</td><td>Finer duty adjustment</td><td>Lower maximum PWM frequency unless the timer clock increases</td></tr>
 <tr><td>Use buffered compare updates</td><td>Avoids malformed mid-cycle pulses</td><td>Update timing and synchronization are peripheral-specific</td></tr>
 </tbody></table></div>
+<h2 id="a-worked-timer-calculation">A worked timer calculation</h2>
+<p>Take a timer clocked at 64 MHz with no prescaler and a period register that counts <code>N = 320</code> ticks:</p>
+<ul>
+<li>PWM period: <code>320 / 64 MHz = 5 µs</code>, which is 200 kHz.</li>
+<li>Duty resolution: <code>1/320 ≈ 0.31 %</code> per step.</li>
+<li>A 25 % duty therefore needs a compare value of <code>0.25 × 320 = 80</code> ticks.</li>
+</ul>
+<p>Halve the period register to <code>N = 160</code> and the frequency doubles to 400 kHz, but the duty resolution halves to <code>1/160 ≈ 0.63 %</code>. That is the trade-off in one line of arithmetic.</p>
 <h2 id="small-timer-example">Small timer example</h2>
 <p>The following is pseudocode for an up-counter timer whose period register is <code>periodCounts</code>. It is not tied to a particular MCU's register layout.</p>
 <pre><code class="language-c">#<span class="tok-ident">include</span> &lt;<span class="tok-ident">stdint</span>.<span class="tok-ident">h</span>&gt;
@@ -137,12 +147,14 @@
 <h2 id="when-pwm-becomes-a-power-control-signal">When PWM becomes a power-control signal</h2>
 <p>A PWM pin is only a command. In a converter or motor drive, switching devices, the magnetics, current paths, output filter, controller, and protection all shape the result. A duty update also does not guarantee a proportional output change: the operating mode, input range, control-loop dynamics, saturation, and load matter.</p>
 <p>Use a waveform or scope capture only with its actual source and conditions identified. This note is an educational explanation, not a record of a measured PWM experiment.</p>
+<h2 id="try-it">Try it</h2>
+<p>The <a href="/tools/pwm-lab.html">PWM signal laboratory</a> draws the waveform for the frequency and duty you choose, and reports period, on-time, off-time, average and RMS together so the difference between them is visible.</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ApplicationNotes/ApplicationNotes/00539c.pdf" rel="noopener noreferrer">Microchip AN539C: Frequency and Resolution Options for PWM Outputs</a></li>
 <li><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/70000323h.pdf" rel="noopener noreferrer">Microchip dsPIC33/PIC24 high-speed PWM module reference</a></li>
 </ul></div></div>
-      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/buck-converter.html">Buck converter explorer ↗</a><a href="/projects.html">Project records ↗</a></div>
+      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/pwm-lab.html">PWM signal laboratory &#8599;</a><a href="/tools/buck-converter.html">Buck converter explorer &#8599;</a><nav class="article-pager" aria-label="More engineering notes"><a class="pager-link" rel="prev" href="/lab/buck-converter-ccm-model.html"><span>Previous note</span>A buck converter in continuous conduction mode</a> <a class="pager-link pager-next" rel="next" href="/lab/simulation-is-not-measurement.html"><span>Next note</span>Simulation is a model, not a measurement</a></nav></div>
     </article>
 
   </main>
@@ -160,7 +172,7 @@
           <li><a href="/expertise.html">Expertise</a></li>
           <li><a href="/lab.html">Engineering Lab</a></li>
           <li><a href="/tools.html">Engineering Tools</a></li>
-          <li><a href="/services.html">Capabilities &amp; collaboration</a></li>
+          <li><a href="/services.html">Collaboration</a></li>
           <li><a href="/about.html">About</a></li>
         </ul>
       </div>

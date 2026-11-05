@@ -62,7 +62,7 @@ body=r'''
 
   <section class="section explorer-teaser" aria-labelledby="explorerTitle">
     <div class="wrap explorer-teaser-grid">
-      <div class="explorer-copy"><span class="section-index">B / INTERACTIVE ENGINEERING</span><h2 id="explorerTitle">Make a model<br><em>move.</em></h2><p>Adjust an ideal converter operating point. Inspect duty, ripple, current, and the boundary beyond which the simple CCM model no longer applies.</p><div class="explorer-tags"><span>IDEAL CCM</span><span>LIVE WAVEFORMS</span><span>EXPLICIT ASSUMPTIONS</span></div><a class="btn btn-primary" href="/tools/buck-converter.html">Open the buck converter explorer <span aria-hidden="true">↗</span></a></div>
+      <div class="explorer-copy"><span class="section-index">B / INTERACTIVE ENGINEERING</span><h2 id="explorerTitle">Make a model<br><em>move.</em></h2><p>Adjust an ideal converter operating point. Inspect duty, ripple, current, and the boundary beyond which the simple CCM model no longer applies.</p><div class="explorer-tags"><span>IDEAL CCM</span><span>LIVE WAVEFORMS</span><span>EXPLICIT ASSUMPTIONS</span></div><div class="explorer-actions"><a class="btn btn-primary" href="/tools/buck-converter.html">Open the buck explorer <span aria-hidden="true">&#8599;</span></a><a class="btn btn-ghost" href="/tools/pwm-lab.html">PWM laboratory</a></div></div>
       <div class="explorer-preview" aria-label="Preview of the buck converter PWM and inductor-current plots"><div class="preview-top"><span>BUCK / CONTINUOUS CONDUCTION</span><span>MODEL PREVIEW</span></div><svg viewBox="0 0 620 270" aria-hidden="true"><path class="preview-gridline" d="M56 38h526M56 80h526M56 122h526M56 164h526M56 206h526M100 24v198m100-198v198m100-198v198m100-198v198m100-198v198"/><path class="preview-gate" d="M58 94V52h185v42h380"/><path class="preview-current" d="M58 192 243 146 428 192 613 146"/><path class="preview-mark" d="M243 36v208"/><text x="74" y="47">SWITCH NODE</text><text x="75" y="136">INDUCTOR CURRENT</text><text x="252" y="58">D·T</text><text x="520" y="250">TIME →</text></svg><div class="preview-values"><div><small>IDEAL DUTY</small><b>VOUT / VIN</b></div><div><small>RIPPLE MODEL</small><b>ΔIL · L · FSW</b></div><div><small>STATUS</small><b>CCM BOUNDARY</b></div></div><p class="preview-note">Illustrative axes; the interactive page plots from your selected inputs. No hardware measurements are shown.</p></div>
     </div>
   </section>
@@ -79,12 +79,23 @@ body=r'''
 
   <section class="section founder-section" aria-labelledby="founderTitle"><div class="wrap founder-grid"><div class="founder-aside"><span class="section-index">E / FOUNDER</span><div class="founder-seal" aria-hidden="true"><span>MSA</span><i>EE / NUST</i><b></b></div></div><div class="founder-copy"><p class="founder-role">ELECTRICAL ENGINEERING UNDERGRADUATE · NUST, PAKISTAN</p><h2 id="founderTitle">Muhammad Shahzaib<br><em>Abbas.</em></h2><p>Academic focus in power engineering. Growing interests in embedded control, electronics, and intelligent energy systems. Elite Bot Studios is where those threads become study, project direction, and documented technical work.</p><a class="text-link" href="/about.html">Meet the engineer <b>↗</b></a></div><div class="founder-note"><span>RESEARCH INTERESTS</span><ul><li>Power electronics</li><li>Embedded control</li><li>Energy monitoring</li><li>Intelligent electrical systems</li></ul><a href="/expertise.html">Explore the learning map <b>↗</b></a></div></div></section>
 
-  <section class="section journal-section" aria-labelledby="journalTitle"><div class="wrap"><div class="section-heading split-heading"><div><span class="section-index">F / ENGINEERING LAB</span><h2 id="journalTitle">Notes for the<br><em>next experiment.</em></h2></div><p>Technical reading on models, methods, and the difference between what is assumed and what is observed.</p><a class="text-link" href="/lab.html">Open the lab <b>&#8599;</b></a></div><div class="journal-grid"><a class="journal-entry" href="/lab/buck-converter-ccm-model.html"><span>01 / POWER ELECTRONICS &middot; 2 MIN</span><h3>A buck converter in continuous conduction mode</h3><p>Derive ideal CCM duty and inductor ripple, estimate the CCM boundary, and separate model output from real converter behavior.</p><b>READ NOTE &#8599;</b></a><a class="journal-entry" href="/lab/pwm-duty-frequency-resolution.html"><span>02 / MICROCONTROLLERS &middot; 2 MIN</span><h3>PWM: duty cycle, frequency, and timer resolution</h3><p>A practical explanation of pulse-width modulation, timer periods, duty ratio, and the resolution trade-off.</p><b>READ NOTE &#8599;</b></a></div></div></section>
-
+  JOURNAL_SECTION
   <section class="closing-section" aria-labelledby="closingTitle"><div class="wrap closing-grid"><span class="section-index">G / KEEP EXPLORING</span><h2 id="closingTitle">Curiosity asks.<br><em>Engineering answers.</em></h2><div class="closing-actions"><a class="btn btn-primary" href="/projects.html">Explore projects ↗</a><a class="btn btn-ghost" href="/contact.html">Start a conversation</a></div></div></section>
 </main>
 '''
 body=body.replace('HERO_IMAGE',hero_image)
+FEATURED=[x for x in POSTS if x['slug'] in ('buck-converter-ccm-model','pwm-duty-frequency-resolution')]
+FEATURED.sort(key=lambda x: ('buck-converter-ccm-model','pwm-duty-frequency-resolution').index(x['slug']))
+journal_cards=''.join(
+    '<a class="journal-entry" href="/lab/%s.html"><span>0%d / %s &middot; %d MIN</span><h3>%s</h3><p>%s</p><b>READ NOTE &#8599;</b></a>'
+    %(post['slug'],i,post['tags'][0].upper() if post['tags'] else 'NOTE',post['read_time'],post['title'],post['desc'])
+    for i,post in enumerate(FEATURED,1))
+JOURNAL_SECTION=('  <section class="section journal-section" aria-labelledby="journalTitle"><div class="wrap"><div class="section-heading split-heading">'
+  '<div><span class="section-index">F / ENGINEERING LAB</span><h2 id="journalTitle">Notes for the<br><em>next experiment.</em></h2></div>'
+  '<p>Technical reading on models, methods, and the difference between what is assumed and what is observed.</p>'
+  '<a class="text-link" href="/lab.html">Open the lab <b>&#8599;</b></a></div>'
+  '<div class="journal-grid">'+journal_cards+'</div></div></section>\n\n')
+body=body.replace('JOURNAL_SECTION',JOURNAL_SECTION)
 html=build.head('Elite Bot Studios — Power, Control, Intelligence.','An independent engineering portfolio exploring embedded systems, power electronics, intelligent control, and engineering design by Muhammad Shahzaib Abbas, Electrical Engineering undergraduate at NUST, Pakistan.','/',extra_head=extra,jsonld=build.SCHEMA_GRAPH)
 html+=build.header('/')+body+build.footer()
 SRC=ROOT/'index.html'

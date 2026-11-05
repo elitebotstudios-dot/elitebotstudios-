@@ -39,3 +39,26 @@ assert.strictEqual(c.divider({ vin: 0, r1: 10000, r2: 10000 }), null);
 near(c.led({ supply: 5, forward: 2, current: 0.02 }).resistance, 150, 1e-12, 'LED resistor');
 near(c.rc({ r: 10000, c: 100e-9 }).cutoff, 159.154943, 0.001, 'RC cutoff');
 console.log('PASS: calculator reference cases, boundary conditions, and corrected buck-efficiency model');
+
+// ---- PWM signal laboratory -------------------------------------------------
+const pwmDefault = c.pwm({ freq: 1000, duty: 0.25, high: 3.3 });
+near(pwmDefault.period, 1e-3, 1e-15, 'PWM period at 1 kHz');
+near(pwmDefault.ton, 250e-6, 1e-15, 'PWM on-time at 25 %');
+near(pwmDefault.toff, 750e-6, 1e-15, 'PWM off-time at 25 %');
+near(pwmDefault.dutyPct, 25, 1e-12, 'PWM duty percentage');
+near(pwmDefault.average, 0.825, 1e-12, 'PWM average voltage');
+near(pwmDefault.rms, 3.3 * Math.sqrt(0.25), 1e-12, 'PWM RMS voltage');
+const pwmFast = c.pwm({ freq: 500e3, duty: 0.4, high: 12 });
+near(pwmFast.period, 2e-6, 1e-18, 'PWM period at 500 kHz');
+near(pwmFast.ton, 800e-9, 1e-18, 'PWM on-time at 500 kHz, 40 %');
+near(pwmFast.average, 4.8, 1e-12, 'PWM average at 40 % of 12 V');
+const pwmZero = c.pwm({ freq: 1000, duty: 0, high: 5 });
+near(pwmZero.average, 0, 1e-12, 'PWM 0 % average is zero');
+near(pwmZero.ton, 0, 1e-12, 'PWM 0 % on-time is zero');
+assert.strictEqual(c.pwm({ freq: 1000, duty: 1.5, high: 5 }), null, 'duty above 100 % rejected');
+assert.strictEqual(c.pwm({ freq: 0, duty: 0.5, high: 5 }), null, 'zero frequency rejected');
+assert.strictEqual(c.pwm({ freq: 1000, duty: 0.5, high: -1 }), null, 'negative high level rejected');
+assert.strictEqual(c.eng(0, 'V'), '0 V', 'zero formatted with its unit');
+near(c.divider({ vin: 12, r1: 10000, r2: 10000 }).current, 0.6e-3, 1e-12, 'divider current 12 V / 20 kΩ');
+near(c.led({ supply: 5, forward: 2, current: 0.01 }).resistance, 300, 1e-12, 'LED resistor for 10 mA');
+console.log('PASS: PWM laboratory reference cases and formatting');

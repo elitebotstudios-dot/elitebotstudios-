@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>ADC resolution, quantization and the reference that decides it | Elite Bot Studios</title>
+  <meta name="description" content="Where an ADC&#x27;s numbers come from, what one code is worth, and why the reference and input impedance matter more than the bit count." />
+<link rel="canonical" href="https://elitebotstudios.me/lab/adc-resolution-quantization.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="ADC resolution, quantization and the reference that decides it | Elite Bot Studios" />
+  <meta property="og:description" content="Where an ADC&#x27;s numbers come from, what one code is worth, and why the reference and input impedance matter more than the bit count." />
+<meta property="og:url" content="https://elitebotstudios.me/lab/adc-resolution-quantization.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ADC resolution, quantization and the reference that decides it | Elite Bot Studios" />
+  <meta name="twitter:description" content="Where an ADC&#x27;s numbers come from, what one code is worth, and why the reference and input impedance matter more than the bit count." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+
+  <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=7ad827f1" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
+  <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R5" />
+
+  <link rel="stylesheet" href="/assets/site.css?v=74d969d8" />
+
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ADC resolution, quantization and the reference that decides it",
+  "datePublished": "2026-11-05",
+  "author": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "mainEntityOfPage": "https://elitebotstudios.me/lab/adc-resolution-quantization.html"
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>
+        <span class="brand-word">Elite Bot Studios</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/projects.html">Projects</a>
+        <a href="/expertise.html">Expertise</a>
+        <a href="/lab.html" aria-current="page">Engineering Lab</a>
+        <a href="/about.html">About</a>
+        <a href="/tools.html">Tools</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-amber" href="/contact.html">Contact</a>
+        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" data-open="false">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html" aria-current="page">Engineering Lab</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/tools.html">Tools</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article class="technical-article">
+      <div class="article-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="readingProgress"></span></div>
+      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>ADC resolution, quantization and the reference that decides it</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>2 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">embedded systems</span><span class="chip">measurement</span><span class="chip">ADC</span></div></div></header>
+      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#the-job-of-an-adc">The job of an ADC</a></li><li><a href="#what-resolution-does-not-tell-you">What resolution does not tell you</a></li><li><a href="#worked-example-a-divided-battery-voltage">Worked example: a divided battery voltage</a></li><li><a href="#reading-several-codes-instead-of-one">Reading several codes instead of one</a></li><li><a href="#a-practical-checklist">A practical checklist</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="the-job-of-an-adc">The job of an ADC</h2>
+<p>An analog-to-digital converter maps an input voltage to an integer code. With <code>N</code> bits, a converter that spans ground to <code>VREF</code> produces <code>2^N</code> codes, and one code covers:</p>
+<div class="equation-block"><code>VLSB = VREF / 2^N</code></div>
+<p>That single quantity — the <em>least significant bit</em> — is the honest headline specification, not the bit count. A 12-bit converter on a 3.3 V reference has a 0.806 mV LSB. The same 12-bit converter on a 1.0 V reference has 0.244 mV. The resolution improved by changing the reference, not the ADC.</p>
+<h2 id="what-resolution-does-not-tell-you">What resolution does not tell you</h2>
+<p><code>VLSB</code> is the <em>quantization step</em>. Real error rarely stops there:</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Error source</th><th scope="col">What it does</th><th scope="col">Where to look</th></tr></thead><tbody>
+<tr><td>Quantization</td><td>±½ LSB uncertainty when rounding to a code</td><td>Inherent to the converter</td></tr>
+<tr><td>Offset and gain error</td><td>Shifts every code, or scales all codes</td><td>Datasheet calibration section</td></tr>
+<tr><td>INL / DNL</td><td>Non-uniform code spacing</td><td>Datasheet specification table</td></tr>
+<tr><td>Reference accuracy and drift</td><td>Scales every code, and moves it with temperature</td><td>Reference datasheet</td></tr>
+<tr><td>Input source impedance</td><td>Sampling capacitor cannot settle</td><td>ADC sample-and-hold timing</td></tr>
+<tr><td>Noise</td><td>Blurs several codes together</td><td>Layout, grounding, filtering</td></tr>
+</tbody></table></div>
+<p>A useful rule for a slowly varying signal is that an ideal <code>N</code>-bit converter sampling a signal that spans full scale cannot resolve better than about <code>VREF/2^N</code>, and a converter using an external reference cannot be more accurate than that reference.</p>
+<h2 id="worked-example-a-divided-battery-voltage">Worked example: a divided battery voltage</h2>
+<p>Suppose a 12-bit ADC with a 3.3 V reference reads a 12 V battery through a divider. Choose <code>R1 = 33 kΩ</code> and <code>R2 = 10 kΩ</code>:</p>
+<ul>
+<li>Divider ratio: <code>R2 / (R1 + R2) = 10/43 ≈ 0.2326</code></li>
+<li>Full-scale input voltage at the ADC: <code>3.3 / 0.2326 ≈ 14.19 V</code></li>
+<li>One LSB in battery volts: <code>(14.19 V) / 4096 ≈ 3.46 mV</code></li>
+</ul>
+<p>Two consequences follow immediately.</p>
+<ol>
+<li><strong>Source impedance.</strong> The divider's output impedance is <code>R1‖R2 ≈ 7.67 kΩ</code>. If the sample-and-hold needs the input stable within half a code, that resistor and the sampling capacitor form an RC time constant that must settle in the sampling window — a large divider makes an accurate reading harder, not easier.</li>
+<li><strong>Standing current.</strong> The divider draws <code>12 V / 43 kΩ ≈ 279 µA</code> continuously. On a battery-powered node that may be the dominant consumer, which is why some designs switch the divider on only while measuring.</li>
+</ol>
+<h2 id="reading-several-codes-instead-of-one">Reading several codes instead of one</h2>
+<p>Averaging <code>M</code> uncorrelated samples reduces random noise by roughly <code>√M</code>, at the cost of time. Oversampling by <code>4×</code> buys about one extra bit of resolution in the ideal case; it does <strong>not</strong> correct offset, gain, INL or reference error, and it cannot help if the input is moving during the measurement window.</p>
+<div class="equation-block"><code>\text{bits gained} = \tfrac{1}{2}\log_2(M)</code></div>
+<p>This is a model of noise averaging, not a promise about any particular converter.</p>
+<h2 id="a-practical-checklist">A practical checklist</h2>
+<ul>
+<li>State the reference: internal, external, and its initial accuracy.</li>
+<li>Convert codes to volts in one place in the firmware, using calibrated constants.</li>
+<li>Check settling: keep source impedance low, or buffer the input.</li>
+<li>Test at two known points (offset and gain) before trusting a curve in between.</li>
+<li>Record the conditions with any published measurement.</li>
+</ul>
+<p>An interactive demonstration of quantization is not included here; the arithmetic above is the part that matters first.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.ti.com/lit/an/sbaa327/sbaa327.pdf" rel="noopener noreferrer">Texas Instruments, ADC performance characteristics and specifications</a></li>
+<li><a href="https://ww1.microchip.com/downloads/en/Appnotes/00699b.pdf" rel="noopener noreferrer">Microchip, Understanding ADC parameters</a></li>
+</ul></div></div>
+      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/voltage-divider.html">Voltage divider tool &#8599;</a><a href="/projects/smart-energy-monitoring.html">Smart Energy Monitoring record &#8599;</a><nav class="article-pager" aria-label="More engineering notes"><span></span> <a class="pager-link pager-next" rel="next" href="/lab/buck-converter-ccm-model.html"><span>Next note</span>A buck converter in continuous conduction mode</a></nav></div>
+    </article>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-tag">Embedded Intelligence · Real-World Power</p>
+        <p>An independent engineering initiative exploring embedded systems, power electronics, and intelligent hardware through practical designs, simulations, prototypes, and documented projects.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul class="footer-links">
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/tools.html">Engineering Tools</a></li>
+          <li><a href="/services.html">Collaboration</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul class="footer-links">
+          <li><a href="/contact.html">Contact</a></li>
+          <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Pakistan · Independent engineering initiative</span>
+      <span>&copy; 2026 Elite Bot Studios</span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js?v=087e6622" defer></script>
+</body>
+</html>

@@ -7,12 +7,12 @@ Static, accessible engineering portfolio for **Elite Bot Studios**. The site doc
 ## Site structure
 
 - `index.html` — studio identity, interactive conceptual power-control system, engineering disciplines, project direction, founder profile, and lab preview.
-- `projects.html` + `projects.json` — evidence-labelled project records; a nested `case_study` object generates `/projects/<slug>.html`. The current Smart Energy Monitoring record is explicitly a concept.
+- `projects.html` + `projects.json` — evidence-labelled project records. A nested `case_study` object generates `/projects/<slug>.html` and supports requirements, sensing/controller options, isolation notes, validation strategy and a staged roadmap. The Smart Energy Monitoring record is explicitly a concept.
 - `project-template.html` — the public case-study standard, with a download of the blank Markdown template (`project-template.md`).
 - `expertise.html` — connected knowledge areas with evidence labels, no proficiency percentages.
 - `lab.html` and `content/lab-notes/*.md` — Markdown-authored technical notes. The index, homepage previews, sitemap and reading times are all generated from the same files.
-- `services.html` — collaboration areas, scoped honestly.
-- `tools.html` and `tools/*.html` — six client-side engineering models, including the interactive ideal-CCM buck explorer.
+- `services.html` — Collaboration page: who gets in touch, and what is in or out of scope.
+- `tools.html` and `tools/*.html` — seven client-side engineering models: buck-converter explorer, PWM signal laboratory, trace width, linear regulator thermal, voltage divider, LED resistor, RC time constant.
 - `about.html`, `contact.html`, legal pages, `404.html`, `offline.html`.
 - `api/contact.js` — optional Vercel serverless function for contact delivery (see below).
 - `assets/site.css`, `assets/site.js`, `assets/calc.js` — shared design and behaviour.
@@ -40,7 +40,7 @@ python3 scripts/build_sitemap.py     # sitemap from canonical tags
 ## Tests
 
 ```sh
-python3 scripts/audit_site.py            # routes, nav, metadata, links, sitemap, content sync
+python3 scripts/audit_site.py            # routes, nav, metadata, links, sitemap, reading-time and lab/project sync
 node --check assets/site.js
 node --check assets/calc.js
 node --check sw.js

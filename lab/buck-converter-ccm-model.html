@@ -23,9 +23,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
   <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.05-R4" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R5" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=15e1f9c5" />
+  <link rel="stylesheet" href="/assets/site.css?v=74d969d8" />
 
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
@@ -108,9 +108,17 @@
 
     <article class="technical-article">
       <div class="article-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="readingProgress"></span></div>
-      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>A buck converter in continuous conduction mode</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>2 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">power electronics</span><span class="chip">DC-DC</span><span class="chip">simulation</span></div></div></header>
-      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#two-switch-states-one-inductor">Two switch states, one inductor</a></li><li><a href="#inductor-ripple-from-the-slopes">Inductor ripple from the slopes</a></li><li><a href="#worked-ideal-ccm-estimate">Worked ideal CCM estimate</a></li><li><a href="#efficiency-belongs-in-the-power-estimate">Efficiency belongs in the power estimate</a></li><li><a href="#explore-the-model">Explore the model</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="two-switch-states-one-inductor">Two switch states, one inductor</h2>
+      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>A buck converter in continuous conduction mode</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>3 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">power electronics</span><span class="chip">DC-DC</span><span class="chip">simulation</span></div></div></header>
+      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#two-switch-states-one-inductor">Two switch states, one inductor</a></li><li><a href="#inductor-ripple-from-the-slopes">Inductor ripple from the slopes</a></li><li><a href="#worked-ideal-ccm-estimate">Worked ideal CCM estimate</a></li><li><a href="#efficiency-belongs-in-the-power-estimate">Efficiency belongs in the power estimate</a></li><li><a href="#try-the-numbers-yourself">Try the numbers yourself</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="two-switch-states-one-inductor">Two switch states, one inductor</h2>
 <p>An ideal buck converter transfers energy through an inductor while the switch alternates between two states. During the <strong>on</strong> interval, the inductor sees <code>Vin − Vout</code>; during the <strong>off</strong> interval in the ideal freewheel path, it sees <code>−Vout</code>. Inductor current ramps up and down rather than changing instantaneously.</p>
+<p><img src="/assets/lab/buck-topology.svg" alt="Ideal buck converter shown in its on-state and off-state" loading="lazy" decoding="async"></p>
+<p><em>Ideal switches only. The drawing shows the two conduction paths; it is not a schematic of a fabricated board.</em></p>
+<p>Two intervals make the converter work:</p>
+<ul>
+<li><strong>Switch closed.</strong> The input is connected to the inductor through the switch. Current rises at <code>(Vin − Vout)/L</code> while energy is stored in the magnetic field.</li>
+<li><strong>Switch open.</strong> The input is disconnected, and the inductor current continues through the freewheel path. Current falls at <code>Vout/L</code>.</li>
+</ul>
+<p>Because the inductor cannot change its current instantly, the output keeps receiving energy during both intervals. That is the whole idea: the switch chops, the inductor and capacitor smooth.</p>
 <p>In steady-state <strong>continuous conduction mode (CCM)</strong>, volt-second balance across the inductor gives the familiar ideal conversion relation:</p>
 <div class="equation-block"><code>D ≈ Vout / Vin</code></div>
 <p>This relationship assumes ideal switches and steady-state CCM. It is not a universal duty command for a physical converter. Switch and diode drops, winding resistance, dead time, control limits, and the selected controller change the real requirement. A single efficiency percentage does not specify those losses or provide a general duty-cycle correction.</p>
@@ -135,14 +143,19 @@
 <p>If a designer supplies an efficiency assumption <code>η</code>, it can estimate input power from output power:</p>
 <div class="equation-block"><code>Pin ≈ Vout·Iout/η,     Ploss ≈ Pin − Vout·Iout</code></div>
 <p>That is a power-budget estimate. It is <strong>not</strong> a universal correction to <code>D = Vout/Vin</code>. Real duty depends on the individual loss mechanisms and the control loop.</p>
-<h2 id="explore-the-model">Explore the model</h2>
-<p>Use the <a href="/tools/buck-converter.html">interactive buck-converter explorer</a> to vary the ideal CCM inputs and view a live PWM timing diagram and inductor-current ramp. When the valley-current condition is not met, the plot explicitly stops claiming a CCM waveform; the tool does not solve DCM.</p>
+<h2 id="try-the-numbers-yourself">Try the numbers yourself</h2>
+<p>Two ways to check this reasoning, both interactive and both ideal:</p>
+<ul>
+<li>The <a href="/tools/buck-converter.html">buck-converter explorer</a> plots the PWM switch node and the inductor-current ramp for the operating point you choose, and flags when the CCM boundary is crossed.</li>
+<li>The <a href="/tools/pwm-lab.html">PWM signal laboratory</a> isolates the switching waveform itself, so you can see how duty and frequency change timing independently of the power stage.</li>
+</ul>
+<p>Use the <a href="/tools/rc-time-constant.html">RC time constant tool</a> if you want to size an output-filter pole for a given corner frequency. When the valley-current condition is not met, the plot explicitly stops claiming a CCM waveform; the tool does not solve DCM.</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://www.ti.com/lit/an/slva257a/slva257a.pdf" rel="noopener noreferrer">Texas Instruments, Basic Buck Topology (SLVA257A)</a></li>
 <li><a href="https://www.ti.com/lit/ds/symlink/lmr51606.pdf" rel="noopener noreferrer">Texas Instruments, LMR516xx buck converter datasheet</a></li>
 </ul></div></div>
-      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/buck-converter.html">Buck converter explorer ↗</a><a href="/projects.html">Project records ↗</a></div>
+      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/buck-converter.html">Buck converter explorer &#8599;</a><a href="/tools/rc-time-constant.html">RC time constant tool &#8599;</a><a href="/projects/smart-energy-monitoring.html">Smart Energy Monitoring record &#8599;</a><nav class="article-pager" aria-label="More engineering notes"><a class="pager-link" rel="prev" href="/lab/adc-resolution-quantization.html"><span>Previous note</span>ADC resolution, quantization and the reference that decides it</a> <a class="pager-link pager-next" rel="next" href="/lab/pwm-duty-frequency-resolution.html"><span>Next note</span>PWM: duty cycle, frequency, and timer resolution</a></nav></div>
     </article>
 
   </main>
@@ -160,7 +173,7 @@
           <li><a href="/expertise.html">Expertise</a></li>
           <li><a href="/lab.html">Engineering Lab</a></li>
           <li><a href="/tools.html">Engineering Tools</a></li>
-          <li><a href="/services.html">Capabilities &amp; collaboration</a></li>
+          <li><a href="/services.html">Collaboration</a></li>
           <li><a href="/about.html">About</a></li>
         </ul>
       </div>

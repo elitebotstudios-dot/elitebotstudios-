@@ -10,6 +10,17 @@ description: Derive ideal CCM duty and inductor ripple, estimate the CCM boundar
 
 An ideal buck converter transfers energy through an inductor while the switch alternates between two states. During the **on** interval, the inductor sees `Vin − Vout`; during the **off** interval in the ideal freewheel path, it sees `−Vout`. Inductor current ramps up and down rather than changing instantaneously.
 
+![Ideal buck converter shown in its on-state and off-state](/assets/lab/buck-topology.svg)
+
+*Ideal switches only. The drawing shows the two conduction paths; it is not a schematic of a fabricated board.*
+
+Two intervals make the converter work:
+
+- **Switch closed.** The input is connected to the inductor through the switch. Current rises at `(Vin − Vout)/L` while energy is stored in the magnetic field.
+- **Switch open.** The input is disconnected, and the inductor current continues through the freewheel path. Current falls at `Vout/L`.
+
+Because the inductor cannot change its current instantly, the output keeps receiving energy during both intervals. That is the whole idea: the switch chops, the inductor and capacitor smooth.
+
 In steady-state **continuous conduction mode (CCM)**, volt-second balance across the inductor gives the familiar ideal conversion relation:
 
 $$
@@ -61,9 +72,14 @@ $$
 
 That is a power-budget estimate. It is **not** a universal correction to `D = Vout/Vin`. Real duty depends on the individual loss mechanisms and the control loop.
 
-## Explore the model
+## Try the numbers yourself
 
-Use the [interactive buck-converter explorer](/tools/buck-converter.html) to vary the ideal CCM inputs and view a live PWM timing diagram and inductor-current ramp. When the valley-current condition is not met, the plot explicitly stops claiming a CCM waveform; the tool does not solve DCM.
+Two ways to check this reasoning, both interactive and both ideal:
+
+- The [buck-converter explorer](/tools/buck-converter.html) plots the PWM switch node and the inductor-current ramp for the operating point you choose, and flags when the CCM boundary is crossed.
+- The [PWM signal laboratory](/tools/pwm-lab.html) isolates the switching waveform itself, so you can see how duty and frequency change timing independently of the power stage.
+
+Use the [RC time constant tool](/tools/rc-time-constant.html) if you want to size an output-filter pole for a given corner frequency. When the valley-current condition is not met, the plot explicitly stops claiming a CCM waveform; the tool does not solve DCM.
 
 ## References
 

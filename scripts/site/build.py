@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = str(ROOT)
 SITE = 'https://elitebotstudios.me'
-SITE_BUILD = 'EBS-2026.11.05-R4'
+SITE_BUILD = 'EBS-2026.11.05-R5'
 EMAIL = 'contact@elitebotstudios.me'
 TAGLINE = 'Embedded Intelligence · Real-World Power'
 ONELINER = ('An independent engineering initiative exploring embedded systems, power electronics, and '
@@ -215,7 +215,7 @@ def footer():
           <li><a href="/expertise.html">Expertise</a></li>
           <li><a href="/lab.html">Engineering Lab</a></li>
           <li><a href="/tools.html">Engineering Tools</a></li>
-          <li><a href="/services.html">Capabilities &amp; collaboration</a></li>
+          <li><a href="/services.html">Collaboration</a></li>
           <li><a href="/about.html">About</a></li>
         </ul>
       </div>
