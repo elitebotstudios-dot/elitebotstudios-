@@ -10,6 +10,7 @@ The public portfolio separates concepts and educational models from project evid
 
 - [Home](https://elitebotstudios.me/): interactive conceptual power-control system, engineering focus, project direction, and academic profile.
 - [Projects](https://elitebotstudios.me/projects.html): evidence-labelled records, a conceptual system architecture, and separately marked future directions.
+- [Power-stage sizing utility](https://elitebotstudios.me/projects/power-stage-utility.html): a published software demonstration (ideal buck sizing, source and tests included), attributed as AI-assisted work rather than the founder's independent engineering.
 - [Smart Energy Monitoring concept record](https://elitebotstudios.me/projects/smart-energy-monitoring.html): an illustrative functional architecture and open design questions; no selected parts, prototype, simulation, or measured results are claimed.
 - [Expertise](https://elitebotstudios.me/expertise.html): academic foundation, practical exploration, and research interests linked as a system map.
 - [Engineering Lab](https://elitebotstudios.me/lab.html): five Markdown-authored technical notes, including [PWM fundamentals](https://elitebotstudios.me/lab/pwm-duty-frequency-resolution.html), [the ideal buck-converter CCM model](https://elitebotstudios.me/lab/buck-converter-ccm-model.html), [ADC resolution and quantization](https://elitebotstudios.me/lab/adc-resolution-quantization.html), simulation versus measurement, and documentation.

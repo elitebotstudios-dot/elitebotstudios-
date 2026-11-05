@@ -51,6 +51,18 @@ $$
 
 Below this load boundary, a diode-based buck's inductor current reaches zero for part of the cycle. In DCM, the ideal conversion ratio depends on load and inductance as well as input/output voltage; the simple CCM duty relation is no longer the complete model.
 
+## Reading the waveforms
+
+![Calculated buck waveforms over one switching period](/assets/lab/buck-waveforms.svg)
+
+*Calculated from the ideal CCM relations below, not measured. Switching edges, ringing, losses and control-loop behaviour are absent by construction.*
+
+Three things are worth noticing in that figure:
+
+- The switch node is high for `t_on` and low for `t_off`; their ratio is the duty cycle.
+- The inductor current is a triangle centred on the load current, not a copy of the switch waveform. It cannot jump, which is why the output keeps receiving current while the switch is open.
+- Peak current sits above the average and valley current below it. A real inductor must saturate above the peak, not above the average.
+
 ## Worked ideal CCM estimate
 
 Consider an illustrative operating point: `Vin = 12 V`, `Vout = 5 V`, `fsw = 500 kHz`, `L = 22 µH`, and `Iout = 2 A`.

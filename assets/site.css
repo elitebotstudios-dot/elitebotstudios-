@@ -768,3 +768,41 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
 .explorer-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .explorer-actions .btn{margin:0}
 @media(max-width:420px){.explorer-actions{flex-direction:column;align-items:stretch}}
+
+/* Power-stage sizing demonstration */
+.ps-grid{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(0,1.15fr);gap:16px;align-items:start}
+.ps-attrib{background:#0D131A}
+.ps-attrib-card{padding:clamp(22px,3.4vw,34px);border:1px solid #6A5731;border-radius:10px;background:rgba(216,182,106,.05)}
+.ps-attrib-card h2{font-size:1.5rem;margin:12px 0 10px}
+.ps-attrib-card p{color:#B4BFC8;max-width:78ch;line-height:1.68}
+.ps-attrib-card .concept-caption{margin-top:14px}
+.ps-attrib-card a{color:var(--teal)}
+.ps-doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,54px)}
+.ps-doc-grid h2{font-size:clamp(1.3rem,2.6vw,1.8rem);margin:12px 0 12px;line-height:1.15}
+.ps-doc-grid p{color:#A9B4BE;line-height:1.68}
+@media(max-width:900px){.ps-grid{grid-template-columns:minmax(0,1fr)}.ps-doc-grid{grid-template-columns:1fr}}
+.software-artefact{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center;margin-top:52px;padding:24px 26px;border:1px solid #3A4651;border-radius:10px;background:linear-gradient(140deg,#151E27,#0E141B)}
+.software-artefact h2{font-size:1.35rem;margin:10px 0 8px}
+.software-artefact p{color:#A4B0BA;font-size:.9rem;max-width:70ch}
+@media(max-width:760px){.software-artefact{grid-template-columns:1fr}}
+
+/* About: reviewer routes */
+.about-reviewers{background:#111820}
+.reviewer-card{padding:clamp(24px,4vw,38px);border:1px solid #38454F;border-radius:10px;background:linear-gradient(140deg,#161F28,#0E141B)}
+.reviewer-card h2{font-size:clamp(1.4rem,2.8vw,2rem);margin:12px 0 18px}
+.reviewer-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.reviewer-list a{display:block;height:100%;padding:16px 18px;border:1px solid #33404A;border-radius:8px;text-decoration:none;transition:border-color .2s}
+.reviewer-list a:hover{border-color:#6A7680}
+.reviewer-list b{display:block;color:#E9EEF1;font-size:.95rem;margin-bottom:6px}
+.reviewer-list span{color:#9DAAB8;font-size:.84rem;line-height:1.55}
+.reviewer-card .concept-caption{margin-top:16px}
+@media(max-width:900px){.reviewer-list{grid-template-columns:1fr}}
+.ps-attrib-card .concept-caption a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* Tables on phones: wrap instead of horizontal scrolling where possible */
+@media(max-width:640px){
+  .table-scroll table,.table-scroll{min-width:0}
+  .table-scroll table{font-size:.8rem}
+  .table-scroll th,.table-scroll td{padding:8px 9px}
+  .detail-section table th{width:40%}
+}

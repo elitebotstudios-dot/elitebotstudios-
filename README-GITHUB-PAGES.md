@@ -9,6 +9,7 @@ Static, accessible engineering portfolio for **Elite Bot Studios**. The site doc
 - `index.html` — studio identity, interactive conceptual power-control system, engineering disciplines, project direction, founder profile, and lab preview.
 - `projects.html` + `projects.json` — evidence-labelled project records. A nested `case_study` object generates `/projects/<slug>.html` and supports requirements, sensing/controller options, isolation notes, validation strategy and a staged roadmap. The Smart Energy Monitoring record is explicitly a concept.
 - `project-template.html` — the public case-study standard, with a download of the blank Markdown template (`project-template.md`).
+- `projects/power-stage-utility.html` — published software demonstration: an ideal buck sizing module with `assets/powerstage.js`, its UI, formulas, limits and reference tests. Clearly attributed as AI-assisted work produced for this site.
 - `expertise.html` — connected knowledge areas with evidence labels, no proficiency percentages.
 - `lab.html` and `content/lab-notes/*.md` — Markdown-authored technical notes. The index, homepage previews, sitemap and reading times are all generated from the same files.
 - `services.html` — Collaboration page: who gets in touch, and what is in or out of scope.
@@ -45,6 +46,7 @@ node --check assets/site.js
 node --check assets/calc.js
 node --check sw.js
 node tests/projects.test.js              # project renderer + hero system tabs
+node tests/powerstage.test.js            # power-stage sizing reference cases and rejections
 node tests/calculators.test.js           # calculator maths and boundaries
 node tests/contact-api.test.js           # contact endpoint validation and fallback
 python3 tests/notes.test.py              # Markdown pipeline

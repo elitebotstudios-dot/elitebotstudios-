@@ -23,9 +23,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
   <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.05-R5" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R6" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=74d969d8" />
+  <link rel="stylesheet" href="/assets/site.css?v=21d99c54" />
 
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
@@ -109,7 +109,7 @@
     <article class="technical-article">
       <div class="article-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="readingProgress"></span></div>
       <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>A buck converter in continuous conduction mode</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>3 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">power electronics</span><span class="chip">DC-DC</span><span class="chip">simulation</span></div></div></header>
-      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#two-switch-states-one-inductor">Two switch states, one inductor</a></li><li><a href="#inductor-ripple-from-the-slopes">Inductor ripple from the slopes</a></li><li><a href="#worked-ideal-ccm-estimate">Worked ideal CCM estimate</a></li><li><a href="#efficiency-belongs-in-the-power-estimate">Efficiency belongs in the power estimate</a></li><li><a href="#try-the-numbers-yourself">Try the numbers yourself</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="two-switch-states-one-inductor">Two switch states, one inductor</h2>
+      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#two-switch-states-one-inductor">Two switch states, one inductor</a></li><li><a href="#inductor-ripple-from-the-slopes">Inductor ripple from the slopes</a></li><li><a href="#reading-the-waveforms">Reading the waveforms</a></li><li><a href="#worked-ideal-ccm-estimate">Worked ideal CCM estimate</a></li><li><a href="#efficiency-belongs-in-the-power-estimate">Efficiency belongs in the power estimate</a></li><li><a href="#try-the-numbers-yourself">Try the numbers yourself</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="two-switch-states-one-inductor">Two switch states, one inductor</h2>
 <p>An ideal buck converter transfers energy through an inductor while the switch alternates between two states. During the <strong>on</strong> interval, the inductor sees <code>Vin − Vout</code>; during the <strong>off</strong> interval in the ideal freewheel path, it sees <code>−Vout</code>. Inductor current ramps up and down rather than changing instantaneously.</p>
 <p><img src="/assets/lab/buck-topology.svg" alt="Ideal buck converter shown in its on-state and off-state" loading="lazy" decoding="async"></p>
 <p><em>Ideal switches only. The drawing shows the two conduction paths; it is not a schematic of a fabricated board.</em></p>
@@ -130,6 +130,15 @@
 <p>CCM requires a nonnegative valley current. Setting the valley to zero gives the ideal boundary inductance:</p>
 <div class="equation-block"><code>Lcrit ≈ Vout·(1 − D) / (2·fsw·Iout)</code></div>
 <p>Below this load boundary, a diode-based buck's inductor current reaches zero for part of the cycle. In DCM, the ideal conversion ratio depends on load and inductance as well as input/output voltage; the simple CCM duty relation is no longer the complete model.</p>
+<h2 id="reading-the-waveforms">Reading the waveforms</h2>
+<p><img src="/assets/lab/buck-waveforms.svg" alt="Calculated buck waveforms over one switching period" loading="lazy" decoding="async"></p>
+<p><em>Calculated from the ideal CCM relations below, not measured. Switching edges, ringing, losses and control-loop behaviour are absent by construction.</em></p>
+<p>Three things are worth noticing in that figure:</p>
+<ul>
+<li>The switch node is high for <code>t_on</code> and low for <code>t_off</code>; their ratio is the duty cycle.</li>
+<li>The inductor current is a triangle centred on the load current, not a copy of the switch waveform. It cannot jump, which is why the output keeps receiving current while the switch is open.</li>
+<li>Peak current sits above the average and valley current below it. A real inductor must saturate above the peak, not above the average.</li>
+</ul>
 <h2 id="worked-ideal-ccm-estimate">Worked ideal CCM estimate</h2>
 <p>Consider an illustrative operating point: <code>Vin = 12 V</code>, <code>Vout = 5 V</code>, <code>fsw = 500 kHz</code>, <code>L = 22 µH</code>, and <code>Iout = 2 A</code>.</p>
 <ul>

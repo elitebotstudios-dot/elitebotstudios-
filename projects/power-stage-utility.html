@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Power-Stage Sizing Utility — software demonstration | Elite Bot Studios</title>
+  <meta name="description" content="An ideal buck power-stage sizing module with published formulas, assumptions, reference tests and source code. A software demonstration, clearly attributed." />
+<link rel="canonical" href="https://elitebotstudios.me/projects/power-stage-utility.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="Power-Stage Sizing Utility — software demonstration | Elite Bot Studios" />
+  <meta property="og:description" content="An ideal buck power-stage sizing module with published formulas, assumptions, reference tests and source code. A software demonstration, clearly attributed." />
+<meta property="og:url" content="https://elitebotstudios.me/projects/power-stage-utility.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Power-Stage Sizing Utility — software demonstration | Elite Bot Studios" />
+  <meta name="twitter:description" content="An ideal buck power-stage sizing module with published formulas, assumptions, reference tests and source code. A software demonstration, clearly attributed." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+
+  <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=7ad827f1" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
+  <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R6" />
+
+  <link rel="stylesheet" href="/assets/site.css?v=21d99c54" />
+
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Power-stage sizing utility",
+  "description": "Ideal buck power-stage sizing module with published source, formulas and reference tests. Software demonstration produced with AI assistance.",
+  "codeRepository": "https://elitebotstudios.me/assets/powerstage.js",
+  "programmingLanguage": "JavaScript",
+  "url": "https://elitebotstudios.me/projects/power-stage-utility.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://elitebotstudios.me"
+  }
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>
+        <span class="brand-word">Elite Bot Studios</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/projects.html" aria-current="page">Projects</a>
+        <a href="/expertise.html">Expertise</a>
+        <a href="/lab.html">Engineering Lab</a>
+        <a href="/about.html">About</a>
+        <a href="/tools.html">Tools</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-amber" href="/contact.html">Contact</a>
+        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" data-open="false">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="/projects.html" aria-current="page">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/tools.html">Tools</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head"><div class="wrap"><a class="backlink" href="/projects.html">&larr; Projects</a><span class="eyebrow">Software demonstration / attribution noted</span><h1>Power-stage sizing utility.</h1><p>A small calculation module that turns a converter specification into an inductor, a capacitor and a current-stress estimate — with the formulas, assumptions and test cases published alongside it.</p></div></section>
+
+    <section class="section"><div class="wrap ps-grid">
+      <form class="calc-panel" id="psForm" novalidate>
+        <p class="range-help">Values update as you type. Defaults are the site's reference operating point.</p>
+        <div class="calc-row">
+          <div class="calc-field"><label for="psVinMin">Minimum input <span class="unit">V</span></label><input id="psVinMin" type="number" value="9" min="1" step="0.1"></div>
+          <div class="calc-field"><label for="psVinMax">Maximum input <span class="unit">V</span></label><input id="psVinMax" type="number" value="15" min="1" step="0.1"></div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-field"><label for="psVout">Output voltage <span class="unit">V</span></label><input id="psVout" type="number" value="5" min="0.5" step="0.1"></div>
+          <div class="calc-field"><label for="psIout">Load current <span class="unit">A</span></label><input id="psIout" type="number" value="2" min="0.05" step="0.1"></div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-field"><label for="psFsw">Switching frequency <span class="unit">kHz</span></label><input id="psFsw" type="number" value="500" min="1" step="10"></div>
+          <div class="calc-field"><label for="psRipple">Inductor ripple target <span class="unit">% of load</span></label><input id="psRipple" type="number" value="30" min="1" max="100" step="5"></div>
+        </div>
+        <div class="calc-field"><label for="psVripple">Output ripple target <span class="unit">% of Vout</span></label><input id="psVripple" type="number" value="1" min="0.1" max="50" step="0.1"></div>
+        <div class="calc-actions"><button class="btn btn-ghost" type="reset">Reset to reference</button></div>
+      </form>
+
+      <div>
+        <div class="calc-output" id="psOut">
+          <span class="label">Sized stage</span>
+          <dl class="calc-readout-group">
+            <div class="calc-readout primary"><dt>Series inductance</dt><dd data-ps="inductance">—</dd></div>
+            <div class="calc-readout"><dt>Inductor ripple ΔI<sub>L</sub></dt><dd data-ps="deltaIl">—</dd></div>
+            <div class="calc-readout"><dt>Peak / valley current</dt><dd data-ps="peakValley">—</dd></div>
+            <div class="calc-readout"><dt>Inductor RMS current</dt><dd data-ps="irms">—</dd></div>
+            <div class="calc-readout"><dt>Output capacitance</dt><dd data-ps="capacitance">—</dd></div>
+            <div class="calc-readout"><dt>Duty at V<sub>in,min</sub> / V<sub>in,max</sub></dt><dd data-ps="duty">—</dd></div>
+            <div class="calc-readout"><dt>Longest on-time</dt><dd data-ps="ontime">—</dd></div>
+            <div class="calc-readout"><dt>CCM boundary inductance</dt><dd data-ps="lcrit">—</dd></div>
+          </dl>
+          <p class="calc-note" id="psNote" role="status" aria-live="polite">Enter a specification to size the stage.</p>
+        </div>
+        <div class="calc-formula">D = V<sub>out</sub>/V<sub>in</sub> · L = V<sub>out</sub>(1 − D<sub>max</sub>) / (ΔI<sub>L</sub> f<sub>sw</sub>) · C<sub>out</sub> ≈ ΔI<sub>L</sub> / (8 f<sub>sw</sub> ΔV<sub>out</sub>) · I<sub>RMS</sub> = √(I<sub>out</sub>² + ΔI<sub>L</sub>²/12)</div>
+      </div>
+    </div></section>
+
+    <section class="section ps-attrib"><div class="wrap">
+      <div class="ps-attrib-card">
+        <span class="section-index">ATTRIBUTION</span>
+        <h2>Who made this.</h2>
+        <p>This utility was written with AI assistance while building this website. It is a software artefact published as part of the site's engineering evidence, <strong>not</strong> the site owner's independent engineering work, and it is not a fabricated hardware result. It computes ideals; it has never been fitted to a physical board.</p>
+        <p class="concept-caption">Source: <a href="/assets/powerstage.js">assets/powerstage.js</a> · Tests: <a href="/tests/powerstage.test.js">tests/powerstage.test.js</a> · both are plain files served from this site.</p>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap ps-doc-grid">
+      <div>
+        <span class="section-index">01 / WHAT IT COMPUTES</span>
+        <h2>From a specification to component values.</h2>
+        <p>The module takes the input range, output voltage, load current, switching frequency and two ripple targets, then returns the inductance needed to hold the ripple target at the worst-case duty point, the resulting peak and valley currents, the RMS current that heats the winding, and the ideal output capacitance for the voltage-ripple target.</p>
+        <ul class="project-detail-list">
+          <li>Worst case for inductor ripple is the lowest input voltage, because duty — and therefore the off-time — is longest there.</li>
+          <li>Peak current sets the saturation requirement; RMS current sets the heating requirement. They are different numbers and both matter.</li>
+          <li>The capacitor estimate uses the ideal <code>ΔV ≈ ΔI/(8 f C)</code> relation for a resistive load.</li>
+        </ul>
+      </div>
+      <div>
+        <span class="section-index">02 / WHAT IT DOES NOT DO</span>
+        <h2>Deliberate limits.</h2>
+        <ul class="project-detail-list">
+          <li>No switch, diode or inductor resistance — a real converter needs more duty than this predicts.</li>
+          <li>No ESR, so the capacitor figure omits the ripple term that often dominates.</li>
+          <li>No thermal model, no loop stability, no transient response, no dead time, no saturation derating.</li>
+          <li>Steady-state CCM only. Ripple is defined relative to load current here, so a 100 % target still leaves a valley of I<sub>out</sub>/2; the reported CCM boundary inductance is the honest indicator.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <span class="section-index">03 / VERIFICATION</span>
+      <h2>Worked cases from the test suite.</h2>
+      <div class="table-scroll"><table>
+        <caption class="sr-only">Reference cases computed by the published test file</caption>
+        <thead><tr><th scope="col">Case</th><th scope="col">Specification</th><th scope="col">Inductance</th><th scope="col">Ripple</th><th scope="col">Peak</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">A</th><td>9–15 V → 5 V, 2 A, 500 kHz, 30 % ripple</td><td>7.41 µH</td><td>0.60 A</td><td>2.30 A</td></tr>
+          <tr><th scope="row">B</th><td>12–24 V → 3.3 V, 1 A, 1 MHz, 40 % ripple</td><td>5.98 µH</td><td>0.40 A</td><td>1.20 A</td></tr>
+          <tr><th scope="row">C</th><td>12 V → 5 V, 1 A, 100 kHz, 100 % ripple</td><td>3.50 µH</td><td>1.00 A</td><td>1.50 A</td></tr>
+        </tbody>
+      </table></div>
+      <p class="concept-caption">These are numbers produced by the published module and asserted in the test file, not measurements of hardware.</p>
+    </div></section>
+
+  </main>
+
+  <script src="/assets/powerstage.js?v=b7f5ffeb" defer></script>
+  <script src="/assets/powerstage-ui.js?v=e40065e9" defer></script>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-tag">Embedded Intelligence · Real-World Power</p>
+        <p>An independent engineering initiative exploring embedded systems, power electronics, and intelligent hardware through practical designs, simulations, prototypes, and documented projects.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul class="footer-links">
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/tools.html">Engineering Tools</a></li>
+          <li><a href="/services.html">Collaboration</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul class="footer-links">
+          <li><a href="/contact.html">Contact</a></li>
+          <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Pakistan · Independent engineering initiative</span>
+      <span>&copy; 2026 Elite Bot Studios</span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js?v=087e6622" defer></script>
+</body>
+</html>

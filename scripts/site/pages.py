@@ -96,7 +96,8 @@ def projects():
         <svg class="architecture-svg" viewBox="0 0 1080 220" role="img" aria-labelledby="archTitle archDesc"><title id="archTitle">Illustrative energy-monitoring system architecture</title><desc id="archDesc">Possible functional roles from electrical sensing through signal conditioning and embedded processing to logging or display. The blocks do not identify selected components or a built prototype.</desc><path class="architecture-route" d="M178 108h130m150 0h130m150 0h130"/><path class="architecture-route-cyan" d="M178 108h130m280 0h130"/><g><rect x="26" y="53" width="152" height="110" rx="5"/><text x="47" y="86">01 / INPUT</text><text class="architecture-title" x="47" y="116">Electrical</text><text class="architecture-title" x="47" y="138">sensing</text></g><g><rect x="308" y="53" width="150" height="110" rx="5"/><text x="329" y="86">02 / SIGNAL</text><text class="architecture-title" x="329" y="116">Analog</text><text class="architecture-title" x="329" y="138">front end</text></g><g><rect x="588" y="53" width="150" height="110" rx="5"/><text x="609" y="86">03 / COMPUTE</text><text class="architecture-title" x="609" y="116">Embedded</text><text class="architecture-title" x="609" y="138">processing</text></g><g><rect x="868" y="53" width="182" height="110" rx="5"/><text x="889" y="86">04 / USE</text><text class="architecture-title" x="889" y="116">Display or</text><text class="architecture-title" x="889" y="138">data logging</text></g><circle cx="178" cy="108" r="5"/><circle cx="458" cy="108" r="5"/><circle cx="738" cy="108" r="5"/><circle cx="868" cy="108" r="5"/></svg>
         <p class="concept-caption">Illustrative system roles only · not a schematic, component selection, or prototype description.</p>
       </div>
-      <div class="roadmap-section"><div class="project-section-label"><span class="section-index">02 / POSSIBLE EXPLORATIONS</span><span>ROADMAP · NOT COMPLETED PROJECTS</span></div><div class="roadmap-grid"><article><span>POWER</span><h3>Digitally controlled buck converter</h3><p>A possible study of switch behavior, inductor ripple, and digital control assumptions.</p></article><article><span>CONTROL</span><h3>Embedded motor control</h3><p>A future direction connecting sensing, actuation, and feedback fundamentals.</p></article><article><span>ENERGY</span><h3>Battery monitoring</h3><p>A possible exploration of measurement, state estimation, and protection concepts.</p></article></div></div>
+      <div class="software-artefact"><div><span class="section-index">SOFTWARE ARTEFACT / PUBLISHED</span><h2>Power-stage sizing utility</h2><p>An ideal buck sizing module with published source, formulas, assumptions and reference tests. Attributed as AI-assisted work produced while building this site &mdash; not presented as the founder's independent engineering.</p></div><a class="btn btn-ghost" href="/projects/power-stage-utility.html">Open the utility &#8599;</a></div>
+      <div class="roadmap-section"><div class="project-section-label"><span class="section-index">03 / POSSIBLE EXPLORATIONS</span><span>ROADMAP · NOT COMPLETED PROJECTS</span></div><div class="roadmap-grid"><article><span>POWER</span><h3>Digitally controlled buck converter</h3><p>A possible study of switch behavior, inductor ripple, and digital control assumptions.</p></article><article><span>CONTROL</span><h3>Embedded motor control</h3><p>A future direction connecting sensing, actuation, and feedback fundamentals.</p></article><article><span>ENERGY</span><h3>Battery monitoring</h3><p>A possible exploration of measurement, state estimation, and protection concepts.</p></article></div></div>
       <div class="project-template-link"><div><span class="section-index">CASE STUDY WORKFLOW</span><h2>Record the method as well as the result.</h2><p>A reusable structure for objectives, architecture, software, simulation, measurements, limitations, and resources.</p></div><a class="btn btn-ghost" href="/project-template.html">Open project template ↗</a></div>
     </div></section>
 '''
@@ -191,12 +192,122 @@ def project_detail_pages():
         %s%s%s
         %s
         <section class="detail-section detail-evidence"><span class="section-index">CURRENT EVIDENCE</span><h2>Where the record stands.</h2><p>%s</p><p>Next additions will be made when the underlying design files, calculations, simulation setup, or test records exist.</p></section>
-        <div class="project-detail-related"><a href="/tools/buck-converter.html">Explore the buck converter model ↗</a><a href="/lab.html">Read engineering notes ↗</a></div>
+        <div class="project-detail-related"><a href="/projects/power-stage-utility.html">Power-stage sizing utility &#8599;</a><a href="/tools/buck-converter.html">Explore the buck converter model &#8599;</a><a href="/lab.html">Read engineering notes &#8599;</a></div>
       </div></div></section>
     </article>
 '''
         body=body%(status_class,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('date','')),quote=True),html_escape(str(p.get('title','')),quote=True),html_escape(str(p.get('summary') or record.get('overview','')),quote=True),html_escape(str(p.get('objective','')),quote=True),status,html_escape(str(p.get('category','')),quote=True),status,html_escape(str(record.get('overview','')),quote=True),html_escape(str(record.get('architecture_label','Illustrative architecture')),quote=True),'\n'.join(nodes),list_section('open_questions','Questions to resolve'),list_section('future_directions','Possible next investigations'),'\n'.join(extra_sections),special_html,html_escape(str(p.get('results_note','')),quote=True))
         page('%s | Project Record | Elite Bot Studios'%html_escape(str(p.get('title','Project')),quote=True),str(p.get('summary') or p.get('objective','Engineering project record.')),'/projects/%s.html'%slug,body,jsonld=SCHEMA_GRAPH)
+
+
+def powerstage_page():
+    body = '''
+    <section class="page-head"><div class="wrap"><a class="backlink" href="/projects.html">&larr; Projects</a><span class="eyebrow">Software demonstration / attribution noted</span><h1>Power-stage sizing utility.</h1><p>A small calculation module that turns a converter specification into an inductor, a capacitor and a current-stress estimate — with the formulas, assumptions and test cases published alongside it.</p></div></section>
+
+    <section class="section"><div class="wrap ps-grid">
+      <form class="calc-panel" id="psForm" novalidate>
+        <p class="range-help">Values update as you type. Defaults are the site's reference operating point.</p>
+        <div class="calc-row">
+          <div class="calc-field"><label for="psVinMin">Minimum input <span class="unit">V</span></label><input id="psVinMin" type="number" value="9" min="1" step="0.1"></div>
+          <div class="calc-field"><label for="psVinMax">Maximum input <span class="unit">V</span></label><input id="psVinMax" type="number" value="15" min="1" step="0.1"></div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-field"><label for="psVout">Output voltage <span class="unit">V</span></label><input id="psVout" type="number" value="5" min="0.5" step="0.1"></div>
+          <div class="calc-field"><label for="psIout">Load current <span class="unit">A</span></label><input id="psIout" type="number" value="2" min="0.05" step="0.1"></div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-field"><label for="psFsw">Switching frequency <span class="unit">kHz</span></label><input id="psFsw" type="number" value="500" min="1" step="10"></div>
+          <div class="calc-field"><label for="psRipple">Inductor ripple target <span class="unit">% of load</span></label><input id="psRipple" type="number" value="30" min="1" max="100" step="5"></div>
+        </div>
+        <div class="calc-field"><label for="psVripple">Output ripple target <span class="unit">% of Vout</span></label><input id="psVripple" type="number" value="1" min="0.1" max="50" step="0.1"></div>
+        <div class="calc-actions"><button class="btn btn-ghost" type="reset">Reset to reference</button></div>
+      </form>
+
+      <div>
+        <div class="calc-output" id="psOut">
+          <span class="label">Sized stage</span>
+          <dl class="calc-readout-group">
+            <div class="calc-readout primary"><dt>Series inductance</dt><dd data-ps="inductance">—</dd></div>
+            <div class="calc-readout"><dt>Inductor ripple ΔI<sub>L</sub></dt><dd data-ps="deltaIl">—</dd></div>
+            <div class="calc-readout"><dt>Peak / valley current</dt><dd data-ps="peakValley">—</dd></div>
+            <div class="calc-readout"><dt>Inductor RMS current</dt><dd data-ps="irms">—</dd></div>
+            <div class="calc-readout"><dt>Output capacitance</dt><dd data-ps="capacitance">—</dd></div>
+            <div class="calc-readout"><dt>Duty at V<sub>in,min</sub> / V<sub>in,max</sub></dt><dd data-ps="duty">—</dd></div>
+            <div class="calc-readout"><dt>Longest on-time</dt><dd data-ps="ontime">—</dd></div>
+            <div class="calc-readout"><dt>CCM boundary inductance</dt><dd data-ps="lcrit">—</dd></div>
+          </dl>
+          <p class="calc-note" id="psNote" role="status" aria-live="polite">Enter a specification to size the stage.</p>
+        </div>
+        <div class="calc-formula">D = V<sub>out</sub>/V<sub>in</sub> · L = V<sub>out</sub>(1 − D<sub>max</sub>) / (ΔI<sub>L</sub> f<sub>sw</sub>) · C<sub>out</sub> ≈ ΔI<sub>L</sub> / (8 f<sub>sw</sub> ΔV<sub>out</sub>) · I<sub>RMS</sub> = √(I<sub>out</sub>² + ΔI<sub>L</sub>²/12)</div>
+      </div>
+    </div></section>
+
+    <section class="section ps-attrib"><div class="wrap">
+      <div class="ps-attrib-card">
+        <span class="section-index">ATTRIBUTION</span>
+        <h2>Who made this.</h2>
+        <p>This utility was written with AI assistance while building this website. It is a software artefact published as part of the site's engineering evidence, <strong>not</strong> the site owner's independent engineering work, and it is not a fabricated hardware result. It computes ideals; it has never been fitted to a physical board.</p>
+        <p class="concept-caption">Source: <a href="/assets/powerstage.js">assets/powerstage.js</a> · Tests: <a href="/tests/powerstage.test.js">tests/powerstage.test.js</a> · both are plain files served from this site.</p>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap ps-doc-grid">
+      <div>
+        <span class="section-index">01 / WHAT IT COMPUTES</span>
+        <h2>From a specification to component values.</h2>
+        <p>The module takes the input range, output voltage, load current, switching frequency and two ripple targets, then returns the inductance needed to hold the ripple target at the worst-case duty point, the resulting peak and valley currents, the RMS current that heats the winding, and the ideal output capacitance for the voltage-ripple target.</p>
+        <ul class="project-detail-list">
+          <li>Worst case for inductor ripple is the lowest input voltage, because duty — and therefore the off-time — is longest there.</li>
+          <li>Peak current sets the saturation requirement; RMS current sets the heating requirement. They are different numbers and both matter.</li>
+          <li>The capacitor estimate uses the ideal <code>ΔV ≈ ΔI/(8 f C)</code> relation for a resistive load.</li>
+        </ul>
+      </div>
+      <div>
+        <span class="section-index">02 / WHAT IT DOES NOT DO</span>
+        <h2>Deliberate limits.</h2>
+        <ul class="project-detail-list">
+          <li>No switch, diode or inductor resistance — a real converter needs more duty than this predicts.</li>
+          <li>No ESR, so the capacitor figure omits the ripple term that often dominates.</li>
+          <li>No thermal model, no loop stability, no transient response, no dead time, no saturation derating.</li>
+          <li>Steady-state CCM only. Ripple is defined relative to load current here, so a 100 % target still leaves a valley of I<sub>out</sub>/2; the reported CCM boundary inductance is the honest indicator.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <span class="section-index">03 / VERIFICATION</span>
+      <h2>Worked cases from the test suite.</h2>
+      <div class="table-scroll"><table>
+        <caption class="sr-only">Reference cases computed by the published test file</caption>
+        <thead><tr><th scope="col">Case</th><th scope="col">Specification</th><th scope="col">Inductance</th><th scope="col">Ripple</th><th scope="col">Peak</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">A</th><td>9–15 V → 5 V, 2 A, 500 kHz, 30 % ripple</td><td>7.41 µH</td><td>0.60 A</td><td>2.30 A</td></tr>
+          <tr><th scope="row">B</th><td>12–24 V → 3.3 V, 1 A, 1 MHz, 40 % ripple</td><td>5.98 µH</td><td>0.40 A</td><td>1.20 A</td></tr>
+          <tr><th scope="row">C</th><td>12 V → 5 V, 1 A, 100 kHz, 100 % ripple</td><td>3.50 µH</td><td>1.00 A</td><td>1.50 A</td></tr>
+        </tbody>
+      </table></div>
+      <p class="concept-caption">These are numbers produced by the published module and asserted in the test file, not measurements of hardware.</p>
+    </div></section>
+'''
+    ld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "Power-stage sizing utility",
+        "description": "Ideal buck power-stage sizing module with published source, formulas and reference tests. Software demonstration produced with AI assistance.",
+        "codeRepository": "https://elitebotstudios.me/assets/powerstage.js",
+        "programmingLanguage": "JavaScript",
+        "url": "https://elitebotstudios.me/projects/power-stage-utility.html",
+        "author": {"@type": "Organization", "name": "Elite Bot Studios"},
+        "isPartOf": {"@type": "WebSite", "url": "https://elitebotstudios.me"}
+    }, indent=2)
+    write('/projects/power-stage-utility.html',
+          __import__('build').head('Power-Stage Sizing Utility — software demonstration | Elite Bot Studios',
+                                   'An ideal buck power-stage sizing module with published formulas, assumptions, reference tests and source code. A software demonstration, clearly attributed.',
+                                   '/projects/power-stage-utility.html', jsonld=ld)
+          + __import__('build').header('/projects.html') + '\n  <main id="main">\n' + body + '\n  </main>\n'
+          + '\n  <script src="%s" defer></script>\n' % __import__('build').asset('assets/powerstage.js')
+          + '  <script src="%s" defer></script>\n' % __import__('build').asset('assets/powerstage-ui.js')
+          + __import__('build').footer())
 
 
 # --------------------------------------------------------------------- lab --
@@ -311,6 +422,15 @@ def about():
         <a class="evidence-card" href="/tools.html"><span class="section-index">ENGINEERING TOOLS</span><h3>Seven working models</h3><p>Including a buck-converter explorer and a PWM signal laboratory, each with stated assumptions and reference tests.</p><b>Open the tools &#8599;</b></a>
       </div>
     </div></section>
+    <section class="section about-reviewers"><div class="wrap"><div class="reviewer-card">
+      <div><span class="section-index">FOR ACADEMIC AND TECHNICAL REVIEWERS</span><h2>Three routes to the evidence.</h2></div>
+      <ul class="reviewer-list">
+        <li><a href="/projects/smart-energy-monitoring.html"><b>Project record</b><span>Requirements, sensing and controller options, isolation boundary, validation plan and current stage.</span></a></li>
+        <li><a href="/lab.html"><b>Technical notes</b><span>Worked derivations with stated assumptions and references, written for study rather than marketing.</span></a></li>
+        <li><a href="/tools.html"><b>Working models</b><span>Seven browser instruments whose formulas and reference tests are published in the repository.</span></a></li>
+      </ul>
+      <p class="concept-caption">A CV will be published here once the owner supplies an approved document; no placeholder credentials or links are shown.</p>
+    </div></div></section>
     <section class="section about-direction"><div class="wrap"><div class="section-heading split-heading"><div><span class="section-index">03 / RESEARCH DIRECTION</span><h2>Questions that cross<br><em>disciplinary boundaries.</em></h2></div><p>Areas of curiosity—not published research contributions.</p></div><div class="research-lines"><article><span>01</span><h3>Digital power conversion</h3><p>How embedded control and power-stage dynamics shape converter behavior.</p></article><article><span>02</span><h3>Energy instrumentation</h3><p>How measurement quality changes the decisions a system can make.</p></article><article><span>03</span><h3>Intelligent electrical systems</h3><p>How connected hardware can improve visibility and control of energy use.</p></article></div></div></section>
     <section class="section about-profile"><div class="wrap about-profile-grid"><div><span class="section-index">04 / PROFILE</span><h2>Academic foundation.</h2><p class="about-profile-lede">Power engineering is the academic direction. Embedded systems, electronics and control are the threads being developed around it, in coursework and in the open work on this site.</p></div><dl class="profile-facts"><div><dt>Name</dt><dd>Muhammad Shahzaib Abbas</dd></div><div><dt>Current status</dt><dd>Electrical Engineering undergraduate</dd></div><div><dt>Institution</dt><dd>National University of Sciences and Technology (NUST), Pakistan</dd></div><div><dt>Academic direction</dt><dd>Power engineering</dd></div><div><dt>Complementary interests</dt><dd>Embedded systems · electronics · control</dd></div></dl></div></section>
     <section class="section about-now"><div class="wrap about-now-grid"><div><span class="section-index">05 / CURRENT PRACTICE</span><h2>Learn it.<br><em>Connect it. Document it.</em></h2></div><div><p>Current work is about developing a rigorous foundation and learning to move between circuit behavior, power flow, embedded decisions, and clear technical documentation. The public project index separates planned directions from artifacts that have actually been produced.</p><a class="text-link" href="/projects.html">See project status <b>↗</b></a></div></div></section>
@@ -430,7 +550,7 @@ def contact():
         <button class="btn btn-primary" type="submit">Send message</button>
         <p class="form-note" id="formStatus" role="status" aria-live="polite">The status line reports what actually happened: a delivered message, a validation problem, or an email draft. Direct email is always available on the right.</p>
       </form>
-    </div><aside class="contact-aside"><div class="info-block"><h2>Direct email</h2><p><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a></p><p class="muted-small">Use this if your device has no email app configured, or if you prefer not to use the form.</p></div><div class="info-block"><h2>Good context to include</h2><p>For a technical discussion, mention the system or research question, relevant constraints, and what kind of feedback or collaboration you are seeking.</p></div><div class="info-block"><h2>How the form handles your data</h2><p>If server delivery is configured, your message is sent through the site's own endpoint to the studio inbox. If it is not configured, nothing is transmitted and your email application opens with a draft instead. The form never reports a success it cannot verify.</p></div></aside></div></section>
+    </div><aside class="contact-aside"><div class="info-block"><h2>Direct email</h2><p><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></p><p class="muted-small">Use this if your device has no email app configured, or if you prefer not to use the form.</p></div><div class="info-block"><h2>Good context to include</h2><p>For a technical discussion, mention the system or research question, relevant constraints, and what kind of feedback or collaboration you are seeking.</p></div><div class="info-block"><h2>How the form handles your data</h2><p>If server delivery is configured, your message is sent through the site's own endpoint to the studio inbox. If it is not configured, nothing is transmitted and your email application opens with a draft instead. The form never reports a success it cannot verify.</p></div></aside></div></section>
 '''
     page('Contact | Elite Bot Studios','Contact Muhammad Shahzaib Abbas about engineering collaboration, academic research discussion, research opportunities, internships, hardware project inquiries, or general questions.','/contact.html',body,jsonld=SCHEMA_GRAPH,extra_head=CONTACT_FORM_JS)
 
@@ -614,6 +734,6 @@ def offline():
 
 if __name__ == '__main__':
     print('building pages…')
-    services(); projects(); project_detail_pages(); project_template_page(); lab_index(); lab_posts(); expertise(); about(); contact()
+    services(); projects(); project_detail_pages(); project_template_page(); powerstage_page(); lab_index(); lab_posts(); expertise(); about(); contact()
     privacy(); terms(); cookies(); notfound(); offline()
     print('done.')

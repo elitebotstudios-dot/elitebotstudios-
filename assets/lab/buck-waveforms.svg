@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" role="img" aria-labelledby="bwTitle bwDesc">
+  <title id="bwTitle">Ideal buck waveforms at 12 V to 5 V, 500 kHz, 22 microhenry, 2 A</title>
+  <desc id="bwDesc">Three aligned traces over one switching period: the switch-node voltage with a duty of about 41.7 percent, the triangular inductor current between 1.87 and 2.13 amps, and a reference line at the average inductor current of 2 amps. Values are calculated from the ideal continuous-conduction model, not measured.</desc>
+  <path d="M84 46H860M84 96H860M84 146H860M84 196H860M84 246H860M84 296H860M84 36V304M232 36V304M380 36V304M528 36V304M676 36V304M860 36V304" fill="none" stroke="#2E3A45" stroke-width="1" stroke-dasharray="2 6"/>
+  <path d="M84 36V304H860" fill="none" stroke="#5B6873" stroke-width="1.2"/>
+  <g font-family="ui-monospace, monospace" font-size="11" fill="#93A1AC" letter-spacing="1">
+    <text x="84" y="28">SWITCH NODE</text>
+    <text x="84" y="184">INDUCTOR CURRENT iL</text>
+    <text x="700" y="28">T = 2.00 µs</text>
+    <text x="700" y="184">D = 41.7 %</text>
+  </g>
+  <path d="M84 96V58H300V96H676V58H860V96" fill="none" stroke="#D8B66A" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M84 246 300 224 516 246 732 224 860 239" fill="none" stroke="#59D9E8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M84 232H860" fill="none" stroke="#8C99A5" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <g font-family="ui-monospace, monospace" font-size="10" fill="#77848F" letter-spacing="1">
+    <text x="306" y="76">t_on = 833 ns</text>
+    <text x="512" y="102">t_off = 1.17 µs</text>
+    <text x="88" y="226">2.133 A peak</text>
+    <text x="88" y="262">1.867 A valley</text>
+    <text x="600" y="228">average = 2 A</text>
+  </g>
+  <path d="M300 36V304" fill="none" stroke="#C6D0D8" stroke-width="1" stroke-dasharray="3 5"/>
+  <path d="M676 36V304" fill="none" stroke="#3C4A55" stroke-width="1" stroke-dasharray="3 5"/>
+  <g font-family="ui-monospace, monospace" font-size="10" fill="#77848F" letter-spacing="1">
+    <text x="84" y="324">Calculated from the ideal CCM model. A real converter shows finite switching edges, ringing and losses.</text>
+  </g>
+</svg>
