@@ -119,8 +119,9 @@ function ebsProjectCard(p) {
   if (p.documentation_url && safeLink(p.documentation_url)) {
     links += '<a class="btn btn-ghost" href="' + ebsEsc(p.documentation_url) + '" rel="noopener noreferrer">Documentation</a>';
   }
-  if (p.case_study_url && safeLink(p.case_study_url)) {
-    links += '<a class="btn btn-ghost" href="' + ebsEsc(p.case_study_url) + '">Read case study</a>';
+  var caseStudyUrl = p.case_study_url || (p.case_study ? '/projects/' + (p.slug || '') + '.html' : '');
+  if (caseStudyUrl && safeLink(caseStudyUrl)) {
+    links += '<a class="btn btn-ghost" href="' + ebsEsc(caseStudyUrl) + '">Open project record</a>';
   }
 
   var anchor = /^[a-z0-9-]+$/.test(p.slug || '') ? ' id="' + p.slug + '"' : '';
@@ -213,43 +214,71 @@ window.EBS.renderProjectCard = ebsProjectCard;
     var status = PROJECT_STATUS_LABEL[p.status] || 'In development';
     var summary = p.summary || p.objective || p.problem || 'Project details will be published when evidence is available.';
     var slug = /^[a-z0-9-]+$/.test(p.slug || '') ? p.slug : '';
-    mount.innerHTML = '<article class="featured-project">' +
+    var caseUrl=p.case_study_url || (p.case_study && slug ? '/projects/'+slug+'.html' : '');
+    var detailUrl = /^\/projects\/[a-z0-9-]+\.html$/.test(caseUrl) ? caseUrl : '';
+    var projectHref = detailUrl || ('/projects.html' + (slug ? '#' + slug : ''));
+    mount.innerHTML = '<article class="featured-project">'+
       '<div class="featured-project-mark" aria-hidden="true"><svg viewBox="0 0 120 96"><path d="M10 48h22m56 0h22M32 24h56v48H32zM46 36v24m14-24v24m14-24v24M4 20h16v56H4m80-56h16v56H84"/><circle cx="60" cy="48" r="4"/></svg></div>' +
       '<div><div class="post-meta"><span class="status-label">' + ebsEsc(status) + '</span><span>' + ebsEsc(p.category || 'Project track') + '</span></div>' +
       '<h3>' + ebsEsc(p.title || 'Project record') + '</h3><p>' + ebsEsc(summary) + '</p>' +
-      '<a class="text-link" href="/projects.html' + (slug ? '#' + slug : '') + '">See the project record <span aria-hidden="true">→</span></a></div></article>';
+      '<a class="text-link" href="' + ebsEsc(projectHref) + '">See the project record <span aria-hidden="true">→</span></a></div></article>';
   }).catch(function () { /* retain the accessible static fallback */ });
 }());
 
 /* -------------------------------------------------- conceptual system map --
-   A small, accessible interaction: each button describes a generic block in
-   the educational power-system diagram. No device behaviour is simulated. */
+   Keyboard-operable tabs explain each block and highlight its matching
+   illustrative SVG layer. This is an architecture concept, not a simulator. */
 (function systemMap() {
-  var root = document.querySelector('.system-flow');
-  var title = document.getElementById('systemDetailTitle');
-  var text = document.getElementById('systemDetailText');
-  var kicker = document.getElementById('systemDetailKicker');
-  if (!root || !title || !text || !kicker) return;
-  var content = {
-    source: ['01 / SOURCE', 'Start with the energy boundary.', 'A design begins by defining its input: voltage range, available power, expected transients, and the source’s limits. Those constraints shape every block downstream.'],
-    converter: ['02 / CONVERSION', 'Condition power for the system.', 'A DC–DC stage converts one DC voltage range to another. Topology, switching, component stresses, thermal limits, and regulation requirements depend on the actual source and load; this diagram assigns no ratings or values.'],
-    controller: ['03 / CONTROL', 'Measure, decide, and command.', 'An embedded controller can sample signals, run control logic, and generate outputs such as PWM. Real designs must account for timing, isolation where required, startup, fault states, and safe defaults.'],
-    sensing: ['04 / FEEDBACK & LOAD', 'Close the loop with measured behaviour.', 'Sensors and signal conditioning provide information about system state; the load is where useful output is delivered. Measurement range, accuracy, protection, and bandwidth must be chosen for a specific design.']
+  var root=document.querySelector('.system-tabs');
+  var panel=document.getElementById('systemPanel');
+  var title=document.getElementById('systemDetailTitle');
+  var text=document.getElementById('systemDetailText');
+  var kicker=document.getElementById('systemDetailKicker');
+  var machine=document.querySelector('.hero-machine');
+  if(!root||!panel||!title||!text||!kicker)return;
+  var content={
+    source:['01 / ENERGY BOUNDARY','Start with what the source can provide.','Input range, available power, and transients define the conditions every later block must respect. Those are design constraints—not decorative numbers.'],
+    converter:['02 / POWER CONVERSION','Move energy between voltage domains.','A DC–DC stage uses switching and energy-storage elements to change a DC voltage level. Topology, device stress, control method, and thermal behavior depend on the actual input and load.'],
+    controller:['03 / EMBEDDED CONTROL','Measure, decide, and command.','A microcontroller can sample signals, execute control logic, and generate outputs such as PWM. Timing, startup, fault response, and safe defaults belong in the design—not only in the firmware.'],
+    feedback:['04 / MEASUREMENT & RESPONSE','Close the loop with useful information.','Sensing and signal conditioning turn electrical behavior into data a controller can use. Range, accuracy, bandwidth, protection, and load response must be chosen for a specific system.']
   };
-  root.addEventListener('click', function (event) {
-    var button = event.target.closest('[data-system-node]');
-    if (!button || !root.contains(button)) return;
-    var next = content[button.getAttribute('data-system-node')];
-    if (!next) return;
-    root.querySelectorAll('[data-system-node]').forEach(function (node) {
-      var active = node === button;
-      node.classList.toggle('is-active', active);
-      node.setAttribute('aria-pressed', active ? 'true' : 'false');
-    });
-    kicker.textContent = next[0];
-    title.textContent = next[1];
-    text.textContent = next[2];
+  function select(button,moveFocus){
+    var key=button.getAttribute('data-system-node'),entry=content[key];if(!entry)return;
+    root.querySelectorAll('[role="tab"]').forEach(function(tab){var active=tab===button;tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',active?'true':'false');tab.tabIndex=active?0:-1;});
+    panel.setAttribute('aria-labelledby',button.id);kicker.textContent=entry[0];title.textContent=entry[1];text.textContent=entry[2];
+    if(machine)machine.setAttribute('data-selected',key);
+    document.querySelectorAll('[data-visual-node]').forEach(function(node){node.classList.toggle('is-active',node.getAttribute('data-visual-node')===key);});
+    if(moveFocus)button.focus();
+  }
+  root.addEventListener('click',function(event){var tab=event.target.closest('[role="tab"]');if(tab&&root.contains(tab))select(tab,false);});
+  root.addEventListener('keydown',function(event){
+    var tabs=Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));var index=tabs.indexOf(event.target);if(index<0)return;var next=null;
+    if(event.key==='ArrowRight'||event.key==='ArrowDown')next=tabs[(index+1)%tabs.length];
+    else if(event.key==='ArrowLeft'||event.key==='ArrowUp')next=tabs[(index-1+tabs.length)%tabs.length];
+    else if(event.key==='Home')next=tabs[0];else if(event.key==='End')next=tabs[tabs.length-1];
+    if(next){event.preventDefault();select(next,true);}
   });
+}());
+
+/* ------------------------------------------------------ article progress -- */
+(function readingProgress() {
+  var fill=document.getElementById('readingProgress');
+  var bar=fill&&fill.parentElement;
+  if(!fill||!bar)return;
+  var pending=false;
+  function update(){
+    pending=false;
+    var root=document.documentElement;
+    var max=Math.max(0,root.scrollHeight-window.innerHeight);
+    var current=Math.max(0,window.scrollY||root.scrollTop||0);
+    var value=max?Math.min(100,Math.round(current/max*100)):0;
+    fill.style.transform='scaleX('+(value/100)+')';
+    bar.setAttribute('aria-valuenow',String(value));
+  }
+  function queue(){if(pending)return;pending=true;window.requestAnimationFrame(update);}
+  window.addEventListener('scroll',queue,{passive:true});
+  window.addEventListener('resize',queue,{passive:true});
+  update();
 }());
 
 /* ------------------------------------------------------------------ PWA --

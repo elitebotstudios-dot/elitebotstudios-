@@ -6,12 +6,12 @@ Static, accessible engineering portfolio for **Elite Bot Studios**. The site doc
 
 ## Site structure
 
-- `index.html` — studio identity, focus areas, interactive educational system diagram, project concept, development method, founder profile, and lab preview.
-- `projects.html` + `projects.json` — evidence-labelled project records.
+- `index.html` — studio identity, interactive conceptual power-control system, engineering disciplines, project direction, founder profile, and lab preview.
+- `projects.html` + `projects.json` — evidence-labelled project records; nested `case_study` data generates dedicated `/projects/<slug>.html` pages. The current Smart Energy Monitoring record is explicitly a concept.
 - `expertise.html` — academic focus, current learning, and research interests, without proficiency percentages.
-- `lab.html` and `content/lab-notes/*.md` — technical notes in Markdown.
+- `lab.html` and `content/lab-notes/*.md` — four Markdown-authored technical notes with equations, code highlighting, tables, references, reading progress, and generated tables of contents.
 - `services.html` — capabilities and collaboration areas; not a claim of established consultancy delivery.
-- `tools.html` and `tools/*.html` — six client-side engineering calculators.
+- `tools.html` and `tools/*.html` — six client-side engineering models, including an interactive ideal-CCM buck explorer with synchronized controls, live PWM/current plots, and an explicit DCM boundary.
 - `about.html`, `contact.html`, legal pages, `404.html`, and `offline.html`.
 - `assets/site.css`, `assets/site.js`, and `assets/calc.js` — shared design and browser behaviour.
 - `sw.js`, `sitemap.xml`, `robots.txt`, `llms.txt`, and `vercel.json` — discoverability, offline support, and hosting configuration.
@@ -28,6 +28,8 @@ python3 scripts/build_sitemap.py
 node --check assets/site.js
 node --check assets/calc.js
 node tests/projects.test.js
+node tests/calculators.test.js
+python3 tests/notes.test.py
 ```
 
 Use `HOW-TO-ADD-A-PROJECT.md` and `project-template.md` for project records. Read `content/README.md` to author a lab note. New notes are authored in Markdown, not in generated HTML.

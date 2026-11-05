@@ -21,25 +21,40 @@
   <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
   <link rel="icon" href="/assets/favicon-16x16.png?v=7ad827f1" sizes="16x16" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
-  <link rel="manifest" href="/site.webmanifest?v=620f6022" />
-  <meta name="theme-color" content="#0A0E13" />
+  <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R1" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=89af0bc9" />
+  <link rel="stylesheet" href="/assets/site.css?v=29e06254" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ"></script>
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
   </script></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="/" aria-label="Elite Bot Studios — home">
+      <a class="brand" href="/">
         <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>
         <span class="brand-word">Elite Bot Studios</span>
       </a>
@@ -126,6 +141,6 @@
     </div>
   </footer>
 
-  <script src="/assets/site.js?v=b2d2e9c7" defer></script>
+  <script src="/assets/site.js?v=8ac920e4" defer></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = str(ROOT)
 SITE = 'https://elitebotstudios.me'
+SITE_BUILD = 'EBS-2026.11.05-R1'
 EMAIL = 'contact@elitebotstudios.me'
 TAGLINE = 'Embedded Intelligence · Real-World Power'
 ONELINER = ('An independent engineering initiative exploring embedded systems, power electronics, and '
@@ -124,21 +125,36 @@ def head(title, desc, path, extra_head='', og_image='/assets/social-preview.png'
   <link rel="icon" href="{fav16}" sizes="16x16" />
   <link rel="apple-touch-icon" href="{apple}" />
   <link rel="manifest" href="{manifest}" />
-  <meta name="theme-color" content="#0A0E13" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="{build_id}" />
 
   <link rel="stylesheet" href="{css_href}" />
 {extra}
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ"></script>
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){{dataLayer.push(arguments);}}
     gtag('js', new Date());
     gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){{
+      var started = false;
+      function load() {{
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }}
+      setTimeout(function () {{
+        if ('requestIdleCallback' in window) requestIdleCallback(load, {{ timeout: 2000 }});
+        else load();
+      }}, 6000);
+    }})();
   </script>{ld}</head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-'''.format(title=title, desc=desc, canon=canon, site=SITE, og=og_image,
+'''.format(title=title, desc=desc, canon=canon, site=SITE, og=og_image, build_id=SITE_BUILD,
            extra=extra_head, ld=ld,
            css_href=asset('assets/site.css'),
            fav32=asset('assets/favicon-32x32.png'),
@@ -159,7 +175,7 @@ def header(current):
     return '''
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="/" aria-label="Elite Bot Studios — home">
+      <a class="brand" href="/">
         %s
         <span class="brand-word">Elite Bot Studios</span>
       </a>
@@ -227,6 +243,7 @@ def footer():
 
 
 def write(path, html):
+    html='\n'.join(line.rstrip() for line in html.splitlines())+'\n'
     full = os.path.join(OUT, path.lstrip('/'))
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, 'w', encoding='utf-8') as f:

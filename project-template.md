@@ -87,16 +87,27 @@ When ready to publish a project, add one object to `projects.json` using these k
   "objective": "Engineering objective or research question.",
   "problem": "Context and constraints.",
   "approach": "Verified design approach, not a future intention.",
-  "hardware": [],
-  "software": [],
-  "simulation": "",
   "measured_results": "",
-  "lessons": "",
   "github_url": "",
   "documentation_url": "",
-  "case_study_url": "",
-  "media": []
+  "media": [],
+  "case_study": {
+    "overview": "",
+    "architecture_label": "",
+    "architecture": [],
+    "hardware": [],
+    "software": [],
+    "schematics": [],
+    "simulation": "",
+    "testing": "",
+    "results": "",
+    "limitations": "",
+    "lessons": [],
+    "open_questions": [],
+    "future_directions": [],
+    "resources": []
+  }
 }
 ```
 
-Use an empty array/string when no evidence exists. Do not populate estimated parts, results, repositories, photos, or measurements. Keep an unfinished project as a local draft if even the concept is not ready for public review.
+The public project card is server-rendered from the top-level summary fields. Add a nested `case_study` object to generate a dedicated `/projects/<slug>.html` detail page; only non-empty sections are shown. Use an empty array/string when no evidence exists. Do not populate estimated parts, results, repositories, photos, or measurements. Keep an unfinished project as a local draft if even the concept is not ready for public review.

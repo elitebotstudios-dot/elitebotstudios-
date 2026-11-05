@@ -21,18 +21,33 @@
   <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
   <link rel="icon" href="/assets/favicon-16x16.png?v=7ad827f1" sizes="16x16" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
-  <link rel="manifest" href="/site.webmanifest?v=620f6022" />
-  <meta name="theme-color" content="#0A0E13" />
+  <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R1" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=89af0bc9" />
+  <link rel="stylesheet" href="/assets/site.css?v=29e06254" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ"></script>
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
   </script>
   <script type="application/ld+json">
   {
@@ -57,7 +72,7 @@
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="/" aria-label="Elite Bot Studios — home">
+      <a class="brand" href="/">
         <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>
         <span class="brand-word">Elite Bot Studios</span>
       </a>
@@ -91,22 +106,13 @@
 
   <main id="main">
 
-    <article>
-      <header class="post-head">
-        <div class="wrap">
-          <a class="backlink" href="/lab.html">&larr; Lab Log</a>
-          <h1>Why document the process?</h1>
-          <div class="post-meta"><time datetime="2026-11-05">2026-11-05</time><span>Elite Bot Studios</span></div>
-          <div class="chips"><span class="chip">practice</span><span class="chip">documentation</span></div>
-        </div>
-      </header>
-      <div class="section">
-        <div class="wrap">
-          <div class="prose reveal">
-<h2>The record is part of the engineering</h2>
+    <article class="technical-article">
+      <div class="article-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="readingProgress"></span></div>
+      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>Why document the process?</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>1 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">practice</span><span class="chip">documentation</span></div></div></header>
+      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#the-record-is-part-of-the-engineering">The record is part of the engineering</a></li><li><a href="#a-practical-evidence-ladder">A practical evidence ladder</a></li></ol></details><div class="prose article-prose"><h2 id="the-record-is-part-of-the-engineering">The record is part of the engineering</h2>
 <p>A project page is most useful when a reader can distinguish an idea from a design, a simulation from a measurement, and a measurement from a claim that has been independently verified. Those distinctions are not presentation details. They affect whether another engineer can review the work and decide what to trust.</p>
 <p>A useful record says what question the work addresses, what constraints were assumed, what choices were made, and what remains unknown. If a value comes from a model, label it as simulated. If a number comes from an instrument, include the conditions and method. If there is no evidence yet, say so directly.</p>
-<h2>A practical evidence ladder</h2>
+<h2 id="a-practical-evidence-ladder">A practical evidence ladder</h2>
 <ol>
 <li><strong>Concept</strong> — a question or direction; no design evidence is implied.</li>
 <li><strong>Design</strong> — a documented architecture or schematic, with assumptions stated.</li>
@@ -115,25 +121,9 @@
 <li><strong>Bench tested</strong> — measurements are published with setup, instruments, and conditions.</li>
 </ol>
 <p>These labels describe different kinds of evidence, not a score or a guarantee. A project may move backward when a test exposes a bad assumption. Keeping the revision history visible is more useful than polishing away the uncertainty.</p>
-<blockquote><p>This note describes the portfolio's documentation approach. It is not a report of a completed prototype or a bench experiment.</p></blockquote>
-          </div>
-        </div>
-      </div>
+<blockquote><p>This note describes the portfolio's documentation approach. It is not a report of a completed prototype or a bench experiment.</p></blockquote></div></div>
+      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/buck-converter.html">Buck converter explorer ↗</a><a href="/projects.html">Project records ↗</a></div>
     </article>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="reveal" style="max-width:600px">
-          <span class="label">Next</span>
-          <h2 style="font-size:clamp(1.4rem,3.6vw,1.8rem);margin:12px 0 14px">Have a technical question?</h2>
-          <p style="color:var(--muted)">Read a project record, explore an engineering calculator, or use the contact page for an academic or technical discussion.</p>
-          <div class="hero-ctas" style="margin-top:24px">
-            <a class="btn btn-primary" href="/projects.html">Explore projects</a>
-            <a class="btn btn-ghost" href="/contact.html">Contact</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
   </main>
 
@@ -171,6 +161,6 @@
     </div>
   </footer>
 
-  <script src="/assets/site.js?v=b2d2e9c7" defer></script>
+  <script src="/assets/site.js?v=8ac920e4" defer></script>
 </body>
 </html>

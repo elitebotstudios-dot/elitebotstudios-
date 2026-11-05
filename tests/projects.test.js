@@ -60,6 +60,7 @@ data.forEach(function (p, i) {
      ['concept', 'simulation', 'design-completed', 'prototype-in-progress', 'bench-tested', 'complete'].indexOf(p.status) !== -1, p.status);
   const html = render(p);
   ok('entry ' + i + ' renders non-empty HTML', html.length > 200, html.length + ' chars');
+  if (p.case_study_url) ok('entry ' + i + ' links to its generated project record', html.indexOf(p.case_study_url) !== -1);
   ok('entry ' + i + ' shows its title', html.indexOf(p.title) !== -1);
   ok('entry ' + i + ' shows the status chip',
      html.indexOf(['bench-tested', 'complete'].indexOf(p.status) !== -1 ? 'chip-teal' : 'chip-amber') !== -1);
@@ -87,47 +88,51 @@ ok('dummy gets the teal COMPLETE chip', dhtml.indexOf('chip-teal') !== -1 && dht
 ok('dummy renders a BOM row', dhtml.indexOf('Dummy part') !== -1);
 ok('dummy renders a Source button for firmware_repo', dhtml.indexOf('https://example.com/repo') !== -1);
 
-/* ---------- interactive system diagram: selection updates accessible detail ---------- */
-const nodes = ['source', 'converter', 'controller', 'sensing'].map(function (key) {
+/* ---------- interactive system diagram: tab selection and arrow-key navigation ---------- */
+const tabNodes = ['source', 'converter', 'controller', 'feedback'].map(function (key, i) {
   return {
-    key, attrs: { 'data-system-node': key }, pressed: 'false', active: false,
-    getAttribute(k) { return this.attrs[k]; },
-    setAttribute(k, v) { if (k === 'aria-pressed') this.pressed = v; },
-    classList: { toggle(_name, value) { nodesRef[thisIndex].active = value; } }
+    key, id: ['tabSource', 'tabConverter', 'tabController', 'tabFeedback'][i],
+    attrs: { 'data-system-node': key }, pressed: 'false', active: false, tabIndex: i === 0 ? 0 : -1,
+    getAttribute(k) { return k === 'id' ? this.id : this.attrs[k]; },
+    setAttribute(k, v) { this.attrs[k] = v; }, focus() { this.focused = true; },
+    classList: { toggle(_name, value) { tabNodes[i].active = value; } }
   };
 });
-// Use simple node objects for the handler's attribute/class updates.
-const nodesRef = nodes;
-nodes.forEach(function (n, i) {
-  n.classList = { toggle(_name, value) { nodesRef[i].active = value; } };
+const panel = { attrs: {}, setAttribute(k,v) { this.attrs[k] = v; } };
+const details = {
+  systemPanel: panel,
+  systemDetailTitle: { textContent: '' },
+  systemDetailText: { textContent: '' },
+  systemDetailKicker: { textContent: '' }
+};
+const visualNodes = tabNodes.map(function (n) {
+  return { key:n.key, active:false, getAttribute(k) { return k === 'data-visual-node' ? this.key : null; }, classList:{ toggle(_k,v){ this.owner.active=v; }, owner:null } };
 });
-let systemClick;
-const flow = {
-  addEventListener(_type, fn) { systemClick = fn; },
-  querySelectorAll() { return nodes; },
+visualNodes.forEach(function(v,i){v.classList.owner=v;});
+let clickHandler, keyHandler;
+const tabsRoot = {
+  addEventListener(type, fn) { if (type==='click') clickHandler=fn; if(type==='keydown') keyHandler=fn; },
+  querySelectorAll() { return tabNodes; },
   contains() { return true; }
 };
-const detail = { textContent: '' };
-const details = {
-  systemDetailTitle: Object.assign({}, detail),
-  systemDetailText: Object.assign({}, detail),
-  systemDetailKicker: Object.assign({}, detail)
-};
+const machine = { attrs:{}, setAttribute(k,v){this.attrs[k]=v;} };
 const doc2 = {
   getElementById(id) { return details[id] || null; },
-  querySelector(selector) { return selector === '.system-flow' ? flow : null; },
-  querySelectorAll() { return []; },
+  querySelector(selector) { return selector === '.system-tabs' ? tabsRoot : (selector === '.hero-machine' ? machine : null); },
+  querySelectorAll(selector) { return selector === '[data-visual-node]' ? visualNodes : []; },
   addEventListener() {}, createElement() { return stubEl(); }
 };
-const sandbox2 = { window: {}, document: doc2, location: { pathname: '/' }, navigator: {}, console,
-  matchMedia: () => ({ matches: false }), fetch: () => Promise.reject(new Error('offline')) };
-sandbox2.window.matchMedia = sandbox2.matchMedia; sandbox2.window.document = doc2;
+const sandbox2 = { window:{}, document:doc2, location:{pathname:'/'}, navigator:{}, console,
+  matchMedia:()=>({matches:false}), fetch:()=>Promise.reject(new Error('offline')) };
+sandbox2.window.matchMedia=sandbox2.matchMedia;sandbox2.window.document=doc2;
 vm.createContext(sandbox2);
-vm.runInContext(fs.readFileSync(path.join(root, 'assets/site.js'), 'utf8'), sandbox2);
-systemClick({ target: { closest() { return nodes[2]; } } });
-ok('system diagram selects a block by click', nodes[2].pressed === 'true' && nodes[2].active);
-ok('system diagram updates the explanatory panel', details.systemDetailTitle.textContent === 'Measure, decide, and command.');
-ok('system diagram announces the selected block', details.systemDetailKicker.textContent === '03 / CONTROL');
+vm.runInContext(fs.readFileSync(path.join(root,'assets/site.js'),'utf8'),sandbox2);
+clickHandler({target:{closest(){return tabNodes[2];}}});
+ok('system diagram selects a block', tabNodes[2].attrs['aria-selected']==='true' && tabNodes[2].active);
+ok('system diagram updates accessible detail', details.systemDetailTitle.textContent==='Measure, decide, and command.');
+ok('system diagram highlights matching illustration group', visualNodes[2].active && machine.attrs['data-selected']==='controller');
+keyHandler({key:'ArrowRight',target:tabNodes[2],preventDefault(){this.prevented=true;}});
+ok('system diagram supports arrow-key navigation', tabNodes[3].attrs['aria-selected']==='true' && tabNodes[3].focused);
 
 /* XSS guard: a hostile title must not produce live markup */
 const evil = Object.assign({}, dummy, { title: '<img src=x onerror=alert(1)>' });

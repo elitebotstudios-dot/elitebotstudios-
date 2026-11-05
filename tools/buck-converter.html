@@ -3,47 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>Buck Converter Design Calculator | Elite Bot Studios</title>
-  <meta name="description" content="Duty cycle, inductor ripple current, peak current and the critical inductance for a buck converter. Shows whether your design stays in continuous conduction." />
+  <title>Interactive Buck Converter Explorer | Elite Bot Studios</title>
+  <meta name="description" content="Explore the ideal continuous-conduction buck-converter model with adjustable input, output, frequency, inductance, load, and efficiency. Includes live PWM and inductor-current plots with the model boundary shown." />
 <link rel="canonical" href="https://elitebotstudios.me/tools/buck-converter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Elite Bot Studios" />
-  <meta property="og:title" content="Buck Converter Design Calculator | Elite Bot Studios" />
-  <meta property="og:description" content="Duty cycle, inductor ripple current, peak current and the critical inductance for a buck converter. Shows whether your design stays in continuous conduction." />
+  <meta property="og:title" content="Interactive Buck Converter Explorer | Elite Bot Studios" />
+  <meta property="og:description" content="Explore the ideal continuous-conduction buck-converter model with adjustable input, output, frequency, inductance, load, and efficiency. Includes live PWM and inductor-current plots with the model boundary shown." />
 <meta property="og:url" content="https://elitebotstudios.me/tools/buck-converter.html" />
   <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Buck Converter Design Calculator | Elite Bot Studios" />
-  <meta name="twitter:description" content="Duty cycle, inductor ripple current, peak current and the critical inductance for a buck converter. Shows whether your design stays in continuous conduction." />
+  <meta name="twitter:title" content="Interactive Buck Converter Explorer | Elite Bot Studios" />
+  <meta name="twitter:description" content="Explore the ideal continuous-conduction buck-converter model with adjustable input, output, frequency, inductance, load, and efficiency. Includes live PWM and inductor-current plots with the model boundary shown." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
 
   <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
   <link rel="icon" href="/assets/favicon-16x16.png?v=7ad827f1" sizes="16x16" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
-  <link rel="manifest" href="/site.webmanifest?v=620f6022" />
-  <meta name="theme-color" content="#0A0E13" />
+  <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R1" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=89af0bc9" />
-  <script src="/assets/calc.js?v=f4fc5dfe" defer></script>
+  <link rel="stylesheet" href="/assets/site.css?v=29e06254" />
+  <script src="/assets/calc.js?v=ddc9b7fc" defer></script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ"></script>
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
   </script>
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Buck Converter",
+  "name": "Buck Converter Explorer",
   "applicationCategory": "EngineeringApplication",
   "operatingSystem": "Any browser",
   "url": "https://elitebotstudios.me/tools/buck-converter.html",
-  "description": "Duty cycle, inductor ripple current, peak current and the critical inductance for a buck converter. Shows whether your design stays in continuous conduction.",
+  "description": "Explore the ideal continuous-conduction buck-converter model with adjustable input, output, frequency, inductance, load, and efficiency. Includes live PWM and inductor-current plots with the model boundary shown.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -62,7 +77,7 @@
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="/" aria-label="Elite Bot Studios — home">
+      <a class="brand" href="/">
         <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>
         <span class="brand-word">Elite Bot Studios</span>
       </a>
@@ -99,8 +114,8 @@
     <section class="page-head">
       <div class="wrap">
         <a class="backlink" href="/tools.html">&larr; All tools</a>
-        <h1 style="font-size:clamp(1.7rem,5vw,2.4rem);margin:14px 0 14px">Buck Converter</h1>
-        <p>Duty cycle, ripple current, peak current and the inductance at which the converter drops out of continuous conduction.</p>
+        <h1 style="font-size:clamp(1.7rem,5vw,2.4rem);margin:14px 0 14px">Buck Converter Explorer</h1>
+        <p>Adjust the operating point and inspect ideal CCM duty, inductor ripple, current limits, and an efficiency-based input-power estimate.</p>
       </div>
     </section>
 
@@ -109,34 +124,41 @@
         <h2 class="sr-only">Calculator inputs and results</h2>
         <div class="calc-grid">
           <form class="calc-panel" data-calc="buck" novalidate>
+          <p class="range-help">Scrub a control for a quick study, or type an exact value.</p>
           <div class="calc-row">
             <div class="calc-field">
               <label for="vin">Input voltage <span class="unit">V</span></label>
-              <input id="vin" name="vin" type="number" value="12" min="0.1" step="0.1" inputmode="decimal">
+              <input id="vin" name="vin" type="number" value="12" min="4" max="48" step="0.1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>INPUT</span><output id="vinRangeValue">12 V</output></div><input type="range" min="4" max="48" step="0.1" value="12" data-sync-range="vin" data-range-display="vinRangeValue" data-unit="V" aria-label="Adjust input voltage"></div>
             </div>
             <div class="calc-field">
               <label for="vout">Output voltage <span class="unit">V</span></label>
-              <input id="vout" name="vout" type="number" value="5" min="0.1" step="0.1" inputmode="decimal">
+              <input id="vout" name="vout" type="number" value="5" min="0.5" max="36" step="0.1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>OUTPUT</span><output id="voutRangeValue">5 V</output></div><input type="range" min="0.5" max="36" step="0.1" value="5" data-sync-range="vout" data-range-display="voutRangeValue" data-unit="V" aria-label="Adjust output voltage"></div>
             </div>
           </div>
           <div class="calc-row">
             <div class="calc-field">
               <label for="freq">Switching frequency <span class="unit">kHz</span></label>
-              <input id="freq" name="freq" type="number" value="500" min="1" step="10" inputmode="decimal">
+              <input id="freq" name="freq" type="number" value="500" min="50" max="1000" step="10" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>FREQUENCY</span><output id="freqRangeValue">500 kHz</output></div><input type="range" min="50" max="1000" step="10" value="500" data-sync-range="freq" data-range-display="freqRangeValue" data-unit="kHz" aria-label="Adjust switching frequency"></div>
             </div>
             <div class="calc-field">
               <label for="inductance">Inductance <span class="unit">µH</span></label>
-              <input id="inductance" name="inductance" type="number" value="22" min="0.1" step="1" inputmode="decimal">
+              <input id="inductance" name="inductance" type="number" value="22" min="2.2" max="100" step="0.1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>INDUCTANCE</span><output id="inductanceRangeValue">22 µH</output></div><input type="range" min="2.2" max="100" step="0.1" value="22" data-sync-range="inductance" data-range-display="inductanceRangeValue" data-unit="µH" aria-label="Adjust inductance"></div>
             </div>
           </div>
           <div class="calc-row">
             <div class="calc-field">
               <label for="iout">Load current <span class="unit">A</span></label>
-              <input id="iout" name="iout" type="number" value="2" min="0.01" step="0.1" inputmode="decimal">
+              <input id="iout" name="iout" type="number" value="2" min="0.1" max="10" step="0.05" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>LOAD</span><output id="ioutRangeValue">2 A</output></div><input type="range" min="0.1" max="10" step="0.05" value="2" data-sync-range="iout" data-range-display="ioutRangeValue" data-unit="A" aria-label="Adjust load current"></div>
             </div>
             <div class="calc-field">
-              <label for="eff">Assumed efficiency <span class="unit">%</span></label>
+              <label for="eff">Efficiency estimate <span class="unit">%</span></label>
               <input id="eff" name="eff" type="number" value="90" min="50" max="100" step="1" inputmode="decimal">
+              <small class="range-help">Used for estimated input power only; it does not modify ideal duty.</small>
             </div>
           </div>
             <div class="calc-actions">
@@ -145,51 +167,82 @@
           </form>
 
           <div>
-            <div class="calc-output" id="calcOut" aria-live="polite">
+            <div class="calc-output" id="calcOut">
               <span class="label">Result</span>
-            <div class="calc-readout-group">
+            <dl class="calc-readout-group">
             <div class="calc-readout primary">
-              <dt>Duty cycle</dt>
-              <dd data-key="duty" data-label="Duty cycle">—</dd>
+              <dt>Ideal CCM duty ratio</dt>
+              <dd data-key="duty" data-label="Ideal CCM duty ratio" aria-live="polite">—</dd>
             </div>
             <div class="calc-readout">
-              <dt>Inductor ripple ΔIL</dt>
-              <dd data-key="ripple" data-label="Inductor ripple ΔIL">—</dd>
+              <dt>Inductor ripple · CCM estimate</dt>
+              <dd data-key="ripple" data-label="Inductor ripple · CCM estimate">—</dd>
             </div>
             <div class="calc-readout">
-              <dt>Peak inductor current</dt>
-              <dd data-key="peak" data-label="Peak inductor current">—</dd>
+              <dt>Peak current · CCM estimate</dt>
+              <dd data-key="peak" data-label="Peak current · CCM estimate">—</dd>
             </div>
             <div class="calc-readout">
-              <dt>Ripple vs load</dt>
-              <dd data-key="ripplepct" data-label="Ripple vs load">—</dd>
+              <dt>Valley current · CCM estimate</dt>
+              <dd data-key="valley" data-label="Valley current · CCM estimate">—</dd>
             </div>
             <div class="calc-readout">
-              <dt>Critical inductance</dt>
-              <dd data-key="lcrit" data-label="Critical inductance">—</dd>
+              <dt>Ripple ratio · CCM estimate</dt>
+              <dd data-key="ripplepct" data-label="Ripple ratio · CCM estimate">—</dd>
             </div>
             <div class="calc-readout">
-              <dt>Switch on-time</dt>
-              <dd data-key="ontime" data-label="Switch on-time">—</dd>
+              <dt>CCM boundary inductance</dt>
+              <dd data-key="lcrit" data-label="CCM boundary inductance">—</dd>
             </div>
             <div class="calc-readout">
-              <dt>Conduction mode</dt>
-              <dd data-key="mode" data-label="Conduction mode">—</dd>
+              <dt>Ideal switch on-time</dt>
+              <dd data-key="ontime" data-label="Ideal switch on-time">—</dd>
             </div>
+            <div class="calc-readout">
+              <dt>Operating-region check</dt>
+              <dd data-key="mode" data-label="Operating-region check">—</dd>
             </div>
-              <div class="calc-note" id="calcNote" data-key="note"></div>
+            <div class="calc-readout">
+              <dt>Estimated input power</dt>
+              <dd data-key="pin" data-label="Estimated input power">—</dd>
+            </div>
+            <div class="calc-readout">
+              <dt>Estimated input current</dt>
+              <dd data-key="iin" data-label="Estimated input current">—</dd>
+            </div>
+            <div class="calc-readout">
+              <dt>Estimated conversion loss</dt>
+              <dd data-key="loss" data-label="Estimated conversion loss">—</dd>
+            </div>
+            </dl>
+              <div class="calc-note" id="calcNote" data-key="note" role="status" aria-live="polite"></div>
               <div class="calc-actions">
                 <button class="btn btn-ghost" type="button" id="calcCopy">Copy results</button>
               </div>
             </div>
-            <div class="calc-formula">D = V<sub>out</sub> / (V<sub>in</sub> · η)   ·   ΔI<sub>L</sub> = V<sub>out</sub>(1 − D) / (L · f<sub>sw</sub>)   ·   I<sub>peak</sub> = I<sub>out</sub> + ΔI<sub>L</sub>/2   ·   L<sub>crit</sub> = V<sub>out</sub>(1 − D) / (2 · f<sub>sw</sub> · I<sub>out</sub>)</div>
+
+            <figure class="buck-explorer" id="buckExplorer" aria-labelledby="buckPlotTitle">
+              <div class="buck-explorer-head"><span id="buckPlotTitle">Switch timing &amp; inductor current</span><span>IDEAL CCM MODEL</span></div>
+              <svg class="buck-plot" viewBox="0 0 660 300" role="img" aria-labelledby="buckSvgTitle buckSvgDesc">
+                <title id="buckSvgTitle">Live buck converter timing and inductor-current model</title>
+                <desc id="buckSvgDesc">The upper plot shows an idealized switch-node PWM pulse. The lower plot shows triangular inductor current only while the continuous-conduction model is applicable.</desc>
+                <path class="buck-plot-grid" d="M58 38H610M58 66H610M58 94H610M58 145H610M58 180H610M58 215H610M58 250H610M58 30V255M196 30V255M334 30V255M472 30V255M610 30V255"/>
+                <path class="buck-plot-axis" d="M58 30V255H610"/>
+                <path class="buck-gate-trace" id="buckGateTrace" d="M58 94V48H284V94H610"/>
+                <path class="buck-current-trace" id="buckCurrentTrace" d="M58 178L284 166L610 178"/>
+                <path class="buck-dash" d="M284 32V250"/>
+                <text x="60" y="24">SWITCH NODE / IDEAL PWM</text><text x="60" y="138">INDUCTOR CURRENT iL</text><text x="293" y="48">D·T</text><text id="buckPeriodLabel" x="420" y="282">T = 2.00 µs · ton = 0.83 µs</text><text x="615" y="265">t</text>
+              </svg>
+              <figcaption class="buck-boundary" id="buckPlotBoundary" aria-live="polite">Ideal continuous-conduction estimate; the triangular ripple is centered on the selected load current.</figcaption>
+            </figure>
+            <div class="calc-formula">Ideal CCM: D ≈ V<sub>out</sub>/V<sub>in</sub> · ΔI<sub>L</sub> = V<sub>out</sub>(1−D)/(L f<sub>sw</sub>) · L<sub>crit</sub> = V<sub>out</sub>(1−D)/(2 f<sub>sw</sub> I<sub>out</sub>)<br>Power estimate: P<sub>in</sub> ≈ V<sub>out</sub>I<sub>out</sub>/η · P<sub>loss</sub> ≈ P<sub>in</sub>−P<sub>out</sub>. Efficiency is not a universal correction to duty.</div>
           </div>
         </div>
 
         <div class="notice reveal" style="margin-top:34px;max-width:860px">
           <div>
             <b>Read this before you commit a design</b>
-            <p>Ideal switch model with a single efficiency term. It does not model diode or synchronous-rectifier losses, capacitor ESR, or the control loop. Peak current is what sizes the inductor's saturation rating — leave headroom above it. Verify stability and transient response on the bench.</p>
+            <p>This is a steady-state ideal CCM model. Duty uses D ≈ Vout/Vin; a real converter needs more duty to account for its actual switch, diode, winding, and control losses, but efficiency alone does not specify that correction. Ripple, peak, valley, and critical inductance are CCM estimates. If the CCM boundary is not met, this tool flags the region instead of pretending to solve a DCM controller. It does not model switch transitions, parasitics, capacitor ripple, loop compensation, thermal behavior, or startup. Use the controller datasheet and verify a real design.</p>
           </div>
         </div>
 
@@ -235,6 +288,6 @@
     </div>
   </footer>
 
-  <script src="/assets/site.js?v=b2d2e9c7" defer></script>
+  <script src="/assets/site.js?v=8ac920e4" defer></script>
 </body>
 </html>

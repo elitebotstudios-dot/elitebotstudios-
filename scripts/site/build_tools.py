@@ -53,51 +53,60 @@ TOOLS = [
                  ('area', 'Cross-section', False), ('resistance', 'Resistance', False),
                  ('drop', 'Voltage drop', False), ('power', 'Power lost as heat', False)],
         formula='I = k · ΔT<sup>0.44</sup> · A<sup>0.725</sup>   →   A = ( I / (k · ΔT<sup>0.44</sup>) )<sup>1/0.725</sup>   →   w = A / (oz × 1.378 mil)<br>k = <b>0.048</b> external · <b>0.024</b> internal · A in mil² · R = ρ·L/A with ρ<sub>Cu</sub> = 1.724 × 10⁻⁸ Ω·m at 20 °C, +0.00393/°C',
-        caveat='IPC-2221 is an empirical model from measured boards, not a field solver. It ignores copper planes, thermal reliefs, adjacent traces and airflow. For anything carrying real power, treat the result as a floor: add margin, run a thermal test on the actual board, and check your fabricator\'s minimum trace and space.',
+        caveat='IPC-2221 is an empirical model, not a field solver. The resistance estimate assumes 20 °C ambient and adds your entered rise; it does not model copper planes, thermal reliefs, adjacent traces, or airflow. For anything carrying real power, treat the result as a floor: add margin, run a thermal test on the actual board, and check your fabricator\'s minimum trace and space.',
     ),
     dict(
-        slug='buck-converter', name='Buck Converter',
-        title='Buck Converter Design Calculator | Elite Bot Studios',
-        desc='Duty cycle, inductor ripple current, peak current and the critical inductance for a buck converter. Shows whether your design stays in continuous conduction.',
-        blurb='Duty cycle, ripple current, peak current and the inductance at which the converter drops out of continuous conduction.',
-        tags=['power', 'DC-DC', 'inductor'],
+        slug='buck-converter', name='Buck Converter Explorer',
+        title='Interactive Buck Converter Explorer | Elite Bot Studios',
+        desc='Explore the ideal continuous-conduction buck-converter model with adjustable input, output, frequency, inductance, load, and efficiency. Includes live PWM and inductor-current plots with the model boundary shown.',
+        blurb='Adjust the operating point and inspect ideal CCM duty, inductor ripple, current limits, and an efficiency-based input-power estimate.',
+        tags=['power conversion', 'interactive model', 'waveforms'],
         calc='buck',
-        form='''          <div class="calc-row">
+        form='''          <p class="range-help">Scrub a control for a quick study, or type an exact value.</p>
+          <div class="calc-row">
             <div class="calc-field">
               <label for="vin">Input voltage <span class="unit">V</span></label>
-              <input id="vin" name="vin" type="number" value="12" min="0.1" step="0.1" inputmode="decimal">
+              <input id="vin" name="vin" type="number" value="12" min="4" max="48" step="0.1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>INPUT</span><output id="vinRangeValue">12 V</output></div><input type="range" min="4" max="48" step="0.1" value="12" data-sync-range="vin" data-range-display="vinRangeValue" data-unit="V" aria-label="Adjust input voltage"></div>
             </div>
             <div class="calc-field">
               <label for="vout">Output voltage <span class="unit">V</span></label>
-              <input id="vout" name="vout" type="number" value="5" min="0.1" step="0.1" inputmode="decimal">
+              <input id="vout" name="vout" type="number" value="5" min="0.5" max="36" step="0.1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>OUTPUT</span><output id="voutRangeValue">5 V</output></div><input type="range" min="0.5" max="36" step="0.1" value="5" data-sync-range="vout" data-range-display="voutRangeValue" data-unit="V" aria-label="Adjust output voltage"></div>
             </div>
           </div>
           <div class="calc-row">
             <div class="calc-field">
               <label for="freq">Switching frequency <span class="unit">kHz</span></label>
-              <input id="freq" name="freq" type="number" value="500" min="1" step="10" inputmode="decimal">
+              <input id="freq" name="freq" type="number" value="500" min="50" max="1000" step="10" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>FREQUENCY</span><output id="freqRangeValue">500 kHz</output></div><input type="range" min="50" max="1000" step="10" value="500" data-sync-range="freq" data-range-display="freqRangeValue" data-unit="kHz" aria-label="Adjust switching frequency"></div>
             </div>
             <div class="calc-field">
               <label for="inductance">Inductance <span class="unit">µH</span></label>
-              <input id="inductance" name="inductance" type="number" value="22" min="0.1" step="1" inputmode="decimal">
+              <input id="inductance" name="inductance" type="number" value="22" min="2.2" max="100" step="0.1" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>INDUCTANCE</span><output id="inductanceRangeValue">22 µH</output></div><input type="range" min="2.2" max="100" step="0.1" value="22" data-sync-range="inductance" data-range-display="inductanceRangeValue" data-unit="µH" aria-label="Adjust inductance"></div>
             </div>
           </div>
           <div class="calc-row">
             <div class="calc-field">
               <label for="iout">Load current <span class="unit">A</span></label>
-              <input id="iout" name="iout" type="number" value="2" min="0.01" step="0.1" inputmode="decimal">
+              <input id="iout" name="iout" type="number" value="2" min="0.1" max="10" step="0.05" inputmode="decimal">
+              <div class="range-row"><div class="range-top"><span>LOAD</span><output id="ioutRangeValue">2 A</output></div><input type="range" min="0.1" max="10" step="0.05" value="2" data-sync-range="iout" data-range-display="ioutRangeValue" data-unit="A" aria-label="Adjust load current"></div>
             </div>
             <div class="calc-field">
-              <label for="eff">Assumed efficiency <span class="unit">%</span></label>
+              <label for="eff">Efficiency estimate <span class="unit">%</span></label>
               <input id="eff" name="eff" type="number" value="90" min="50" max="100" step="1" inputmode="decimal">
+              <small class="range-help">Used for estimated input power only; it does not modify ideal duty.</small>
             </div>
           </div>''',
-        outputs=[('duty', 'Duty cycle', True), ('ripple', 'Inductor ripple ΔIL', False),
-                 ('peak', 'Peak inductor current', False), ('ripplepct', 'Ripple vs load', False),
-                 ('lcrit', 'Critical inductance', False), ('ontime', 'Switch on-time', False),
-                 ('mode', 'Conduction mode', False)],
-        formula='D = V<sub>out</sub> / (V<sub>in</sub> · η)   ·   ΔI<sub>L</sub> = V<sub>out</sub>(1 − D) / (L · f<sub>sw</sub>)   ·   I<sub>peak</sub> = I<sub>out</sub> + ΔI<sub>L</sub>/2   ·   L<sub>crit</sub> = V<sub>out</sub>(1 − D) / (2 · f<sub>sw</sub> · I<sub>out</sub>)',
-        caveat='Ideal switch model with a single efficiency term. It does not model diode or synchronous-rectifier losses, capacitor ESR, or the control loop. Peak current is what sizes the inductor\'s saturation rating — leave headroom above it. Verify stability and transient response on the bench.',
+        outputs=[('duty', 'Ideal CCM duty ratio', True), ('ripple', 'Inductor ripple · CCM estimate', False),
+                 ('peak', 'Peak current · CCM estimate', False), ('valley', 'Valley current · CCM estimate', False),
+                 ('ripplepct', 'Ripple ratio · CCM estimate', False), ('lcrit', 'CCM boundary inductance', False),
+                 ('ontime', 'Ideal switch on-time', False), ('mode', 'Operating-region check', False),
+                 ('pin', 'Estimated input power', False), ('iin', 'Estimated input current', False),
+                 ('loss', 'Estimated conversion loss', False)],
+        formula='Ideal CCM: D ≈ V<sub>out</sub>/V<sub>in</sub> · ΔI<sub>L</sub> = V<sub>out</sub>(1−D)/(L f<sub>sw</sub>) · L<sub>crit</sub> = V<sub>out</sub>(1−D)/(2 f<sub>sw</sub> I<sub>out</sub>)<br>Power estimate: P<sub>in</sub> ≈ V<sub>out</sub>I<sub>out</sub>/η · P<sub>loss</sub> ≈ P<sub>in</sub>−P<sub>out</sub>. Efficiency is not a universal correction to duty.',
+        caveat='This is a steady-state ideal CCM model. Duty uses D ≈ Vout/Vin; a real converter needs more duty to account for its actual switch, diode, winding, and control losses, but efficiency alone does not specify that correction. Ripple, peak, valley, and critical inductance are CCM estimates. If the CCM boundary is not met, this tool flags the region instead of pretending to solve a DCM controller. It does not model switch transitions, parasitics, capacitor ripple, loop compensation, thermal behavior, or startup. Use the controller datasheet and verify a real design.',
     ),
     dict(
         slug='linear-regulator', name='Linear Regulator Thermal',
@@ -223,9 +232,26 @@ TOOLS = [
 def calc_page(t):
     rows = []
     for key, label, primary in t['outputs']:
-        rows.append('<div class="calc-readout%s">\n              <dt>%s</dt>\n              <dd data-key="%s" data-label="%s">—</dd>\n            </div>'
-                    % (' primary' if primary else '', label, key, label))
+        rows.append('<div class="calc-readout%s">\n              <dt>%s</dt>\n              <dd data-key="%s" data-label="%s"%s>—</dd>\n            </div>'
+                    % (' primary' if primary else '', label, key, label, ' aria-live="polite"' if primary else ''))
     rows = '\n            '.join(rows)
+    visualization=''
+    if t['calc']=='buck':
+        visualization='''
+            <figure class="buck-explorer" id="buckExplorer" aria-labelledby="buckPlotTitle">
+              <div class="buck-explorer-head"><span id="buckPlotTitle">Switch timing &amp; inductor current</span><span>IDEAL CCM MODEL</span></div>
+              <svg class="buck-plot" viewBox="0 0 660 300" role="img" aria-labelledby="buckSvgTitle buckSvgDesc">
+                <title id="buckSvgTitle">Live buck converter timing and inductor-current model</title>
+                <desc id="buckSvgDesc">The upper plot shows an idealized switch-node PWM pulse. The lower plot shows triangular inductor current only while the continuous-conduction model is applicable.</desc>
+                <path class="buck-plot-grid" d="M58 38H610M58 66H610M58 94H610M58 145H610M58 180H610M58 215H610M58 250H610M58 30V255M196 30V255M334 30V255M472 30V255M610 30V255"/>
+                <path class="buck-plot-axis" d="M58 30V255H610"/>
+                <path class="buck-gate-trace" id="buckGateTrace" d="M58 94V48H284V94H610"/>
+                <path class="buck-current-trace" id="buckCurrentTrace" d="M58 178L284 166L610 178"/>
+                <path class="buck-dash" d="M284 32V250"/>
+                <text x="60" y="24">SWITCH NODE / IDEAL PWM</text><text x="60" y="138">INDUCTOR CURRENT iL</text><text x="293" y="48">D·T</text><text id="buckPeriodLabel" x="420" y="282">T = 2.00 µs · ton = 0.83 µs</text><text x="615" y="265">t</text>
+              </svg>
+              <figcaption class="buck-boundary" id="buckPlotBoundary" aria-live="polite">Ideal continuous-conduction estimate; the triangular ripple is centered on the selected load current.</figcaption>
+            </figure>'''
 
     body = '''
     <section class="page-head">
@@ -248,16 +274,17 @@ def calc_page(t):
           </form>
 
           <div>
-            <div class="calc-output" id="calcOut" aria-live="polite">
+            <div class="calc-output" id="calcOut">
               <span class="label">Result</span>
-            <div class="calc-readout-group">
+            <dl class="calc-readout-group">
             %(rows)s
-            </div>
-              <div class="calc-note" id="calcNote" data-key="note"></div>
+            </dl>
+              <div class="calc-note" id="calcNote" data-key="note" role="status" aria-live="polite"></div>
               <div class="calc-actions">
                 <button class="btn btn-ghost" type="button" id="calcCopy">Copy results</button>
               </div>
             </div>
+            %(visualization)s
             <div class="calc-formula">%(formula)s</div>
           </div>
         </div>
@@ -275,7 +302,7 @@ def calc_page(t):
       </div>
     </section>
 ''' % dict(name=t['name'], blurb=t['blurb'], calc=t['calc'], form=t['form'],
-           rows=rows, formula=t['formula'], caveat=t['caveat'])
+           rows=rows, formula=t['formula'], caveat=t['caveat'], visualization=visualization)
 
     ld = json.dumps({
         "@context": "https://schema.org",
@@ -295,61 +322,29 @@ def calc_page(t):
 
 
 def hub():
-    cards = []
-    for t in TOOLS:
-        tags = ''.join('<span class="chip">%s</span>' % x for x in t['tags'])
-        cards.append('''          <a class="tool-card reveal" href="/tools/%s.html">
-            <h3>%s</h3>
-            <p>%s</p>
-            <div class="chips">%s</div>
-            <span class="tool-go">Open tool &rarr;</span>
-          </a>''' % (t['slug'], t['name'], t['blurb'], tags))
+    art={
+      'trace-width':'<path d="M18 53h42l15-13 19 26 16-32 14 19h48"/><path d="M22 25h126M22 81h126"/><circle cx="60" cy="53" r="4"/><circle cx="148" cy="53" r="4"/>',
+      'buck-converter':'<path d="M16 62V31h42v31h83"/><path d="M16 88 58 73l42 15 42-15"/><path d="M58 20v78"/>',
+      'linear-regulator':'<path d="M22 78V28h110v50z"/><path d="m50 68 18-32 20 32"/><path d="M138 35v37"/><circle cx="138" cy="28" r="4"/>',
+      'voltage-divider':'<path d="M78 18v18m0 42v18M54 36h48v14H54zm0 22h48v14H54z"/><path d="M30 50h24m48 0h36M30 64h24m48 0h36"/>',
+      'led-resistor':'<path d="M20 57h35m33 0h49"/><path d="M55 42v30h33V42z"/><path d="m102 44 24 13-24 13z"/><path d="m105 34 8-8m-1 17 9-9"/>',
+      'rc-time-constant':'<path d="M18 24v66m0-33h28m0-20v40m14-40v40m0-20h72"/><path d="M82 38c13 0 16 6 20 15s10 15 30 15"/>'
+    }
+    cards=[]
+    for i,t in enumerate(TOOLS):
+        tags=''.join('<span class="chip">%s</span>'%x for x in t['tags'])
+        cards.append('''<a class="tool-card reveal" href="/tools/%s.html"><div class="tool-card-top"><span>MODEL / %02d</span><svg viewBox="0 0 180 110" aria-hidden="true">%s</svg></div><h3>%s</h3><p>%s</p><div class="chips">%s</div><span class="tool-go">OPEN TOOL <b>↗</b></span></a>'''%(t['slug'],i+1,art.get(t['slug'],''),t['name'],t['blurb'],tags))
+    body='''
+    <section class="page-head tools-head"><div class="wrap"><span class="eyebrow">Engineering tools / browser-based</span><h1>Make the first estimate<br><em>inspectable.</em></h1><p>Six small models for checking units, exploring sensitivities, and understanding assumptions. They are learning and early-design aids—not design approval.</p></div></section>
+    <section class="section tools-feature-section"><div class="wrap"><article class="tools-featured"><div class="tools-feature-copy"><span class="section-index">FEATURED / POWER CONVERSION</span><h2>Move the operating point.<br><em>See what changes.</em></h2><p>An interactive ideal CCM buck model with adjustable inputs, live inductor-current and PWM plots, and an explicit operating-region boundary.</p><div class="feature-chips"><span>IDEAL CCM</span><span>LIVE MODEL</span><span>EFFICIENCY ≠ DUTY CORRECTION</span></div><a class="btn btn-primary" href="/tools/buck-converter.html">Explore the buck converter ↗</a></div><div class="tools-feature-graphic" aria-hidden="true"><svg viewBox="0 0 540 260"><path d="M26 35h488M26 82h488M26 129h488M26 176h488M26 223h488M60 20v218m95-218v218m95-218v218m95-218v218m95-218v218m95-218v218" class="feature-gridline"/><path d="M26 113V59h184v54h304" class="feature-wave-gold"/><path d="M26 198 210 167 394 198 578 167" class="feature-wave-cyan"/><path d="M210 28v208" class="feature-wave-mark"/><text x="32" y="52">PWM</text><text x="32" y="158">iL</text><text x="218" y="50">D · T</text></svg></div></article></div></section>
+    <section class="section tools-library"><div class="wrap"><div class="section-heading split-heading"><div><span class="section-index">MODEL LIBRARY / 06</span><h2>Useful equations.<br><em>Clear boundaries.</em></h2></div><p>Each calculator explains the model it applies, shows a worked output, and points out where real components, board layout, and operating conditions can change the answer.</p></div><div class="tool-library-grid">%s</div></div></section>
+    <section class="section tool-principles"><div class="wrap"><div class="tool-principles-grid"><div><span class="section-index">HOW TO USE THESE</span><h2>A starting point,<br>not a sign-off.</h2></div><div><p>Inputs are calculated in your browser and are not sent to a calculation API. Use the result to inspect a relationship or frame a first estimate; then check component datasheets, tolerances, thermal paths, layout, and the relevant design standard.</p><a class="text-link" href="/lab/buck-converter-ccm-model.html">Read the CCM model note <b>↗</b></a></div></div></div></section>
+'''.replace('%s','TOOLS_CARDS')
+    body=body.replace('TOOLS_CARDS','\n'.join(cards))
+    ld=json.dumps({'@context':'https://schema.org','@type':'CollectionPage','name':'Engineering Calculators & Explorers','url':'https://elitebotstudios.me/tools.html','description':'Client-side engineering calculators and interactive models for PCB trace width, buck conversion, regulator thermal estimates, voltage dividers, LED resistors, and RC time constants.','isPartOf':{'@type':'WebSite','url':'https://elitebotstudios.me'}},indent=2)
+    page('Engineering Tools &amp; Calculators | Elite Bot Studios','Six browser-based engineering models, including an interactive buck converter explorer. Inspect calculations and assumptions for power conversion, PCB traces, circuits, and RC timing.','/tools.html',body,jsonld=ld)
 
-    body = '''
-    <section class="page-head">
-      <div class="wrap">
-        <span class="eyebrow">Tools</span>
-        <h1>Small tools for early estimates.</h1>
-        <p>Six browser-based calculators for common early estimates: copper width, regulator dissipation, converter ripple, resistor selection, and first-order RC behaviour. Inputs are processed in your browser; they are not sent to a calculation API.</p>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="wrap">
-        <h2 class="sr-only">Available calculators</h2>
-        <div class="grid grid-2">
-%s
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="prose reveal" style="max-width:760px">
-          <h2>Why these are free</h2>
-          <p>These lightweight educational calculators make common engineering equations easier to inspect and test. Inputs stay in the browser and are not sent to a calculation API. No account or email gate is required.</p>
-          <h2>What they are not</h2>
-          <p>Every one of these is a closed-form estimate. None of them replaces a field solver, a thermal
-             test on a real board, or the datasheet of the part you actually bought. Each page says exactly
-             where its model breaks down — read that note before you commit a design.</p>
-        </div>
-      </div>
-    </section>
-''' % '\n'.join(cards)
-
-    ld = json.dumps({
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "Engineering Calculators",
-        "url": "https://elitebotstudios.me/tools.html",
-        "description": "Free engineering calculators for PCB trace width, buck converters, linear regulator thermals, voltage dividers, LED resistors and RC time constants.",
-        "isPartOf": {"@type": "WebSite", "url": "https://elitebotstudios.me"}
-    }, indent=2)
-
-    page('Engineering Calculators — PCB, Power, Analog | Elite Bot Studios',
-         'Free client-side engineering calculators: IPC-2221 trace width, buck converter design, '
-         'linear regulator thermals, voltage dividers, LED resistors and RC time constants.',
-         '/tools.html', body, jsonld=ld)
 
 
 if __name__ == '__main__':

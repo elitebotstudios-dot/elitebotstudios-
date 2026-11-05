@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>PWM: duty cycle, frequency, and timer resolution | Elite Bot Studios</title>
+  <meta name="description" content="A practical explanation of pulse-width modulation, timer periods, duty ratio, and the resolution trade-off." />
+<link rel="canonical" href="https://elitebotstudios.me/lab/pwm-duty-frequency-resolution.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="PWM: duty cycle, frequency, and timer resolution | Elite Bot Studios" />
+  <meta property="og:description" content="A practical explanation of pulse-width modulation, timer periods, duty ratio, and the resolution trade-off." />
+<meta property="og:url" content="https://elitebotstudios.me/lab/pwm-duty-frequency-resolution.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PWM: duty cycle, frequency, and timer resolution | Elite Bot Studios" />
+  <meta name="twitter:description" content="A practical explanation of pulse-width modulation, timer periods, duty ratio, and the resolution trade-off." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+
+  <link rel="icon" href="/assets/favicon-32x32.png?v=cb29a776" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=7ad827f1" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=cfc40558" />
+  <link rel="manifest" href="/site.webmanifest?v=3b5f9f7b" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.05-R1" />
+
+  <link rel="stylesheet" href="/assets/site.css?v=29e06254" />
+
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "PWM: duty cycle, frequency, and timer resolution",
+  "datePublished": "2026-11-05",
+  "author": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "mainEntityOfPage": "https://elitebotstudios.me/lab/pwm-duty-frequency-resolution.html"
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 11.5 50 22v20L32 52.5 14 42V22z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round"/><text x="32" y="39" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="19" font-weight="700" fill="#D4AF37">EB</text></svg>
+        <span class="brand-word">Elite Bot Studios</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/projects.html">Projects</a>
+        <a href="/expertise.html">Expertise</a>
+        <a href="/lab.html" aria-current="page">Engineering Lab</a>
+        <a href="/about.html">About</a>
+        <a href="/tools.html">Tools</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-amber" href="/contact.html">Contact</a>
+        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" data-open="false">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html" aria-current="page">Engineering Lab</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/tools.html">Tools</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <article class="technical-article">
+      <div class="article-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="readingProgress"></span></div>
+      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / 2026-11-05</p><h1>PWM: duty cycle, frequency, and timer resolution</h1><div class="article-meta"><time datetime="2026-11-05">2026-11-05</time><span>2 min read</span><span>Educational note</span></div><div class="chips"><span class="chip">microcontrollers</span><span class="chip">PWM</span><span class="chip">embedded systems</span></div></div></header>
+      <div class="article-layout wrap"><details class="article-toc"><summary>On this page</summary><ol><li><a href="#what-a-pwm-signal-controls">What a PWM signal controls</a></li><li><a href="#timer-counts-set-the-available-resolution">Timer counts set the available resolution</a></li><li><a href="#small-timer-example">Small timer example</a></li><li><a href="#when-pwm-becomes-a-power-control-signal">When PWM becomes a power-control signal</a></li><li><a href="#references">References</a></li></ol></details><div class="prose article-prose"><h2 id="what-a-pwm-signal-controls">What a PWM signal controls</h2>
+<p>Pulse-width modulation (PWM) represents a control command with a repeating digital waveform. The <strong>period</strong> <code>T</code> is the time for one cycle, the <strong>frequency</strong> <code>f</code> is its reciprocal, and the <strong>duty ratio</strong> <code>D</code> is the fraction of a cycle spent in the active state.</p>
+<div class="equation-block"><code>f = 1/T,     D = ton/T</code></div>
+<p>For an ideal pulse that switches between zero and <code>VH</code>, the time-average at the switching node is <code>D·VH</code>. That does <strong>not</strong> mean every load receives a smooth DC voltage: the load, filter, driver, and switching network determine the actual current and voltage.</p>
+<h2 id="timer-counts-set-the-available-resolution">Timer counts set the available resolution</h2>
+<p>A common timer implementation counts through <code>N</code> time steps per period and changes the output when the compare count is reached. A useful approximation is:</p>
+<div class="equation-block"><code>tstep = T/N,     ΔD ≈ 1/N</code></div>
+<p>The timer clock, prescaler, period register, alignment mode, and hardware buffering determine the exact mapping. More counts per cycle improve duty granularity, but at a fixed timer clock they require a longer period and therefore lower PWM frequency. Microcontroller peripherals differ; use the selected part's reference manual for the precise register equation.</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Change</th><th scope="col">Benefit</th><th scope="col">Trade-off</th></tr></thead><tbody>
+<tr><td>Increase PWM frequency</td><td>Faster control updates; smaller passive components may be possible</td><td>Fewer timer counts at a fixed timer clock; higher switching loss in a power stage</td></tr>
+<tr><td>Increase period counts</td><td>Finer duty adjustment</td><td>Lower maximum PWM frequency unless the timer clock increases</td></tr>
+<tr><td>Use buffered compare updates</td><td>Avoids malformed mid-cycle pulses</td><td>Update timing and synchronization are peripheral-specific</td></tr>
+</tbody></table></div>
+<h2 id="small-timer-example">Small timer example</h2>
+<p>The following is pseudocode for an up-counter timer whose period register is <code>periodCounts</code>. It is not tied to a particular MCU's register layout.</p>
+<pre><code class="language-c">#<span class="tok-ident">include</span> &lt;<span class="tok-ident">stdint</span>.<span class="tok-ident">h</span>&gt;
+#<span class="tok-ident">include</span> &lt;<span class="tok-ident">math</span>.<span class="tok-ident">h</span>&gt;
+
+<span class="tok-keyword">uint32_t</span> <span class="tok-ident">pwm_compare_from_duty</span>(<span class="tok-keyword">float</span> <span class="tok-ident">duty</span>, <span class="tok-keyword">uint32_t</span> <span class="tok-ident">periodCounts</span>)
+{
+    <span class="tok-keyword">if</span> (<span class="tok-ident">duty</span> &lt; <span class="tok-number">0</span>.0f) <span class="tok-ident">duty</span> = <span class="tok-number">0</span>.0f;
+    <span class="tok-keyword">if</span> (<span class="tok-ident">duty</span> &gt; <span class="tok-number">1</span>.0f) <span class="tok-ident">duty</span> = <span class="tok-number">1</span>.0f;
+    <span class="tok-keyword">return</span> (<span class="tok-keyword">uint32_t</span>)<span class="tok-ident">lroundf</span>(<span class="tok-ident">duty</span> * (<span class="tok-keyword">float</span>)<span class="tok-ident">periodCounts</span>);
+}</code></pre>
+<p>A power switch must not be driven directly from a microcontroller pin unless the device and switching conditions explicitly permit it. Gate charge, voltage rating, switching transitions, common-mode behavior, isolation, dead time, and fault shutdown can require a dedicated driver and additional design review.</p>
+<h2 id="when-pwm-becomes-a-power-control-signal">When PWM becomes a power-control signal</h2>
+<p>A PWM pin is only a command. In a converter or motor drive, switching devices, the magnetics, current paths, output filter, controller, and protection all shape the result. A duty update also does not guarantee a proportional output change: the operating mode, input range, control-loop dynamics, saturation, and load matter.</p>
+<p>Use a waveform or scope capture only with its actual source and conditions identified. This note is an educational explanation, not a record of a measured PWM experiment.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ApplicationNotes/ApplicationNotes/00539c.pdf" rel="noopener noreferrer">Microchip AN539C: Frequency and Resolution Options for PWM Outputs</a></li>
+<li><a href="https://ww1.microchip.com/downloads/en/DeviceDoc/70000323h.pdf" rel="noopener noreferrer">Microchip dsPIC33/PIC24 high-speed PWM module reference</a></li>
+</ul></div></div>
+      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/buck-converter.html">Buck converter explorer ↗</a><a href="/projects.html">Project records ↗</a></div>
+    </article>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-tag">Embedded Intelligence · Real-World Power</p>
+        <p>An independent engineering initiative exploring embedded systems, power electronics, and intelligent hardware through practical designs, simulations, prototypes, and documented projects.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul class="footer-links">
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/tools.html">Engineering Tools</a></li>
+          <li><a href="/services.html">Capabilities &amp; collaboration</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul class="footer-links">
+          <li><a href="/contact.html">Contact</a></li>
+          <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Pakistan · Independent engineering initiative</span>
+      <span>&copy; 2026 Elite Bot Studios</span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js?v=8ac920e4" defer></script>
+</body>
+</html>

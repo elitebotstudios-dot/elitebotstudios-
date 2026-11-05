@@ -5,10 +5,32 @@
     "status": "concept",
     "category": "Embedded Systems · Energy",
     "tags": ["concept", "embedded systems", "energy monitoring"],
+    "date": "2026-11",
+    "summary": "A project direction exploring how embedded measurement might make electrical energy data easier to understand.",
     "objective": "Explore how embedded measurement and electrical energy data can be combined in a documented monitoring system.",
     "problem": "This is a project track, not a built device. The intended question is how useful electrical measurements can be collected and presented in a responsible, understandable way.",
     "approach": "No hardware architecture, component selection, firmware, or test plan is being claimed yet. Those details will be added only after they are actually designed and reviewed.",
     "results_note": "No prototype, simulation, repository, or measured results are published for this concept.",
-    "date": "2026-11"
+    "case_study_url": "/projects/smart-energy-monitoring.html",
+    "case_study": {
+      "overview": "An exploration of energy monitoring as a connected electrical and embedded-systems problem. The central question is what measurement and context a user needs to understand energy behavior—not a claim that a device has been designed or built.",
+      "architecture_label": "Illustrative functional roles · components and interfaces not selected",
+      "architecture": [
+        { "name": "Electrical input", "detail": "A future measurement boundary; source and sensing approach remain open." },
+        { "name": "Signal path", "detail": "A possible conditioning and sampling stage; no circuit or parts have been chosen." },
+        { "name": "Embedded processing", "detail": "A potential role for deriving useful information from sampled data; firmware is not published." },
+        { "name": "Data use", "detail": "Possible display or logging directions; interface and connectivity are undecided." }
+      ],
+      "open_questions": [
+        "Which measurable quantity and operating range should the first study address?",
+        "What measurement approach, isolation boundary, and calibration method would be appropriate for a safe, supervised prototype?",
+        "What information would make the output useful without implying more accuracy than the measurement supports?"
+      ],
+      "future_directions": [
+        "Define a low-voltage, supervised measurement objective and its safety boundaries.",
+        "Compare candidate sensing approaches using datasheets and analytical models.",
+        "Publish a reviewed schematic, simulation or firmware only when those artifacts actually exist."
+      ]
+    }
   }
 ]

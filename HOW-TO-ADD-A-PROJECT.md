@@ -13,7 +13,7 @@ The public project cards are rendered from `projects.json`. Use `/project-templa
 
 ## Data fields
 
-Core fields: `slug`, `title`, `status`, `category`, `date`, `objective`, `problem`, `approach`, `hardware`, `software`, `simulation`, `measured_results`, `lessons`, `github_url`, `documentation_url`, `case_study_url`, and `media`. Arrays may stay empty and text fields may stay blank; absent evidence is not a reason to fabricate content.
+Card fields: `slug`, `title`, `status`, `category`, `date`, `summary`, `objective`, `problem`, `approach`, and `results_note`. Add a nested `case_study` object to generate a dedicated `/projects/<slug>.html` page; the generator displays only populated sections such as `architecture`, `hardware`, `software`, `schematics`, `simulation`, `testing`, `results`, `limitations`, `lessons`, `open_questions`, `future_directions`, and `resources`. Optional top-level links include `github_url`, `documentation_url`, and `media`. Arrays may stay empty and text fields may stay blank; absent evidence is not a reason to fabricate content.
 
 ## Local checks
 

@@ -15,53 +15,65 @@ var OZ_TO_MILS = 1.378;    // 1 oz copper = 1.378 mil
    Rearranged for area, then divided by copper thickness. Empirical minimum. */
 function traceWidth(o) {
   var I = o.current, dT = o.rise, oz = o.copper, len = o.length || 0;
+  var ambient = o.ambient == null ? 20 : o.ambient;
   var k = o.internal ? 0.024 : 0.048;
-  if (!(I > 0) || !(dT > 0) || !(oz > 0)) return null;
+  if (!(I > 0) || !(dT > 0) || !(oz > 0) || len < 0 || !(ambient > -273.15)) return null;
   var areaMil2 = Math.pow(I / (k * Math.pow(dT, 0.44)), 1 / 0.725);
   var thickMil = oz * OZ_TO_MILS;
   var widthMil = areaMil2 / thickMil;
   var widthMm = widthMil * MIL2MM;
   var wM = widthMm * 1e-3, tM = thickMil * MIL2MM * 1e-3, lM = len * 1e-3;
-  var R = (wM * tM) > 0 ? CU_RHO20 * (1 + CU_ALPHA * dT) * lM / (wM * tM) : 0;
+  var copperTemp = ambient + dT;
+  var rho = CU_RHO20 * (1 + CU_ALPHA * (copperTemp - 20));
+  var R = (wM * tM) > 0 ? rho * lM / (wM * tM) : 0;
   return {
     areaMil2: areaMil2, widthMil: widthMil, widthMm: widthMm,
-    resistance: R, drop: I * R, power: I * I * R, thickMm: tM * 1e3
+    resistance: R, drop: I * R, power: I * I * R, thickMm: tM * 1e3,
+    ambient: ambient, copperTemp: copperTemp
   };
 }
 
 function buck(o) {
-  var vin = o.vin, vout = o.vout, f = o.freq, L = o.inductance, iout = o.iout, eff = o.eff || 1;
-  if (!(vin > 0) || !(vout > 0) || !(f > 0) || !(L > 0) || vout >= vin) return null;
-  var d = vout / (vin * eff);
-  if (d > 1) return null;
+  var vin = o.vin, vout = o.vout, f = o.freq, L = o.inductance;
+  var iout = o.iout, eff = o.eff == null ? 1 : o.eff;
+  if (!(vin > 0) || !(vout > 0) || vout >= vin || !(f > 0) || !(L > 0) ||
+      !(iout > 0) || !(eff > 0) || eff > 1) return null;
+
+  /* Ideal CCM conversion ratio: Vout ≈ D·Vin. Efficiency does not correct duty
+     universally; its only use here is an estimate of input power/current. */
+  var d = vout / vin;
   var dIl = vout * (1 - d) / (L * f);
-  var ioutSafe = iout > 0 ? iout : 1e-9;
+  var pOut = vout * iout;
+  var pIn = pOut / eff;
+  var iValley = iout - dIl / 2;
   return {
-    duty: d, dutyIdeal: vout / vin, deltaIl: dIl,
-    iPeak: iout + dIl / 2, iValley: iout - dIl / 2,
-    ripplePct: (dIl / ioutSafe) * 100,
-    lCrit: (vout * (1 - d)) / (2 * f * ioutSafe),
-    ccm: iout > dIl / 2,
+    duty: d, dutyIdeal: d, deltaIl: dIl,
+    iPeak: iout + dIl / 2, iValley: iValley,
+    ripplePct: (dIl / iout) * 100,
+    lCrit: (vout * (1 - d)) / (2 * f * iout),
+    ccm: iValley >= 0,
     onTimeNs: (d / f) * 1e9, periodNs: (1 / f) * 1e9,
-    maxOut: vin * eff
+    outputPower: pOut, inputPower: pIn, inputCurrent: pIn / vin,
+    estimatedLoss: pIn - pOut,
+    inductorRms: Math.sqrt(iout * iout + (dIl * dIl) / 12)
   };
 }
 
 function linear(o) {
   var vin = o.vin, vout = o.vout, iout = o.iout, theta = o.thetaJa, ta = o.ambient;
   var tjmax = o.tjMax || 125;
-  if (!(vin > 0) || vout < 0 || !(iout > 0) || vout > vin) return null;
+  if (!(vin > 0) || vout < 0 || !(iout > 0) || vout > vin || !(theta > 0) || !(ta > -273.15)) return null;
   var drop = vin - vout, p = drop * iout, rise = p * theta, tj = ta + rise;
   return {
     drop: drop, power: p, rise: rise, tj: tj, headroom: tjmax - tj,
     efficiency: (vout / vin) * 100, safe: tj <= tjmax,
-    maxCurrent: theta > 0 ? (tjmax - ta) / (theta * drop) : Infinity
+    maxCurrent: theta > 0 && drop > 0 ? Math.max(0, (tjmax - ta) / (theta * drop)) : Infinity
   };
 }
 
 function divider(o) {
   var vin = o.vin, r1 = o.r1, r2 = o.r2;
-  if (!(r1 > 0) || !(r2 > 0)) return null;
+  if (!(vin > 0) || !(r1 > 0) || !(r2 > 0)) return null;
   var vout = vin * r2 / (r1 + r2), cur = vin / (r1 + r2);
   return {
     vout: vout, current: cur,
@@ -71,8 +83,8 @@ function divider(o) {
 }
 
 function led(o) {
-  var vs = o.supply, vf = o.forward, i = o.current, n = o.count || 1;
-  if (!(vs > 0) || !(vf > 0) || !(i > 0)) return null;
+  var vs = o.supply, vf = o.forward, i = o.current, n = o.count == null ? 1 : o.count;
+  if (!(vs > 0) || !(vf > 0) || !(i > 0) || !(n >= 1) || Math.floor(n) !== n) return null;
   var drop = n * vf;
   if (drop >= vs) return null;
   var r = (vs - drop) / i, near = nearestE12(r);
@@ -139,8 +151,9 @@ if (typeof document !== 'undefined') {
     function num(form, name, fallback) {
       var el = form.querySelector('[name="' + name + '"]');
       if (!el) return fallback;
-      var v = parseFloat(el.value);
-      return isFinite(v) ? v : fallback;
+      if (el.value.trim() === '') return NaN;
+      var v = Number(el.value);
+      return isFinite(v) ? v : NaN;
     }
     function radio(form, name) {
       var el = form.querySelector('[name="' + name + '"]:checked');
@@ -154,14 +167,44 @@ if (typeof document !== 'undefined') {
       else el.removeAttribute('data-tone');
     }
 
+    function clearReadouts(root, keys) {
+      keys.forEach(function (key) { put(root, key, '—'); });
+    }
+
+    function drawBuckPlot(root, r) {
+      var plot=document.getElementById('buckExplorer') || root.parentNode;
+      var gate=plot.querySelector('#buckGateTrace');
+      var current=plot.querySelector('#buckCurrentTrace');
+      var boundary=plot.querySelector('#buckPlotBoundary');
+      var period=plot.querySelector('#buckPeriodLabel');
+      if (!gate || !current || !boundary) return;
+      if (!r) { gate.setAttribute('d',''); current.setAttribute('d',''); boundary.textContent='Enter valid values to plot the ideal CCM model.'; return; }
+      var x0=58, x1=600, yHi=48, yLo=86, xD=x0+(x1-x0)*r.duty;
+      gate.setAttribute('d','M'+x0+' '+yLo+'V'+yHi+'H'+xD+'V'+yLo+'H'+x1);
+      if (period) period.textContent='T = '+(r.periodNs/1000).toFixed(2)+' µs · ton = '+(r.onTimeNs/1000).toFixed(2)+' µs';
+      if (r.ccm) {
+        var ymin=154, ymax=248, max=Math.max(r.iPeak*1.18,0.1), yv=ymax-(r.iValley/max)*(ymax-ymin), yp=ymax-(r.iPeak/max)*(ymax-ymin);
+        current.setAttribute('d','M'+x0+' '+yv+'L'+xD+' '+yp+'L'+x1+' '+yv);
+        boundary.textContent='Ideal continuous-conduction estimate · triangular ripple assumes steady state and ideal switch conversion.';
+      } else {
+        current.setAttribute('d','');
+        boundary.textContent='The CCM boundary is not met at this load. Ripple and peak values above are CCM extrapolations; the DCM waveform and duty ratio are not solved by this model.';
+      }
+    }
+
     var CALCS = {
       tracewidth: function (form, out) {
         var internal = radio(form, 'layer') === 'internal';
         var r = traceWidth({
           current: num(form, 'current'), rise: num(form, 'rise'),
-          copper: num(form, 'copper'), length: num(form, 'length'), internal: internal
+          copper: num(form, 'copper'), length: num(form, 'length'),
+          ambient: 20, internal: internal
         });
-        if (!r) { put(out, 'width', '—'); return; }
+        if (!r) {
+          clearReadouts(out,['width','widthmil','area','resistance','drop','power']);
+          put(out,'note','Enter a positive current, rise, copper thickness, nonnegative length, and a valid ambient temperature.','warn');
+          return;
+        }
         put(out, 'width', Number(r.widthMm.toPrecision(3)) + ' mm');
         put(out, 'widthmil', Number(r.widthMil.toPrecision(3)) + ' mil');
         put(out, 'area', Number(r.areaMil2.toPrecision(3)) + ' mil²');
@@ -171,7 +214,7 @@ if (typeof document !== 'undefined') {
         var rec = r.widthMm <= 0.15 ? 'below the usual 0.15 mm fab minimum' :
                   r.widthMm <= 0.25 ? 'fine for most fabs, check the minimum' :
                   'comfortably inside typical fab limits';
-        put(out, 'note', 'At 0.15 mm minimum trace/space this is ' + rec + '.');
+        put(out, 'note', 'Resistance uses 20 °C ambient plus the entered temperature rise. At a 0.15 mm fab minimum, this width is ' + rec + '.');
       },
 
       buck: function (form, out) {
@@ -181,22 +224,27 @@ if (typeof document !== 'undefined') {
           iout: num(form, 'iout'), eff: num(form, 'eff') / 100
         });
         if (!r) {
-          put(out, 'duty', '—');
-          put(out, 'note', 'Vout must be lower than Vin for a buck. Check the inputs.', 'warn');
+          clearReadouts(out,['duty','ripple','peak','valley','ripplepct','lcrit','ontime','mode','pin','iin','loss']);
+          put(out, 'note', 'Check that Vin > Vout > 0, inductance, current and frequency are positive, and the efficiency estimate is between 0 and 100%.', 'warn');
+          drawBuckPlot(out, null);
           return;
         }
         put(out, 'duty', (r.duty * 100).toFixed(1) + ' %');
         put(out, 'ripple', eng(r.deltaIl, 'A'));
-        put(out, 'peak', eng(r.iPeak, 'A'));
-        put(out, 'ripplepct', r.ripplePct.toFixed(0) + ' % of load');
+        put(out, 'peak', eng(r.iPeak, 'A') + ' (CCM estimate)');
+        put(out, 'valley', eng(r.iValley, 'A') + ' (CCM estimate)');
+        put(out, 'ripplepct', r.ripplePct.toFixed(1) + ' % of load');
         put(out, 'lcrit', eng(r.lCrit, 'H'));
-        put(out, 'mode', r.ccm ? 'Continuous (CCM)' : 'Discontinuous (DCM)',
-            r.ccm ? 'ok' : 'warn');
+        put(out, 'mode', r.ccm ? 'CCM boundary met' : 'CCM boundary not met', r.ccm ? 'ok' : 'warn');
         put(out, 'ontime', r.onTimeNs.toFixed(0) + ' ns');
+        put(out, 'pin', eng(r.inputPower, 'W'));
+        put(out, 'iin', eng(r.inputCurrent, 'A'));
+        put(out, 'loss', eng(r.estimatedLoss, 'W'));
         put(out, 'note', r.ccm
-          ? 'Stays in continuous conduction at this load. Peak current sets the inductor saturation rating.'
-          : 'This inductor is too small for the load — the converter enters discontinuous mode and the output ripple rises sharply. Increase L or the switching frequency.',
+          ? 'Ideal CCM model. D = Vout/Vin; efficiency is used only to estimate input power and loss. Check controller limits, switch drops, inductor saturation, capacitor ripple current, and transient response for a real design.'
+          : 'The CCM boundary is not met at this load. Duty, ripple and peak values are CCM estimates—not a solved DCM operating point. Select a larger inductance or use a DCM model for this operating region.',
           r.ccm ? null : 'warn');
+        drawBuckPlot(out, r);
       },
 
       linear: function (form, out) {
@@ -204,7 +252,7 @@ if (typeof document !== 'undefined') {
           vin: num(form, 'vin'), vout: num(form, 'vout'), iout: num(form, 'iout'),
           thetaJa: num(form, 'theta'), ambient: num(form, 'ambient'), tjMax: 125
         });
-        if (!r) { put(out, 'power', '—'); return; }
+        if (!r) { clearReadouts(out,['power','tj','headroom','eff','maxcur','verdict']); put(out,'note','Enter Vin ≥ Vout ≥ 0, a positive load current, and a valid thermal resistance.','warn'); return; }
         put(out, 'power', r.power.toFixed(2) + ' W');
         put(out, 'tj', r.tj.toFixed(0) + ' °C');
         put(out, 'headroom', r.headroom.toFixed(0) + ' °C');
@@ -221,7 +269,7 @@ if (typeof document !== 'undefined') {
 
       divider: function (form, out) {
         var r = divider({ vin: num(form, 'vin'), r1: num(form, 'r1'), r2: num(form, 'r2') });
-        if (!r) { put(out, 'vout', '—'); return; }
+        if (!r) { clearReadouts(out,['vout','current','ratio','p1','p2']); put(out,'note','Enter a positive source voltage and positive resistor values.','warn'); return; }
         put(out, 'vout', r.vout.toFixed(4) + ' V');
         put(out, 'current', eng(r.current, 'A'));
         put(out, 'ratio', (r.ratio * 100).toFixed(2) + ' %');
@@ -236,8 +284,8 @@ if (typeof document !== 'undefined') {
           current: num(form, 'current') / 1000, count: num(form, 'count')
         });
         if (!r) {
-          put(out, 'resistance', '—');
-          put(out, 'note', 'The forward voltage of the string is at or above the supply. Increase the supply or use fewer LEDs.', 'warn');
+          clearReadouts(out,['resistance','nearest','powerr','powerled']);
+          put(out, 'note', 'Check that supply exceeds the total forward voltage and that current and LED count are positive.','warn');
           return;
         }
         put(out, 'resistance', r.resistance.toFixed(1) + ' Ω');
@@ -251,7 +299,7 @@ if (typeof document !== 'undefined') {
 
       rc: function (form, out) {
         var r = rc({ r: num(form, 'r'), c: num(form, 'c') * 1e-9 });
-        if (!r) { put(out, 'tau', '—'); return; }
+        if (!r) { clearReadouts(out,['tau','rise','t95','cutoff']); put(out,'note','Enter positive resistance and capacitance values.','warn'); return; }
         put(out, 'tau', eng(r.tau, 's'));
         put(out, 'rise', eng(r.rise, 's'));
         put(out, 't95', eng(r.t95, 's'));
@@ -260,14 +308,34 @@ if (typeof document !== 'undefined') {
       }
     };
 
+    function wireRanges(form) {
+      Array.prototype.forEach.call(form.querySelectorAll('[data-sync-range]'), function (range) {
+        var name=range.getAttribute('data-sync-range');
+        var field=form.querySelector('[name="'+name+'"]');
+        var display=document.getElementById(range.getAttribute('data-range-display'));
+        if (!field) return;
+        function paint() {
+          range.value=field.value;
+          if (display) display.textContent=Number(field.value).toLocaleString(undefined,{maximumFractionDigits:2})+' '+(range.getAttribute('data-unit')||'');
+        }
+        range.addEventListener('input',function(){field.value=range.value;paint();field.dispatchEvent(new Event('input',{bubbles:true}));});
+        field.addEventListener('input',paint);
+        field.addEventListener('change',paint);
+        form.addEventListener('reset',function(){setTimeout(paint,0);});
+        paint();
+      });
+    }
+
     Array.prototype.forEach.call(document.querySelectorAll('form[data-calc]'), function (form) {
       var out = document.getElementById('calcOut');
       var fn = CALCS[form.getAttribute('data-calc')];
       if (!out || !fn) return;
 
       function run() { fn(form, out); }
+      wireRanges(form);
       form.addEventListener('input', run);
       form.addEventListener('change', run);
+      form.addEventListener('reset', function () { setTimeout(run, 0); });
       run();
 
       var copy = document.getElementById('calcCopy');
@@ -295,7 +363,7 @@ if (typeof document !== 'undefined') {
       var touched = false;
       params.forEach(function (v, k) {
         var el = form.querySelector('[name="' + k + '"]');
-        if (el) { el.value = v; touched = true; }
+        if (el) { el.value = v; touched = true; el.dispatchEvent(new Event('input', { bubbles: true })); }
       });
       if (touched) form.dispatchEvent(new Event('input'));
     });

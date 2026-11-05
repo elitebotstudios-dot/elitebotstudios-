@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Page bodies. Content is either verbatim from the approved brief or marked
 data-owner="TODO" — nothing is invented."""
-import json, sys
-from html import escape as html_escape
+import json, re, sys
+from html import escape as html_escape, unescape as html_unescape
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build import page, EMAIL, write, SCHEMA_GRAPH
@@ -30,7 +30,10 @@ def render_project(p):
     def block(label,value): return '<div><dt>%s</dt><dd>%s</dd></div>'%(label,html_escape(str(value),quote=True)) if value else ''
     tags=''.join('<span class="chip">%s</span>'%html_escape(str(x),quote=True) for x in p.get('tags',[]))
     body=''.join([block('Objective',p.get('objective')),block('Context',p.get('problem')),block('Approach',p.get('approach')),block('Evidence',p.get('measured_results') or p.get('results') or p.get('results_note'))])
-    return '<article class="card proj-card reveal" id="%s"><div class="post-meta"><span class="chip %s">%s</span><span>%s</span></div><h3>%s</h3><dl class="proj-body" style="margin:0">%s</dl>%s</article>'%(slug,cls,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('title','')),quote=True),body,('<div class="chips">%s</div>'%tags) if tags else '')
+    action=''
+    url=p.get('case_study_url') or ('/projects/%s.html'%slug if p.get('case_study') else '')
+    if url and re.fullmatch(r'/projects/[a-z0-9-]+\.html',url): action='<a class="text-link" href="%s">Open project record ↗</a>'%html_escape(url,quote=True)
+    return '<article class="card proj-card reveal" id="%s"><div class="post-meta"><span class="chip %s">%s</span><span>%s</span></div><h3>%s</h3><dl class="proj-body" style="margin:0">%s</dl>%s%s</article>'%(slug,cls,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('title','')),quote=True),body,('<div class="chips">%s</div>'%tags) if tags else '',action)
 
 
 def services():
@@ -53,152 +56,138 @@ def projects():
     cards='\n'.join(render_project(p) for p in PROJECT_RECORDS)
     empty_attr=' hidden' if PROJECT_RECORDS else ''
     body = '''
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Projects</span><h1>A portfolio that earns its claims.</h1><p>Concepts are labelled as concepts. Simulations and measurements are published with assumptions, methods, and limitations. Each record shows the evidence that exists—and what does not.</p></div></section>
+    <section class="page-head project-index-head"><div class="wrap"><span class="eyebrow">Portfolio / Engineering work</span><h1>Ideas, models, and<br><em>what comes next.</em></h1><p>Follow the engineering questions as they move through design. Every entry carries its real status: concept, model, prototype, or measured system.</p></div></section>
     <section class="section"><div class="wrap">
-      <div class="notice reveal"><div><b>Evidence first</b><p>Project status is explicit. No concept, design render, or simulation is presented as a completed hardware result. Detailed case studies will be expanded as verified files and test evidence become available.</p></div></div>
+      <div class="project-section-label"><span class="section-index">01 / CURRENT PROJECT RECORDS</span><span>STATUS IS PART OF THE STORY</span></div>
       <h2 class="sr-only">Project records</h2><div id="projectsGrid" class="grid grid-2">PROJECT_CARDS</div>
-      <div class="empty-state" id="projectsEmpty"EMPTY_ATTR><h3>The project record is still being built.</h3><p>There are no public project records yet. The portfolio is intentionally small rather than padded with imagined case studies.</p><a class="btn btn-ghost" href="/lab.html">Visit the Engineering Lab</a></div>
-      <div class="section-head" style="margin-top:52px"><span class="label">Case-study standard</span><h2>What a project record will contain</h2><p>Objective, architecture, verified hardware and software, design decisions, simulations, test conditions, measured results, limitations, lessons, and supporting resources—only where the relevant artifacts exist.</p><a class="text-link" href="/project-template.md">Open the reusable project template →</a></div>
+      <div class="empty-state" id="projectsEmpty"EMPTY_ATTR><h3>Project records are taking shape.</h3><p>As project work develops, records will follow it with the relevant design files, models, and evidence.</p><a class="btn btn-ghost" href="/lab.html">Read the Engineering Lab</a></div>
+      <div class="concept-architecture"><div class="concept-architecture-head"><div><span class="section-index">CONCEPT SKETCH / NOT A SELECTED DESIGN</span><h2>Smart energy monitoring</h2><p>A functional architecture to explore the system question. Sensing method, analog front end, controller, and data path are not yet selected.</p></div><span class="status-label">Exploration</span></div>
+        <svg class="architecture-svg" viewBox="0 0 1080 220" role="img" aria-labelledby="archTitle archDesc"><title id="archTitle">Illustrative energy-monitoring system architecture</title><desc id="archDesc">Possible functional roles from electrical sensing through signal conditioning and embedded processing to logging or display. The blocks do not identify selected components or a built prototype.</desc><path class="architecture-route" d="M178 108h130m150 0h130m150 0h130"/><path class="architecture-route-cyan" d="M178 108h130m280 0h130"/><g><rect x="26" y="53" width="152" height="110" rx="5"/><text x="47" y="86">01 / INPUT</text><text class="architecture-title" x="47" y="116">Electrical</text><text class="architecture-title" x="47" y="138">sensing</text></g><g><rect x="308" y="53" width="150" height="110" rx="5"/><text x="329" y="86">02 / SIGNAL</text><text class="architecture-title" x="329" y="116">Analog</text><text class="architecture-title" x="329" y="138">front end</text></g><g><rect x="588" y="53" width="150" height="110" rx="5"/><text x="609" y="86">03 / COMPUTE</text><text class="architecture-title" x="609" y="116">Embedded</text><text class="architecture-title" x="609" y="138">processing</text></g><g><rect x="868" y="53" width="182" height="110" rx="5"/><text x="889" y="86">04 / USE</text><text class="architecture-title" x="889" y="116">Display or</text><text class="architecture-title" x="889" y="138">data logging</text></g><circle cx="178" cy="108" r="5"/><circle cx="458" cy="108" r="5"/><circle cx="738" cy="108" r="5"/><circle cx="868" cy="108" r="5"/></svg>
+        <p class="concept-caption">Illustrative system roles only · not a schematic, component selection, or prototype description.</p>
+      </div>
+      <div class="roadmap-section"><div class="project-section-label"><span class="section-index">02 / POSSIBLE EXPLORATIONS</span><span>ROADMAP · NOT COMPLETED PROJECTS</span></div><div class="roadmap-grid"><article><span>POWER</span><h3>Digitally controlled buck converter</h3><p>A possible study of switch behavior, inductor ripple, and digital control assumptions.</p></article><article><span>CONTROL</span><h3>Embedded motor control</h3><p>A future direction connecting sensing, actuation, and feedback fundamentals.</p></article><article><span>ENERGY</span><h3>Battery monitoring</h3><p>A possible exploration of measurement, state estimation, and protection concepts.</p></article></div></div>
+      <div class="project-template-link"><div><span class="section-index">CASE STUDY WORKFLOW</span><h2>Record the method as well as the result.</h2><p>A reusable structure for objectives, architecture, software, simulation, measurements, limitations, and resources.</p></div><a class="btn btn-ghost" href="/project-template.md">Open project template ↗</a></div>
     </div></section>
 '''
     body=body.replace('PROJECT_CARDS',cards).replace('EMPTY_ATTR',empty_attr)
     page('Engineering Projects &amp; Case Studies | Elite Bot Studios','Evidence-led project records in embedded systems, power electronics, PCB design, and control. Concepts are separated from simulations, prototypes, and measured work.','/projects.html',body,jsonld=SCHEMA_GRAPH)
 
 
+def project_detail_pages():
+    for p in PROJECT_RECORDS:
+        record=p.get('case_study')
+        if not record: continue
+        slug=p['slug'];status,status_class=PROJECT_STATUS.get(p.get('status'),('Unclassified','chip-amber'))
+        architecture=record.get('architecture') or []
+        nodes=[]
+        for i,node in enumerate(architecture,1):
+            nodes.append('<li class="concept-node"><span>%02d / FUNCTION</span><h3>%s</h3><p>%s</p></li>'%(i,html_escape(str(node.get('name','')),quote=True),html_escape(str(node.get('detail','')),quote=True)))
+        def list_section(key,title):
+            items=record.get(key) or []
+            if not items:return ''
+            return '<section class="detail-section"><span class="section-index">PROJECT NOTE</span><h2>%s</h2><ul class="project-detail-list">%s</ul></section>'%(title,''.join('<li>%s</li>'%html_escape(str(x),quote=True) for x in items))
+        extra_sections=[]
+        for key,title in [('hardware','Hardware'),('software','Firmware and software'),('schematics','Schematics and PCB'),('simulation','Simulation'),('testing','Testing and validation'),('results','Results'),('limitations','Limitations'),('lessons','Lessons learned'),('resources','Resources')]:
+            value=record.get(key)
+            if not value:continue
+            if isinstance(value,list):
+                rendered=''.join('<li>%s</li>'%html_escape(str(x),quote=True) for x in value)
+                content='<ul class="project-detail-list">%s</ul>'%rendered
+            else: content='<p>%s</p>'%html_escape(str(value),quote=True)
+            extra_sections.append('<section class="detail-section"><span class="section-index">PROJECT NOTE</span><h2>%s</h2>%s</section>'%(title,content))
+        body='''
+    <article class="project-detail-page">
+      <header class="project-detail-hero"><div class="wrap"><a class="backlink" href="/projects.html">← Projects</a><div class="project-detail-meta"><span class="chip %s">%s</span><span>%s</span><span>%s</span></div><h1>%s</h1><p class="project-detail-lede">%s</p><div class="project-detail-statusline"><span class="section-index">ENGINEERING OBJECTIVE</span><p>%s</p></div></div></header>
+      <section class="section"><div class="wrap project-detail-layout"><aside class="project-quickfacts"><span class="section-index">PROJECT RECORD</span><dl><div><dt>Status</dt><dd>%s</dd></div><div><dt>Category</dt><dd>%s</dd></div><div><dt>Published stage</dt><dd>%s</dd></div></dl><p>This page describes a concept and its open questions. It is not a fabricated device, schematic, simulation, or test report.</p></aside><div class="project-detail-content"><section class="detail-section"><span class="section-index">OVERVIEW</span><h2>What question is this exploring?</h2><p>%s</p></section>
+        <section class="detail-section"><div class="concept-architecture-head"><div><span class="section-index">SYSTEM ARCHITECTURE / ILLUSTRATIVE</span><h2>Functional roles to investigate.</h2><p>%s</p></div><span class="status-label">Concept only</span></div><ol class="concept-flow">%s</ol><p class="concept-caption">Illustrative system roles only. No component selection, electrical ratings, or measured performance is implied.</p></section>
+        %s%s%s
+        <section class="detail-section detail-evidence"><span class="section-index">CURRENT EVIDENCE</span><h2>Where the record stands.</h2><p>%s</p><p>Next additions will be made when the underlying design files, calculations, simulation setup, or test records exist.</p></section>
+        <div class="project-detail-related"><a href="/tools/buck-converter.html">Explore the buck converter model ↗</a><a href="/lab.html">Read engineering notes ↗</a></div>
+      </div></div></section>
+    </article>
+'''
+        body=body%(status_class,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('date','')),quote=True),html_escape(str(p.get('title','')),quote=True),html_escape(str(p.get('summary') or record.get('overview','')),quote=True),html_escape(str(p.get('objective','')),quote=True),status,html_escape(str(p.get('category','')),quote=True),status,html_escape(str(record.get('overview','')),quote=True),html_escape(str(record.get('architecture_label','Illustrative architecture')),quote=True),'\n'.join(nodes),list_section('open_questions','Questions to resolve'),list_section('future_directions','Possible next investigations'),'\n'.join(extra_sections),html_escape(str(p.get('results_note','')),quote=True))
+        page('%s | Project Record | Elite Bot Studios'%html_escape(str(p.get('title','Project')),quote=True),str(p.get('summary') or p.get('objective','Engineering project record.')),'/projects/%s.html'%slug,body,jsonld=SCHEMA_GRAPH)
+
+
 # --------------------------------------------------------------------- lab --
 # Lab-note content is authored in content/lab-notes/*.md and parsed by notes.py.
 
-
 def lab_index():
-    cards = []
+    cards=[]
     for p in POSTS:
-        tags = ''.join('<span class="chip">%s</span>' % t for t in p['tags'])
-        cards.append('''        <a class="post-card reveal" href="/lab/%s.html">
-          <div class="post-meta"><time datetime="%s">%s</time><span>%s</span></div>
-          <h3>%s</h3>
-          <p>%s</p>
-          <div class="chips">%s</div>
-        </a>''' % (p['slug'], p['date'], p['date'], 'Lab Log', p['title'], p['desc'], tags))
-
-    body = '''
-    <section class="page-head">
-      <div class="wrap">
-        <span class="eyebrow">Lab Log</span>
-        <h1>Engineering notes and models.</h1>
-        <p>Educational explanations and method notes. Bench observations will be labelled as such and published only with real test conditions and evidence.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <h2 class="sr-only">Lab notes</h2>
-        <div class="grid">
-%s
-        </div>
-      </div>
-    </section>
-''' % '\n'.join(cards)
-
-    page('Lab Log — Build Notes from the Bench | Elite Bot Studios',
-         'Engineering notes on embedded systems, simulation, documentation, and evidence—separating educational explanations from bench observations.',
-         '/lab.html', body, jsonld=SCHEMA_GRAPH)
+        tags=''.join('<span class="chip">%s</span>'%t for t in p['tags'][:3])
+        cards.append('''<a class="journal-entry reveal" href="/lab/%s.html"><div class="journal-entry-meta"><span>%s</span><span>%d MIN READ</span></div><h3>%s</h3><p>%s</p><div class="chips">%s</div><b>OPEN NOTE ↗</b></a>'''%(p['slug'],p['date'],p['read_time'],p['title'],p['desc'],tags))
+    body='''
+    <section class="page-head"><div class="wrap"><span class="eyebrow">Engineering Lab / Notebook</span><h1>Ideas become clearer<br><em>when written down.</em></h1><p>Educational notes on embedded systems, power conversion, models, and engineering method. Explanations are distinct from measured observations.</p></div></section>
+    <section class="section"><div class="wrap"><h2 class="sr-only">Engineering note index</h2><div class="lab-index-intro"><span class="section-index">READ / MODEL / QUESTION</span><p>Each note explains a concept with stated assumptions, useful equations, and references where appropriate. No simulated curve is presented as a bench result.</p></div><div class="journal-list">%s</div><div class="section-tail"><span>MARKDOWN-AUTHORED · STATICALLY PUBLISHED</span><a class="text-link" href="/content/README.md">How notes are authored <b>↗</b></a></div></div></section>
+'''%''.join(cards)
+    page('Engineering Lab &amp; Technical Notes | Elite Bot Studios','Engineering notes on embedded systems, PWM, power conversion, simulation, measurement, and practical design concepts. Educational content clearly labels assumptions and evidence.','/lab.html',body,jsonld=SCHEMA_GRAPH)
 
 
 def lab_posts():
     for p in POSTS:
-        tags = ''.join('<span class="chip">%s</span>' % t for t in p['tags'])
-        body = '''
-    <article>
-      <header class="post-head">
-        <div class="wrap">
-          <a class="backlink" href="/lab.html">&larr; Lab Log</a>
-          <h1>%s</h1>
-          <div class="post-meta"><time datetime="%s">%s</time><span>Elite Bot Studios</span></div>
-          <div class="chips">%s</div>
-        </div>
-      </header>
-      <div class="section">
-        <div class="wrap">
-          <div class="prose reveal">
-%s
-          </div>
-        </div>
-      </div>
+        tags=''.join('<span class="chip">%s</span>'%t for t in p['tags'])
+        headings=re.findall(r'<h2 id="([^"]+)">(.*?)</h2>',p['body'])
+        toc=''.join('<li><a href="#%s">%s</a></li>'%(slug,html_unescape(re.sub(r'<[^>]+>','',title))) for slug,title in headings)
+        toc_html=('<details class="article-toc"><summary>On this page</summary><ol>%s</ol></details>'%toc) if toc else ''
+        body='''
+    <article class="technical-article">
+      <div class="article-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="readingProgress"></span></div>
+      <header class="post-head"><div class="wrap"><a class="backlink" href="/lab.html">← Engineering Lab</a><p class="article-kicker">ENGINEERING NOTE / %s</p><h1>%s</h1><div class="article-meta"><time datetime="%s">%s</time><span>%d min read</span><span>Educational note</span></div><div class="chips">%s</div></div></header>
+      <div class="article-layout wrap">%s<div class="prose article-prose">%s</div></div>
+      <div class="wrap article-related"><span class="section-index">CONTINUE EXPLORING</span><a href="/tools/buck-converter.html">Buck converter explorer ↗</a><a href="/projects.html">Project records ↗</a></div>
     </article>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="reveal" style="max-width:600px">
-          <span class="label">Next</span>
-          <h2 style="font-size:clamp(1.4rem,3.6vw,1.8rem);margin:12px 0 14px">Have a technical question?</h2>
-          <p style="color:var(--muted)">Read a project record, explore an engineering calculator, or use the contact page for an academic or technical discussion.</p>
-          <div class="hero-ctas" style="margin-top:24px">
-            <a class="btn btn-primary" href="/projects.html">Explore projects</a>
-            <a class="btn btn-ghost" href="/contact.html">Contact</a>
-          </div>
-        </div>
-      </div>
-    </section>
-''' % (p['title'], p['date'], p['date'], tags, p['body'])
-
-        write('/lab/%s.html' % p['slug'],
-              __import__('build').head(
-                  p.get('seo') or ('%s | Elite Bot Studios' % p['title']), p['desc'],
-                  '/lab/%s.html' % p['slug'],
-                  jsonld=json.dumps({
-                      "@context": "https://schema.org", "@type": "Article",
-                      "headline": p['title'], "datePublished": p['date'],
-                      "author": {"@type": "Organization", "name": "Elite Bot Studios"},
-                      "publisher": {"@type": "Organization", "name": "Elite Bot Studios"},
-                      "mainEntityOfPage": "https://elitebotstudios.me/lab/%s.html" % p['slug']
-                  }, indent=2))
-              + __import__('build').header('/lab.html') + '\n  <main id="main">\n' + body
-              + '\n  </main>\n' + __import__('build').footer())
+'''%(p['date'],p['title'],p['date'],p['date'],p['read_time'],tags,toc_html,p['body'])
+        schema=json.dumps({'@context':'https://schema.org','@type':'Article','headline':html_unescape(p['title']),'datePublished':p['date'],'author':{'@type':'Organization','name':'Elite Bot Studios'},'publisher':{'@type':'Organization','name':'Elite Bot Studios'},'mainEntityOfPage':'https://elitebotstudios.me/lab/%s.html'%p['slug']},indent=2)
+        write('/lab/%s.html'%p['slug'],__import__('build').head('%s | Elite Bot Studios'%p['title'],p['desc'],'/lab/%s.html'%p['slug'],jsonld=schema)+__import__('build').header('/lab.html')+'\n  <main id="main">\n'+body+'\n  </main>\n'+__import__('build').footer())
 
 
 # ------------------------------------------------------------- expertise --
 def expertise():
-    body = '''
-    <section class="page-head"><div class="wrap"><span class="eyebrow">Technical expertise</span><h1>Study areas, evidence, and direction.</h1><p>Skills are not assigned percentages. Each topic is classified by how it is represented here, and demonstrated capability is linked to an actual project or artifact.</p></div></section>
-    <section class="section"><div class="wrap">
-      <div class="notice"><div><b>Evidence status</b><p>No completed hardware case study is currently published. The sections below describe academic focus, subject areas, and interests from the owner-provided profile—not a claim of advanced proficiency or project validation.</p></div></div>
-      <div class="expertise-grid">
-        <article class="expertise-card"><span class="status-label">Academic focus</span><h2>Electrical engineering &amp; power</h2><p>Undergraduate study at NUST, Pakistan. The academic direction emphasizes power engineering; the detailed course list can be added once the owner supplies the verified course names.</p><ul><li>Electrical energy and power systems</li><li>Power conversion fundamentals</li><li>Engineering analysis and system models</li></ul></article>
-        <article class="expertise-card"><span class="status-label">Currently developing</span><h2>Embedded systems &amp; electronics</h2><p>Complementary interests pursued alongside the electrical-engineering degree. Specific MCU, language, protocol, or tool proficiency is not asserted without supporting work.</p><ul><li>Microcontrollers and firmware</li><li>Digital and analog electronics</li><li>PCB design and hardware validation</li></ul></article>
-        <article class="expertise-card"><span class="status-label">Learning map</span><h2>Control &amp; instrumentation</h2><p>Study topics that connect measurement, embedded control, and electrical systems.</p><ul><li>Feedback and control systems</li><li>Sensor interfaces and signal conditioning</li><li>Modeling, simulation, and test methodology</li></ul></article>
-        <article class="expertise-card"><span class="status-label">Research interest</span><h2>Intelligent energy systems</h2><p>Long-term interests at the intersection of power engineering and embedded computation.</p><ul><li>Energy monitoring and instrumentation</li><li>Embedded control for power conversion</li><li>Renewable-energy integration and smart electrical systems</li></ul></article>
+    body='''
+    <section class="page-head expertise-head"><div class="wrap"><span class="eyebrow">Technical map / 01</span><h1>How the disciplines<br><em>connect.</em></h1><p>Power engineering is the academic centre. Embedded systems, electronics, and control are the complementary threads being developed around it.</p></div></section>
+    <section class="section expertise-network-section"><div class="wrap">
+      <div class="expertise-network" aria-label="Conceptual connection map: power conversion, electronics, embedded computing, measurement, control, and connected energy systems interact as one system.">
+        <svg viewBox="0 0 1000 420" role="img" aria-labelledby="expertiseDiagramTitle expertiseDiagramDesc"><title id="expertiseDiagramTitle">Engineering disciplines connect as a system</title><desc id="expertiseDiagramDesc">Power conversion, hardware, embedded computing, measurement and control form connected engineering disciplines; connected energy systems bring them together.</desc><path class="network-line network-line-gold" d="M190 105H432M568 105H810M190 315H432M568 315H810M500 142V278M220 132 430 288M780 132 570 288"/><path class="network-line network-line-cyan" d="M251 105H380m-9-7 9 7-9 7M620 105h129m-9-7 9 7-9 7M250 315h130m-9-7 9 7-9 7M620 315h130m-9-7 9 7-9 7M500 171v73m-7-9 7 9 7-9"/><circle class="network-node" cx="160" cy="105" r="42"/><circle class="network-node" cx="500" cy="105" r="42"/><circle class="network-node" cx="840" cy="105" r="42"/><circle class="network-node" cx="160" cy="315" r="42"/><circle class="network-node" cx="500" cy="315" r="42"/><circle class="network-node" cx="840" cy="315" r="42"/><text x="160" y="111">POWER</text><text x="500" y="111">HW</text><text x="840" y="111">EMBED</text><text x="160" y="321">SENSE</text><text x="500" y="321">CONTROL</text><text x="840" y="321">ENERGY</text><text class="network-caption" x="500" y="211">A SYSTEMS VIEW</text></svg>
       </div>
-      <div class="section-head" style="margin-top:54px"><span class="label">Evidence policy</span><h2>What “demonstrated” means here</h2><p>A project will be marked demonstrated only when the site can link to the relevant source, design files, simulation setup, or test evidence. Academic familiarity, current learning, and research interest remain separate labels.</p><a class="text-link" href="/projects.html">Review project records →</a></div>
+      <div class="expertise-legend"><span><i class="legend-gold"></i>Academic focus</span><span><i class="legend-cyan"></i>Complementary system links</span><span>Conceptual map · not a proficiency chart</span></div>
     </div></section>
-'''
-    page('Technical Expertise &amp; Learning Map | Elite Bot Studios','A transparent learning map for embedded systems, power electronics, electronics, PCB design, control, instrumentation, and energy systems. Demonstrated skills are tied to published evidence.','/expertise.html',body,jsonld=SCHEMA_GRAPH)
+    <section class="section expertise-details" aria-labelledby="knowledgeTitle"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">KNOWLEDGE AREAS</span><h2 id="knowledgeTitle">A developing toolkit.</h2></div><p>Evidence is attached to work, not guessed from a percentage. The labels below distinguish the academic foundation from topics being explored and longer-term research questions.</p></div>
+      <div class="expertise-grid">
+        <article class="expertise-card" id="power"><span class="status-label">Academic foundation</span><h2>Power conversion</h2><p>The main academic direction: how electrical energy is modeled, converted, controlled, and delivered.</p><ul><li>Power engineering</li><li>DC–DC conversion principles</li><li>Switching behavior and power-system analysis</li></ul></article>
+        <article class="expertise-card" id="embedded"><span class="status-label">Practical exploration</span><h2>Embedded computing</h2><p>Microcontroller-based systems as a bridge between electrical behavior and software-defined decisions.</p><ul><li>Microcontrollers and firmware</li><li>Digital interfaces and peripheral concepts</li><li>Embedded control and connected devices</li></ul></article>
+        <article class="expertise-card" id="electronics"><span class="status-label">Practical exploration</span><h2>Electronics &amp; hardware</h2><p>From circuit-level reasoning to board-level implementation, with attention to interfaces and constraints.</p><ul><li>Analog and digital electronics</li><li>PCB design and hardware architecture</li><li>Measurement, protection, and validation</li></ul></article>
+        <article class="expertise-card" id="control"><span class="status-label">Learning map</span><h2>Control &amp; instrumentation</h2><p>How sensing, models, and actuation combine to shape a system’s response.</p><ul><li>Feedback and control fundamentals</li><li>Sensor interfaces and signal conditioning</li><li>System modeling and simulation</li></ul></article>
+        <article class="expertise-card expertise-card-wide" id="energy"><span class="status-label">Research interest</span><h2>Intelligent energy systems</h2><p>Long-term questions around energy monitoring, embedded control, renewable integration, and instrumented electrical systems.</p><a class="text-link" href="/projects.html">Follow the project directions <b>↗</b></a></article>
+      </div>
+      <div class="evidence-key"><span class="section-index">EVIDENCE KEY</span><span><i>Academic foundation</i> Course-based grounding</span><span><i>Practical exploration</i> Skills currently being developed</span><span><i>Demonstrated project work</i> Linked to an artifact when published</span><span><i>Research interest</i> Future questions, not claimed contributions</span></div>
+    </div></section>
+    '''
+    page('Expertise Map | Elite Bot Studios','Explore how power engineering, embedded computing, electronics, control, and intelligent energy systems connect in Muhammad Shahzaib Abbas’s evolving engineering practice.','/expertise.html',body,jsonld=SCHEMA_GRAPH)
 
 
 # ------------------------------------------------------------------- about --
 def about():
-    body = '''
-    <section class="page-head"><div class="wrap"><span class="eyebrow">About the engineer</span><h1>A student building toward the work.</h1><p>Elite Bot Studios is a technical brand and a public record of an engineer's development—not a large company or a claim of professional licensure.</p></div></section>
-    <section class="section"><div class="wrap"><div class="founder-profile"><div class="profile-monogram" aria-hidden="true">MSA<span>EE · NUST</span></div><div class="prose"><span class="label">Founder</span><h2>Muhammad Shahzaib Abbas</h2><p>I am an Electrical Engineering undergraduate at the National University of Sciences and Technology (NUST), Pakistan. My academic direction emphasizes power engineering, and I am independently developing complementary interests in embedded systems, electronics, microcontrollers, and control.</p><p>I am interested in how embedded computation can make electrical and energy systems more observable and controllable. Elite Bot Studios gives me a place to document that development through practical designs, simulations, prototypes, and engineering notes—clearly separating what is planned from what has been built and measured.</p><p>My aim is to build useful technical depth over time and contribute to thoughtful engineering and research collaborations. I am also interested in further study and international research, particularly in Europe including Germany, as my academic path develops. This site will grow as verified projects, academic work, and supporting evidence become available.</p></div></div></div></section>
-    <section class="section"><div class="wrap"><div class="section-head"><span class="label">Research interests</span><h2>Questions worth pursuing.</h2></div><div class="grid grid-3"><article class="card"><h3>Power electronics</h3><p>Modeling, design trade-offs, and control of power-conversion systems.</p></article><article class="card"><h3>Embedded control</h3><p>Microcontroller-based sensing, actuation, and real-time interaction with electrical systems.</p></article><article class="card"><h3>Intelligent energy systems</h3><p>Energy monitoring, renewable integration, and instrumentation for smart electrical systems.</p></article></div></div></section>
-    <section class="section"><div class="wrap"><div class="section-head"><span class="label">Profile facts</span><h2>Verified identity, without filler.</h2></div><dl class="profile-facts"><div><dt>Current status</dt><dd>Electrical Engineering undergraduate</dd></div><div><dt>Institution</dt><dd>National University of Sciences and Technology (NUST), Pakistan</dd></div><div><dt>Academic emphasis</dt><dd>Power engineering</dd></div><div><dt>Technical interests</dt><dd>Embedded systems · electronics · control · energy systems</dd></div></dl><p class="muted-small" style="margin-top:20px">A CV, profile links, course list, photograph, and verified project artifacts will be added when provided and approved. No placeholder profile links or stock portrait are shown.</p></div></section>
-    <section class="section"><div class="wrap"><div class="collaboration-card"><span class="label">Contact</span><h2>Research, learning, and engineering conversations.</h2><p>For academic discussion, research opportunities, internships, or appropriately scoped collaboration, use the contact page.</p><a class="btn btn-primary" href="/contact.html">Get in touch</a></div></div></section>
+    body='''
+    <section class="page-head about-head"><div class="wrap"><span class="eyebrow">About / Muhammad Shahzaib Abbas</span><h1>The engineer behind<br><em>Elite Bot Studios.</em></h1><p>Electrical Engineering undergraduate at NUST, Pakistan. Academic focus in power engineering; independent interests in embedded systems, electronics, and control.</p></div></section>
+    <section class="section about-editorial"><div class="wrap about-intro-grid"><div class="about-monogram" aria-label="Initials MSA">MSA<span>EE / NUST</span><i></i></div><div class="about-prose"><span class="section-index">01 / BACKGROUND</span><h2>Power systems drew me in.<br><em>Embedded control keeps widening the frame.</em></h2><p>I study Electrical Engineering at the National University of Sciences and Technology in Pakistan, with an academic direction in power engineering. Alongside my degree, I am building a complementary understanding of embedded systems, electronics, microcontrollers, and control.</p><p>I am drawn to the point where an electrical system becomes observable and responsive: sensing what is happening, deciding what should happen next, and understanding the limits of the hardware doing it. Elite Bot Studios is my long-term place to develop those ideas in public through models, project records, and technical notes.</p><p>My broader interests include power electronics, intelligent energy systems, and applied research. I am interested in postgraduate study and international research collaboration, particularly in Europe and Germany, as my academic path develops.</p></div></div></section>
+    <section class="section about-direction"><div class="wrap"><div class="section-heading split-heading"><div><span class="section-index">02 / RESEARCH DIRECTION</span><h2>Questions that cross<br><em>disciplinary boundaries.</em></h2></div><p>Areas of curiosity—not published research contributions.</p></div><div class="research-lines"><article><span>01</span><h3>Digital power conversion</h3><p>How embedded control and power-stage dynamics shape converter behavior.</p></article><article><span>02</span><h3>Energy instrumentation</h3><p>How measurement quality changes the decisions a system can make.</p></article><article><span>03</span><h3>Intelligent electrical systems</h3><p>How connected hardware can improve visibility and control of energy use.</p></article></div></div></section>
+    <section class="section about-profile"><div class="wrap about-profile-grid"><div><span class="section-index">03 / PROFILE</span><h2>Academic foundation.</h2><p class="about-profile-lede">The detail that matters is the work and study behind the title.</p></div><dl class="profile-facts"><div><dt>Name</dt><dd>Muhammad Shahzaib Abbas</dd></div><div><dt>Current status</dt><dd>Electrical Engineering undergraduate</dd></div><div><dt>Institution</dt><dd>National University of Sciences and Technology (NUST), Pakistan</dd></div><div><dt>Academic direction</dt><dd>Power engineering</dd></div><div><dt>Complementary interests</dt><dd>Embedded systems · electronics · control</dd></div></dl></div></section>
+    <section class="section about-now"><div class="wrap about-now-grid"><div><span class="section-index">04 / CURRENT PRACTICE</span><h2>Learn it.<br><em>Connect it. Document it.</em></h2></div><div><p>Current work is about developing a rigorous foundation and learning to move between circuit behavior, power flow, embedded decisions, and clear technical documentation. The public project index separates planned directions from artifacts that have actually been produced.</p><a class="text-link" href="/projects.html">See project status <b>↗</b></a></div></div></section>
+    <section class="section"><div class="wrap"><div class="collaboration-card"><span class="section-index">05 / CONNECT</span><h2>Good engineering starts with a good question.</h2><p>Open to academic discussion, research conversations, internships, and appropriately scoped engineering collaboration.</p><a class="btn btn-primary" href="/contact.html">Start a conversation ↗</a></div></div></section>
 '''
     about_ld=json.loads(SCHEMA_GRAPH)
-    about_ld['@graph'].append({
-        '@type':'Person', '@id':'https://elitebotstudios.me/about.html#founder',
-        'name':'Muhammad Shahzaib Abbas', 'url':'https://elitebotstudios.me/about.html',
-        'email':EMAIL, 'jobTitle':'Electrical Engineering undergraduate',
-        'affiliation':{'@type':'CollegeOrUniversity','name':'National University of Sciences and Technology (NUST)','address':{'@type':'PostalAddress','addressCountry':'PK'}},
-        'knowsAbout':['Power engineering','Embedded systems','Electronics','Microcontrollers','Control systems','Intelligent energy systems']
-    })
-    page('About Muhammad Shahzaib Abbas | Elite Bot Studios','Muhammad Shahzaib Abbas is an Electrical Engineering undergraduate at NUST, Pakistan, focused academically on power engineering and exploring embedded systems, electronics, and control.','/about.html',body,jsonld=json.dumps(about_ld,indent=2))
-
+    about_ld['@graph'].append({'@type':'Person','@id':'https://elitebotstudios.me/about.html#founder','name':'Muhammad Shahzaib Abbas','url':'https://elitebotstudios.me/about.html','email':EMAIL,'jobTitle':'Electrical Engineering undergraduate','affiliation':{'@type':'CollegeOrUniversity','name':'National University of Sciences and Technology (NUST)','address':{'@type':'PostalAddress','addressCountry':'PK'}},'knowsAbout':['Power engineering','Embedded systems','Electronics','Microcontrollers','Control systems','Intelligent energy systems']})
+    page('About Muhammad Shahzaib Abbas | Elite Bot Studios','Muhammad Shahzaib Abbas studies Electrical Engineering at NUST, Pakistan, with an academic direction in power engineering and interests in embedded systems, electronics, and control.','/about.html',body,jsonld=json.dumps(about_ld,indent=2))
 
 
 # ----------------------------------------------------------------- contact --
 CONTACT_FORM_JS = '''
   <script>
-    (function contactComposer(){
+    (function(){
+      function initContactComposer(){
       var form=document.getElementById('contactForm');if(!form)return;var status=document.getElementById('formStatus');
       function field(el,msg){var box=el.closest('.field');if(!box)return false;var error=box.querySelector('.err');el.setAttribute('aria-invalid',msg?'true':'false');if(error)error.textContent=msg||'';return !msg;}
       function validate(el){var v=(el.value||'').trim();if(el.required&&!v)return field(el,'This field is required.');if(el.type==='email'&&v&&!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(v))return field(el,'Enter a valid email address.');if(el.tagName==='TEXTAREA'&&v.length<20)return field(el,'Please add at least 20 characters.');return field(el,'');}
@@ -208,6 +197,8 @@ CONTACT_FORM_JS = '''
         window.location.href='mailto:contact@elitebotstudios.me?subject='+encodeURIComponent('Elite Bot Studios — '+data.get('category'))+'&body='+encodeURIComponent(lines.join('\\n'));
         status.textContent='Your email app should open with a draft. Review it and press Send there; this website has not received or sent your message.';
       });
+      }
+      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initContactComposer,{once:true});else initContactComposer();
     }());
   </script>'''
 
@@ -408,6 +399,6 @@ def offline():
 
 if __name__ == '__main__':
     print('building pages…')
-    services(); projects(); lab_index(); lab_posts(); expertise(); about(); contact()
+    services(); projects(); project_detail_pages(); lab_index(); lab_posts(); expertise(); about(); contact()
     privacy(); terms(); cookies(); notfound(); offline()
     print('done.')
