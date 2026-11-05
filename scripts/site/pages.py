@@ -184,17 +184,17 @@ def about():
 
 
 # ----------------------------------------------------------------- contact --
-CONTACT_FORM_JS = '''
+CONTACT_FORM_JS = r'''
   <script>
     (function(){
       function initContactComposer(){
       var form=document.getElementById('contactForm');if(!form)return;var status=document.getElementById('formStatus');
       function field(el,msg){var box=el.closest('.field');if(!box)return false;var error=box.querySelector('.err');el.setAttribute('aria-invalid',msg?'true':'false');if(error)error.textContent=msg||'';return !msg;}
-      function validate(el){var v=(el.value||'').trim();if(el.required&&!v)return field(el,'This field is required.');if(el.type==='email'&&v&&!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(v))return field(el,'Enter a valid email address.');if(el.tagName==='TEXTAREA'&&v.length<20)return field(el,'Please add at least 20 characters.');return field(el,'');}
+      function validate(el){var v=(el.value||'').trim();if(el.required&&!v)return field(el,'This field is required.');if(el.type==='email'&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return field(el,'Enter a valid email address.');if(el.tagName==='TEXTAREA'&&v.length<20)return field(el,'Please add at least 20 characters.');return field(el,'');}
       Array.prototype.forEach.call(form.elements,function(el){if(!el.name)return;el.addEventListener('blur',function(){validate(el);});el.addEventListener('input',function(){if(el.getAttribute('aria-invalid')==='true')validate(el);});});
       form.addEventListener('submit',function(ev){ev.preventDefault();var ok=true,first=null;Array.prototype.forEach.call(form.elements,function(el){if(!el.name)return;if(!validate(el)){ok=false;if(!first)first=el;}});if(!ok){status.textContent='Please review the highlighted fields.';if(first)first.focus();return;}
         var data=new FormData(form);var lines=['Name: '+data.get('name'),'Email: '+data.get('email'),'Organization / university: '+(data.get('organization')||'Not provided'),'Inquiry: '+data.get('category'),'','Message:',data.get('message')];
-        window.location.href='mailto:contact@elitebotstudios.me?subject='+encodeURIComponent('Elite Bot Studios — '+data.get('category'))+'&body='+encodeURIComponent(lines.join('\\n'));
+        window.location.href='mailto:contact@elitebotstudios.me?subject='+encodeURIComponent('Elite Bot Studios — '+data.get('category'))+'&body='+encodeURIComponent(lines.join('\n'));
         status.textContent='Your email app should open with a draft. Review it and press Send there; this website has not received or sent your message.';
       });
       }
