@@ -234,7 +234,7 @@ window.EBS.renderProjectCard = ebsProjectCard;
   var title=document.getElementById('systemDetailTitle');
   var text=document.getElementById('systemDetailText');
   var kicker=document.getElementById('systemDetailKicker');
-  var machine=document.querySelector('.hero-machine');
+  var artwork=document.querySelector('.hero-artwork');
   if(!root||!panel||!title||!text||!kicker)return;
   var content={
     source:['01 / ENERGY BOUNDARY','Start with what the source can provide.','Input range, available power, and transients define the conditions every later block must respect. Those are design constraints—not decorative numbers.'],
@@ -246,8 +246,7 @@ window.EBS.renderProjectCard = ebsProjectCard;
     var key=button.getAttribute('data-system-node'),entry=content[key];if(!entry)return;
     root.querySelectorAll('[role="tab"]').forEach(function(tab){var active=tab===button;tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',active?'true':'false');tab.tabIndex=active?0:-1;});
     panel.setAttribute('aria-labelledby',button.id);kicker.textContent=entry[0];title.textContent=entry[1];text.textContent=entry[2];
-    if(machine)machine.setAttribute('data-selected',key);
-    document.querySelectorAll('[data-visual-node]').forEach(function(node){node.classList.toggle('is-active',node.getAttribute('data-visual-node')===key);});
+    if(artwork)artwork.setAttribute('data-selected',key);
     if(moveFocus)button.focus();
   }
   root.addEventListener('click',function(event){var tab=event.target.closest('[role="tab"]');if(tab&&root.contains(tab))select(tab,false);});

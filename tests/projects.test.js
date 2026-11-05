@@ -118,7 +118,7 @@ const tabsRoot = {
 const machine = { attrs:{}, setAttribute(k,v){this.attrs[k]=v;} };
 const doc2 = {
   getElementById(id) { return details[id] || null; },
-  querySelector(selector) { return selector === '.system-tabs' ? tabsRoot : (selector === '.hero-machine' ? machine : null); },
+  querySelector(selector) { return selector === '.system-tabs' ? tabsRoot : (selector === '.hero-artwork' ? machine : null); },
   querySelectorAll(selector) { return selector === '[data-visual-node]' ? visualNodes : []; },
   addEventListener() {}, createElement() { return stubEl(); }
 };
@@ -130,7 +130,7 @@ vm.runInContext(fs.readFileSync(path.join(root,'assets/site.js'),'utf8'),sandbox
 clickHandler({target:{closest(){return tabNodes[2];}}});
 ok('system diagram selects a block', tabNodes[2].attrs['aria-selected']==='true' && tabNodes[2].active);
 ok('system diagram updates accessible detail', details.systemDetailTitle.textContent==='Measure, decide, and command.');
-ok('system diagram highlights matching illustration group', visualNodes[2].active && machine.attrs['data-selected']==='controller');
+ok('system diagram moves the artwork hotspot to the selected subsystem', machine.attrs['data-selected']==='controller');
 keyHandler({key:'ArrowRight',target:tabNodes[2],preventDefault(){this.prevented=true;}});
 ok('system diagram supports arrow-key navigation', tabNodes[3].attrs['aria-selected']==='true' && tabNodes[3].focused);
 
