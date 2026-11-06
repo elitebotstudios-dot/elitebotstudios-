@@ -5,7 +5,7 @@
    Precaching is resilient: a missing file cannot break the whole
    cache install, so a new icon or asset never takes the site down.
    ============================================================ */
-const CACHE_VERSION = 'ebs-v50';
+const CACHE_VERSION = 'ebs-v51';
 const PRECACHE = [
   '/',
   /* '/index.html' is deliberately absent: it 308-redirects to '/', so
@@ -13,11 +13,13 @@ const PRECACHE = [
   '/services.html',
   '/projects.html',
   '/projects/smart-energy-monitoring.html',
+  '/projects/power-stage-utility.html',
   '/lab.html',
   '/lab/why-document-the-process.html',
   '/lab/simulation-is-not-measurement.html',
   '/lab/pwm-duty-frequency-resolution.html',
   '/lab/buck-converter-ccm-model.html',
+  '/lab/adc-resolution-quantization.html',
   '/expertise.html',
   '/about.html',
   '/tools.html',
@@ -39,6 +41,8 @@ const PRECACHE = [
   '/assets/site.css',
   '/assets/site.js',
   '/assets/calc.js',
+  '/assets/powerstage.js',
+  '/assets/powerstage-ui.js',
   '/assets/hero-core-concept.webp',
   '/assets/logo-mark.webp',
   '/assets/logo-192.png',

@@ -18,14 +18,14 @@
   <meta name="twitter:description" content="Explore the ideal continuous-conduction buck-converter model with adjustable input, output, frequency, inductance, load, and efficiency. Includes live PWM and inductor-current plots with the model boundary shown." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
 
-  <link rel="icon" href="/assets/favicon-32x32.png?v=c596a9ac" sizes="32x32" />
-  <link rel="icon" href="/assets/favicon-16x16.png?v=67538590" sizes="16x16" />
+  <link rel="icon" href="/assets/favicon-32x32.png?v=f887a99b" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=3a582b91" sizes="16x16" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=dd9eaed5" />
   <link rel="manifest" href="/site.webmanifest?v=f8f8f629" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.05-R7" />
+  <meta name="ebs-build" content="EBS-2026.11.06-R8" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=5765f2de" />
+  <link rel="stylesheet" href="/assets/site.css?v=efd52ab6" />
   <script src="/assets/calc.js?v=96a8fee6" defer></script>
 
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
@@ -242,7 +242,7 @@
         <div class="notice reveal" style="margin-top:34px;max-width:860px">
           <div>
             <b>Read this before you commit a design</b>
-            <p>This is a steady-state ideal CCM model. Duty uses D ≈ Vout/Vin; a real converter needs more duty to account for its actual switch, diode, winding, and control losses, but efficiency alone does not specify that correction. Ripple, peak, valley, and critical inductance are CCM estimates. If the CCM boundary is not met, this tool flags the region instead of pretending to solve a DCM controller. It does not model switch transitions, parasitics, capacitor ripple, loop compensation, thermal behavior, or startup. Use the controller datasheet and verify a real design.</p>
+            <p>This is a steady-state ideal CCM model. Duty uses D ≈ Vout/Vin; a real converter needs more duty to account for its actual switch, diode, winding, and control losses, but efficiency alone does not specify that correction. Ripple, peak, valley, and critical inductance are CCM estimates evaluated at the one input voltage you enter; over a real input range, ripple and critical inductance are worst at the highest input voltage, so sweep Vin before fixing the inductor. If the CCM boundary is not met, this tool flags the region instead of pretending to solve a DCM controller. It does not model switch transitions, parasitics, capacitor ripple, loop compensation, thermal behavior, or startup. Use the controller datasheet and verify a real design.</p>
           </div>
         </div>
 

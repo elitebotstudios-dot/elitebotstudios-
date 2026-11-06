@@ -7,6 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build import page, EMAIL, write, SCHEMA_GRAPH
 from notes import POSTS
+from build_tools import TOOLS
 
 # ORG_LD was replaced by build.SCHEMA_GRAPH. Every page that emits schema now
 # shares one @graph, so the organisation reads the same in each place.
@@ -86,23 +87,60 @@ def services():
 def projects():
     cards='\n'.join(render_project(p) for p in PROJECT_RECORDS)
     empty_attr=' hidden' if PROJECT_RECORDS else ''
+    n_projects=len(PROJECT_RECORDS)
+    n_tools=len(TOOLS)
+    n_notes=len(POSTS)
+    def work_type(index,kind,count,label,body,href,cta):
+        return ('<article class="work-type"><span class="work-type-index">%s</span>'
+                '<span class="work-type-kind">%s</span>'
+                '<h3>%s</h3><p>%s</p>'
+                '<div class="work-type-foot"><span class="work-type-count">%s</span>'
+                '<a class="text-link" href="%s">%s <b aria-hidden="true">&#8599;</b></a></div></article>'
+                %(index,kind,label,body,count,href,cta))
+    work_types='\n'.join([
+      work_type('01','Physical engineering','%d record'%n_projects,
+                'Hardware work, kept honest',
+                'Converter, instrumentation and embedded-system work described through requirements, architecture and validation planning. Status labels show how far each one actually got &mdash; concept, simulation, prototype or measured.',
+                '/projects.html#project-records','Read the records'),
+      work_type('02','Software demonstration','1 artefact',
+                'Tested code, published source',
+                'The power-stage sizing utility: an ideal buck sizing module with its formulas, assumptions, worked calculation and an independent test suite published alongside. Attributed as AI-assisted work.',
+                '/projects/power-stage-utility.html','Open the utility'),
+      work_type('03','Educational calculator','%d tools'%n_tools,
+                'Interactive models, stated limits',
+                'Seven single-purpose engineering calculators &mdash; trace width, buck operating point, linear regulator, divider, LED resistor, RC timing and PWM. Each shows the equation it implements and what it omits.',
+                '/tools.html','Open the tools'),
+      work_type('04','Technical note','%d notes'%n_notes,
+                'Derivations and method',
+                'Short written notes on converter modelling, ADC quantisation, PWM resolution and the difference between simulation and measurement. Reasoning first, no product claims.',
+                '/lab.html','Read the notes'),
+    ])
     body = '''
     <section class="page-head project-index-head"><div class="wrap"><span class="eyebrow">Portfolio / Engineering work</span><h1>Ideas, models, and<br><em>what comes next.</em></h1><p>Follow the engineering questions as they move through design. Every entry carries its real status: concept, model, prototype, or measured system.</p></div></section>
-    <section class="section"><div class="wrap">
-      <div class="project-section-label"><span class="section-index">01 / CURRENT PROJECT RECORDS</span><span>STATUS IS PART OF THE STORY</span></div>
+    <section class="section work-types-section"><div class="wrap">
+      <div class="project-section-label"><span class="section-index">00 / WHAT IS ON THIS SITE</span><span>FOUR KINDS OF WORK, LABELLED</span></div>
+      <h2 class="sr-only">Types of work published on this site</h2>
+      <div class="work-types-grid">WORK_TYPES</div>
+      <p class="work-types-note">Physical project records and software demonstrations are different kinds of evidence. A tested calculator is not a prototype, and a concept record is not a result &mdash; the labels above keep that distinction visible everywhere the work appears.</p>
+    </div></section>
+    <section class="section" id="project-records"><div class="wrap">
+      <div class="project-section-label"><span class="section-index">01 / PHYSICAL ENGINEERING RECORDS</span><span>STATUS IS PART OF THE STORY</span></div>
       <h2 class="sr-only">Project records</h2><div id="projectsGrid" class="grid grid-2">PROJECT_CARDS</div>
       <div class="empty-state" id="projectsEmpty"EMPTY_ATTR><h3>Project records are taking shape.</h3><p>As project work develops, records will follow it with the relevant design files, models, and evidence.</p><a class="btn btn-ghost" href="/lab.html">Read the Engineering Lab</a></div>
       <div class="concept-architecture"><div class="concept-architecture-head"><div><span class="section-index">CONCEPT SKETCH / NOT A SELECTED DESIGN</span><h2>Smart energy monitoring</h2><p>A functional architecture to explore the system question. Sensing method, analog front end, controller, and data path are not yet selected.</p></div><span class="status-label">Exploration</span></div>
         <svg class="architecture-svg" viewBox="0 0 1080 220" role="img" aria-labelledby="archTitle archDesc"><title id="archTitle">Illustrative energy-monitoring system architecture</title><desc id="archDesc">Possible functional roles from electrical sensing through signal conditioning and embedded processing to logging or display. The blocks do not identify selected components or a built prototype.</desc><path class="architecture-route" d="M178 108h130m150 0h130m150 0h130"/><path class="architecture-route-cyan" d="M178 108h130m280 0h130"/><g><rect x="26" y="53" width="152" height="110" rx="5"/><text x="47" y="86">01 / INPUT</text><text class="architecture-title" x="47" y="116">Electrical</text><text class="architecture-title" x="47" y="138">sensing</text></g><g><rect x="308" y="53" width="150" height="110" rx="5"/><text x="329" y="86">02 / SIGNAL</text><text class="architecture-title" x="329" y="116">Analog</text><text class="architecture-title" x="329" y="138">front end</text></g><g><rect x="588" y="53" width="150" height="110" rx="5"/><text x="609" y="86">03 / COMPUTE</text><text class="architecture-title" x="609" y="116">Embedded</text><text class="architecture-title" x="609" y="138">processing</text></g><g><rect x="868" y="53" width="182" height="110" rx="5"/><text x="889" y="86">04 / USE</text><text class="architecture-title" x="889" y="116">Display or</text><text class="architecture-title" x="889" y="138">data logging</text></g><circle cx="178" cy="108" r="5"/><circle cx="458" cy="108" r="5"/><circle cx="738" cy="108" r="5"/><circle cx="868" cy="108" r="5"/></svg>
-        <p class="concept-caption">Illustrative system roles only · not a schematic, component selection, or prototype description.</p>
+        <p class="concept-caption">Illustrative system roles only &middot; not a schematic, component selection, or prototype description.</p>
       </div>
-      <div class="software-artefact"><div><span class="section-index">SOFTWARE ARTEFACT / PUBLISHED</span><h2>Power-stage sizing utility</h2><p>An ideal buck sizing module with published source, formulas, assumptions and reference tests. Attributed as AI-assisted work produced while building this site &mdash; not presented as the founder's independent engineering.</p></div><a class="btn btn-ghost" href="/projects/power-stage-utility.html">Open the utility &#8599;</a></div>
-      <div class="roadmap-section"><div class="project-section-label"><span class="section-index">03 / POSSIBLE EXPLORATIONS</span><span>ROADMAP · NOT COMPLETED PROJECTS</span></div><div class="roadmap-grid"><article><span>POWER</span><h3>Digitally controlled buck converter</h3><p>A possible study of switch behavior, inductor ripple, and digital control assumptions.</p></article><article><span>CONTROL</span><h3>Embedded motor control</h3><p>A future direction connecting sensing, actuation, and feedback fundamentals.</p></article><article><span>ENERGY</span><h3>Battery monitoring</h3><p>A possible exploration of measurement, state estimation, and protection concepts.</p></article></div></div>
-      <div class="project-template-link"><div><span class="section-index">CASE STUDY WORKFLOW</span><h2>Record the method as well as the result.</h2><p>A reusable structure for objectives, architecture, software, simulation, measurements, limitations, and resources.</p></div><a class="btn btn-ghost" href="/project-template.html">Open project template ↗</a></div>
+      <div class="roadmap-section"><div class="project-section-label"><span class="section-index">03 / POSSIBLE EXPLORATIONS</span><span>ROADMAP &middot; NOT COMPLETED PROJECTS</span></div><div class="roadmap-grid"><article><span>POWER</span><h3>Digitally controlled buck converter</h3><p>A possible study of switch behavior, inductor ripple, and digital control assumptions.</p></article><article><span>CONTROL</span><h3>Embedded motor control</h3><p>A future direction connecting sensing, actuation, and feedback fundamentals.</p></article><article><span>ENERGY</span><h3>Battery monitoring</h3><p>A possible exploration of measurement, state estimation, and protection concepts.</p></article></div></div>
+      <div class="project-template-link"><div><span class="section-index">CASE STUDY WORKFLOW</span><h2>Record the method as well as the result.</h2><p>A reusable structure for objectives, architecture, software, simulation, measurements, limitations, and resources.</p></div><a class="btn btn-ghost" href="/project-template.html">Open project template &#8599;</a></div>
+    </div></section>
+    <section class="section work-demo-section"><div class="wrap">
+      <div class="project-section-label"><span class="section-index">02 / SOFTWARE DEMONSTRATIONS</span><span>TESTED CODE &middot; PUBLISHED SOURCE</span></div>
+      <div class="software-artefact"><div><span class="work-status">Software demonstration &middot; tested</span><h2>Power-stage sizing utility</h2><p>Sizes an ideal buck inductor at the worst-case input voltage and reports the current stress and capacitance estimates that follow. The formulas, a hand-worked case, the published module and an independent test suite are on the page.</p><p class="software-artefact-meta">AI-assisted implementation &middot; no dependencies &middot; runs in the browser &middot; 495 independent assertions</p></div><a class="btn btn-ghost" href="/projects/power-stage-utility.html">Open the utility &#8599;</a></div>
     </div></section>
 '''
-    body=body.replace('PROJECT_CARDS',cards).replace('EMPTY_ATTR',empty_attr)
-    page('Engineering Projects &amp; Case Studies | Elite Bot Studios','Evidence-led project records in embedded systems, power electronics, PCB design, and control. Concepts are separated from simulations, prototypes, and measured work.','/projects.html',body,jsonld=SCHEMA_GRAPH)
+    body=body.replace('PROJECT_CARDS',cards).replace('EMPTY_ATTR',empty_attr).replace('WORK_TYPES',work_types)
+    page('Engineering Projects &amp; Case Studies | Elite Bot Studios','Evidence-led project records in embedded systems, power electronics, PCB design, and control, separated from software demonstrations, calculators and technical notes. Concepts are never presented as measured work.','/projects.html',body,jsonld=SCHEMA_GRAPH)
 
 
 def project_template_page():
@@ -201,99 +239,244 @@ def project_detail_pages():
 
 
 def powerstage_page():
-    body = '''
-    <section class="page-head"><div class="wrap"><a class="backlink" href="/projects.html">&larr; Projects</a><span class="eyebrow">Software demonstration / attribution noted</span><h1>Power-stage sizing utility.</h1><p>A small calculation module that turns a converter specification into an inductor, a capacitor and a current-stress estimate — with the formulas, assumptions and test cases published alongside it.</p></div></section>
+    # --------------------------------------------------------- equations ---
+    # MathML Core is supported by current Chrome, Edge, Firefox and Safari, so
+    # the formulas are typeset natively without shipping a font or a library.
+    m_vout = '<msub><mi>V</mi><mtext>out</mtext></msub>'
+    m_vin = '<msub><mi>V</mi><mtext>in</mtext></msub>'
+    m_vinmax = '<msub><mi>V</mi><mtext>in,max</mtext></msub>'
+    m_dil = '<mi>Δ</mi><msub><mi>I</mi><mi>L</mi></msub>'
+    m_fsw = '<msub><mi>f</mi><mtext>sw</mtext></msub>'
+    m_one_minus_dmax = ('<mrow><mo>(</mo><mn>1</mn><mo>−</mo>'
+                        '<mfrac>%s%s</mfrac><mo>)</mo></mrow>' % (m_vout, m_vinmax))
+    eq_duty = (
+        '<math display="block"><mrow><mi>D</mi><mo>=</mo>'
+        '<mfrac>%s%s</mfrac></mrow></math>' % (m_vout, m_vin))
+    eq_ripple = (
+        '<math display="block"><mrow>%s<mo stretchy="false">(</mo>%s<mo stretchy="false">)</mo>'
+        '<mo>=</mo><mfrac><mrow>%s<mrow><mo>(</mo><mn>1</mn><mo>−</mo>'
+        '<mfrac>%s%s</mfrac><mo>)</mo></mrow></mrow><mrow><mi>L</mi>%s</mrow></mfrac></mrow></math>'
+        % (m_dil, m_vin, m_vout, m_vout, m_vin, m_fsw))
+    eq_lreq = (
+        '<math display="block"><mrow><mi>L</mi><mo>≥</mo>'
+        '<mfrac><mrow>%s%s</mrow><mrow><mi>Δ</mi><msub><mi>I</mi><mrow><mi>L</mi><mo>,</mo>'
+        '<mtext>target</mtext></mrow></msub>%s</mrow></mfrac></mrow></math>'
+        % (m_vout, m_one_minus_dmax, m_fsw))
+    eq_lcrit = (
+        '<math display="block"><mrow><msub><mi>L</mi><mtext>crit</mtext></msub><mo>=</mo>'
+        '<mfrac><mrow>%s%s</mrow><mrow><mn>2</mn><msub><mi>I</mi><mtext>out</mtext></msub>%s</mrow></mfrac>'
+        '</mrow></math>' % (m_vout, m_one_minus_dmax, m_fsw))
+    eq_cap = (
+        '<math display="block"><mrow><mi>Δ</mi>%s<mo>≈</mo>'
+        '<mfrac><mrow>%s</mrow><mrow><mn>8</mn>%s<mi>C</mi></mrow></mfrac><mo>+</mo>'
+        '%s<mo>·</mo><msub><mi>R</mi><mtext>ESR</mtext></msub></mrow></math>'
+        % (m_vout, m_dil, m_fsw, m_dil))
+    eq_rms = (
+        '<math display="block"><mrow><msub><mi>I</mi><mrow><mi>L</mi><mo>,</mo><mtext>rms</mtext></mrow></msub>'
+        '<mo>=</mo><msqrt><mrow><msubsup><mi>I</mi><mtext>out</mtext><mn>2</mn></msubsup><mo>+</mo>'
+        '<mfrac><mrow><mi>Δ</mi><msubsup><mi>I</mi><mi>L</mi><mn>2</mn></msubsup></mrow><mn>12</mn></mfrac>'
+        '</mrow></msqrt></mrow></math>')
 
-    <section class="section"><div class="wrap ps-grid">
-      <form class="calc-panel" id="psForm" novalidate>
-        <p class="range-help">Values update as you type. Defaults are the site's reference operating point.</p>
-        <div class="calc-row">
-          <div class="calc-field"><label for="psVinMin">Minimum input <span class="unit">V</span></label><input id="psVinMin" type="number" value="9" min="1" step="0.1"></div>
-          <div class="calc-field"><label for="psVinMax">Maximum input <span class="unit">V</span></label><input id="psVinMax" type="number" value="15" min="1" step="0.1"></div>
-        </div>
-        <div class="calc-row">
-          <div class="calc-field"><label for="psVout">Output voltage <span class="unit">V</span></label><input id="psVout" type="number" value="5" min="0.5" step="0.1"></div>
-          <div class="calc-field"><label for="psIout">Load current <span class="unit">A</span></label><input id="psIout" type="number" value="2" min="0.05" step="0.1"></div>
-        </div>
-        <div class="calc-row">
-          <div class="calc-field"><label for="psFsw">Switching frequency <span class="unit">kHz</span></label><input id="psFsw" type="number" value="500" min="1" step="10"></div>
-          <div class="calc-field"><label for="psRipple">Inductor ripple target <span class="unit">% of load</span></label><input id="psRipple" type="number" value="30" min="1" max="100" step="5"></div>
-        </div>
-        <div class="calc-field"><label for="psVripple">Output ripple target <span class="unit">% of Vout</span></label><input id="psVripple" type="number" value="1" min="0.1" max="50" step="0.1"></div>
-        <div class="calc-actions"><button class="btn btn-ghost" type="reset">Reset to reference</button></div>
+    body = '''
+    <section class="page-head"><div class="wrap"><a class="backlink" href="/projects.html">&larr; Projects</a><span class="eyebrow">Software demonstration · tested · AI-assisted</span><h1>Power-stage sizing utility.</h1><p>Sizes an ideal buck inductor against the worst-case input voltage, and reports the current stress and output-capacitance estimates that follow from it. The formulas, assumptions, worked calculation and an independent test suite are published with the module.</p></div></section>
+
+    <section class="section ps-tool-section"><div class="wrap ps-grid">
+      <div class="ps-col">
+      <form class="calc-panel ps-panel" id="psForm" novalidate>
+        <p class="ps-panel-title">Specification</p>
+        <p class="range-help">Results update as you type. Defaults are case A of the reference table below.</p>
+
+        <fieldset class="ps-fieldset"><legend>01 / Input range</legend>
+          <div class="calc-row">
+            <div class="calc-field"><label for="psVinMin">Minimum input <span class="unit">V</span></label><input id="psVinMin" type="number" value="9" min="0.5" step="0.1" inputmode="decimal"></div>
+            <div class="calc-field"><label for="psVinMax">Maximum input <span class="unit">V</span></label><input id="psVinMax" type="number" value="15" min="0.5" step="0.1" inputmode="decimal"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="ps-fieldset"><legend>02 / Output and load</legend>
+          <div class="calc-row">
+            <div class="calc-field"><label for="psVout">Regulated output <span class="unit">V</span></label><input id="psVout" type="number" value="5" min="0.1" step="0.1" inputmode="decimal"></div>
+            <div class="calc-field"><label for="psIout">Full load current <span class="unit">A</span></label><input id="psIout" type="number" value="2" min="0.01" step="0.1" inputmode="decimal"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="ps-fieldset"><legend>03 / Switching and targets</legend>
+          <div class="calc-row">
+            <div class="calc-field"><label for="psFsw">Switching frequency <span class="unit">kHz</span></label><input id="psFsw" type="number" value="500" min="1" step="10" inputmode="decimal"></div>
+            <div class="calc-field"><label for="psRipple">Inductor ripple <span class="unit">% of load</span></label><input id="psRipple" type="number" value="30" min="1" max="200" step="5" inputmode="decimal"></div>
+          </div>
+          <div class="calc-field"><label for="psVripple">Output ripple budget <span class="unit">% of output</span></label><input id="psVripple" type="number" value="1" min="0.05" max="50" step="0.1" inputmode="decimal"></div>
+        </fieldset>
+
+        <details class="ps-advanced">
+          <summary>04 / Capacitor and transient assumptions <span>optional</span></summary>
+          <p class="ps-advanced-help">Left ideal by default. Real numbers make the capacitance figure larger and more realistic.</p>
+          <div class="calc-field"><label for="psEsr">Output capacitor ESR <span class="unit">Ω</span></label><input id="psEsr" type="number" value="0" min="0" step="0.001" inputmode="decimal"></div>
+          <div class="calc-field"><label for="psDerating">Capacitance remaining after derating <span class="unit">% of nominal</span></label><input id="psDerating" type="number" value="100" min="10" max="100" step="5" inputmode="decimal"></div>
+          <div class="calc-field"><label for="psLoadStep">Load release for transient check <span class="unit">A</span></label><input id="psLoadStep" type="number" value="0" min="0" step="0.1" inputmode="decimal"></div>
+          <p class="ps-advanced-help">Derating covers tolerance, DC bias loss and ageing. A 10&nbsp;µF ceramic at 5&nbsp;V may retain well under half of its nominal value.</p>
+        </details>
+
+        <div class="calc-actions"><button class="btn btn-ghost" type="reset">Reset to case A</button></div>
       </form>
 
-      <div>
+      <figure class="ps-plot-card">
+        <figcaption class="ps-plot-head"><span>Inductor ripple across the input range</span><span>ΔI<sub>L</sub> vs V<sub>in</sub></span></figcaption>
+        <div class="ps-plot" id="psPlot" aria-hidden="true"></div>
+        <p class="ps-plot-note" id="psPlotNote">Ripple grows with input voltage because the off-time fraction (1 − D) grows.</p>
+      </figure>
+      </div>
+
+      <div class="ps-results">
         <div class="calc-output" id="psOut">
-          <span class="label">Sized stage</span>
+          <div class="ps-status-row"><span class="label">Sized stage</span><span class="ps-chip" id="psCcmChip" data-tone="ok">evaluating</span></div>
+
+          <dl class="calc-readout-group"><div class="calc-readout primary ps-primary"><dt>Series inductance <span class="ps-where">held across V<sub>in,min</sub>…V<sub>in,max</sub></span></dt><dd data-ps="inductance">—</dd></div></dl>
+
+          <div class="ps-readout-columns">
+          <div class="ps-readout-col">
+          <p class="ps-group-label">Inductor current</p>
           <dl class="calc-readout-group">
-            <div class="calc-readout primary"><dt>Series inductance</dt><dd data-ps="inductance">—</dd></div>
-            <div class="calc-readout"><dt>Inductor ripple ΔI<sub>L</sub></dt><dd data-ps="deltaIl">—</dd></div>
-            <div class="calc-readout"><dt>Peak / valley current</dt><dd data-ps="peakValley">—</dd></div>
-            <div class="calc-readout"><dt>Inductor RMS current</dt><dd data-ps="irms">—</dd></div>
-            <div class="calc-readout"><dt>Output capacitance</dt><dd data-ps="capacitance">—</dd></div>
-            <div class="calc-readout"><dt>Duty at V<sub>in,min</sub> / V<sub>in,max</sub></dt><dd data-ps="duty">—</dd></div>
-            <div class="calc-readout"><dt>Longest on-time</dt><dd data-ps="ontime">—</dd></div>
+            <div class="calc-readout"><dt>Ripple at V<sub>in,max</sub></dt><dd data-ps="rippleWorst">—</dd></div>
+            <div class="calc-readout"><dt>Ripple at V<sub>in,min</sub></dt><dd data-ps="rippleMinVin">—</dd></div>
+            <div class="calc-readout"><dt>Peak current I<sub>peak</sub></dt><dd data-ps="peak">—</dd></div>
+            <div class="calc-readout"><dt>Valley current I<sub>valley</sub></dt><dd data-ps="valley">—</dd></div>
+            <div class="calc-readout"><dt>RMS current I<sub>L,rms</sub></dt><dd data-ps="irms">—</dd></div>
             <div class="calc-readout"><dt>CCM boundary inductance</dt><dd data-ps="lcrit">—</dd></div>
           </dl>
+          </div>
+
+          <div class="ps-readout-col">
+          <p class="ps-group-label">Output capacitor</p>
+          <dl class="calc-readout-group">
+            <div class="calc-readout"><dt>Nominal capacitance</dt><dd data-ps="cNominal">—</dd></div>
+            <div class="calc-readout"><dt>ESR contribution</dt><dd data-ps="cEsr">—</dd></div>
+            <div class="calc-readout"><dt>Transient floor</dt><dd data-ps="cTransient">—</dd></div>
+            <div class="calc-readout"><dt>Capacitor RMS current</dt><dd data-ps="cRms">—</dd></div>
+          </dl>
+
+          <p class="ps-group-label">Timing</p>
+          <dl class="calc-readout-group">
+            <div class="calc-readout"><dt>Duty ratio (min / max input)</dt><dd data-ps="duty">—</dd></div>
+            <div class="calc-readout"><dt>On-time (longest / shortest)</dt><dd data-ps="ontime">—</dd></div>
+            <div class="calc-readout"><dt>Switching period</dt><dd data-ps="period">—</dd></div>
+          </dl>
+          </div>
+          </div>
+
           <p class="calc-note" id="psNote" role="status" aria-live="polite">Enter a specification to size the stage.</p>
         </div>
-        <div class="calc-formula">D = V<sub>out</sub>/V<sub>in</sub> · L = V<sub>out</sub>(1 − D<sub>max</sub>) / (ΔI<sub>L</sub> f<sub>sw</sub>) · C<sub>out</sub> ≈ ΔI<sub>L</sub> / (8 f<sub>sw</sub> ΔV<sub>out</sub>) · I<sub>RMS</sub> = √(I<sub>out</sub>² + ΔI<sub>L</sub>²/12)</div>
+
       </div>
     </div></section>
 
-    <section class="section ps-attrib"><div class="wrap">
-      <div class="ps-attrib-card">
-        <span class="section-index">ATTRIBUTION</span>
-        <h2>Who made this.</h2>
-        <p>This utility was written with AI assistance while building this website. It is a software artefact published as part of the site's engineering evidence, <strong>not</strong> the site owner's independent engineering work, and it is not a fabricated hardware result. It computes ideals; it has never been fitted to a physical board.</p>
-        <p class="concept-caption">Source: <a href="/assets/powerstage.js">assets/powerstage.js</a> · Tests: <a href="/tests/powerstage.test.js">tests/powerstage.test.js</a> · both are plain files served from this site.</p>
+    <section class="section ps-eq-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">01 / THE MODEL</span><h2>Five relations,<br><em>one worst case.</em></h2></div><p>Ideal continuous conduction. Every expression below is implemented in the published module and re-derived independently in the test suite.</p></div>
+      <div class="ps-eq-grid">
+        <article class="ps-eq"><span class="ps-eq-tag">Duty ratio</span>''' + eq_duty + '''<p>Ideal CCM conversion ratio. Duty is largest at the minimum input; on-time follows it.</p></article>
+        <article class="ps-eq"><span class="ps-eq-tag">Inductor ripple</span>''' + eq_ripple + '''<p>The ripple depends on the input only through <em>1 − V<sub>out</sub>/V<sub>in</sub></em>, which rises with input voltage.</p></article>
+        <article class="ps-eq"><span class="ps-eq-tag">Required inductance</span>''' + eq_lreq + '''<p>Sized at the maximum input, where the ripple is worst — not at the minimum input, where the duty is worst.</p></article>
+        <article class="ps-eq"><span class="ps-eq-tag">CCM boundary</span>''' + eq_lcrit + '''<p>The inductance at which the valley current reaches zero at full load. Below it the converter enters DCM and this model no longer describes it.</p></article>
+        <article class="ps-eq"><span class="ps-eq-tag">Output ripple</span>''' + eq_cap + '''<p>Capacitive and resistive terms summed as a worst case. Set ESR to zero for the ideal figure.</p></article>
+        <article class="ps-eq"><span class="ps-eq-tag">Inductor heating</span>''' + eq_rms + '''<p>Combines the DC load current with the triangular ripple. Different from the peak current that sets the saturation requirement.</p></article>
       </div>
-    </div></section>
-
-    <section class="section"><div class="wrap ps-doc-grid">
-      <div>
-        <span class="section-index">01 / WHAT IT COMPUTES</span>
-        <h2>From a specification to component values.</h2>
-        <p>The module takes the input range, output voltage, load current, switching frequency and two ripple targets, then returns the inductance needed to hold the ripple target at the worst-case duty point, the resulting peak and valley currents, the RMS current that heats the winding, and the ideal output capacitance for the voltage-ripple target.</p>
-        <ul class="project-detail-list">
-          <li>Worst case for inductor ripple is the lowest input voltage, because duty — and therefore the off-time — is longest there.</li>
-          <li>Peak current sets the saturation requirement; RMS current sets the heating requirement. They are different numbers and both matter.</li>
-          <li>The capacitor estimate uses the ideal <code>ΔV ≈ ΔI/(8 f C)</code> relation for a resistive load.</li>
-        </ul>
-      </div>
-      <div>
-        <span class="section-index">02 / WHAT IT DOES NOT DO</span>
-        <h2>Deliberate limits.</h2>
-        <ul class="project-detail-list">
-          <li>No switch, diode or inductor resistance — a real converter needs more duty than this predicts.</li>
-          <li>No ESR, so the capacitor figure omits the ripple term that often dominates.</li>
-          <li>No thermal model, no loop stability, no transient response, no dead time, no saturation derating.</li>
-          <li>Steady-state CCM only. Ripple is defined relative to load current here, so a 100 % target still leaves a valley of I<sub>out</sub>/2; the reported CCM boundary inductance is the honest indicator.</li>
-        </ul>
+      <div class="ps-worstcase">
+        <span class="section-index">WORST-CASE OPERATING POINTS</span>
+        <div class="ps-worstcase-grid">
+          <div><h3>At V<sub>in,max</sub></h3><p>Inductor ripple, peak current, valley current, RMS current and the CCM boundary inductance are all worst here, because the off-time fraction is largest.</p></div>
+          <div><h3>At V<sub>in,min</sub></h3><p>Duty ratio and on-time are worst here, which matters for minimum on-time limits, gate-drive timing and switching loss.</p></div>
+        </div>
+        <p class="ps-worstcase-note">The tool reports both ends of the range. Evaluating a whole input range at one arbitrary voltage is the mistake this utility was rebuilt to avoid.</p>
       </div>
     </div></section>
 
     <section class="section"><div class="wrap">
-      <span class="section-index">03 / VERIFICATION</span>
-      <h2>Worked cases from the test suite.</h2>
-      <div class="table-scroll"><table>
-        <caption class="sr-only">Reference cases computed by the published test file</caption>
-        <thead><tr><th scope="col">Case</th><th scope="col">Specification</th><th scope="col">Inductance</th><th scope="col">Ripple</th><th scope="col">Peak</th></tr></thead>
+      <div class="section-heading split-heading"><div><span class="section-index">02 / BEHAVIOUR</span><h2>What the range<br><em>actually does.</em></h2></div><p>The same sized inductor, evaluated at five input voltages. Interpolated live from your specification.</p></div>
+      <div class="table-scroll ps-table-wrap" tabindex="0" role="region" aria-label="Operating points across the input range, scrollable"><table class="ps-table">
+        <caption class="sr-only">Inductor ripple, current stress and timing at five input voltages for the current specification</caption>
+        <thead><tr><th scope="col">V<sub>in</sub></th><th scope="col">Duty D</th><th scope="col">ΔI<sub>L</sub></th><th scope="col">Ripple / I<sub>out</sub></th><th scope="col">I<sub>peak</sub></th><th scope="col">I<sub>valley</sub></th><th scope="col">On-time</th></tr></thead>
+        <tbody id="psSweepBody"><tr><td colspan="7">Enable JavaScript to interpolate the operating points.</td></tr></tbody>
+      </table></div>
+      <p class="ps-scroll-hint">Scroll the table sideways for every column.</p>
+      <p class="ps-table-note" id="psSweepNote">The maximum ripple and the maximum duty occur at opposite ends of the input range.</p>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">03 / WORKED CALCULATION</span><h2>Case A,<br><em>by hand.</em></h2></div><p>9–15 V in, 5 V out, 2 A, 500 kHz, 30 % ripple target, 1 % output ripple. Every figure below is reproduced by both test files.</p></div>
+      <div class="ps-worked">
+        <ol class="ps-steps">
+          <li><span class="ps-step-no">01</span><div><h3>Ripple allowance</h3><p><code>ΔI<sub>L,target</sub> = 30 % × 2 A = 0.60 A</code> peak to peak.</p></div></li>
+          <li><span class="ps-step-no">02</span><div><h3>Duty at the maximum input</h3><p><code>D = 5 / 15 = 0.3333</code>, so the off-time fraction is <code>1 − D = 0.6667</code>.</p></div></li>
+          <li><span class="ps-step-no">03</span><div><h3>Required inductance</h3><p><code>L = 5 × 0.6667 / (0.60 × 500 kHz) = 11.11 µH</code>.</p></div></li>
+          <li><span class="ps-step-no">04</span><div><h3>Check the minimum input</h3><p>At 9 V, <code>D = 0.5556</code> and the same inductor gives <code>ΔI<sub>L</sub> = 5 × 0.4444 / (11.11 µH × 500 kHz) = 0.40 A</code> — 20 % of load, inside the 30 % target.</p></div></li>
+          <li><span class="ps-step-no">05</span><div><h3>Current stress</h3><p><code>I<sub>peak</sub> = 2 + 0.30 = 2.30 A</code>, <code>I<sub>valley</sub> = 2 − 0.30 = 1.70 A</code>, <code>I<sub>rms</sub> = √(2² + 0.60²/12) = 2.007 A</code>.</p></div></li>
+          <li><span class="ps-step-no">06</span><div><h3>Continuity check</h3><p><code>L<sub>crit</sub> = 5 × 0.6667 / (2 × 2 A × 500 kHz) = 1.667 µH</code>. The chosen 11.11 µH is 6.7× that boundary, so the design stays in CCM at full load by a wide margin.</p></div></li>
+          <li><span class="ps-step-no">07</span><div><h3>Output capacitance</h3><p>1 % of 5 V is 50 mV. With <code>ESR = 0</code>: <code>C = 0.60 / (8 × 500 kHz × 0.05) = 3.0 µF</code>. With <code>ESR = 10 mΩ</code> the resistive term takes 6 mV of the 50 mV budget, raising the requirement to 3.41 µF — and a capacitor that keeps only 60 % of its nominal value under bias needs 5.68 µF on the order line.</p></div></li>
+        </ol>
+        <aside class="ps-worked-aside">
+          <span class="section-index">WHY IT MATTERS</span>
+          <p>Sizing at the <em>minimum</em> input instead gives <code>7.41 µH</code> — 33 % short. That part would exceed its ripple target across the entire upper half of the input range, and the error only appears at the operating point that application notes warn about.</p>
+          <p class="muted-small">The published module previously made exactly that mistake. The correction and the test that now catches it are described in section 06.</p>
+        </aside>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">04 / REFERENCE CASES</span><h2>Three cases,<br><em>two independent methods.</em></h2></div><p>Produced by the published module and asserted in <code>tests/powerstage.test.js</code>; the same values are re-derived from first principles in <code>tests/powerstage-independent.test.js</code>.</p></div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Reference cases, scrollable"><table class="ps-table ps-ref-table">
+        <caption class="sr-only">Reference cases computed by the published module and verified independently</caption>
+        <thead><tr><th scope="col">Case</th><th scope="col">Specification</th><th scope="col">L required</th><th scope="col">ΔI<sub>L</sub> at V<sub>in,max</sub></th><th scope="col">I<sub>peak</sub></th><th scope="col">L<sub>crit</sub></th><th scope="col">C for ripple target</th></tr></thead>
         <tbody>
-          <tr><th scope="row">A</th><td>9–15 V → 5 V, 2 A, 500 kHz, 30 % ripple</td><td>7.41 µH</td><td>0.60 A</td><td>2.30 A</td></tr>
-          <tr><th scope="row">B</th><td>12–24 V → 3.3 V, 1 A, 1 MHz, 40 % ripple</td><td>5.98 µH</td><td>0.40 A</td><td>1.20 A</td></tr>
-          <tr><th scope="row">C</th><td>12 V → 5 V, 1 A, 100 kHz, 100 % ripple</td><td>3.50 µH</td><td>1.00 A</td><td>1.50 A</td></tr>
+          <tr><th scope="row">A</th><td>9–15 V → 5 V, 2 A, 500 kHz, 30 %</td><td>11.111 µH</td><td>0.600 A</td><td>2.300 A</td><td>1.667 µH</td><td>3.000 µF</td></tr>
+          <tr><th scope="row">B</th><td>12–24 V → 3.3 V, 1 A, 1 MHz, 40 %</td><td>7.116 µH</td><td>0.400 A</td><td>1.200 A</td><td>1.423 µH</td><td>0.758 µF</td></tr>
+          <tr><th scope="row">C</th><td>12 V → 5 V, 1 A, 100 kHz, 100 %</td><td>29.167 µH</td><td>1.000 A</td><td>1.500 A</td><td>14.583 µH</td><td>25.000 µF</td></tr>
         </tbody>
       </table></div>
-      <p class="concept-caption">These are numbers produced by the published module and asserted in the test file, not measurements of hardware.</p>
+      <p class="ps-scroll-hint">Scroll the table sideways for every column.</p>
+      <p class="concept-caption">Ideal model output, not measurements of hardware. Case C sizes 29.167 µH for a ripple allowance equal to the full load current, leaving a valley of 0.5 A; the zero-valley boundary is half that inductance, because the ripple allowance is quoted relative to I<sub>out</sub>.</p>
     </div></section>
+
+    <section class="section ps-dev-section"><div class="wrap">
+      <div class="ps-dev-head">
+        <div><span class="section-index">05 / DEVELOPMENT &amp; VERIFICATION</span><h2>How this was built, and how it is checked.</h2></div>
+        <span class="status-label">Software demonstration · tested</span>
+      </div>
+      <dl class="ps-meta-strip">
+        <div><dt>Status</dt><dd>Tested software demonstration</dd></div>
+        <div><dt>Attribution</dt><dd>AI-assisted implementation</dd></div>
+        <div><dt>Dependencies</dt><dd>None</dd></div>
+        <div><dt>Runs</dt><dd>Entirely in your browser</dd></div>
+        <div><dt>Source</dt><dd><a href="/assets/powerstage.js">powerstage.js</a> · <a href="/tests/powerstage-independent.test.js">tests</a></dd></div>
+      </dl>
+      <div class="ps-dev-grid">
+        <article><h3>Implementation</h3><p>The model was specified by the studio, written with AI assistance, and then reviewed line by line against the standard ideal CCM buck relations. The module has no dependencies and no build step: the file served at <code>/assets/powerstage.js</code> is the file that runs in the browser and the file the tests import.</p></article>
+        <article><h3>AI assistance</h3><p>Disclosed because it is material. The JavaScript module, the page, and both test files were produced with AI assistance. The work is published as a software artefact of this site — it is not presented as the founder's independent engineering work, nor as a converter that was built or measured.</p></article>
+        <article><h3>Validation method</h3><p>Correct answers are established by a second method, not by re-running the module. Because ripple is defined by <em>di/dt</em>, the test suite integrates the inductor current through a switching cycle and finds the duty ratio by bisection on volt-second balance. Ripple, RMS current and capacitor voltage ripple are then measured from the simulated waveform and compared with the closed-form results.</p></article>
+        <article><h3>External reference values</h3><p>Three specifications were supplied independently of the implementation, with hand-calculated expectations. Case A: 11.111 µH inductance and 1.667 µH boundary. Case B: 7.116 µH. Case C: 29.167 µH. The module reproduces all of them within 0.3 %.</p></article>
+        <article><h3>Test coverage</h3><p>495 assertions in eight groups: cycle-integration parity, dense sweeps locating the worst case, boundary behaviour, scaling invariants, RMS integration, capacitor integration with ESR and derating, sweep consistency, and input validation. A separate file asserts the worked cases and the reference table published above, so a stale table fails the build rather than going unnoticed.</p></article>
+        <article><h3>Reproducing it</h3><p>The suite runs with Node and no packages.<code class="ps-code-block">node tests/powerstage.test.js
+node tests/powerstage-independent.test.js</code></p></article>
+      </div>
+      <div class="ps-dev-limits">
+        <h3>What the model deliberately leaves out</h3>
+        <ul>
+          <li>No switch, diode or winding resistance, so a real converter needs slightly more duty than <code>V<sub>out</sub>/V<sub>in</sub></code>. Efficiency is not used to correct the duty ratio.</li>
+          <li>No inductor saturation, core loss or thermal model. The peak current is a sizing input for a saturation rating, not a guarantee.</li>
+          <li>The capacitor estimate sums the capacitive and ESR ripple terms as a worst case, ignores ESL, and treats derating as a single scalar you choose.</li>
+          <li>The transient figure is an energy-balance floor for a load release. It ignores loop bandwidth entirely and cannot replace a stability analysis.</li>
+          <li>Steady-state CCM only. Below <code>L<sub>crit</sub></code> the tool stops claiming anything rather than reporting a DCM result.</li>
+          <li>Nothing here has been compared with a bench measurement, because no converter has been built.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section class="section"><div class="wrap"><div class="project-detail-related"><a href="/projects.html">All project records &#8599;</a><a href="/tools/buck-converter.html">Explore one operating point &#8599;</a><a href="/lab/buck-converter-ccm-model.html">Read the derivation note &#8599;</a></div></div></section>
 '''
     ld = json.dumps({
         "@context": "https://schema.org",
         "@type": "SoftwareSourceCode",
         "name": "Power-stage sizing utility",
-        "description": "Ideal buck power-stage sizing module with published source, formulas and reference tests. Software demonstration produced with AI assistance.",
+        "description": "Ideal buck power-stage sizing module: inductor sized at the worst-case input voltage, current stress, CCM boundary and output-capacitance estimate, with formulas, assumptions and independent tests published alongside. Software demonstration produced with AI assistance.",
         "codeRepository": "https://elitebotstudios.me/assets/powerstage.js",
         "programmingLanguage": "JavaScript",
         "url": "https://elitebotstudios.me/projects/power-stage-utility.html",
@@ -301,8 +484,8 @@ def powerstage_page():
         "isPartOf": {"@type": "WebSite", "url": "https://elitebotstudios.me"}
     }, indent=2)
     write('/projects/power-stage-utility.html',
-          __import__('build').head('Power-Stage Sizing Utility — software demonstration | Elite Bot Studios',
-                                   'An ideal buck power-stage sizing module with published formulas, assumptions, reference tests and source code. A software demonstration, clearly attributed.',
+          __import__('build').head('Power-Stage Sizing Utility — tested software demonstration | Elite Bot Studios',
+                                   'An ideal buck power-stage sizing module: inductor sized at the worst-case input voltage, current stress, CCM boundary and output-capacitance estimate, with formulas, a worked calculation and an independent test suite.',
                                    '/projects/power-stage-utility.html', jsonld=ld)
           + __import__('build').header('/projects.html') + '\n  <main id="main">\n' + body + '\n  </main>\n'
           + '\n  <script src="%s" defer></script>\n' % __import__('build').asset('assets/powerstage.js')
@@ -420,6 +603,7 @@ def about():
         <a class="evidence-card" href="/projects/smart-energy-monitoring.html"><span class="section-index">PROJECT RECORD</span><h3>Smart Energy Monitoring</h3><p>A design brief with requirements, sensing options, safety boundary and a staged roadmap. Status: concept.</p><b>Open the record &#8599;</b></a>
         <a class="evidence-card" href="/lab.html"><span class="section-index">ENGINEERING LAB</span><h3>Five technical notes</h3><p>Buck converter CCM, PWM timing, ADC resolution, and how simulation differs from measurement.</p><b>Read the notes &#8599;</b></a>
         <a class="evidence-card" href="/tools.html"><span class="section-index">ENGINEERING TOOLS</span><h3>Seven working models</h3><p>Including a buck-converter explorer and a PWM signal laboratory, each with stated assumptions and reference tests.</p><b>Open the tools &#8599;</b></a>
+        <a class="evidence-card" href="/projects/power-stage-utility.html"><span class="section-index">SOFTWARE DEMONSTRATION</span><h3>Power-stage sizing utility</h3><p>A buck sizing module with a worked calculation, published source and an independent test suite. AI-assisted, and labelled as such.</p><b>Open the utility &#8599;</b></a>
       </div>
     </div></section>
     <section class="section about-reviewers"><div class="wrap"><div class="reviewer-card">
@@ -429,10 +613,53 @@ def about():
         <li><a href="/lab.html"><b>Technical notes</b><span>Worked derivations with stated assumptions and references, written for study rather than marketing.</span></a></li>
         <li><a href="/tools.html"><b>Working models</b><span>Seven browser instruments whose formulas and reference tests are published in the repository.</span></a></li>
       </ul>
-      <p class="concept-caption">A CV will be published here once the owner supplies an approved document; no placeholder credentials or links are shown.</p>
+      <p class="concept-caption">The <a href="/about.html#profile">profile section</a> lists exactly which public documents exist and which are still awaiting owner approval.</p>
     </div></div></section>
     <section class="section about-direction"><div class="wrap"><div class="section-heading split-heading"><div><span class="section-index">03 / RESEARCH DIRECTION</span><h2>Questions that cross<br><em>disciplinary boundaries.</em></h2></div><p>Areas of curiosity—not published research contributions.</p></div><div class="research-lines"><article><span>01</span><h3>Digital power conversion</h3><p>How embedded control and power-stage dynamics shape converter behavior.</p></article><article><span>02</span><h3>Energy instrumentation</h3><p>How measurement quality changes the decisions a system can make.</p></article><article><span>03</span><h3>Intelligent electrical systems</h3><p>How connected hardware can improve visibility and control of energy use.</p></article></div></div></section>
-    <section class="section about-profile"><div class="wrap about-profile-grid"><div><span class="section-index">04 / PROFILE</span><h2>Academic foundation.</h2><p class="about-profile-lede">Power engineering is the academic direction. Embedded systems, electronics and control are the threads being developed around it, in coursework and in the open work on this site.</p></div><dl class="profile-facts"><div><dt>Name</dt><dd>Muhammad Shahzaib Abbas</dd></div><div><dt>Current status</dt><dd>Electrical Engineering undergraduate</dd></div><div><dt>Institution</dt><dd>National University of Sciences and Technology (NUST), Pakistan</dd></div><div><dt>Academic direction</dt><dd>Power engineering</dd></div><div><dt>Complementary interests</dt><dd>Embedded systems · electronics · control</dd></div></dl></div></section>
+    <section class="section about-profile" id="profile"><div class="wrap about-profile-grid">
+      <div>
+        <span class="section-index">04 / PROFILE</span>
+        <h2>A profile built from<br><em>what can be checked.</em></h2>
+        <p class="about-profile-lede">Power engineering is the academic direction. Embedded systems, electronics and control are the threads being developed around it, in coursework and in the open work on this site.</p>
+        <p class="about-profile-note">Only information that can be verified from this website is listed. Where a document or external profile does not exist yet, that is stated rather than filled with a placeholder.</p>
+      </div>
+      <div class="cv-panel">
+        <div class="cv-block">
+          <span class="cv-block-label">Education</span>
+          <div class="cv-entry">
+            <h3>BSc Electrical Engineering</h3>
+            <p>National University of Sciences and Technology (NUST), Pakistan</p>
+            <p class="cv-entry-meta">Undergraduate &middot; in progress &middot; academic direction: power engineering</p>
+          </div>
+          <p class="cv-disclaimer">Self-reported academic status. Elite Bot Studios is an independent initiative and is not affiliated with, endorsed by, or part of NUST. Coursework lists, grades and transcripts are not published here.</p>
+        </div>
+        <div class="cv-block">
+          <span class="cv-block-label">Focus areas</span>
+          <ul class="cv-focus">
+            <li><b>Power conversion</b><span>DC–DC topologies, switching behaviour, inductor and capacitor sizing, ideal-model limits</span></li>
+            <li><b>Embedded systems</b><span>Microcontroller fundamentals, peripherals, timing and PWM resolution</span></li>
+            <li><b>Electronics &amp; PCB</b><span>Circuit analysis, conductor sizing, protection and grounding concepts</span></li>
+            <li><b>Control &amp; instrumentation</b><span>Measurement quality, quantisation, feedback fundamentals</span></li>
+          </ul>
+        </div>
+        <div class="cv-block">
+          <span class="cv-block-label">Public record</span>
+          <ul class="cv-links">
+            <li><a href="/projects/smart-energy-monitoring.html"><span>Project record &mdash; smart energy monitoring</span><b>Concept stage &#8599;</b></a></li>
+            <li><a href="/projects/power-stage-utility.html"><span>Software demonstration &mdash; power-stage sizing utility</span><b>Tested &#8599;</b></a></li>
+            <li><a href="/tools.html"><span>Engineering calculators</span><b>Seven tools &#8599;</b></a></li>
+            <li><a href="/lab.html"><span>Technical notes</span><b>Five notes &#8599;</b></a></li>
+            <li><a href="/contact.html"><span>Direct contact</span><b>Contact page &#8599;</b></a></li>
+          </ul>
+          <ul class="cv-pending">
+            <li><span>Curriculum vitae (PDF)</span><b>Not published &mdash; owner approval pending</b></li>
+            <li><span>GitHub profile and repositories</span><b>Not published &mdash; owner approval pending</b></li>
+            <li><span>Professional profile (LinkedIn)</span><b>Not published &mdash; owner approval pending</b></li>
+          </ul>
+          <p class="cv-pending-note">These entries appear only after the owner supplies an approved document or URL. Nothing is linked speculatively, and no credentials, publications or employment history are claimed.</p>
+        </div>
+      </div>
+    </div></section>
     <section class="section about-now"><div class="wrap about-now-grid"><div><span class="section-index">05 / CURRENT PRACTICE</span><h2>Learn it.<br><em>Connect it. Document it.</em></h2></div><div><p>Current work is about developing a rigorous foundation and learning to move between circuit behavior, power flow, embedded decisions, and clear technical documentation. The public project index separates planned directions from artifacts that have actually been produced.</p><a class="text-link" href="/projects.html">See project status <b>↗</b></a></div></div></section>
     <section class="section"><div class="wrap"><div class="collaboration-card"><span class="section-index">06 / CONNECT</span><h2>Good engineering starts with a good question.</h2><p>Open to academic discussion, research conversations, internships, and appropriately scoped engineering collaboration.</p><a class="btn btn-primary" href="/contact.html">Start a conversation ↗</a></div></div></section>
 '''

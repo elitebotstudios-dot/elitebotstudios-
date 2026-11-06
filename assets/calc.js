@@ -122,9 +122,7 @@ function pwm(o) {
   return {
     period: period, ton: ton, toff: toff,
     dutyPct: duty * 100, average: average, rms: rms,
-    high: high, low: 0,
-    /* counts available in a 16-bit timer at this period, for context only */
-    maxCounts: 65535
+    high: high, low: 0
   };
 }
 
