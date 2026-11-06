@@ -528,6 +528,7 @@
     var preset = D.PRESETS.filter(function (p) { return p.id === id; })[0];
     if (!preset) return;
     state.preset = preset;
+    if (el.scenario) el.scenario.value = id;
     var cfg = preset.config;
     /* Write the preset into the controls so the user can see and then change
        every value it uses. */
@@ -652,6 +653,23 @@
         if (el.scenario.value) applyPreset(el.scenario.value);
       });
     }
+    /* "Load this experiment" cards below the instrument apply the same presets
+       as the scenario list and bring the instrument back into view. */
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-experiment]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var id = button.getAttribute('data-experiment');
+        applyPreset(id);
+        var app = document.getElementById('emApp');
+        if (app && app.scrollIntoView) {
+          app.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        }
+        var heading = app && app.querySelector('.em-status');
+        if (heading && heading.focus) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
+        announce('Experiment loaded into the instrument. Press Start to run it.');
+      });
+    });
+
     document.querySelectorAll('[data-arch]').forEach(function (button) {
       button.addEventListener('click', function () {
         document.querySelectorAll('[data-arch]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
