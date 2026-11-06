@@ -150,7 +150,7 @@ ok(seen.size >= 6, 'the pages link to at least six artefacts', seen.size);
     ok(!rx.test(project), 'the project page does not claim ' + rx, (project.match(rx) || [''])[0]);
     ok(!rx.test(dashboard), 'the instrument page does not claim ' + rx, (dashboard.match(rx) || [''])[0]);
   });
-  ok(/Hardware prototype\s*<\/?[^>]*>?\s*Not yet built/i.test(project) || project.includes('Not yet built'),
+  ok(/not (yet )?built|no prototype|prototype does not exist/i.test(project),
     'the project page states that hardware is not built');
   ok(project.toLowerCase().includes('not built') || project.toLowerCase().includes('not yet built'),
     'the project page says the hardware does not exist');

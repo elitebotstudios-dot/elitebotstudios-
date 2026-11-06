@@ -57,13 +57,13 @@ data.forEach(function (p, i) {
   ok('entry ' + i + ' "' + (p.slug || '?') + '" has required fields', missing.length === 0,
      missing.length ? 'missing ' + missing.join(', ') : '');
   ok('entry ' + i + ' status is a known value',
-     ['concept', 'simulation', 'design-completed', 'prototype-in-progress', 'bench-tested', 'complete'].indexOf(p.status) !== -1, p.status);
+     ['designed', 'concept', 'simulation', 'design-completed', 'prototype-in-progress', 'bench-tested', 'complete'].indexOf(p.status) !== -1, p.status);
   const html = render(p);
   ok('entry ' + i + ' renders non-empty HTML', html.length > 200, html.length + ' chars');
   if (p.case_study_url) ok('entry ' + i + ' links to its generated project record', html.indexOf(p.case_study_url) !== -1);
   ok('entry ' + i + ' shows its title', html.indexOf(p.title) !== -1);
   ok('entry ' + i + ' shows the status chip',
-     html.indexOf(['bench-tested', 'complete'].indexOf(p.status) !== -1 ? 'chip-teal' : 'chip-amber') !== -1);
+     html.indexOf(['designed', 'bench-tested', 'complete'].indexOf(p.status) !== -1 ? 'chip-teal' : 'chip-amber') !== -1);
   ok('entry ' + i + ' renders the problem text', html.indexOf(p.problem.slice(0, 30)) !== -1);
   if (p.results) ok('entry ' + i + ' shows results', html.indexOf(p.results.slice(0, 20)) !== -1);
   else if (p.results_note) ok('entry ' + i + ' shows the pending-results note',

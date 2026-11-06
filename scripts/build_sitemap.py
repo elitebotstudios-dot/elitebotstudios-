@@ -16,7 +16,11 @@ class CanonicalParser(HTMLParser):
 urls=set()
 for f in ROOT.rglob('*.html'):
     if f.name in ('404.html','offline.html'): continue
-    parser=CanonicalParser(); parser.feed(f.read_text(encoding='utf-8'))
+    raw = f.read_text(encoding='utf-8')
+    # A noindex page is not a page of the site — a print source, for example —
+    # so its canonical must not pull its target into the sitemap.
+    if 'name="robots" content="noindex"' in raw: continue
+    parser=CanonicalParser(); parser.feed(raw)
     url=parser.canonical
     if url and url.startswith(SITE): urls.add(url)
 register_namespace('', 'http://www.sitemaps.org/schemas/sitemap/0.9')

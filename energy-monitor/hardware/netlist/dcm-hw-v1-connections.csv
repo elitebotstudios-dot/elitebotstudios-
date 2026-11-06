@@ -1,0 +1,43 @@
+net,class,ref,pin,pin_name,component,function
+3V3,power,C1,1,+,Murata GRM32ER71E106KA12 (1210),Bulk decoupling at the module supply
+3V3,power,C2,1,+,Kemet C0603C104K3RAC (0603),High-frequency decoupling at the module supply
+3V3,power,J3,1,3V3,Wurth 61300411121 (or generic 4-pin header),I2C and 3.3 V link to the microcontroller
+3V3,power,R2,1,to 3V3,Yageo RC0603FR-074K7L,"I2C pull-up, SDA, to 3.3 V"
+3V3,power,R3,1,to 3V3,Yageo RC0603FR-074K7L,"I2C pull-up, SCL, to 3.3 V"
+3V3,power,U1,6,VS,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+3V3,power,U2,3V3,3.3 V out,Espressif ESP32-DevKitC-32E,"Microcontroller, off-board, connected by J3"
+GND,ground,C1,2,-,Murata GRM32ER71E106KA12 (1210),Bulk decoupling at the module supply
+GND,ground,C2,2,-,Kemet C0603C104K3RAC (0603),High-frequency decoupling at the module supply
+GND,ground,D2,A,anode,Littelfuse SMBJ15A,Transient clamp across the protected rail
+GND,ground,J1,2,-,Phoenix MKDS 1/2-5.08 or equivalent,DC input terminals
+GND,ground,J2,2,-,Phoenix MKDS 1/2-5.08 or equivalent,Load output terminals
+GND,ground,J3,2,GND,Wurth 61300411121 (or generic 4-pin header),I2C and 3.3 V link to the microcontroller
+GND,ground,TP4,1,probe,Keystone 5000 series or 1 mm pad,"Probe point, common ground"
+GND,ground,U1,1,A1,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+GND,ground,U1,2,A0,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+GND,ground,U1,7,GND,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+GND,ground,U2,GND,ground,Espressif ESP32-DevKitC-32E,"Microcontroller, off-board, connected by J3"
+SCL,signal,J3,4,SCL,Wurth 61300411121 (or generic 4-pin header),I2C and 3.3 V link to the microcontroller
+SCL,signal,R3,2,to SCL,Yageo RC0603FR-074K7L,"I2C pull-up, SCL, to 3.3 V"
+SCL,signal,TP5,1,probe,Keystone 5000 series or 1 mm pad,"Probe point, I2C clock"
+SCL,signal,U1,5,SCL,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+SCL,signal,U2,IO22,I2C SCL (default),Espressif ESP32-DevKitC-32E,"Microcontroller, off-board, connected by J3"
+SDA,signal,J3,3,SDA,Wurth 61300411121 (or generic 4-pin header),I2C and 3.3 V link to the microcontroller
+SDA,signal,R2,2,to SDA,Yageo RC0603FR-074K7L,"I2C pull-up, SDA, to 3.3 V"
+SDA,signal,U1,4,SDA,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+SDA,signal,U2,IO21,I2C SDA (default),Espressif ESP32-DevKitC-32E,"Microcontroller, off-board, connected by J3"
+VFUSED,power,D1,A,anode,onsemi SS34,Reverse-polarity protection
+VFUSED,power,F1,2,out,Bourns MF-R110,Resettable series protection
+VIN,power,F1,1,in,Bourns MF-R110,Resettable series protection
+VIN,power,J1,1,+,Phoenix MKDS 1/2-5.08 or equivalent,DC input terminals
+VIN,power,TP1,1,probe,Keystone 5000 series or 1 mm pad,"Probe point, raw input"
+VLOAD,power,J2,1,+,Phoenix MKDS 1/2-5.08 or equivalent,Load output terminals
+VLOAD,power,R1,2,low,Vishay CRCW2512 0R1 1 W (or Panasonic ERJ-M1WS),"Current shunt, external to the module"
+VLOAD,power,TP3,1,probe,Keystone 5000 series or 1 mm pad,"Probe point, load side of the shunt"
+VLOAD,power,U1,8,VBUS,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+VLOAD,power,U1,9,IN-,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"
+VPROT,power,D1,K,cathode,onsemi SS34,Reverse-polarity protection
+VPROT,power,D2,K,cathode,Littelfuse SMBJ15A,Transient clamp across the protected rail
+VPROT,power,R1,1,high,Vishay CRCW2512 0R1 1 W (or Panasonic ERJ-M1WS),"Current shunt, external to the module"
+VPROT,power,TP2,1,probe,Keystone 5000 series or 1 mm pad,"Probe point, protected rail / shunt high side"
+VPROT,power,U1,10,IN+,Texas Instruments INA226AIDGSR (VSSOP-10),"Bus voltage and shunt current measurement, I2C"

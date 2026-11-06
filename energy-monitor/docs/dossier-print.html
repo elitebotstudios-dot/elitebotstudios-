@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart DC Energy Monitor — Engineering Design and Verification Report</title>
+<meta name="description" content="Technical dossier for Project 01: software model, KiCad schematic, ESP32 firmware and their verification. Elite Bot Studios.">
+<link rel="canonical" href="https://elitebotstudios.me/assets/dossier-smart-dc-energy-monitor.pdf">
+<meta name="robots" content="noindex">
+<meta name="ebs-print-source" content="true">
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: #14181c;
+         font-family: 'Georgia', 'Times New Roman', serif; font-size: 10.4pt; line-height: 1.62; }
+  .page { max-width: 190mm; margin: 0 auto; padding: 0; }
+  .doc-head { border-bottom: 2px solid #1b3a49; padding-bottom: 10mm; margin-bottom: 8mm; }
+  .doc-head .kicker { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 7.6pt;
+                      letter-spacing: .18em; text-transform: uppercase; color: #3f4c56; }
+  .doc-head .meta { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 8.4pt;
+                    color: #3f4c56; margin-top: 6mm; }
+  h1 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 22pt; line-height: 1.14;
+       margin: 6mm 0 2mm; letter-spacing: -.02em; color: #0f1c24; }
+  h2 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12.4pt; margin: 9mm 0 3mm;
+       color: #0f1c24; border-bottom: 1px solid #d3dbe1; padding-bottom: 1.6mm;
+       page-break-after: avoid; }
+  h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10.6pt; margin: 6mm 0 2mm;
+       color: #1b3a49; page-break-after: avoid; }
+  p { margin: 0 0 3mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.4mm; }
+  strong { color: #0f1c24; }
+  code { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 8.8pt;
+         background: #f2f5f7; padding: .4mm 1.2mm; border-radius: 1mm; }
+  pre { background: #f6f8f9; border: 1px solid #dde4e9; border-left: 3px solid #1b3a49;
+        padding: 3mm 4mm; overflow-x: auto; page-break-inside: avoid; margin: 0 0 4mm; }
+  pre code { background: none; font-size: 8.2pt; line-height: 1.5; color: #22323d; }
+  table { width: 100%; border-collapse: collapse; font-family: 'Helvetica Neue', Arial, sans-serif;
+          font-size: 8.4pt; margin: 0 0 4mm; page-break-inside: avoid; }
+  th { background: #edf2f5; text-align: left; padding: 1.8mm 2.4mm; border: 1px solid #cdd7de;
+       font-weight: 600; color: #0f1c24; }
+  td { padding: 1.6mm 2.4mm; border: 1px solid #dde4e9; vertical-align: top; }
+  tbody tr:nth-child(even) td { background: #fafcfd; }
+  hr { border: 0; border-top: 1px solid #d3dbe1; margin: 8mm 0; }
+  a { color: #1b5b6e; text-decoration: none; }
+  .doc-foot { margin-top: 10mm; padding-top: 4mm; border-top: 1px solid #d3dbe1;
+              font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 7.8pt; color: #3f4c56; }
+  h2 + p, h3 + p { page-break-before: avoid; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="doc-head">
+    <span class="kicker">Elite Bot Studios &middot; Project 01 &middot; Technical dossier</span>
+    <div class="meta">Revision B &middot; generated 2026-11-06 from
+      energy-monitor/docs/dossier.md &middot; software verified, hardware designed,
+      prototype not built</div>
+  </header>
+  <main id="dossier">
+  <h1 id="smart-dc-energy-monitor">Smart DC Energy Monitor</h1>
+<h2 id="engineering-design-and-verification-report">Engineering Design and Verification Report</h2>
+<p><strong>Elite Bot Studios · Project 01 · revision B · 6 November 2026</strong></p>
+<p>A low-voltage DC energy monitor built in three layers: a software model verified against reference cases, a native KiCad schematic that passes electrical rule check, and firmware that cross-compiles for an ESP32. The physical prototype has not been built and no measurement of hardware exists.</p>
+<hr>
+<h2 id="1-abstract">1. Abstract</h2>
+<p>This report documents the design of a low-voltage direct-current energy monitor intended to measure bus voltage and load current, derive instantaneous power and integrate energy over time. The work is presented in three independent but mutually verifiable layers.</p>
+<p>The <strong>software model</strong> implements the entire measurement chain — source, load, sensing, analogue-to-digital conversion, sampled power and energy accumulation — and is verified by 67 hand-derived reference assertions and 594 checks against independent constructions. The <strong>electrical design</strong> is a native KiCad schematic built from official library symbols, passing electrical rule check with zero errors and zero warnings, whose exported netlist agrees with the design file on all 42 pins. The <strong>firmware</strong> extracts current from the shunt voltage, timestamps each sample, integrates energy with an explicit missing-data policy, and cross-compiles for the ESP32 target using PlatformIO with the Xtensa GCC 14.2.0 toolchain; its arithmetic and its sensor driver pass 98 host checks.</p>
+<p>What the project does <strong>not</strong> have is equally important: no printed circuit board, no assembled prototype, no flashed firmware and no measurement against a reference instrument. No accuracy figure is claimed. The report distinguishes throughout between what has been verified computationally and what remains untested physical work.</p>
+<hr>
+<h2 id="2-objectives">2. Objectives</h2>
+<p>The motivating question is not what an energy monitor displays, but how far that display can be from the truth and which stage put the error there.</p>
+<p>A monitor reporting 12.00 W is making a claim about a chain of components. A divider scales voltage; a shunt converts current into a small differential voltage; an amplifier and an ADC convert both into numbers; firmware multiplies them and a clock decides how long to accumulate. Each stage contributes an error the others do not cancel, and several of those errors — gain error, a stale sample, an interval integrated across missing data — are indistinguishable from a real change in the load.</p>
+<p>The project therefore has three objectives:</p>
+<ol>
+<li>Implement the measurement chain in software so that every stage can be varied and tested in isolation.</li>
+<li>Produce an electrically valid hardware design for the same chain, checked by tools rather than by assertion.</li>
+<li>Implement firmware whose arithmetic can be tested without hardware, and prove it compiles for the intended target.</li>
+</ol>
+<hr>
+<h2 id="3-requirements">3. Requirements</h2>
+<p>Requirements are marked <strong>verified</strong> where an artefact or script in the repository checks them, and <strong>proposed</strong> where they remain intentions that only a bench can confirm.</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th><th scope="col">Acceptance criterion</th><th scope="col">Status</th></tr></thead><tbody>
+<tr><td>S1</td><td>Model a DC source with series resistance</td><td>Terminal voltage follows Voc − I·Rs</td><td>verified</td></tr>
+<tr><td>S2</td><td>Five load models: resistance, current, step, duty, sequence</td><td>Each produces the documented operating point</td><td>verified</td></tr>
+<tr><td>S3</td><td>Configurable sensing per channel</td><td>Reported value reproducible from the documented equation</td><td>verified</td></tr>
+<tr><td>S4</td><td>Quantisation with saturation reporting</td><td>Values on the LSB grid; half-LSB bound; clipping counted</td><td>verified</td></tr>
+<tr><td>S5</td><td>Per-channel calibration</td><td>True error terms recover the true value exactly</td><td>verified</td></tr>
+<tr><td>S6</td><td>Sample timestamps with rejection of invalid data</td><td>Duplicate, non-monotonic, non-numeric and out-of-range refused</td><td>verified</td></tr>
+<tr><td>S7</td><td>Power from measured values and from truth</td><td>Both reported side by side</td><td>verified</td></tr>
+<tr><td>S8</td><td>Energy by trapezoidal integration on actual intervals</td><td>Reference cases A, B, C, E reproduce hand values</td><td>verified</td></tr>
+<tr><td>S9</td><td>Separate imported and exported energy</td><td>Net, import and export reported</td><td>verified</td></tr>
+<tr><td>S10</td><td>CSV export with a documented column set</td><td>Round trip within 1e-6</td><td>verified</td></tr>
+<tr><td>S11</td><td>Deterministic runs</td><td>Same configuration and seed give identical output</td><td>verified</td></tr>
+<tr><td>E1</td><td>Measure bus voltage at the load</td><td>Within ±1 % of a reference meter at three points</td><td>proposed</td></tr>
+<tr><td>E2</td><td>Measure DC current through a shunt</td><td>Within ±2 % of a reference meter at three points</td><td>proposed</td></tr>
+<tr><td>E3</td><td>Derive instantaneous power</td><td>P = V × I from the same sample</td><td>verified</td></tr>
+<tr><td>E4</td><td>Accumulate energy over elapsed time</td><td>Trapezoidal on measured intervals</td><td>verified</td></tr>
+<tr><td>E5</td><td>Report through serial</td><td>CSV at ≥ 1 Hz with status</td><td>proposed (never run on a board)</td></tr>
+<tr><td>E6</td><td>Survive a sensor communication failure</td><td>Sample marked, interval not integrated, counter incremented</td><td>verified</td></tr>
+<tr><td>E7</td><td>Protect the input</td><td>Series fuse, reverse diode, transient clamp</td><td>verified by design rule check</td></tr>
+<tr><td>E9</td><td>Keep logic levels compatible</td><td>3.3 V on both sides; no 5 V on the bus</td><td>verified by design rule check</td></tr>
+<tr><td>E12</td><td>Report energy without inventing it</td><td>Gaps and invalid samples never integrated</td><td>verified</td></tr>
+</tbody></table></div>
+<p>The design envelope is 5–12 V DC nominal and 0–0.5 A, with a bench supply current-limited to 1 A. A 1 A test would require a 0.05 Ω shunt: with 0.1 Ω the measurable maximum is 0.8192 A, set by the sensor's ±81.92 mV shunt range.</p>
+<hr>
+<h2 id="4-system-architecture">4. System architecture</h2>
+<p>The same signal path is described three ways.</p>
+<pre><code class=""> DC source ──▶ [fuse] ──▶ [Schottky] ──┬──▶ INA226 IN+ ──[0.1 Ω shunt]── INA226 IN− ──▶ load
+                                        │                                        │
+                                     [TVS]                                   VBUS tied here
+                                        │                                        │
+                                       GND ◀────────── common ground ────────────┘
+                                                                                 │
+                                             INA226 ──I²C (0x40, 3.3 V)──▶ ESP32-DevKitC
+                                                                                 │
+                                                                   CSV on USB serial 115200</code></pre>
+<p>The shunt is in series with the load, the sensor measures the <strong>load side</strong> of it, and the reverse-polarity diode sits <strong>upstream</strong> of the shunt. That ordering is deliberate: the diode costs headroom, but it cannot corrupt the measurement, and the reported power is what the load actually receives.</p>
+<p>Three descriptions exist for this one path, which is what makes verification possible:</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Description</th><th scope="col">Artefact</th><th scope="col">Verified by</th></tr></thead><tbody>
+<tr><td>Simulation</td><td><code>energy-monitor/model/dcem.js</code></td><td>661 automated checks</td></tr>
+<tr><td>Schematic</td><td><code>energy-monitor/hardware/kicad/dcm-hw-v1.kicad_sch</code></td><td>ERC, netlist comparison</td></tr>
+<tr><td>Firmware</td><td><code>energy-monitor/firmware/</code></td><td>98 host checks, cross-compilation</td></tr>
+</tbody></table></div>
+<hr>
+<h2 id="5-mathematical-model">5. Mathematical model</h2>
+<p><strong>Power</strong> is computed twice, from the measured voltage and current and from the simulated truth, and both are reported:</p>
+<pre><code class="">P = V · I</code></pre>
+<p><strong>Energy</strong> is accumulated with the trapezoidal rule over the actual interval between accepted samples:</p>
+<pre><code class="">E_import += ½ (P_prev + P_now) · Δt
+E_export += ½ (|P_prev| + |P_now|) · Δt          (negative power)
+E_Wh = (E_import − E_export) / 3600</code></pre>
+<p>An interval containing a sign change is split at the zero crossing by linear interpolation before integration, so imported and exported energy are each integrated over the region where they apply.</p>
+<p><strong>Why trapezoidal.</strong> It is exact for constant power and second-order accurate for piecewise-linear power. For a step that straddles one interval it smears the step across that interval; with 1 s sampling the error on a 27 000 J run is 2.5 J, or 0.0093 %. Halving the sample interval quarters that error — a convergence order the independent suite checks directly rather than assuming.</p>
+<p><strong>Why actual intervals.</strong> The model never assumes uniform spacing. Integrating a constant 18 W profile at deliberately irregular timestamps must produce exactly P · (t_end − t_start); this is asserted to 1e-9 J. Summing power samples without multiplying by time is dimensionally wrong, and at 0.5 s sampling it is out by a factor of two.</p>
+<p><strong>Sensing chain</strong>, per channel, in signal order:</p>
+<pre><code class="">pin  = value · S · (1 + g) + Vos + n        sensitivity, gain error, offset, noise
+pin&#x27; = clamp(pin, 0, Vref)                  saturation, flagged
+code = round(pin&#x27; / LSB),  LSB = Vref / 2^bits
+reported = code · LSB / S                   uncalibrated
+reported = (code · LSB − Vos,est) / (S · (1 + g_est))   calibrated</code></pre>
+<p>Calibration is per channel: a divider and a shunt amplifier have independent tolerances, and one correction cannot serve both. An early revision shared a single correction across both channels; the test suite caught it.</p>
+<p><strong>Missing data.</strong> An invalid sample costs two intervals — the one ending at it and the one starting from it — because the alternative is to integrate across a stale reading. A gap longer than five seconds is treated as missing data and not integrated at all. Both events are counted, so a period with no measurement cannot be mistaken for a period of zero power.</p>
+<hr>
+<h2 id="6-hardware-design">6. Hardware design</h2>
+<div class="table-scroll"><table><thead><tr><th scope="col">Item</th><th scope="col">Selection</th><th scope="col">Key figures</th></tr></thead><tbody>
+<tr><td>Sensor</td><td>Texas Instruments INA226AIDGSR, VSSOP-10</td><td>0–36 V bus, ±81.92 mV shunt, 16-bit, 2.7–5.5 V supply</td></tr>
+<tr><td>Shunt</td><td>0.1 Ω, 0.5 %, 1 W, 2512</td><td>50 mV at 0.5 A (61 % of range), 25 mW</td></tr>
+<tr><td>Controller</td><td>Espressif ESP32-DevKitC-32E</td><td>3.3 V logic, I²C on GPIO21/22 at 100 kHz</td></tr>
+<tr><td>Series protection</td><td>Bourns MF-R110 PTC</td><td>1.1 A hold, 2.2 A trip</td></tr>
+<tr><td>Reverse polarity</td><td>onsemi SS34 Schottky</td><td>3 A, 40 V, upstream of the shunt</td></tr>
+<tr><td>Transient clamp</td><td>Littelfuse SMBJ15A</td><td>15 V standoff, 24.4 V clamp at peak current</td></tr>
+<tr><td>Pull-ups</td><td>4.7 kΩ to 3.3 V, on the carrier</td><td>keeps the bus at the sensor's own supply level</td></tr>
+</tbody></table></div>
+<p><strong>A correction worth recording.</strong> Revision A of this design treated the sensor as a breakout module and never modelled VBUS. On the bare IC, VBUS is pin 8, a separate input that must be wired to IN− for load-side measurement; the datasheet's own application example does exactly that. Without it the bus reading comes from the wrong node and every power figure is wrong while appearing plausible. Revision B specifies the bare IC, wires VBUS to VLOAD, straps A0 and A1 to ground for address 0x40, and marks ALERT as an explicit no-connect.</p>
+<p><strong>Electrical verification.</strong> The schematic is a native KiCad 9 project generated from the design file and built from official library symbols. <code>kicad-cli sch erc</code> reports <strong>0 errors and 0 warnings</strong> after two genuine errors were fixed by correcting symbol pin types rather than by disabling the rule. Twenty-five purpose-written design rules additionally check the things ERC cannot: sensor ranges, shunt dissipation and current limit, clamp voltage against the sensor's absolute maximum, connector ratings, ground continuity and measurement polarity.</p>
+<hr>
+<h2 id="7-firmware-architecture">7. Firmware architecture</h2>
+<pre><code class="">include/dcm/types.h        units, Status, Calibration, Sample, EnergyTotals
+include/dcm/transport.h    the I2C boundary as an interface
+include/dcm/ina226.h       register map and decode declarations
+include/dcm/sensor.h       device logic: configuration, identity, reads
+include/dcm/integrator.h   energy accumulation and the missing-data policy
+src/core/*.cpp             implementations, free of Arduino
+src/main.cpp               ESP32 application layer (Wire transport, CSV, self-test)
+test/test_core.cpp         69 host checks over eight vector sets
+test/test_sensor.cpp       29 host checks against a mock I2C bus</code></pre>
+<p>The split exists so the arithmetic can be tested without a board: the host tests drive the same <code>dcm::Ina226Sensor</code> through a simulated bus that can acknowledge, NACK, report the wrong identity, saturate, over-range or recover.</p>
+<p>Two decisions dominate the firmware's behaviour:</p>
+<ul>
+<li><strong>Current is derived from the shunt voltage and the known resistance</strong>, not from the device's current register. This removes any dependence on the calibration register having been written correctly, at the cost of one division per sample.</li>
+<li><strong>Timestamps are unsigned 32-bit milliseconds</strong>, so subtraction wraps correctly after 49.7 days. There is no real-time clock, so no date or time of day is claimed anywhere in the output.</li>
+</ul>
+<p><strong>Build.</strong> <code>pio run -e esp32dev</code> with PlatformIO 6.2.0, the espressif32 8.0.0 platform and the Xtensa GCC 14.2.0 toolchain produces <code>firmware.bin</code> using 25.4 % of flash and 7.2 % of RAM, with no warnings at <code>-Wall -Wextra</code>. The first attempt failed: <code>setup()</code> and <code>loop()</code> were inside an anonymous namespace, so the Arduino core could never have called them. The binary has never been flashed.</p>
+<hr>
+<h2 id="8-verification-methodology">8. Verification methodology</h2>
+<p>No test in this project asserts a value produced by the code it is testing.</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Suite</th><th scope="col">Method</th><th scope="col">Checks</th></tr></thead><tbody>
+<tr><td>Reference cases</td><td>Hand-derived expectations from P = VI and the trapezoidal rule</td><td>67</td></tr>
+<tr><td>Model independent</td><td>Second integrator over 500 random series; closed-form sine integral with a convergence-order check; Ohm and Kirchhoff balance; additivity; quantisation bounds; noise statistics</td><td>594</td></tr>
+<tr><td>Energy duration</td><td>1 s, 9 s, 1 hour, irregular and invalid-sample cases, hand-derived, against both the firmware policy and the model</td><td>48</td></tr>
+<tr><td>Firmware core</td><td>Vector sets generated from the written policy, not from the C++</td><td>69</td></tr>
+<tr><td>Sensor driver</td><td>The driver against a programmable mock bus</td><td>29</td></tr>
+<tr><td>Vectors vs model</td><td>The firmware vectors replayed through the verified model</td><td>20</td></tr>
+<tr><td>Netlist agreement</td><td>The KiCad export compared pin by pin with the design file</td><td>42 pins</td></tr>
+<tr><td>Configuration</td><td>Manifest values compared with the C++ sources, the design file and the published pages</td><td>30</td></tr>
+<tr><td>Package coherence</td><td>Every referenced artefact exists; claims are bound to artefacts</td><td>237</td></tr>
+<tr><td>Design rules</td><td>25 electrical rules with margins printed</td><td>25</td></tr>
+<tr><td>ERC</td><td><code>kicad-cli sch erc</code></td><td>0 errors, 0 warnings</td></tr>
+</tbody></table></div>
+<p>The reference and independent suites are deliberately complementary: a model error that is consistent with itself survives the first and fails the second.</p>
+<hr>
+<h2 id="9-verified-results">9. Verified results</h2>
+<p>Actual output from the suites, not a summary of intent:</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Case</th><th scope="col">Input</th><th scope="col">Expected</th><th scope="col">Result</th></tr></thead><tbody>
+<tr><td>A</td><td>12 V, 1 A, 3600 s</td><td>43 200 J = 12 Wh</td><td>exact</td></tr>
+<tr><td>B</td><td>5 V, 2 A, 1800 s</td><td>18 000 J = 5 Wh</td><td>exact</td></tr>
+<tr><td>C</td><td>10 V, 1 A → 0.5 A at 1800 s</td><td>27 000 J continuous ideal</td><td>26 997.5 J (0.0093 % low)</td></tr>
+<tr><td>D</td><td>12 V, 0 A, 600 s</td><td>0 J</td><td>exact, voltage still reported</td></tr>
+<tr><td>E</td><td>irregular timestamps, 5 intervals</td><td>77.605 J by hand</td><td>77.605 J</td></tr>
+<tr><td>F</td><td>+2 % gain, +50 mV offset</td><td>10.4 V uncalibrated, 10.000 V calibrated</td><td>exact both ways</td></tr>
+<tr><td>G</td><td>six invalid-data classes</td><td>classified and refused</td><td>all refused</td></tr>
+<tr><td>Q</td><td>12-bit ADC, 3.3 V, ÷4 divider</td><td>3.2227 mV per LSB at the input</td><td>exact</td></tr>
+<tr><td>Energy</td><td>3 W for 1 s / 9 s / 3600 s</td><td>3 J / 27 J / 10 800 J</td><td>exact</td></tr>
+<tr><td>Firmware</td><td>gap, invalid sample, 32-bit rollover</td><td>held, counted, wrap-safe</td><td>all pass</td></tr>
+<tr><td>ESP32</td><td><code>pio run -e esp32dev</code></td><td>links for Xtensa LX6</td><td>SUCCESS, 25.4 % flash</td></tr>
+<tr><td>KiCad ERC</td><td><code>dcm-hw-v1.kicad_sch</code></td><td>no pin conflicts</td><td>0 errors, 0 warnings</td></tr>
+</tbody></table></div>
+<hr>
+<h2 id="10-design-limitations">10. Design limitations</h2>
+<ul>
+<li><strong>No hardware accuracy.</strong> No sensor, ADC, microcontroller or board was used. Nothing in this report predicts the accuracy of a real implementation.</li>
+<li><strong>DC only, single channel, non-isolated.</strong> No AC, mains, grid or isolation.</li>
+<li><strong>No switched-mode behaviour.</strong> Loads are smooth resistance or current demands; anything faster than the sample interval is aliased.</li>
+<li><strong>No ADC non-idealities.</strong> Quantisation is ideal uniform rounding: no INL, DNL, reference drift or aperture jitter.</li>
+<li><strong>No MCU behaviour.</strong> No fixed-point arithmetic, timer jitter or interrupt latency is modelled.</li>
+<li><strong>The module question is unresolved.</strong> If a breakout module is used instead of the bare IC, its shunt value, pull-up rail, address straps and VBUS connection must be verified physically.</li>
+<li><strong>ERC is not correctness.</strong> It proves the connections are electrically legal, not that the circuit does the right thing.</li>
+<li><strong>A compile is not a run.</strong> The firmware has never executed on hardware.</li>
+</ul>
+<hr>
+<h2 id="11-future-physical-testing">11. Future physical testing</h2>
+<p>Seven stages, each with an observable exit condition, defined in <code>verification/calibration-plan/calibration-plan.md</code> and summarised in <code>hardware/design-review/prototype-review-checklist.md</code>:</p>
+<ol>
+<li>Review the design and decide bare IC or module.</li>
+<li>Identify the parts: markings, shunt resistance, module pull-up rail, VBUS.</li>
+<li>Unpowered continuity; prove no short from the protected rail to ground.</li>
+<li>First power-up at 5 V and 100 mA with no load.</li>
+<li>Communication: I²C scan finds 0x40, identity registers read correctly.</li>
+<li>Known loads, compared with a multimeter.</li>
+<li>Six-point reference comparison, then calibration, then a repeat.</li>
+<li>Uncertainty statement: residual error at each point, repeatability and conditions.</li>
+</ol>
+<p>Only after stage 8 does this project have an accuracy figure to publish. Until then the website states the accuracy targets as targets, with no evidence.</p>
+<hr>
+<h2 id="12-references-and-source-locations">12. References and source locations</h2>
+<p><strong>Datasheets</strong> (official sources, not redistributed):</p>
+<ul>
+<li>Texas Instruments INA226, <em>36 V, 16-bit, ultra-precise I²C output current / voltage / power monitor</em>, SBOS547A. <code>https://www.ti.com/product/INA226</code></li>
+<li>Espressif ESP32-DevKitC-32E documentation, <code>https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/</code></li>
+<li>Bourns MF-R series PTC, onsemi SS34, Littelfuse SMBJ, Vishay CRCW and Yageo RC series: linked individually in <code>hardware/datasheets-references/links.md</code>.</li>
+</ul>
+<p><strong>Source locations</strong> (all served from this site):</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Artefact</th><th scope="col">Path</th></tr></thead><tbody>
+<tr><td>Simulation model</td><td><code>/energy-monitor/model/dcem.js</code></td></tr>
+<tr><td>Model tests</td><td><code>/energy-monitor/tests/</code></td></tr>
+<tr><td>Reference datasets</td><td><code>/energy-monitor/examples/</code></td></tr>
+<tr><td>KiCad schematic</td><td><code>/energy-monitor/hardware/kicad/dcm-hw-v1.kicad_sch</code></td></tr>
+<tr><td>ERC report</td><td><code>/energy-monitor/hardware/kicad/erc-report.txt</code></td></tr>
+<tr><td>Netlist</td><td><code>/energy-monitor/hardware/kicad/netlist-kicad.net</code></td></tr>
+<tr><td>Bill of materials</td><td><code>/energy-monitor/hardware/bom/dcm-hw-v1-bom.csv</code></td></tr>
+<tr><td>Design review</td><td><code>/energy-monitor/hardware/design-review/design-review.md</code></td></tr>
+<tr><td>Firmware</td><td><code>/energy-monitor/firmware/</code></td></tr>
+<tr><td>Build evidence</td><td><code>/energy-monitor/firmware/BUILD-EVIDENCE.md</code></td></tr>
+<tr><td>Evidence hub</td><td><code>/projects/dc-energy-monitor-evidence.html</code></td></tr>
+</tbody></table></div>
+<hr>
+<h2 id="13-attribution-and-contributions">13. Attribution and contributions</h2>
+<p><strong>Produced with AI assistance.</strong> The software model, the test suites, the schematic generator, the KiCad project, the firmware, the documentation and this report were written with AI assistance during the construction of the Elite Bot Studios website. This is disclosed because it is material to how the work should be read: it is a well-instrumented engineering exercise, not a body of independently authored personal engineering.</p>
+<p><strong>Specified by the founder.</strong> The project direction; the decision to remain low-voltage and DC; the operating envelope; the requirement that hardware claims stay separate from software claims; and the rule that no measurement, credential or result be invented.</p>
+<p><strong>Not yet done by the founder.</strong> Reading and re-deriving the power and energy relations independently; running the suites and breaking something deliberately; reviewing the schematic pin by pin; building the board; and measuring it. Until those happen, the project's most valuable claim is that it knows exactly what it has and has not verified.</p>
+<hr>
+<p><em>Report generated from the repository at revision B. Every figure in sections 8 and 9 is printed by a suite that can be re-run; every claim in sections 3 to 7 is linked to an artefact in section 12.</em></p>
+  </main>
+  <footer class="doc-foot">
+    Prepared with AI assistance as part of the Elite Bot Studios website. Not a
+    body of independently authored personal engineering work; see section 13.
+    No hardware measurement, calibration or accuracy claim is made anywhere in
+    this report.
+  </footer>
+</div>
+</body>
+</html>

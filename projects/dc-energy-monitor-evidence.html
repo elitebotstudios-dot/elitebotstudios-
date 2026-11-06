@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Project 01 evidence hub — source, schematics and tests | Elite Bot Studios</title>
+  <meta name="description" content="Every artefact from the Smart DC Energy Monitor project: simulation model, test suites, KiCad schematic, ERC report, netlist, BOM, ESP32 firmware and documentation, each with what it is and whether it is verified." />
+<link rel="canonical" href="https://elitebotstudios.me/projects/dc-energy-monitor-evidence.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="Project 01 evidence hub — source, schematics and tests | Elite Bot Studios" />
+  <meta property="og:description" content="Every artefact from the Smart DC Energy Monitor project: simulation model, test suites, KiCad schematic, ERC report, netlist, BOM, ESP32 firmware and documentation, each with what it is and whether it is verified." />
+<meta property="og:url" content="https://elitebotstudios.me/projects/dc-energy-monitor-evidence.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Project 01 evidence hub — source, schematics and tests | Elite Bot Studios" />
+  <meta name="twitter:description" content="Every artefact from the Smart DC Energy Monitor project: simulation model, test suites, KiCad schematic, ERC report, netlist, BOM, ESP32 firmware and documentation, each with what it is and whether it is verified." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
+
+  <link rel="icon" href="/assets/favicon-32x32.png?v=f887a99b" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=3a582b91" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=dd9eaed5" />
+  <link rel="manifest" href="/site.webmanifest?v=f8f8f629" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.07-R16" />
+
+  <link rel="stylesheet" href="/assets/site.css?v=97dd0958" />
+
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://elitebotstudios.me/#organization",
+      "name": "Elite Bot Studios",
+      "url": "https://elitebotstudios.me/",
+      "email": "contact@elitebotstudios.me",
+      "logo": "https://elitebotstudios.me/assets/logo-512.png",
+      "description": "An independent engineering initiative focused on embedded systems, power electronics, and intelligent hardware, explored through practical designs, simulations, prototypes, and documented projects."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://elitebotstudios.me/#website",
+      "url": "https://elitebotstudios.me/",
+      "name": "Elite Bot Studios",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://elitebotstudios.me/#organization"
+      }
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Smart DC Energy Monitor \u2014 evidence hub",
+      "url": "https://elitebotstudios.me/projects/dc-energy-monitor-evidence.html",
+      "about": "Source code, schematics, tests, reports and documentation for Project 01, each with its verification status."
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">
+        <img class="brand-mark" src="/assets/logo-mark.webp?v=adc77c23" alt="" width="42" height="48" decoding="async" />
+        <span class="brand-word">Elite Bot Studios</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/projects.html" aria-current="page">Projects</a>
+        <a href="/expertise.html">Expertise</a>
+        <a href="/lab.html">Engineering Lab</a>
+        <a href="/about.html">About</a>
+        <a href="/tools.html">Tools</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-amber" href="/contact.html">Contact</a>
+        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" data-open="false">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="/projects.html" aria-current="page">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/tools.html">Tools</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head ev-head"><div class="wrap">
+      <a class="backlink" href="/projects/smart-energy-monitoring.html">&larr; Smart Energy Monitoring</a>
+      <span class="eyebrow">Project 01 / Evidence hub</span>
+      <h1>Every artefact,<br><em>with its status.</em></h1>
+      <p>Everything this project has produced, grouped by kind. Each entry says what the file is, why it matters, whether it has been verified, and how to open it. Nothing here is a rendering of the work: these are the files.</p>
+      <div class="ev-summary">
+        <div><span>Artefacts</span><b>31</b></div>
+        <div><span>Verified</span><b class="ev-ok-text">22</b></div>
+        <div><span>Drafted</span><b>9</b></div>
+        <div><span>Physical prototype</span><b class="ev-warn-text">not built</b></div>
+      </div>
+    </div></section>
+    <section class="ev-section"><div class="wrap"><div class="ev-section-head"><h2>Software</h2><p>The model, its tests and the data it produces</p><span class="ev-count">6 items</span></div><div class="ev-grid"><article class="ev-item"><div class="ev-head"><h3>Simulation model</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">A dependency-free model of a low-voltage DC energy monitor: source and load solved together, a configurable sensing chain, sampled power and trapezoidal energy on real timestamps.</p><p class="ev-why">This is the reference implementation. The browser instrument and the firmware test vectors are both checked against it.</p><a class="ev-link" href="/energy-monitor/model/dcem.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Reference test suite</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Seven worked cases (A–G) with hand-derived expected values and stated tolerances, printed as a table.</p><p class="ev-why">Shows the arithmetic is right where the mathematics is exact, and quantifies where it is not: a step straddling one interval costs 0.0093 %.</p><a class="ev-link" href="/energy-monitor/tests/dcem-reference.test.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Independent verification</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">594 checks that compare the model against a second construction: a switching-cycle simulation, a closed-form integral, Ohm and Kirchhoff balance, additivity, quantisation bounds and noise statistics.</p><p class="ev-why">A model error that is consistent with itself survives the reference suite and fails this one.</p><a class="ev-link" href="/energy-monitor/tests/dcem-independent.test.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Energy duration cases</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">The 1 s / 9 s / 1 hour / irregular / invalid-sample cases, with expectations derived by hand.</p><p class="ev-why">Written after a published description confused the sample interval with the duration. It now cannot happen again silently.</p><a class="ev-link" href="/energy-monitor/tests/energy-duration.test.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Reference datasets</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Six CSV files with metadata headers, regenerated from the model and checked against hand values.</p><p class="ev-why">Lets a reviewer open the data in a spreadsheet without running any code.</p><a class="ev-link" href="/energy-monitor/examples/generate.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Interactive instrument</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">The model running in the browser with controls, four live charts, five guided experiments and CSV export.</p><p class="ev-why">The fastest way to see what the model does. Nothing it shows is a hardware measurement.</p><a class="ev-link" href="/projects/dc-energy-monitor.html">Open <span aria-hidden="true">&#8599;</span></a></article></div></div></section><section class="ev-section"><div class="wrap"><div class="ev-section-head"><h2>Hardware</h2><p>The electrical design, its checks and its parts</p><span class="ev-count">8 items</span></div><div class="ev-grid"><article class="ev-item"><div class="ev-head"><h3>KiCad schematic</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">A native KiCad 9 project built from official library symbols: the INA226 as the bare IC, its address straps, the shunt, the protection and the microcontroller interface.</p><p class="ev-why">Editable and ERC-checked. This is the authoritative electrical description, not a picture of one.</p><a class="ev-link" href="/energy-monitor/hardware/kicad/dcm-hw-v1.kicad_sch">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>ERC report</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">The output of kicad-cli sch erc: 0 errors, 0 warnings.</p><p class="ev-why">The evidence behind the claim that the schematic is electrically legal. It does not prove the circuit works.</p><a class="ev-link" href="/energy-monitor/hardware/kicad/erc-report.txt">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>KiCad netlist</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">The netlist exported by kicad-cli, compared pin by pin with the design file.</p><p class="ev-why">42 pins and 8 nets agree between the schematic and the design intent. Any disagreement fails the build.</p><a class="ev-link" href="/energy-monitor/hardware/kicad/netlist-kicad.net" download>Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Schematic drawings</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">Two vector drawings generated from the design file: the power path, and the supply and I²C wiring.</p><p class="ev-why">Easier to read than the KiCad export on a small screen. Generated from the same data, so they cannot drift.</p><a class="ev-link" href="/energy-monitor/hardware/schematic/dcm-hw-v1-sheet1.svg">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Design source</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">One JSON file holding every component, pin, net and rating, with the rationale for each part.</p><p class="ev-why">The single source from which the drawings, the netlist, the BOM and the KiCad project are generated.</p><a class="ev-link" href="/energy-monitor/hardware/design/dcm-hw-v1.json" download>Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Bill of materials</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">Parts with manufacturer, ratings, function, rationale and a datasheet reference each. No prices are quoted.</p><p class="ev-why">What to buy, and why that part. Nothing has been purchased.</p><a class="ev-link" href="/energy-monitor/hardware/bom/dcm-hw-v1-bom.csv" download>Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Design rule checks</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Twenty-five rules written for this circuit — sensor ranges, shunt dissipation, clamp voltage, connector ratings, logic compatibility, ground continuity — each printing its margin.</p><p class="ev-why">Reproducible, and not a substitute for ERC. Both exist because they check different things.</p><a class="ev-link" href="/energy-monitor/hardware/design/checks.py">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Prototype review checklist</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">The physical steps to take before buying or energising anything, including stop conditions.</p><p class="ev-why">The handover document for the part of the project that needs hands.</p><a class="ev-link" href="/energy-monitor/hardware/design-review/prototype-review-checklist.md">Open <span aria-hidden="true">&#8599;</span></a></article></div></div></section><section class="ev-section"><div class="wrap"><div class="ev-section-head"><h2>Firmware</h2><p>What runs on the board, and how it was tested</p><span class="ev-count">6 items</span></div><div class="ev-grid"><article class="ev-item"><div class="ev-head"><h3>Application layer</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">I²C initialisation, sensor self-test, calibration, CSV reporting and the scheduling loop for the ESP32.</p><p class="ev-why">Cross-compiles for the target. Has never been flashed.</p><a class="ev-link" href="/energy-monitor/firmware/src/main.cpp">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Sensor driver</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Device logic independent of Arduino: configuration, identity check, register reads, saturation and over-voltage handling.</p><p class="ev-why">The same code the host tests exercise, through a transport interface.</p><a class="ev-link" href="/energy-monitor/firmware/src/core/sensor.cpp">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Energy integrator</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Trapezoidal accumulation on wrap-safe millisecond timestamps, with an explicit missing-data policy.</p><p class="ev-why">Where the difference between "no data" and "zero power" is decided.</p><a class="ev-link" href="/energy-monitor/firmware/src/core/integrator.cpp">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Firmware tests</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">69 checks over eight vector sets: constant, step, irregular, gap, invalid, rollover, zero current, calibrated.</p><p class="ev-why">Desktop arithmetic, not hardware.</p><a class="ev-link" href="/energy-monitor/firmware/test/test_core.cpp">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Mock-bus sensor tests</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">29 checks driving the driver through a simulated I²C bus: absent device, NACK, wrong identity, saturation, recovery.</p><p class="ev-why">Proves the error handling. Says nothing about a real INA226.</p><a class="ev-link" href="/energy-monitor/firmware/test/test_sensor.cpp">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Build evidence</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Toolchain versions, the exact build command, flash and RAM use, and the two compile errors the first attempt produced.</p><p class="ev-why">A successful compile is not a working device, and this file says so.</p><a class="ev-link" href="/energy-monitor/firmware/BUILD-EVIDENCE.md">Open <span aria-hidden="true">&#8599;</span></a></article></div></div></section><section class="ev-section"><div class="wrap"><div class="ev-section-head"><h2>Verification</h2><p>The checks that tie the three layers together</p><span class="ev-count">5 items</span></div><div class="ev-grid"><article class="ev-item"><div class="ev-head"><h3>Configuration manifest</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">The address, shunt, GPIOs, timing and measurement nodes that the schematic, the firmware and the site must all agree on.</p><p class="ev-why">Drift between hardware and firmware is the defect that survives every unit test and fails on the bench.</p><a class="ev-link" href="/energy-monitor/hardware/dcm-hw-v1.manifest.json" download>Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Consistency test</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Thirty checks that read the manifest and compare it with the C++ sources, the design file and the published pages.</p><p class="ev-why">Fails the build if the schematic and the firmware stop agreeing.</p><a class="ev-link" href="/energy-monitor/tests/config-consistency.test.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Package coherence test</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">Checks that every referenced artefact exists, that prices are not invented, and that no page claims more than the artefacts support.</p><p class="ev-why">A claim of ERC is only allowed if the report exists and says 0/0.</p><a class="ev-link" href="/energy-monitor/tests/hardware-package.test.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Vectors vs model</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">The firmware test vectors replayed through the verified JavaScript model.</p><p class="ev-why">Two implementations of one written rule, compared where they should agree and where they deliberately differ.</p><a class="ev-link" href="/energy-monitor/tests/vector-model-parity.test.js">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Known limitations</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">What the project does not establish, written down before anyone asks.</p><p class="ev-why">The most useful document for a reviewer deciding how much to trust the rest.</p><a class="ev-link" href="/energy-monitor/docs/limitations.md">Open <span aria-hidden="true">&#8599;</span></a></article></div></div></section><section class="ev-section"><div class="wrap"><div class="ev-section-head"><h2>Documentation</h2><p>For a reader who wants the whole story</p><span class="ev-count">6 items</span></div><div class="ev-grid"><article class="ev-item"><div class="ev-head"><h3>Technical dossier (PDF)</h3><span class="ev-chip ev-ok">Verified</span></div><p class="ev-what">A ten-page engineering report generated from the Markdown source: abstract, objectives, requirements, architecture, model, hardware, firmware, verification, results, limitations and attribution.</p><p class="ev-why">Written for a supervisor or admissions reviewer who will not browse a website.</p><a class="ev-link" href="/assets/dossier-smart-dc-energy-monitor.pdf">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Dossier source</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">The maintainable Markdown the PDF and the print page are generated from.</p><p class="ev-why">One source, three outputs — nothing is authored twice.</p><a class="ev-link" href="/energy-monitor/docs/dossier.md">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Requirements</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">S1–S13 and E1–E12 with acceptance criteria, each marked verified or proposed.</p><p class="ev-why">Shows which requirements are met by evidence and which are still intentions.</p><a class="ev-link" href="/energy-monitor/docs/requirements.md">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Model documentation</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">Equations, units, integration method, error model, data types and test coverage.</p><p class="ev-why">Everything needed to reproduce a published number without the dashboard.</p><a class="ev-link" href="/energy-monitor/docs/model.md">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Design review</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">What was verified, how, what was not, and the questions only the physical parts can answer.</p><p class="ev-why">Includes the finding that VBUS was missing from the previous revision.</p><a class="ev-link" href="/energy-monitor/hardware/design-review/design-review.md">Open <span aria-hidden="true">&#8599;</span></a></article><article class="ev-item"><div class="ev-head"><h3>Reproduction instructions</h3><span class="ev-chip ev-draft">Drafted</span></div><p class="ev-what">The exact commands and the output to expect.</p><p class="ev-why">Node, g++ and Python 3 are enough for the software side.</p><a class="ev-link" href="/energy-monitor/docs/reproduce.md">Open <span aria-hidden="true">&#8599;</span></a></article></div></div></section>
+    <section class="section"><div class="wrap">
+      <div class="ev-legend">
+        <h2>What the labels mean</h2>
+        <dl>
+          <div><dt><span class="ev-chip ev-ok">Verified</span></dt><dd>Checked by a test, a tool or a comparison that can be re-run. The check exists in this repository.</dd></div>
+          <div><dt><span class="ev-chip ev-draft">Drafted</span></dt><dd>Written and reviewed but not machine-checked, or a design artefact that no tool can validate without the physical parts.</dd></div>
+          <div><dt><span class="ev-chip ev-warn">Untested</span></dt><dd>Depends on hardware that does not exist. No entry currently carries this label, because untested hardware results are not published at all.</dd></div>
+        </dl>
+      </div>
+      <div class="project-detail-related"><a href="/projects/smart-energy-monitoring.html">Read the case study &#8599;</a><a href="/projects/dc-energy-monitor-hardware.html">Hardware design &#8599;</a><a href="/assets/dossier-smart-dc-energy-monitor.pdf">Technical dossier (PDF) &#8599;</a></div>
+    </div></section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-tag">Embedded Intelligence · Real-World Power</p>
+        <p>An independent engineering initiative exploring embedded systems, power electronics, and intelligent hardware through practical designs, simulations, prototypes, and documented projects.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul class="footer-links">
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/tools.html">Engineering Tools</a></li>
+          <li><a href="/services.html">Collaboration</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul class="footer-links">
+          <li><a href="/contact.html">Contact</a></li>
+          <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Pakistan · Independent engineering initiative</span>
+      <span>&copy; 2026 Elite Bot Studios</span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js?v=19ee34ac" defer></script>
+</body>
+</html>

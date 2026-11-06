@@ -3,3 +3,4 @@ __pycache__/
 .deploy-token
 .env
 .env.*
+energy-monitor/firmware/.pio/

@@ -22,7 +22,7 @@ AREAS = [
 
 SITE_ROOT=Path(__file__).resolve().parents[2]
 PROJECT_RECORDS=json.loads((SITE_ROOT/'projects.json').read_text(encoding='utf-8'))
-PROJECT_STATUS={'concept':('Concept','chip-amber'),'simulation':('In simulation','chip-amber'),'design-completed':('Design completed','chip-amber'),'prototype-in-progress':('Prototype in progress','chip-amber'),'bench-tested':('Bench tested','chip-teal'),'complete':('Completed','chip-teal')}
+PROJECT_STATUS={'designed':('Software verified · hardware designed · not built','chip-teal'),'concept':('Concept','chip-amber'),'simulation':('In simulation','chip-amber'),'design-completed':('Design completed','chip-amber'),'prototype-in-progress':('Prototype in progress','chip-amber'),'bench-tested':('Bench tested','chip-teal'),'complete':('Completed','chip-teal')}
 
 def render_project(p):
     slug=p.get('slug','')
@@ -30,20 +30,25 @@ def render_project(p):
     status,cls=PROJECT_STATUS.get(p.get('status'),('Unclassified','chip-amber'))
     def block(label,value): return '<div><dt>%s</dt><dd>%s</dd></div>'%(label,html_escape(str(value),quote=True)) if value else ''
     tags=''.join('<span class="chip">%s</span>'%html_escape(str(x),quote=True) for x in p.get('tags',[]))
-    body=''.join([block('Objective',p.get('objective')),block('Context',p.get('problem')),block('Approach',p.get('approach')),block('Evidence',p.get('measured_results') or p.get('results') or p.get('results_note'))])
+    body=''.join([block('Objective',p.get('objective')),block('Where it stands',p.get('results_note')),block('Method',p.get('approach'))])
     action=''
     url=p.get('case_study_url') or ('/projects/%s.html'%slug if p.get('case_study') else '')
     if url and re.fullmatch(r'/projects/[a-z0-9-]+\.html',url): action='<a class="text-link" href="%s">Open project record ↗</a>'%html_escape(url,quote=True)
-    demo=p.get('demo_url')
+    demo=p.get('demo_url'); hw=p.get('hardware_url')
     if demo and re.fullmatch(r'/projects/[a-z0-9-]+\.html',demo):
         action=('<div class="proj-actions"><a class="btn btn-primary proj-demo" href="%s">Launch the DC Energy Monitor ↗</a>'
-                '<a class="text-link" href="%s">Project record ↗</a></div>'
-                %(html_escape(demo,quote=True),html_escape(url,quote=True)))
+                '%s<a class="text-link" href="%s">Project record ↗</a></div>'
+                %(html_escape(demo,quote=True),
+                  ('<a class="btn btn-ghost" href="%s">Hardware design ↗</a>'%html_escape(hw,quote=True)) if hw and re.fullmatch(r'/projects/[a-z0-9-]+\.html',hw) else '',
+                  html_escape(url,quote=True)))
     staged=''
-    if p.get('software_status') or p.get('hardware_status'):
-        staged='<ul class="proj-stages">%s%s</ul>'%(
-            ('<li data-state="done"><span>Software</span><b>%s</b></li>'%html_escape(str(p.get('software_status')),quote=True)) if p.get('software_status') else '',
-            ('<li data-state="pending"><span>Hardware</span><b>%s</b></li>'%html_escape(str(p.get('hardware_status')),quote=True)) if p.get('hardware_status') else '')
+    milestones=p.get('milestones') or []
+    if milestones:
+        rows=''.join('<li data-state="%s"><span>%s</span><b>%s</b></li>'%(
+            html_escape(str(m.get('state')),quote=True),
+            html_escape(str(m.get('name')),quote=True),
+            html_escape(str(m.get('status')),quote=True)) for m in milestones)
+        staged='<ul class="proj-stages proj-stages-all">%s</ul>'%rows
     return '<article class="card proj-card reveal" id="%s"><div class="post-meta"><span class="chip %s">%s</span><span>%s</span></div><h3>%s</h3><dl class="proj-body" style="margin:0">%s</dl>%s%s%s</article>'%(slug,cls,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('title','')),quote=True),body,staged,('<div class="chips">%s</div>'%tags) if tags else '',action)
 
 
@@ -651,6 +656,7 @@ def about():
         <h2>A profile built from<br><em>what can be checked.</em></h2>
         <p class="about-profile-lede">Power engineering is the academic direction. Embedded systems, electronics and control are the threads being developed around it, in coursework and in the open work on this site.</p>
         <p class="about-profile-note">Only information that can be verified from this website is listed. Where a document or external profile does not exist yet, that is stated rather than filled with a placeholder.</p>
+        <p class="about-profile-note"><strong>Current work.</strong> Project 01 &mdash; a low-voltage DC energy monitor &mdash; has a verified software model, a native KiCad schematic that passes ERC, and firmware that cross-compiles for an ESP32. The prototype is not built; the case study is explicit about which claims carry evidence and which do not.</p>
       </div>
       <div class="cv-panel">
         <div class="cv-block">
@@ -674,7 +680,11 @@ def about():
         <div class="cv-block">
           <span class="cv-block-label">Public record</span>
           <ul class="cv-links">
-            <li><a href="/projects/smart-energy-monitoring.html"><span>Project record &mdash; smart energy monitoring</span><b>Concept stage &#8599;</b></a></li>
+            <li><a href="/projects/smart-energy-monitoring.html"><span>Engineering case study &mdash; smart energy monitoring</span><b>Software verified &middot; hardware designed &#8599;</b></a></li>
+            <li><a href="/projects/dc-energy-monitor-evidence.html"><span>Evidence hub &mdash; every artefact with its status</span><b>30 items &#8599;</b></a></li>
+            <li><a href="/projects/dc-energy-monitor-hardware.html"><span>Hardware design &mdash; KiCad schematic, ERC, BOM</span><b>ERC clean &#8599;</b></a></li>
+            <li><a href="/assets/dossier-smart-dc-energy-monitor.pdf"><span>Technical dossier (PDF, 10 pages)</span><b>Download &#8599;</b></a></li>
+            <li><a href="/projects/dc-energy-monitor.html"><span>Software demonstration &mdash; the running instrument</span><b>Tested &#8599;</b></a></li>
             <li><a href="/projects/power-stage-utility.html"><span>Software demonstration &mdash; power-stage sizing utility</span><b>Tested &#8599;</b></a></li>
             <li><a href="/tools.html"><span>Engineering calculators</span><b>Seven tools &#8599;</b></a></li>
             <li><a href="/lab.html"><span>Technical notes</span><b>Five notes &#8599;</b></a></li>

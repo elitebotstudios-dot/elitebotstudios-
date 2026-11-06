@@ -1,0 +1,48 @@
+{
+  "manifest": "DCM-HW-V1 hardware configuration",
+  "revision": "B",
+  "date": "2026-11-06",
+  "purpose": "The values that the schematic, the firmware and the published documentation must all agree on. tests/config-consistency.test.js fails the build if any of them drifts.",
+  "mcu": {
+    "part": "ESP32-DevKitC-32E",
+    "logic_voltage_v": 3.3,
+    "i2c_sda_gpio": 21,
+    "i2c_scl_gpio": 22,
+    "i2c_clock_hz": 100000
+  },
+  "sensor": {
+    "part": "INA226AIDGSR",
+    "package": "VSSOP-10",
+    "i2c_address": "0x40",
+    "address_straps": "A0 to GND, A1 to GND",
+    "supply_v": 3.3,
+    "shunt_ohms": 0.1,
+    "shunt_lsb_uv": 2.5,
+    "bus_lsb_mv": 1.25,
+    "bus_max_v": 36,
+    "shunt_full_scale_mv": 81.92,
+    "in_plus_net": "VPROT",
+    "in_minus_net": "VLOAD",
+    "vbus_net": "VLOAD",
+    "alert": "unconnected in V1"
+  },
+  "envelope": {
+    "vin_min_v": 5,
+    "vin_nominal_v": 12,
+    "vin_max_v": 12,
+    "design_current_a": 0.5,
+    "measurable_current_max_a": 0.8192
+  },
+  "firmware": {
+    "sample_interval_ms": 250,
+    "max_gap_ms": 5000,
+    "report_format": "CSV on USB serial at 115200 baud",
+    "timestamp": "milliseconds since boot, no RTC",
+    "calibration": "gain and offset per channel, identity until calibrated"
+  },
+  "protection": {
+    "fuse": "Bourns MF-R110, 1.1 A hold",
+    "reverse_diode": "onsemi SS34, 40 V 3 A",
+    "tvs": "Littelfuse SMBJ15A, 15 V standoff"
+  }
+}

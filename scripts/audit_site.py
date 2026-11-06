@@ -120,7 +120,8 @@ for route, (p, file) in pages.items():
         descriptions[p.description] = route
     if len(p.canonical) > 1:
         errors.append('multiple canonicals: ' + route)
-    if route not in ('/404.html', '/offline.html'):
+    noindex = 'name="robots" content="noindex"' in text
+    if route not in ('/404.html', '/offline.html') and not noindex:
         if len(p.canonical) != 1:
             errors.append('missing canonical: ' + route)
         elif not p.canonical[0].startswith(SITE):
@@ -231,6 +232,15 @@ for loc in locs:
         errors.append('sitemap includes non-indexable page: ' + loc)
 for route in pages:
     if route in ('/404.html', '/offline.html'):
+        continue
+    # a noindex page must NOT be in the sitemap: including it would be the defect
+    target = ROOT / (route.lstrip('/') or 'index.html')
+    if target.is_dir():
+        target = target / 'index.html'
+    is_noindex = target.is_file() and 'name="robots" content="noindex"' in target.read_text(encoding='utf-8')
+    if is_noindex:
+        if SITE + route in locs:
+            errors.append('noindex page listed in sitemap: ' + route)
         continue
     if SITE + route not in locs and (SITE + route + '.html') not in locs and route != '/':
         errors.append('page missing from sitemap: ' + route)

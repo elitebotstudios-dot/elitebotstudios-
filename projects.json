@@ -2,7 +2,7 @@
   {
     "slug": "smart-energy-monitoring",
     "title": "Smart Energy Monitoring",
-    "status": "simulation",
+    "status": "designed",
     "category": "Embedded Systems · Energy",
     "tags": [
       "concept",
@@ -10,11 +10,11 @@
       "energy monitoring"
     ],
     "date": "2026-11",
-    "summary": "A low-voltage DC energy monitor, now a verified software model of the full measurement chain: source, load, sensing, ADC, sampled power and energy accumulation.",
+    "summary": "A low-voltage DC energy monitor: a verified software model of the measurement chain, a native KiCad schematic that passes ERC, and firmware that cross-compiles for the ESP32. No prototype has been built.",
     "objective": "Explore how embedded measurement and electrical energy data can be combined in a documented monitoring system.",
-    "problem": "This is a project track, not a built device. The intended question is how useful electrical measurements can be collected and presented in a responsible, understandable way.",
-    "approach": "No hardware architecture, component selection, firmware, or test plan is being claimed yet. Those details will be added only after they are actually designed and reviewed.",
-    "results_note": "Software Model V1 is complete and verified against seven reference cases with an independent test suite. No hardware exists: no sensor, ADC, controller or board has been built or measured.",
+    "problem": "Electrical energy data is only useful if the reader knows how far to trust it. A monitor that reports 12.00 W is making a claim about a whole chain — divider, shunt, amplifier, ADC, arithmetic and clock — and each link contributes an error that the others do not cancel.",
+    "approach": "The chain was built in software first, so every stage could be inspected and tested: source and load solved together, sensing with gain, offset, noise and quantisation, sampled power and trapezoidal energy. The electrical design and firmware followed from that model, and each carries its own evidence — reference tests, a KiCad ERC report, a cross-compiled binary, a netlist comparison — none of which is a measurement of hardware.",
+    "results_note": "Verified: a software model (67 reference assertions, 594 independent checks), a native KiCad schematic with a clean ERC report, and firmware that cross-compiles for the ESP32 and passes 98 host checks. Not done: no PCB, no assembled board, no flashed firmware, no measurement, no calibration.",
     "case_study_url": "/projects/smart-energy-monitoring.html",
     "case_study": {
       "overview": "A design brief for a low-voltage DC energy-monitoring system, and the first working artefact that follows it: a software model of the whole measurement chain — DC source, load, voltage and current sensing, ADC quantisation, sampled power and trapezoidal energy accumulation — with the formulas, source, reference cases and an independent verification suite published alongside it.",
@@ -159,7 +159,138 @@
       ]
     },
     "software_status": "Software Model V1 — verified against reference cases",
-    "hardware_status": "Hardware prototype — not yet built",
-    "demo_url": "/projects/dc-energy-monitor.html"
+    "hardware_status": "Hardware design prepared — prototype not built",
+    "demo_url": "/projects/dc-energy-monitor.html",
+    "demo_label": "Launch the DC Energy Monitor",
+    "hardware_url": "/projects/dc-energy-monitor-hardware.html",
+    "milestones": [
+      {
+        "name": "Concept",
+        "state": "done",
+        "status": "Completed",
+        "detail": "The problem, the measurement question and the safety boundary, written before any design existed.",
+        "evidence": [
+          {
+            "label": "Project record",
+            "href": "/projects.json"
+          }
+        ]
+      },
+      {
+        "name": "Software model",
+        "state": "done",
+        "status": "Implemented and reference-tested",
+        "detail": "The whole measurement chain in software: source, load, sensing, ADC, sampled power, trapezoidal energy. Seven reference cases and 594 independent checks.",
+        "evidence": [
+          {
+            "label": "Model source",
+            "href": "/energy-monitor/model/dcem.js"
+          },
+          {
+            "label": "Reference tests",
+            "href": "/energy-monitor/tests/dcem-reference.test.js"
+          },
+          {
+            "label": "Independent tests",
+            "href": "/energy-monitor/tests/dcem-independent.test.js"
+          },
+          {
+            "label": "Run the instrument",
+            "href": "/projects/dc-energy-monitor.html"
+          }
+        ]
+      },
+      {
+        "name": "Hardware requirements",
+        "state": "done",
+        "status": "Documented (draft for review)",
+        "detail": "E1–E12 with acceptance criteria, each marked verified against a datasheet or script, or proposed.",
+        "evidence": [
+          {
+            "label": "Electrical requirements",
+            "href": "/energy-monitor/hardware/requirements/electrical-requirements.md"
+          }
+        ]
+      },
+      {
+        "name": "Electrical design",
+        "state": "done",
+        "status": "Schematic authored, ERC clean",
+        "detail": "Native KiCad schematic built from official library symbols. kicad-cli 9.0.2 ERC: 0 errors, 0 warnings. The exported netlist matches the design file on all 42 pins.",
+        "evidence": [
+          {
+            "label": "KiCad schematic",
+            "href": "/energy-monitor/hardware/kicad/dcm-hw-v1.kicad_sch"
+          },
+          {
+            "label": "ERC report",
+            "href": "/energy-monitor/hardware/kicad/erc-report.txt"
+          },
+          {
+            "label": "Design review",
+            "href": "/energy-monitor/hardware/design-review/design-review.md"
+          },
+          {
+            "label": "Hardware design page",
+            "href": "/projects/dc-energy-monitor-hardware.html"
+          }
+        ]
+      },
+      {
+        "name": "Embedded firmware",
+        "state": "done",
+        "status": "Host-tested and cross-compiled",
+        "detail": "PlatformIO + Xtensa GCC 14.2.0 build firmware.bin for esp32dev (25.4 % flash). 98 host checks including a mocked I²C bus. Never flashed, never run on a board.",
+        "evidence": [
+          {
+            "label": "Build evidence",
+            "href": "/energy-monitor/firmware/BUILD-EVIDENCE.md"
+          },
+          {
+            "label": "Application layer",
+            "href": "/energy-monitor/firmware/src/main.cpp"
+          },
+          {
+            "label": "Sensor driver",
+            "href": "/energy-monitor/firmware/src/core/sensor.cpp"
+          },
+          {
+            "label": "Mock-bus tests",
+            "href": "/energy-monitor/firmware/test/test_sensor.cpp"
+          }
+        ]
+      },
+      {
+        "name": "Physical prototype",
+        "state": "pending",
+        "status": "Not built",
+        "detail": "No component purchased, no board assembled, nothing energised.",
+        "evidence": [
+          {
+            "label": "Prototype review checklist",
+            "href": "/energy-monitor/hardware/design-review/prototype-review-checklist.md"
+          }
+        ]
+      },
+      {
+        "name": "Calibration",
+        "state": "pending",
+        "status": "Not performed",
+        "detail": "Procedure and blank recording sheet exist; no instrument has been compared with anything.",
+        "evidence": [
+          {
+            "label": "Calibration plan",
+            "href": "/energy-monitor/verification/calibration-plan/calibration-plan.md"
+          }
+        ]
+      },
+      {
+        "name": "Physical validation",
+        "state": "pending",
+        "status": "Unavailable",
+        "detail": "No measurement against a reference meter. This is the only thing that could turn the design into an accuracy claim.",
+        "evidence": []
+      }
+    ]
   }
 ]
