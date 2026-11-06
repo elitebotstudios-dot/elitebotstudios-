@@ -10,8 +10,9 @@ The public portfolio separates concepts and educational models from project evid
 
 - [Home](https://elitebotstudios.me/): interactive conceptual power-control system, engineering focus, project direction, and academic profile.
 - [Projects](https://elitebotstudios.me/projects.html): evidence-labelled records, a conceptual system architecture, and separately marked future directions.
+- [DC Energy Monitor](https://elitebotstudios.me/projects/dc-energy-monitor.html): a running software model of a low-voltage DC energy-monitoring system — configurable source and five load models, a sensing chain with gain, offset, noise and ADC quantisation, sampled power and trapezoidal energy accumulation. Includes five guided experiments, CSV export and an architecture explanation. Attributed as AI-assisted work; no hardware exists.
+- [Smart Energy Monitoring project record](https://elitebotstudios.me/projects/smart-energy-monitoring.html): the case study for Project 01 — problem, objective, system design, mathematics, verification results, trade-offs, limitations and the hardware plan. Software Model V1 is verified; the hardware prototype is explicitly not built.
 - [Power-stage sizing utility](https://elitebotstudios.me/projects/power-stage-utility.html): a published software demonstration. Sizes an ideal buck inductor at the worst-case input voltage (V_in,max, where ripple is largest), reports current stress, the CCM boundary and an output-capacitance estimate with optional ESR, derating and transient terms. Formulas, a worked calculation and two test suites (a reference-case suite and an independent switching-cycle simulation) are published with the source. Attributed as AI-assisted work rather than the founder's independent engineering.
-- [Smart Energy Monitoring concept record](https://elitebotstudios.me/projects/smart-energy-monitoring.html): an illustrative functional architecture and open design questions; no selected parts, prototype, simulation, or measured results are claimed.
 - [Expertise](https://elitebotstudios.me/expertise.html): academic foundation, practical exploration, and research interests linked as a system map.
 - [Engineering Lab](https://elitebotstudios.me/lab.html): five Markdown-authored technical notes, including [PWM fundamentals](https://elitebotstudios.me/lab/pwm-duty-frequency-resolution.html), [the ideal buck-converter CCM model](https://elitebotstudios.me/lab/buck-converter-ccm-model.html), [ADC resolution and quantization](https://elitebotstudios.me/lab/adc-resolution-quantization.html), simulation versus measurement, and documentation.
 - [Engineering tools](https://elitebotstudios.me/tools.html): seven browser-side models: an interactive ideal-CCM buck converter explorer, a PWM signal laboratory (duty, frequency, timing, average and RMS), and five component/sizing calculators.
@@ -19,11 +20,21 @@ The public portfolio separates concepts and educational models from project evid
 - [About](https://elitebotstudios.me/about.html): founder profile and academic/research direction.
 - [Contact](https://elitebotstudios.me/contact.html): posts to the site's own /api/contact endpoint. If mail delivery is not configured on a deployment, the endpoint reports that and the page opens a local email draft instead, telling the visitor that nothing was transmitted.
 
+## Project 01 artefacts
+
+- Model: `energy-monitor/model/dcem.js` (dependency-free, UMD; the same file the instrument runs and the tests import).
+- Reference tests: `energy-monitor/tests/dcem-reference.test.js` (cases A–G, 67 assertions).
+- Independent tests: `energy-monitor/tests/dcem-independent.test.js` (10 groups, 594 checks).
+- Page contract test: `energy-monitor/tests/energy-monitor-page.test.js`.
+- Reference datasets: `energy-monitor/examples/*.csv` with metadata headers.
+- Documentation: `energy-monitor/docs/` — model, requirements, architecture, limitations, hardware plan, reproduction.
+
 ## Sources and limits
 
 - The buck explorer uses the ideal steady-state CCM duty and inductor-ripple relationships at the single input voltage entered. Over an input range, ripple and the CCM boundary are worst at the highest input voltage; the power-stage sizing utility handles that range explicitly. Neither model solves DCM, device losses, controller dynamics, thermal behavior, or switching transitions.
 - Other calculators also show their assumptions and intended limits on their pages.
 - The calculator UI processes inputs in the browser and does not send them to a calculation API.
+- The DC Energy Monitor is a simulation. It models an ideal sensing chain; it is not a measurement of any hardware, and no accuracy claim about physical devices follows from it. Its hardware prototype has not been built.
 
 ## Content sources
 

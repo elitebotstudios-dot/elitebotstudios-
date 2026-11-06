@@ -1,0 +1,14 @@
+# model: Elite Bot Studios DCEM 1.0.0
+# dataset: reference-case-e-irregular.csv
+# title: Reference case E — irregular timestamps, hand-checkable
+# note: E = Σ ½(P_i + P_i+1)(t_i+1 − t_i) over the five intervals.
+# expected_energy_j: 77.605
+# hand_sum_j: 77.605000
+# model_energy_j: 77.605000
+t_s,p_w
+0.00,10.000
+0.37,12.000
+1.20,7.000
+2.05,15.000
+3.90,9.000
+7.31,11.000

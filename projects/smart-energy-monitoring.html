@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>Smart Energy Monitoring | Project Record | Elite Bot Studios</title>
-  <meta name="description" content="A project direction exploring how embedded measurement might make electrical energy data easier to understand." />
+  <title>Smart Energy Monitoring — verified software model | Elite Bot Studios</title>
+  <meta name="description" content="A low-voltage DC energy-monitoring project: a verified software model of the measurement chain, with published source, reference cases and an independent test suite. Hardware prototype not built." />
 <link rel="canonical" href="https://elitebotstudios.me/projects/smart-energy-monitoring.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Elite Bot Studios" />
-  <meta property="og:title" content="Smart Energy Monitoring | Project Record | Elite Bot Studios" />
-  <meta property="og:description" content="A project direction exploring how embedded measurement might make electrical energy data easier to understand." />
+  <meta property="og:title" content="Smart Energy Monitoring — verified software model | Elite Bot Studios" />
+  <meta property="og:description" content="A low-voltage DC energy-monitoring project: a verified software model of the measurement chain, with published source, reference cases and an independent test suite. Hardware prototype not built." />
 <meta property="og:url" content="https://elitebotstudios.me/projects/smart-energy-monitoring.html" />
   <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Smart Energy Monitoring | Project Record | Elite Bot Studios" />
-  <meta name="twitter:description" content="A project direction exploring how embedded measurement might make electrical energy data easier to understand." />
+  <meta name="twitter:title" content="Smart Energy Monitoring — verified software model | Elite Bot Studios" />
+  <meta name="twitter:description" content="A low-voltage DC energy-monitoring project: a verified software model of the measurement chain, with published source, reference cases and an independent test suite. Hardware prototype not built." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
   <meta name="twitter:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
 
@@ -27,9 +27,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=dd9eaed5" />
   <link rel="manifest" href="/site.webmanifest?v=f8f8f629" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.06-R9" />
+  <meta name="ebs-build" content="EBS-2026.11.06-R10" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=6b02036a" />
+  <link rel="stylesheet" href="/assets/site.css?v=2f8fffaf" />
 
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
@@ -72,7 +72,20 @@
       "url": "https://elitebotstudios.me/",
       "name": "Elite Bot Studios",
       "inLanguage": "en",
-      "publisher": { "@id": "https://elitebotstudios.me/#organization" }
+      "publisher": {
+        "@id": "https://elitebotstudios.me/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "Smart DC Energy Monitor \u2014 Software Model V1",
+      "description": "A simulated low-voltage DC energy-monitoring system with a configurable sensing chain, sampled power and trapezoidal energy accumulation, published with reference and independent test suites.",
+      "codeRepository": "https://elitebotstudios.me/energy-monitor/model/dcem.js",
+      "url": "https://elitebotstudios.me/projects/dc-energy-monitor.html",
+      "author": {
+        "@type": "Organization",
+        "name": "Elite Bot Studios"
+      }
     }
   ]
 }
@@ -88,7 +101,7 @@
         <span class="brand-word">Elite Bot Studios</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="/projects.html">Projects</a>
+        <a href="/projects.html" aria-current="page">Projects</a>
         <a href="/expertise.html">Expertise</a>
         <a href="/lab.html">Engineering Lab</a>
         <a href="/about.html">About</a>
@@ -104,7 +117,7 @@
     <div class="mobile-menu" id="mobileMenu" data-open="false">
       <nav aria-label="Mobile">
         <ul>
-          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/projects.html" aria-current="page">Projects</a></li>
           <li><a href="/expertise.html">Expertise</a></li>
           <li><a href="/lab.html">Engineering Lab</a></li>
           <li><a href="/about.html">About</a></li>
@@ -117,18 +130,206 @@
 
   <main id="main">
 
-    <article class="project-detail-page">
-      <header class="project-detail-hero"><div class="wrap"><a class="backlink" href="/projects.html">← Projects</a><div class="project-detail-meta"><span class="chip chip-amber">Concept</span><span>Embedded Systems · Energy</span><span>2026-11</span></div><h1>Smart Energy Monitoring</h1><p class="project-detail-lede">A project direction exploring how embedded measurement might make electrical energy data easier to understand.</p><div class="project-detail-statusline"><span class="section-index">ENGINEERING OBJECTIVE</span><p>Explore how embedded measurement and electrical energy data can be combined in a documented monitoring system.</p></div></div></header>
-      <section class="section"><div class="wrap project-detail-layout"><aside class="project-quickfacts"><span class="section-index">PROJECT RECORD</span><dl><div><dt>Status</dt><dd>Concept</dd></div><div><dt>Category</dt><dd>Embedded Systems · Energy</dd></div><div><dt>Published stage</dt><dd>Concept</dd></div></dl><p>This page describes a concept and its open questions. It is not a fabricated device, schematic, simulation, or test report.</p></aside><div class="project-detail-content"><section class="detail-section"><span class="section-index">OVERVIEW</span><h2>What question is this exploring?</h2><p>A design brief for an energy-monitoring system, written before any hardware exists. It fixes the problem, the requirements and the open engineering choices, so the eventual schematic and firmware can be judged against something rather than invented after the fact.</p></section>
-        <section class="detail-section"><div class="concept-architecture-head"><div><span class="section-index">SYSTEM ARCHITECTURE / ILLUSTRATIVE</span><h2>Functional roles to investigate.</h2><p>Proposed functional roles · no component has been selected</p></div><span class="status-label">Concept only</span></div><ol class="concept-flow"><li class="concept-node"><span>01 / FUNCTION</span><h3>Electrical input</h3><p>A low-voltage measurement boundary; source, range and isolation approach are still open.</p></li>
-<li class="concept-node"><span>02 / FUNCTION</span><h3>Signal path</h3><p>A proposed conditioning and sampling stage; gain, filtering and reference are undecided.</p></li>
-<li class="concept-node"><span>03 / FUNCTION</span><h3>Embedded processing</h3><p>A candidate role for RMS and power computation; firmware is not written.</p></li>
-<li class="concept-node"><span>04 / FUNCTION</span><h3>Data use</h3><p>Possible logging or display direction; interface and connectivity are undecided.</p></li></ol><p class="concept-caption">Illustrative system roles only. No component selection, electrical ratings, or measured performance is implied.</p></section>
-        <section class="detail-section"><span class="section-index">PROJECT NOTE</span><h2>Questions to resolve</h2><ul class="project-detail-list"><li>Which measurable quantity and operating range should the first study address?</li><li>Shunt, Hall-effect, or integrated monitor — which trade-off is worth learning first?</li><li>How is the ADC reference stabilised so the measurement means something?</li><li>What information would make the output useful without implying more accuracy than the measurement supports?</li></ul></section><section class="detail-section"><span class="section-index">PROJECT NOTE</span><h2>Possible next investigations</h2><ul class="project-detail-list"><li>Publish the requirements table once the operating range is chosen.</li><li>Compare candidate sensing approaches from datasheets and a signal-chain model.</li><li>Only publish a schematic, simulation or firmware when those artifacts exist.</li></ul></section>
-        <section class="detail-section"><span class="section-index">INTENDED APPLICATION</span><h2>Where it would be used.</h2><p>The intended application is low-voltage, supervised measurement of an appliance or small installation: enough to answer “what is this load actually drawing, and when?” without claiming revenue-grade accuracy or mains-connected deployment.</p></section><section class="detail-section"><span class="section-index">REQUIREMENTS / PROPOSED</span><h2>What the design has to satisfy.</h2><div class="table-scroll"><table><caption class="sr-only">Proposed requirements</caption><tbody><tr><th scope="row">R1</th><td>Measure voltage and current of a single low-voltage DC load at a useful rate (at least tens of samples per second) and derive power.</td></tr><tr><th scope="row">R2</th><td>Keep measurement uncertainty stated, with a calibration procedure against a reference meter.</td></tr><tr><th scope="row">R3</th><td>Record or display data locally so a network outage does not lose the measurement.</td></tr><tr><th scope="row">R4</th><td>Stay inside a supervised, low-voltage boundary; any mains-referenced variant requires isolation review before it is attempted.</td></tr><tr><th scope="row">R5</th><td>Publish the architecture, calibration method and test conditions alongside any number, so a reader can check the claim.</td></tr></tbody></table></div><p class="concept-caption">Requirements are proposals for review, not accepted specifications.</p></section><section class="detail-section"><span class="section-index">SENSING OPTIONS / PROPOSED</span><h2>Possible sensing methods.</h2><p>Nothing is selected yet. Each method is listed with the trade-off that would decide it.</p><div class="table-scroll"><table><caption class="sr-only">Possible sensing methods.</caption><tbody><tr><th scope="row">Shunt resistor + current-sense amplifier</th><td>Best linearity and low-side simplicity; adds a small series drop and needs attention to common-mode range if used high-side.</td></tr><tr><th scope="row">Hall-effect current sensor</th><td>Isolated by construction, simpler to wire, but offset drift and temperature behaviour need checking against the datasheet.</td></tr><tr><th scope="row">Resistive divider for voltage</th><td>Cheap and predictable, but the divider loads the node and its impedance must suit the ADC sample-and-hold.</td></tr><tr><th scope="row">Energy-monitoring IC with integrated ADCs</th><td>Fewer analog decisions to make, less of the signal chain to learn — a trade of effort against understanding.</td></tr></tbody></table></div></section><section class="detail-section"><span class="section-index">CONTROLLER OPTIONS / PROPOSED</span><h2>Controller candidates.</h2><p>Controller choice follows the measurement decisions, not the other way round.</p><div class="table-scroll"><table><caption class="sr-only">Controller candidates.</caption><tbody><tr><th scope="row">ESP32 class</th><td>Wi-Fi and a capable ADC on one part; ADC linearity needs care and calibration.</td></tr><tr><th scope="row">STM32 class</th><td>Better analog peripherals and deterministic timing; connectivity needs additional design.</td></tr><tr><th scope="row">External ADC + any MCU</th><td>Moves accuracy requirements into a component with a proper datasheet, at the cost of board complexity.</td></tr></tbody></table></div></section><section class="detail-section"><span class="section-index">SAFETY &amp; ISOLATION</span><h2>Where this study stops.</h2><p>The first study stays low-voltage and supervised. A mains-referenced version would need galvanic isolation, creepage and clearance decisions, protective devices and review by someone qualified to sign it off — that is out of scope for this record.</p></section><section class="detail-section"><span class="section-index">VALIDATION STRATEGY</span><h2>How a result would be checked.</h2><ul class="project-detail-list"><li>Compare against a calibrated reference meter at several operating points and record the deviation.</li><li>State ambient temperature, instrument, wiring and load for every measurement.</li><li>Repeat measurements over time to separate drift from noise.</li><li>Publish failed checks as well as passing ones.</li></ul></section><section class="detail-section"><span class="section-index">DEVELOPMENT ROADMAP</span><h2>Stages, and what each one produces.</h2><ol class="roadmap-track"><li class="roadmap-step" data-status="complete"><span class="roadmap-status">Complete</span><h3>Concept</h3><p>This design brief and the open-questions list.</p></li><li class="roadmap-step" data-status="in progress"><span class="roadmap-status">In progress</span><h3>Requirements</h3><p>Ranges, accuracy target and safety boundary written down and reviewed.</p></li><li class="roadmap-step" data-status="planned"><span class="roadmap-status">Planned</span><h3>Architecture</h3><p>Block diagram with chosen sensing method and interfaces.</p></li><li class="roadmap-step" data-status="planned"><span class="roadmap-status">Planned</span><h3>Simulation</h3><p>Signal-chain model covering divider loading, gain and quantization.</p></li><li class="roadmap-step" data-status="planned"><span class="roadmap-status">Planned</span><h3>Implementation</h3><p>Schematic, PCB revision and firmware repository.</p></li><li class="roadmap-step" data-status="planned"><span class="roadmap-status">Planned</span><h3>Validation</h3><p>Bench comparison against a reference meter with conditions recorded.</p></li></ol><p class="concept-caption">Status reflects work actually done on this date. Planned stages have no artifact yet.</p></section>
-        <section class="detail-section detail-evidence"><span class="section-index">CURRENT EVIDENCE</span><h2>Where the record stands.</h2><p>No prototype, simulation, repository, or measured results are published for this concept.</p><p>Next additions will be made when the underlying design files, calculations, simulation setup, or test records exist.</p></section>
-        <div class="project-detail-related"><a href="/projects/power-stage-utility.html">Power-stage sizing utility &#8599;</a><a href="/tools/buck-converter.html">Explore the buck converter model &#8599;</a><a href="/lab.html">Read engineering notes &#8599;</a></div>
-      </div></div></section>
+    <article class="em-project">
+      <header class="em-project-hero"><div class="wrap">
+        <a class="backlink" href="/projects.html">&larr; Projects</a>
+        <div class="em-project-meta">
+          <span class="chip chip-teal">Software model V1 · verified</span>
+          <span class="chip chip-amber">Hardware · not built</span>
+          <span>Project 01</span><span>2026-11</span>
+        </div>
+        <h1>Smart Energy Monitoring.<br><em>Now a working software model.</em></h1>
+        <p class="em-project-lede">A low-voltage DC energy monitor, modelled end to end: source, load, sensing chain, ADC, sampled processing and energy accumulation. The model, its reference cases and an independent verification suite are published, and the instrument runs in the browser.</p>
+        <div class="em-project-actions">
+          <a class="btn btn-primary" href="/projects/dc-energy-monitor.html">Launch the DC Energy Monitor <span aria-hidden="true">&#8599;</span></a>
+          <a class="btn btn-ghost" href="/energy-monitor/docs/model.md">Read the model documentation</a>
+        </div>
+        <figure class="em-project-shot"><img src="/assets/energy-monitor-dashboard.webp?v=3a60476e" width="1200" height="1203" alt="The DC energy monitor instrument after a completed run: status bar, architecture blocks, controls, four live readouts and four charts of voltage, current, power and accumulated energy. All values are simulated." loading="lazy" decoding="async"><figcaption>The instrument after a step-load run. Solid traces are the simulated truth, dashed traces are what the sensing chain reports. Every value shown is simulated.</figcaption></figure>
+      </div></header>
+
+      <section class="section em-status-section"><div class="wrap">
+        <div class="em-status-grid">
+          <div><span class="em-tag em-tag-ok">Software Model V1</span><h2 class="em-status-h">Verified against reference cases</h2><p>The model, seven reference cases, an independent verification suite and six published datasets are complete for the scope in the requirements document. Status is verifiable by running two Node commands.</p></div>
+          <div><span class="em-tag">Hardware prototype</span><h2 class="em-status-h">Not yet built</h2><p>No sensor, ADC, microcontroller, board or enclosure exists. Nothing has been energised. The hardware plan lists the milestones and the approvals required before anything is.</p></div>
+        </div>
+      </div></section>
+
+      <section class="section"><div class="wrap em-study">
+        <section class="em-study-block"><span class="section-index">01 / PROBLEM</span><h2>Energy data is only useful if you know how far to trust it.</h2>
+          <p>A design brief for a low-voltage DC energy-monitoring system, and the first working artefact that follows it: a software model of the whole measurement chain — DC source, load, voltage and current sensing, ADC quantisation, sampled power and trapezoidal energy accumulation — with the formulas, source, reference cases and an independent verification suite published alongside it.</p>
+          <p>A monitoring system that reports 12.00 W is making a claim about a measurement chain: a divider, a shunt, an amplifier, an ADC, an arithmetic rule and a clock. Each of those contributes an error, and the errors do not cancel. The useful question is not "what does it read?" but "how far can that reading be from the truth, and why?"</p>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">02 / OBJECTIVE</span><h2>Build the measurement chain in software first.</h2>
+          <p>The intended application is low-voltage, supervised measurement of an appliance or small installation: enough to answer “what is this load actually drawing, and when?” without claiming revenue-grade accuracy or mains-connected deployment.</p>
+          <p>V1 has one job: implement the whole chain so that every stage can be inspected, varied and tested independently. A student building the hardware next year should be able to point at the model and say "this is what the firmware must compute, these are the error terms it must tolerate, and this is the test it must pass".</p>
+          <ul class="em-scope-list">
+            <li><b>In scope:</b> DC source and load models, configurable sensing with gain, offset, noise and quantisation, sampled power, trapezoidal energy, CSV logging, an interactive instrument.</li>
+            <li><b>Out of scope:</b> AC or mains measurement, isolation, PCB design, firmware, calibration against a reference meter, any accuracy claim about hardware.</li>
+          </ul>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">03 / SYSTEM DESIGN</span><h2>Two paths through the same signal.</h2>
+          <p>The model solves the electrical operating point at every sample instant, then passes it through the sensing chain. That gives two numbers per channel — the truth and what a firmware would report — and the difference between them is the subject of the whole project.</p>
+          <figure class="em-arch-figure">
+            <svg viewBox="0 0 1080 300" role="img" aria-labelledby="emArchTitle emArchDesc">
+              <title id="emArchTitle">Signal path of the DC energy monitor model</title>
+              <desc id="emArchDesc">A DC source feeds a load. The same operating point feeds two paths: an ideal path holding the simulated truth, and a measurement path through a voltage divider or shunt amplifier, gain and offset errors, noise, an ADC with quantisation, and a calibration correction. Both paths reach sampled processing, which computes power and accumulates energy, then logging and the instrument.</desc>
+              <path class="em-arch-line" d="M150 120h90M370 120h60M580 120h60"/>
+              <rect class="em-arch-box" x="30" y="80" width="120" height="80" rx="6"/>
+              <text class="em-arch-t" x="48" y="112">DC source</text>
+              <text class="em-arch-s" x="48" y="132">Voc, Rs</text>
+              <rect class="em-arch-box" x="250" y="80" width="120" height="80" rx="6"/>
+              <text class="em-arch-t" x="268" y="112">Load</text>
+              <text class="em-arch-s" x="268" y="132">R or I(t)</text>
+
+              <path class="em-arch-line-cyan" d="M310 80V40h330"/>
+              <text class="em-arch-label" x="330" y="30">SIMULATED TRUTH</text>
+              <rect class="em-arch-box-cyan" x="640" y="16" width="180" height="48" rx="6"/>
+              <text class="em-arch-t" x="656" y="46">True V, I → P</text>
+
+              <path class="em-arch-line" d="M370 120h40"/>
+              <rect class="em-arch-box" x="410" y="80" width="170" height="80" rx="6"/>
+              <text class="em-arch-t" x="426" y="110">Dividers and</text>
+              <text class="em-arch-t" x="426" y="130">shunt amplifier</text>
+              <text class="em-arch-s" x="426" y="150">gain, offset, noise</text>
+              <rect class="em-arch-box" x="640" y="80" width="180" height="80" rx="6"/>
+              <text class="em-arch-t" x="656" y="110">ADC</text>
+              <text class="em-arch-s" x="656" y="130">n bits, Vref</text>
+              <text class="em-arch-s" x="656" y="148">quantisation</text>
+              <rect class="em-arch-box" x="880" y="80" width="170" height="80" rx="6"/>
+              <text class="em-arch-t" x="896" y="110">Calibration</text>
+              <text class="em-arch-s" x="896" y="130">per channel</text>
+
+              <path class="em-arch-line-cyan" d="M820 120h60"/>
+              <path class="em-arch-line" d="M880 160v40H700"/>
+              <rect class="em-arch-box" x="520" y="200" width="180" height="70" rx="6"/>
+              <text class="em-arch-t" x="536" y="228">Sampled processing</text>
+              <text class="em-arch-s" x="536" y="248">P = V·I, trapezoid</text>
+              <path class="em-arch-line" d="M700 235h80"/>
+              <rect class="em-arch-box" x="780" y="200" width="150" height="70" rx="6"/>
+              <text class="em-arch-t" x="796" y="228">Logging</text>
+              <text class="em-arch-s" x="796" y="248">CSV, instrument</text>
+              <path class="em-arch-line-cyan" d="M820 64v16"/>
+            </svg>
+            <figcaption>Both paths come from the same operating point. The model never lets the reported value stand in for the truth without showing both.</figcaption>
+          </figure>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">04 / ENGINEERING MATHEMATICS</span><h2>Power, and the integral that turns it into energy.</h2>
+          <div class="em-study-math">
+            <div class="em-study-eq"><span>Instantaneous power</span><div class="em-eq"><math display="block"><mrow><mi>P</mi><mo>=</mo><mi>V</mi><mo>·</mo><mi>I</mi></mrow></math></div><p>Computed twice: once from the reported voltage and current, once from the simulated truth.</p></div>
+            <div class="em-study-eq"><span>Energy, discretely</span><div class="em-eq"><math display="block"><mrow><msub><mi>E</mi><mi>j</mi></msub><mo>=</mo><msub><mi>E</mi><mrow><mi>j</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mfrac><mrow><msub><mi>P</mi><mrow><mi>j</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>P</mi><mi>j</mi></msub></mrow><mn>2</mn></mfrac><mo>·</mo><mo>(</mo><msub><mi>t</mi><mi>j</mi></msub><mo>−</mo><msub><mi>t</mi><mrow><mi>j</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>)</mo></mrow></math></div><p>The interval comes from the timestamps, never from an assumed period.</p></div>
+            <div class="em-study-eq"><span>Watt-hours</span><div class="em-eq"><math display="block"><mrow><msub><mi>E</mi><mtext>Wh</mtext></msub><mo>=</mo><mfrac><msub><mi>E</mi><mtext>J</mtext></msub><mn>3600</mn></mfrac></mrow></math></div><p>Accumulators hold joules; 1 Wh = 3600 J exactly.</p></div>
+          </div>
+          <p class="em-study-note">The trapezoidal rule is second order: halving the sample interval quarters the integration error. The independent suite checks that convergence rate directly rather than trusting it.</p>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">05 / SOFTWARE ARCHITECTURE</span><h2>One module, no dependencies, two consumers.</h2>
+          <p><code>energy-monitor/model/dcem.js</code> holds all of the physics and arithmetic. The dashboard is the second consumer of that file, not a reimplementation: if the model and the instrument could disagree, that would defeat the purpose.</p>
+          <ol class="em-study-steps">
+            <li><span>01</span><div><b>Source and load</b><p>Solved together so voltage, current and resistance cannot contradict each other.</p></div></li>
+            <li><span>02</span><div><b>Sensing and ADC</b><p>Sensitivity, gain error, offset, noise, clamping and uniform quantisation, per channel.</p></div></li>
+            <li><span>03</span><div><b>Sampling and validation</b><p>Timestamps, rejection of duplicate or non-monotonic samples, counters instead of silence.</p></div></li>
+            <li><span>04</span><div><b>Power and energy</b><p>Trapezoidal accumulation on the real interval, with imported and exported energy separated.</p></div></li>
+            <li><span>05</span><div><b>Logging</b><p>CSV with both truth and measurement columns, written locally.</p></div></li>
+          </ol>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">06 / VERIFICATION</span><h2>Seven reference cases, two independent methods.</h2>
+          <p>The reference suite asserts hand-derived values with stated tolerances. The independent suite compares the model against a different construction — a second integrator over 500 random series, a closed-form sine integral with a convergence-order check, Ohm's law and Kirchhoff balance, additivity across consecutive runs, and statistics on the noise generator.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Reference cases, scrollable">
+            <table class="em-table">
+              <caption class="sr-only">Reference cases and their expected results</caption>
+              <thead><tr><th scope="col">Case</th><th scope="col">Input</th><th scope="col">Expected</th><th scope="col">Basis</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">A</th><td>12 V, 1 A, 3600 s</td><td class="em-mono">43 200 J / 12 Wh</td><td>exact — constant power</td></tr>
+                <tr><th scope="row">B</th><td>5 V, 2 A, 1800 s</td><td class="em-mono">18 000 J / 5 Wh</td><td>exact</td></tr>
+                <tr><th scope="row">C</th><td>10 V, 1 A → 0.5 A at 1800 s</td><td class="em-mono">26 997.5 J / 7.49931 Wh</td><td>step convention, 0.0093 % below the 27 000 J ideal</td></tr>
+                <tr><th scope="row">D</th><td>12 V, 0 A, 600 s</td><td class="em-mono">0 J</td><td>zero current, voltage still measured</td></tr>
+                <tr><th scope="row">E</th><td>irregular timestamps</td><td class="em-mono">77.605 J</td><td>hand-checkable; a uniform-spacing estimate would give 77.973 J</td></tr>
+                <tr><th scope="row">F</th><td>+2 % gain, +50 mV offset</td><td class="em-mono">10.4 V → 10.000 V calibrated</td><td>analytical, and the correction is exact</td></tr>
+                <tr><th scope="row">G</th><td>invalid datasets</td><td class="em-mono">classified and refused</td><td>six defect classes, each with its own code</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="em-study-note">Test output, not a summary: <code>67 assertions</code> in the reference suite and <code>594 checks</code> in the independent suite, both runnable with Node and no packages.</p>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">07 / TRADE-OFFS</span><h2>Choices that cost something.</h2>
+          <dl class="em-tradeoffs">
+            <div><dt>Trapezoidal instead of rectangular</dt><dd>Second-order accuracy for two multiplications and one extra stored sample. The rectangular rule would have been simpler and would have biased every step.</dd></div>
+            <div><dt>Per-channel calibration</dt><dd>Two independent corrections instead of one shared one. A divider and a shunt amplifier do not share a tolerance, and an early version of the model got this wrong.</dd></div>
+            <div><dt>Ideal quantisation only</dt><dd>The model does not reproduce INL, DNL or reference drift. They matter for a real ADC and would need datasheet numbers to model honestly.</dd></div>
+            <div><dt>Seeded noise instead of random</dt><dd>Reproducible runs and testable statistics, at the cost of not being able to show a "different" run on each reload.</dd></div>
+            <div><dt>No filtering by default</dt><dd>A first-order low-pass is available but off, because it changes reference results. Turning it on is a decision the user makes, not a hidden default.</dd></div>
+            <div><dt>Browser-side only</dt><dd>No server, no account, no upload. The cost is that a run lives and dies in the tab unless it is exported.</dd></div>
+          </dl>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">08 / RESULTS</span><h2>What the software demonstrates.</h2>
+          <ul class="em-result-list">
+            <li>A DC power and energy calculation that matches hand-derived values exactly where the mathematics is exact, and to a quantified tolerance where it is not.</li>
+            <li>A sensing chain whose gain, offset, noise and quantisation each produce the error the equations predict, with calibration recovering the value.</li>
+            <li>A sampling rule that uses real timestamps, so irregular intervals integrate correctly.</li>
+            <li>Honest failure: invalid data is refused and counted rather than integrated into a plausible-looking total.</li>
+            <li>An instrument that shows the truth and the measurement at the same time, so the difference is never hidden behind a single number.</li>
+          </ul>
+        </section>
+
+        <section class="em-study-block"><span class="section-index">09 / LIMITATIONS</span><h2>What it does not establish.</h2>
+          <ul class="em-result-list">
+            <li>No hardware accuracy of any kind: no sensor, ADC, MCU or board has been used.</li>
+            <li>No AC, mains, isolation or grid behaviour.</li>
+            <li>No switched-mode or fast-transient load behaviour; loads that change faster than the sample interval are aliased.</li>
+            <li>No ADC non-idealities, no fixed-point arithmetic, no timer jitter.</li>
+            <li>No filtering design and no loop response.</li>
+          </ul>
+          <p class="em-study-note">The full list is in <a href="/energy-monitor/docs/limitations.md">limitations.md</a>.</p>
+        </section>
+      </div></section>
+
+      <section class="section em-plan-section"><div class="wrap">
+        <div class="section-heading split-heading"><div><span class="section-index">10 / NEXT PHASE</span><h2>From model<br><em>to bench.</em></h2></div><p>A supervised, low-voltage hardware prototype. No component has been selected and nothing has been energised. Every milestone below is not started.</p></div>
+        <ol class="em-milestones"><li class="em-milestone"><span>1</span><h3 class="em-milestone-h">Approve hardware requirements</h3><b>Not started</b></li><li class="em-milestone"><span>2</span><h3 class="em-milestone-h">Select components against datasheets</h3><b>Not started</b></li><li class="em-milestone"><span>3</span><h3 class="em-milestone-h">Review the schematic</h3><b>Not started</b></li><li class="em-milestone"><span>4</span><h3 class="em-milestone-h">Build the supervised low-voltage prototype</h3><b>Not started</b></li><li class="em-milestone"><span>5</span><h3 class="em-milestone-h">Implement firmware using the model as its arithmetic reference</h3><b>Not started</b></li><li class="em-milestone"><span>6</span><h3 class="em-milestone-h">Bench measurements with recorded conditions</h3><b>Not started</b></li><li class="em-milestone"><span>7</span><h3 class="em-milestone-h">Calibrate against a reference instrument</h3><b>Not started</b></li><li class="em-milestone"><span>8</span><h3 class="em-milestone-h">Document results, including failures</h3><b>Not started</b></li><li class="em-milestone"><span>9</span><h3 class="em-milestone-h">Compare simulation with measurement</h3><b>Not started</b></li></ol>
+        <div class="em-plan-grid">
+          <div><h3>Requirements carried over</h3>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Requirements and their status, scrollable"><table class="em-table em-req-table"><caption class="sr-only">Requirements with their current status</caption><thead><tr><th scope="col">ID</th><th scope="col">Requirement</th><th scope="col">Status</th></tr></thead><tbody><tr><th scope="row">R1</th><td>Measure voltage and current of a single low-voltage DC load at a useful rate (at least tens of samples per second) and derive power.</td><td><span class="em-req" data-state="ok">Met by the software model</span></td></tr><tr><th scope="row">R2</th><td>Keep measurement uncertainty stated, with a calibration procedure against a reference meter.</td><td><span class="em-req" data-state="part">Partially met — uncertainty stated in the model, no hardware calibration yet</span></td></tr><tr><th scope="row">R3</th><td>Record or display data locally so a network outage does not lose the measurement.</td><td><span class="em-req" data-state="ok">Met in software (local record and CSV export)</span></td></tr><tr><th scope="row">R4</th><td>Stay inside a supervised, low-voltage boundary; any mains-referenced variant requires isolation review before it is attempted.</td><td><span class="em-req" data-state="ok">Preserved — the model is DC-only and low-voltage</span></td></tr><tr><th scope="row">R5</th><td>Publish the architecture, calibration method and test conditions alongside any number, so a reader can check the claim.</td><td><span class="em-req" data-state="ok">Met — model, tests, datasets and assumptions are published</span></td></tr></tbody></table></div>
+          </div>
+          <div><h3>Open questions</h3><ul class="em-result-list"><li>Which measurable quantity and operating range should the first study address?</li><li>Shunt, Hall-effect, or integrated monitor — which trade-off is worth learning first?</li><li>How is the ADC reference stabilised so the measurement means something?</li><li>What information would make the output useful without implying more accuracy than the measurement supports?</li></ul></div>
+        </div>
+        <div class="em-plan-tables">
+          <div><h3>Sensing methods to compare</h3><div class="table-scroll" tabindex="0" role="region" aria-label="Sensing options, scrollable"><table class="em-table"><caption class="sr-only">Sensing options</caption><tbody><tr><th scope="row">Shunt resistor + current-sense amplifier</th><td>Best linearity and low-side simplicity; adds a small series drop and needs attention to common-mode range if used high-side.</td></tr><tr><th scope="row">Hall-effect current sensor</th><td>Isolated by construction, simpler to wire, but offset drift and temperature behaviour need checking against the datasheet.</td></tr><tr><th scope="row">Resistive divider for voltage</th><td>Cheap and predictable, but the divider loads the node and its impedance must suit the ADC sample-and-hold.</td></tr><tr><th scope="row">Energy-monitoring IC with integrated ADCs</th><td>Fewer analog decisions to make, less of the signal chain to learn — a trade of effort against understanding.</td></tr></tbody></table></div><p class="em-study-note">Nothing is selected. Each method is listed with the trade-off that would decide it.</p></div>
+          <div><h3>Controller candidates</h3><div class="table-scroll" tabindex="0" role="region" aria-label="Controller options, scrollable"><table class="em-table"><caption class="sr-only">Controller options</caption><tbody><tr><th scope="row">ESP32 class</th><td>Wi-Fi and a capable ADC on one part; ADC linearity needs care and calibration.</td></tr><tr><th scope="row">STM32 class</th><td>Better analog peripherals and deterministic timing; connectivity needs additional design.</td></tr><tr><th scope="row">External ADC + any MCU</th><td>Moves accuracy requirements into a component with a proper datasheet, at the cost of board complexity.</td></tr></tbody></table></div><p class="em-study-note">Controller choice follows the measurement decisions, not the other way round.</p></div>
+        </div>
+        <div class="em-safety"><span class="section-index">SAFETY AND ISOLATION</span><p>The first study stays low-voltage and supervised. A mains-referenced version would need galvanic isolation, creepage and clearance decisions, protective devices and review by someone qualified to sign it off — that is out of scope for this record.</p><p class="em-study-note">The first build is limited to a supervised bench supply at 24 V DC or less with a current limit of 1 A or less, an inline fuse, and a second person present. No mains wiring.</p></div>
+        <div class="em-validation"><span class="section-index">HOW A HARDWARE RESULT WOULD BE CHECKED</span><ul class="em-result-list"><li>Run the reference suite and compare its printed table with the published values before trusting any number on the site.</li><li>Re-derive the power and energy relations independently; the independent suite exists so a self-consistent error cannot pass both.</li><li>For hardware, compare against a calibrated reference meter at several operating points and record the instrument, wiring, load and ambient conditions.</li><li>Publish failed checks as well as passing ones, and state the tolerance with every claim.</li></ul></div>
+      </div></section>
+
+      <section class="section em-dev-section"><div class="wrap">
+        <div class="em-dev-head"><div><span class="section-index">11 / DEVELOPMENT AND ATTRIBUTION</span><h2>How this was made, and what is whose.</h2></div><span class="status-label">Software artefact · AI-assisted</span></div>
+        <dl class="em-meta-strip">
+          <div><dt>Status</dt><dd>Software Model V1, verified</dd></div>
+          <div><dt>Attribution</dt><dd>AI-assisted implementation</dd></div>
+          <div><dt>Dependencies</dt><dd>None</dd></div>
+          <div><dt>Runtime</dt><dd>Browser and Node</dd></div>
+          <div><dt>Hardware</dt><dd>Not built</dd></div>
+        </dl>
+        <div class="em-dev-grid">
+          <article><h3>What the agent produced</h3><p>The model, both test suites, the datasets, the documentation, the instrument interface and this page were written with AI assistance. That is disclosed because it is material, not as a formality.</p></article>
+          <article><h3>What the founder specified</h3><p>The project direction, the scope decision to stay low-voltage and DC, the ranges, the requirement to keep hardware claims separate from software claims, and the instruction that no measurement be invented.</p></article>
+          <article><h3>What the founder still has to do</h3><p>Read and understand the model, re-derive at least the power and energy relations independently, run the test suites, break something and watch a test fail, then decide whether the trade-offs in section 07 are the ones he wants to defend.</p></article>
+          <article><h3>How to check it without trusting this page</h3><p>Open the model file, run the two Node commands, compare the printed table with the numbers above. Nothing on this page is required to reproduce a result.</p><code class="em-code-block" tabindex="0" role="region" aria-label="Commands to reproduce the results">node energy-monitor/tests/dcem-reference.test.js
+node energy-monitor/tests/dcem-independent.test.js</code></article>
+          <article><h3>What is verifiable and what is not</h3><p>Verifiable: the arithmetic, the error model, the tests, the datasets, the instrument. Not verifiable here: anything about physical accuracy, because no physical system exists.</p></article>
+          <article><h3>Repository layout</h3><p>Model, tests, examples and documentation sit under <code>energy-monitor/</code>. The dashboard script under <code>assets/</code> is presentation only. Nothing in the software model is presented as the founder's independent engineering work.</p></article>
+        </div>
+        <div class="em-dev-links">
+          <span class="section-index">ARTEFACTS</span>
+          <ul class="em-artefacts"><li><a href="/energy-monitor/model/dcem.js">Model source</a><span>the module the page and the tests both use</span></li><li><a href="/energy-monitor/tests/dcem-reference.test.js">Reference tests</a><span>cases A–G, 67 assertions</span></li><li><a href="/energy-monitor/tests/dcem-independent.test.js">Independent tests</a><span>ten groups, 594 assertions</span></li><li><a href="/energy-monitor/docs/model.md">Model documentation</a><span>equations, units, integration, error model</span></li><li><a href="/energy-monitor/docs/requirements.md">Requirements</a><span>what V1 must do, and what it must not claim</span></li><li><a href="/energy-monitor/docs/architecture.md">Architecture</a><span>stage-by-stage structure</span></li><li><a href="/energy-monitor/docs/limitations.md">Limitations</a><span>what the model does not establish</span></li><li><a href="/energy-monitor/docs/hardware-plan.md">Hardware plan</a><span>the low-voltage roadmap, not yet started</span></li><li><a href="/energy-monitor/docs/reproduce.md">Reproduction</a><span>commands and expected output</span></li><li><a href="/energy-monitor/examples/">Reference datasets</a><span>six CSV files with their metadata</span></li></ul>
+        </div>
+        <div class="project-detail-related"><a href="/projects/dc-energy-monitor.html">Launch the instrument &#8599;</a><a href="/energy-monitor/docs/requirements.md">Requirements &#8599;</a><a href="/energy-monitor/docs/hardware-plan.md">Hardware plan &#8599;</a><a href="/lab.html">Engineering notes &#8599;</a></div>
+      </div></section>
     </article>
 
   </main>

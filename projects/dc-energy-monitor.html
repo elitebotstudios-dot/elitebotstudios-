@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>DC Energy Monitor — interactive software model | Elite Bot Studios</title>
+  <meta name="description" content="Run a simulated low-voltage DC energy monitor: configurable source, five load models, a sensing chain with gain, offset, noise and ADC quantisation, and trapezoidal energy accumulation with published verification." />
+<link rel="canonical" href="https://elitebotstudios.me/projects/dc-energy-monitor.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elite Bot Studios" />
+  <meta property="og:title" content="DC Energy Monitor — interactive software model | Elite Bot Studios" />
+  <meta property="og:description" content="Run a simulated low-voltage DC energy monitor: configurable source, five load models, a sensing chain with gain, offset, noise and ADC quantisation, and trapezoidal energy accumulation with published verification." />
+<meta property="og:url" content="https://elitebotstudios.me/projects/dc-energy-monitor.html" />
+  <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DC Energy Monitor — interactive software model | Elite Bot Studios" />
+  <meta name="twitter:description" content="Run a simulated low-voltage DC energy monitor: configurable source, five load models, a sensing chain with gain, offset, noise and ADC quantisation, and trapezoidal energy accumulation with published verification." />
+  <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
+
+  <link rel="icon" href="/assets/favicon-32x32.png?v=f887a99b" sizes="32x32" />
+  <link rel="icon" href="/assets/favicon-16x16.png?v=3a582b91" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=dd9eaed5" />
+  <link rel="manifest" href="/site.webmanifest?v=f8f8f629" />
+  <meta name="theme-color" content="#080B10" />
+  <meta name="ebs-build" content="EBS-2026.11.06-R10" />
+
+  <link rel="stylesheet" href="/assets/site.css?v=2f8fffaf" />
+
+  <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HLQ4G5HBMZ');
+    (function deferAnalytics(){
+      var started = false;
+      function load() {
+        if (started) return;
+        started = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HLQ4G5HBMZ';
+        document.head.appendChild(script);
+      }
+      setTimeout(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 2000 });
+        else load();
+      }, 6000);
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Smart DC Energy Monitor \u2014 Software Model V1",
+  "description": "A simulated low-voltage DC energy-monitoring system: source and load models, a configurable sensing chain with gain, offset, noise and ADC quantisation, sampled power and trapezoidal energy accumulation, with reference and independent test suites.",
+  "codeRepository": "https://elitebotstudios.me/energy-monitor/model/dcem.js",
+  "programmingLanguage": "JavaScript",
+  "url": "https://elitebotstudios.me/projects/dc-energy-monitor.html",
+  "author": {
+    "@type": "Organization",
+    "name": "Elite Bot Studios"
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://elitebotstudios.me"
+  }
+}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">
+        <img class="brand-mark" src="/assets/logo-mark.webp?v=adc77c23" alt="" width="42" height="48" decoding="async" />
+        <span class="brand-word">Elite Bot Studios</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/projects.html" aria-current="page">Projects</a>
+        <a href="/expertise.html">Expertise</a>
+        <a href="/lab.html">Engineering Lab</a>
+        <a href="/about.html">About</a>
+        <a href="/tools.html">Tools</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-amber" href="/contact.html">Contact</a>
+        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" data-open="false">
+      <nav aria-label="Mobile">
+        <ul>
+          <li><a href="/projects.html" aria-current="page">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/tools.html">Tools</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="page-head em-head"><div class="wrap">
+      <a class="backlink" href="/projects/smart-energy-monitoring.html">&larr; Smart Energy Monitoring</a>
+      <span class="eyebrow">Project 01 / Software model V1 / Hardware not built</span>
+      <h1>DC energy monitor.<br><em>Run the instrument.</em></h1>
+      <p>A simulated low-voltage DC energy monitor: source, load, sensing chain, embedded sampling and energy accumulation, all running in this page. True and measured values are shown side by side so the difference is never hidden.</p>
+      <div class="em-head-tags">
+        <span class="em-tag em-tag-ok">Software model V1 · verified</span>
+        <span class="em-tag">Hardware prototype · not built</span>
+        <span class="em-tag">Runs in your browser</span>
+      </div>
+    </div></section>
+
+    <section class="section em-app-section"><div class="wrap">
+      <div class="em-app" id="emApp">
+        <div class="em-statusbar">
+          <span class="em-status" id="emStatus" data-tone="idle" role="status">Ready</span>
+          <dl class="em-status-facts">
+            <div><dt>Simulated time</dt><dd id="emClock">00:00.0</dd></div>
+            <div><dt>Samples</dt><dd id="emSamples">0</dd></div>
+            <div><dt>Rejected / clipped</dt><dd id="emRejected">0</dd></div>
+          </dl>
+        </div>
+
+        <div class="em-arch" role="group" aria-label="System architecture">
+          <button type="button" class="em-arch-block" data-arch="source" data-arch-info="<b>DC source.</b> An ideal voltage source with an optional series resistance. The terminal voltage is solved together with the load, so a load that draws more current makes the terminal voltage sag by I·R<sub>s</sub>. The open-circuit voltage is a simulated quantity; nothing here is a measurement of a real supply." aria-pressed="false"><span class="em-arch-no">01</span><span class="em-arch-label">DC source</span></button>
+<button type="button" class="em-arch-block" data-arch="load" data-arch-info="<b>Electrical load.</b> Five models: fixed resistance, fixed current, a step, a duty cycle, and a user sequence. A resistive load derives its own current from the applied voltage — the model never assigns voltage, current and resistance independently." aria-pressed="false"><span class="em-arch-no">02</span><span class="em-arch-label">Electrical load</span></button>
+<button type="button" class="em-arch-block" data-arch="sensing" data-arch-info="<b>Sensing.</b> A divider (V per V) and a shunt amplifier (V per A) scale the two signals into the ADC range. Gain error, offset and noise are applied at the pin, then the result is quantised. The parameters are illustrative, not a datasheet for a specific part." aria-pressed="false"><span class="em-arch-no">03</span><span class="em-arch-label">Voltage and current sensing</span></button>
+<button type="button" class="em-arch-block" data-arch="controller" data-arch-info="<b>Embedded processing.</b> The sampled values are timestamped, converted to engineering units, optionally filtered, multiplied to give power, and accumulated with the trapezoidal rule over the actual sample intervals. Rejected samples are counted instead of being integrated." aria-pressed="false"><span class="em-arch-no">04</span><span class="em-arch-label">Embedded processing</span></button>
+<button type="button" class="em-arch-block" data-arch="logging" data-arch-info="<b>Logging.</b> The running record is held in the browser and can be exported as CSV with the exact timestamps and both true and measured columns. No simulation data leaves the device unless you export it." aria-pressed="false"><span class="em-arch-no">05</span><span class="em-arch-label">Logging and interface</span></button>
+        </div>
+        <p class="em-arch-info" id="emArchInfo">Source → load → sensing → controller → logging. Select a block to read what the model does at that stage.</p>
+
+        <div class="em-layout">
+          <form class="em-controls" id="emControls" novalidate>
+            <div class="em-control-group">
+              <label class="em-control-label" for="emScenario">Scenario</label>
+              <select id="emScenario"><option value="constant-load">Constant resistive load</option><option value="step-load">Step-changing load</option><option value="adc-quantisation">ADC quantisation</option><option value="calibration">Gain, offset and noise</option><option value="sampling-interval">Sampling interval</option><option value="duty-load">Duty-cycled load</option><option value="source-droop">Real source impedance</option></select>
+              <p class="em-note" id="emNote"></p>
+            </div>
+
+            <fieldset class="em-control-group"><legend>Source</legend>
+              <div class="em-pair">
+                <div><label for="emSupply">Supply <span>V</span></label><input id="emSupply" type="number" value="12" min="1" max="48" step="0.1" inputmode="decimal"></div>
+                <div><label for="emSourceR">Source resistance <span>Ω</span></label><input id="emSourceR" type="number" value="0" min="0" max="5" step="0.05" inputmode="decimal"></div>
+              </div>
+            </fieldset>
+
+            <fieldset class="em-control-group"><legend>Load</legend>
+              <label for="emLoad">Load model</label>
+              <select id="emLoad">
+                <option value="resistive" selected>Fixed resistance</option>
+                <option value="current">Fixed current</option>
+                <option value="step">Step change</option>
+                <option value="duty">Duty cycle</option>
+              </select>
+              <div class="em-pair" data-load-mode="resistive">
+                <div><label for="emResistance">Resistance <span>Ω</span></label><input id="emResistance" type="number" value="12" min="0.5" max="1000" step="0.5" inputmode="decimal"></div>
+              </div>
+              <div class="em-pair" data-load-mode="current">
+                <div><label for="emCurrent">Current <span>A</span></label><input id="emCurrent" type="number" value="1" min="0" max="5" step="0.05" inputmode="decimal"></div>
+              </div>
+              <div class="em-pair" data-load-mode="step">
+                <div><label for="emStepBefore">Before <span>A</span></label><input id="emStepBefore" type="number" value="1" min="0" max="5" step="0.05" inputmode="decimal"></div>
+                <div><label for="emStepAfter">After <span>A</span></label><input id="emStepAfter" type="number" value="0.5" min="0" max="5" step="0.05" inputmode="decimal"></div>
+              </div>
+              <div class="em-pair" data-load-mode="step">
+                <div><label for="emStepAt">Step at <span>s</span></label><input id="emStepAt" type="number" value="150" min="0" max="3600" step="1" inputmode="numeric"></div>
+              </div>
+              <div class="em-pair" data-load-mode="duty">
+                <div><label for="emDutyPeriod">Period <span>s</span></label><input id="emDutyPeriod" type="number" value="30" min="0.5" max="600" step="0.5" inputmode="decimal"></div>
+                <div><label for="emDutyRatio">On-time <span>%</span></label><input id="emDutyRatio" type="number" value="40" min="1" max="99" step="1" inputmode="numeric"></div>
+              </div>
+              <div class="em-pair" data-load-mode="duty">
+                <div><label for="emDutyOn">On current <span>A</span></label><input id="emDutyOn" type="number" value="1.5" min="0" max="5" step="0.05" inputmode="decimal"></div>
+                <div><label for="emDutyOff">Off current <span>A</span></label><input id="emDutyOff" type="number" value="0.2" min="0" max="5" step="0.05" inputmode="decimal"></div>
+              </div>
+            </fieldset>
+
+            <fieldset class="em-control-group"><legend>Sampling and sensing</legend>
+              <div class="em-pair">
+                <div><label for="emInterval">Sample interval <span>s</span></label><input id="emInterval" type="number" value="0.5" min="0.05" max="10" step="0.05" inputmode="decimal"></div>
+                <div><label for="emAdcBits">ADC bits</label>
+                  <select id="emAdcBits">
+                    <option value="6">6</option><option value="8">8</option><option value="10">10</option>
+                    <option value="12" selected>12</option><option value="14">14</option><option value="16">16</option>
+                  </select></div>
+              </div>
+              <div class="em-pair">
+                <div><label for="emVDivider">Voltage divider <span>V/V</span></label>
+                  <select id="emVDivider"><option value="0.1">0.1 (10:1)</option><option value="0.25" selected>0.25 (4:1)</option><option value="0.5">0.5 (2:1)</option></select></div>
+                <div><label for="emISense">Current sense <span>V/A</span></label>
+                  <select id="emISense"><option value="0.25">0.25</option><option value="0.5" selected>0.5</option><option value="1">1.0</option><option value="2">2.0</option></select></div>
+              </div>
+              <details class="em-advanced">
+                <summary>Error terms and calibration</summary>
+                <div class="em-pair">
+                  <div><label for="emVGain">Voltage gain error <span>%</span></label><input id="emVGain" type="number" value="0" min="-20" max="20" step="0.1" inputmode="decimal"></div>
+                  <div><label for="emVOffset">Voltage offset <span>mV</span></label><input id="emVOffset" type="number" value="0" min="-200" max="200" step="1" inputmode="decimal"></div>
+                </div>
+                <div class="em-pair">
+                  <div><label for="emVNoise">Voltage noise <span>mV RMS</span></label><input id="emVNoise" type="number" value="0" min="0" max="200" step="0.5" inputmode="decimal"></div>
+                  <div><label for="emINoise">Current noise <span>mV RMS</span></label><input id="emINoise" type="number" value="0" min="0" max="200" step="0.5" inputmode="decimal"></div>
+                </div>
+                <div class="em-pair">
+                  <div><label for="emIGain">Current gain error <span>%</span></label><input id="emIGain" type="number" value="0" min="-20" max="20" step="0.1" inputmode="decimal"></div>
+                  <div><label for="emIOffset">Current offset <span>mV</span></label><input id="emIOffset" type="number" value="0" min="-200" max="200" step="1" inputmode="decimal"></div>
+                </div>
+                <div class="em-check">
+                  <input id="emCalibration" type="checkbox">
+                  <label for="emCalibration">Apply calibration (uses the entered error terms as the calibration constants)</label>
+                </div>
+                <p class="em-help">Calibration applies to each channel separately. With these defaults it corrects the gain error and offset you enter, which is exactly the correction a real calibration would estimate.</p>
+              </details>
+            </fieldset>
+
+            <fieldset class="em-control-group"><legend>Run</legend>
+              <div class="em-pair">
+                <div><label for="emDuration">Duration <span>s</span></label><input id="emDuration" type="number" value="300" min="10" max="3600" step="10" inputmode="numeric"></div>
+                <div><label for="emSpeed">Speed <span>×</span></label><input id="emSpeed" type="number" value="20" min="1" max="120" step="1" inputmode="numeric"></div>
+              </div>
+            </fieldset>
+
+            <div class="em-buttons">
+              <button type="button" class="btn btn-primary" id="emStart">Start</button>
+              <button type="button" class="btn btn-ghost" id="emPause" disabled>Pause</button>
+              <button type="button" class="btn btn-ghost" id="emReset">Reset</button>
+              <button type="button" class="btn btn-ghost" id="emExport" disabled>Export CSV</button>
+            </div>
+            <p class="em-help">Start, pause and reset are exact: a paused run does not advance simulated time, and a reset clears the accumulator. Changing the load model or the calibration starts a new run so energy cannot carry over from a different configuration.</p>
+            <p class="em-warning" id="emWarnings" hidden></p>
+          </form>
+
+          <div class="em-instrument">
+            <div class="em-readouts">
+              <div class="em-readout"><span class="em-readout-label">Voltage</span><span class="em-readout-value" id="emV">—</span><span class="em-readout-unit">V</span><span class="em-readout-true">true <b id="emVTrue">—</b> V</span></div>
+              <div class="em-readout"><span class="em-readout-label">Current</span><span class="em-readout-value" id="emI">—</span><span class="em-readout-unit">A</span><span class="em-readout-true">true <b id="emITrue">—</b> A</span></div>
+              <div class="em-readout em-readout-accent"><span class="em-readout-label">Power</span><span class="em-readout-value" id="emP">—</span><span class="em-readout-unit">W</span><span class="em-readout-true">true <b id="emPTrue">—</b> W</span></div>
+              <div class="em-readout em-readout-accent"><span class="em-readout-label">Energy</span><span class="em-readout-value" id="emE">—</span><span class="em-readout-unit">Wh</span><span class="em-readout-true">true <b id="emETrue">—</b> Wh</span></div>
+            </div>
+            <p class="em-readout-foot"><span>Load state</span> <b id="emLoadState">—</b> <span class="em-readout-hint">Large numbers are the measurement chain output; the small line under each is the simulated truth.</span></p>
+
+            <p class="em-inspect" id="emInspect">Hover or focus a chart to read a point.</p>
+
+            <div class="em-chart-tabs" role="tablist" aria-label="Chart selection">
+              <button type="button" role="tab" aria-selected="true" data-chart-tab="voltage">Voltage</button>
+              <button type="button" role="tab" aria-selected="false" data-chart-tab="current">Current</button>
+              <button type="button" role="tab" aria-selected="false" data-chart-tab="power">Power</button>
+              <button type="button" role="tab" aria-selected="false" data-chart-tab="energy">Energy</button>
+            </div>
+
+            <div class="em-charts">
+              <figure class="em-chart" data-chart-panel="voltage"><figcaption>Voltage <span>V</span></figcaption><canvas id="emChart-voltage" role="img" aria-label="Voltage against time"></canvas></figure>
+              <figure class="em-chart" data-chart-panel="current"><figcaption>Current <span>A</span></figcaption><canvas id="emChart-current" role="img" aria-label="Current against time"></canvas></figure>
+              <figure class="em-chart" data-chart-panel="power"><figcaption>Power <span>W</span></figcaption><canvas id="emChart-power" role="img" aria-label="Power against time"></canvas></figure>
+              <figure class="em-chart" data-chart-panel="energy"><figcaption>Accumulated energy <span>Wh</span></figcaption><canvas id="emChart-energy" role="img" aria-label="Accumulated energy against time"></canvas></figure>
+            </div>
+            <p class="em-chart-note">Solid lines are the simulated truth; dashed lines are what the sensing chain reports. Both come from the same sample set.</p>
+            <p class="sr-only" id="emLive" aria-live="polite"></p>
+          </div>
+        </div>
+        <noscript><p class="em-noscript">The instrument needs JavaScript. The model itself is a plain file you can read and run with Node: <code>node energy-monitor/tests/dcem-reference.test.js</code>.</p></noscript>
+      </div>
+    </div></section>
+
+    <section class="section em-experiments-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">01 / EXPERIMENTS</span><h2>Five things<br><em>worth looking at.</em></h2></div><p>Each experiment loads a complete configuration into the instrument above. They all use the same validated model — there is no second implementation for the demonstrations.</p></div>
+      <div class="em-experiments"><article class="em-experiment"><span class="em-experiment-no">EXPERIMENT 01</span><h3>Constant DC load</h3><p class="em-experiment-tagline">Voltage, current, power and energy in the simplest case.</p><p>A 12 V supply into a 12 Ω resistive load. The current follows from the supply and the resistance, and the energy graph is a straight line whose slope is the power.</p><button type="button" class="btn btn-ghost em-experiment-btn" data-experiment="constant-load">Load this experiment</button></article>
+<article class="em-experiment"><span class="em-experiment-no">EXPERIMENT 02</span><h3>Changing load</h3><p class="em-experiment-tagline">What a step does to power and to the energy slope.</p><p>The load current halves part-way through the run. Power halves with it, so the energy trace bends rather than stopping.</p><button type="button" class="btn btn-ghost em-experiment-btn" data-experiment="step-load">Load this experiment</button></article>
+<article class="em-experiment"><span class="em-experiment-no">EXPERIMENT 03</span><h3>ADC quantisation</h3><p class="em-experiment-tagline">Ideal signal against a quantised measurement.</p><p>An 8-bit converter on a slowly varying signal. The measured trace is a staircase; every step is one LSB of the sensing chain.</p><button type="button" class="btn btn-ghost em-experiment-btn" data-experiment="adc-quantisation">Load this experiment</button></article>
+<article class="em-experiment"><span class="em-experiment-no">EXPERIMENT 04</span><h3>Calibration and error</h3><p class="em-experiment-tagline">Systematic error, random error, and the correction.</p><p>Gain error and offset bias the reading in a predictable direction. Calibration removes the systematic part; the noise remains.</p><button type="button" class="btn btn-ghost em-experiment-btn" data-experiment="calibration">Load this experiment</button></article>
+<article class="em-experiment"><span class="em-experiment-no">EXPERIMENT 05</span><h3>Sampling interval</h3><p class="em-experiment-tagline">What sparse samples cannot tell you.</p><p>A 4 s duty cycle sampled every 2 s. The reported average depends on where the samples land, which is a property of the sampling, not of the load.</p><button type="button" class="btn btn-ghost em-experiment-btn" data-experiment="sampling-interval">Load this experiment</button></article></div>
+    </div></section>
+
+    <section class="section em-method-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">02 / THE MODEL</span><h2>Power, energy,<br><em>and the time between samples.</em></h2></div><p>Discrete samples do not measure instantaneous power; they bracket it. The model says exactly what it does between two samples.</p></div>
+      <div class="em-method-grid">
+        <article><h3>Power</h3><div class="em-eq"><math display="block"><mrow><mi>P</mi><mo>=</mo><mi>V</mi><mo>·</mo><mi>I</mi></mrow></math></div><p>Computed from the two measured channels after scaling and quantisation, and separately from the simulated truth so the difference can be read directly.</p></article>
+        <article><h3>Energy, trapezoidal</h3><div class="em-eq"><math display="block"><mrow><msub><mi>E</mi><mi>j</mi></msub><mo>+=</mo><mfrac><mrow><msub><mi>P</mi><mrow><mi>j</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>P</mi><mi>j</mi></msub></mrow><mn>2</mn></mfrac><mo>·</mo><mi>Δ</mi><msub><mi>t</mi><mi>j</mi></msub></mrow></math></div><p>Each interval contributes the average of its two endpoint powers times the <em>actual</em> elapsed time. Power is never summed without multiplying by time.</p></article>
+        <article><h3>Units</h3><div class="em-eq"><math display="block"><mrow><msub><mi>E</mi><mtext>Wh</mtext></msub><mo>=</mo><mfrac><msub><mi>E</mi><mtext>J</mtext></msub><mn>3600</mn></mfrac></mrow></math></div><p>Accumulators hold joules; the interface shows watt-hours. 1 Wh = 3600 J exactly, with no rounding in between.</p></article>
+        <article><h3>Sensing chain</h3><div class="em-eq"><math display="block"><mrow><msub><mi>V</mi><mtext>pin</mtext></msub><mo>=</mo><mi>V</mi><mo>·</mo><mi>S</mi><mo>·</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>g</mi><mo>)</mo><mo>+</mo><msub><mi>V</mi><mtext>os</mtext></msub><mo>+</mo><mi>n</mi></mrow></math></div><p>Sensitivity, gain error, offset and noise at the pin, then uniform quantisation to the nearest LSB. A channel with 0 bits is treated as ideal.</p></article>
+      </div>
+      <div class="em-assumptions">
+        <h3>What the numbers between samples mean</h3>
+        <ul>
+          <li>The simulated truth is evaluated at each sample instant. Between samples it is undefined — the model does not interpolate a "true" waveform.</li>
+          <li>The trapezoidal rule assumes power varies linearly across an interval. That is exact for constant power, slightly high or low across a step, and approximate for anything curved.</li>
+          <li>A step that falls between two samples is smeared across that interval. Reference case C quantifies it: 2.5 J in 27 000 J, or 0.0093 %.</li>
+          <li>Imported and exported energy are integrated separately, splitting the interval at a sign change, so reversed current cannot reduce a consumption total by accident.</li>
+          <li>Rejected samples — duplicate, non-monotonic, non-numeric or out of range — are counted and never integrated.</li>
+        </ul>
+      </div>
+    </div></section>
+
+    <section class="section em-verify-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">03 / VERIFICATION</span><h2>Reference cases,<br><em>with their tolerances.</em></h2></div><p>Every row below is asserted by <code>dcem-reference.test.js</code> and re-derived by a separate method in <code>dcem-independent.test.js</code>. These are the values the test files print.</p></div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Reference test results, scrollable"><table class="em-table"><caption class="sr-only">Reference cases asserted by the test suite</caption><thead><tr><th scope="col">Case</th><th scope="col">Input</th><th scope="col">Expected result</th><th scope="col">Why that number</th></tr></thead><tbody><tr><th scope="row">A</th><td>12 V, 1 A, 3600 s</td><td class="em-mono">43 200 J / 12 Wh</td><td>exact — constant power, so the trapezoidal rule has no error</td></tr><tr><th scope="row">B</th><td>5 V, 2 A, 1800 s</td><td class="em-mono">18 000 J / 5 Wh</td><td>exact</td></tr><tr><th scope="row">C</th><td>10 V, 1 A → 0.5 A at 1800 s</td><td class="em-mono">26 997.5 J / 7.49931 Wh</td><td>0.0093 % below the 27 000 J continuous ideal — the step straddles one interval</td></tr><tr><th scope="row">D</th><td>12 V, 0 A, 600 s</td><td class="em-mono">0 J</td><td>zero current, so zero energy, with the voltage still measured</td></tr><tr><th scope="row">E</th><td>irregular timestamps, 5 intervals</td><td class="em-mono">77.605 J</td><td>hand-checkable; the naive mean × time estimate would give 77.973 J</td></tr><tr><th scope="row">F</th><td>10 V true, +2 % gain, +50 mV offset</td><td class="em-mono">10.4 V uncalibrated → 10.000 V calibrated</td><td>analytical; calibrating removes the bias exactly</td></tr><tr><th scope="row">G</th><td>invalid datasets</td><td class="em-mono">classified and refused</td><td>missing, duplicate, non-monotonic, non-numeric, extreme and empty inputs</td></tr></tbody></table></div>
+      <p class="em-caption">Software verification only. Nothing on this page is a measurement of a physical circuit, and no accuracy claim about real hardware follows from it.</p>
+    </div></section>
+
+    <section class="section em-artefacts-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">04 / ARTEFACTS</span><h2>Everything needed<br><em>to reproduce it.</em></h2></div><p>The model, both test suites, the documentation and the reference datasets are plain files served from this site. You do not need the dashboard to check the numbers.</p></div>
+      <ul class="em-artefacts"><li><a href="/energy-monitor/model/dcem.js">Model source</a><span>the module the page and the tests both use</span></li><li><a href="/energy-monitor/tests/dcem-reference.test.js">Reference tests</a><span>cases A–G, 67 assertions</span></li><li><a href="/energy-monitor/tests/dcem-independent.test.js">Independent tests</a><span>ten groups, 594 assertions</span></li><li><a href="/energy-monitor/docs/model.md">Model documentation</a><span>equations, units, integration, error model</span></li><li><a href="/energy-monitor/docs/requirements.md">Requirements</a><span>what V1 must do, and what it must not claim</span></li><li><a href="/energy-monitor/docs/architecture.md">Architecture</a><span>stage-by-stage structure</span></li><li><a href="/energy-monitor/docs/limitations.md">Limitations</a><span>what the model does not establish</span></li><li><a href="/energy-monitor/docs/hardware-plan.md">Hardware plan</a><span>the low-voltage roadmap, not yet started</span></li><li><a href="/energy-monitor/docs/reproduce.md">Reproduction</a><span>commands and expected output</span></li><li><a href="/energy-monitor/examples/">Reference datasets</a><span>six CSV files with their metadata</span></li></ul>
+      <p class="em-reproduce"><code>node energy-monitor/tests/dcem-reference.test.js<br>node energy-monitor/tests/dcem-independent.test.js</code></p>
+    </div></section>
+
+    <section class="section em-status-section"><div class="wrap">
+      <div class="em-status-grid">
+        <div><span class="em-tag em-tag-ok">Software model V1</span><h3>Verified against reference cases</h3><p>The model, its tests and its datasets are complete for the scope described in the requirements document.</p></div>
+        <div><span class="em-tag">Hardware prototype</span><h2 class="em-status-h">Not yet built</h2><p>No sensor, ADC, microcontroller, board or enclosure exists. The hardware plan lists the stages and the approvals required before anything is energised.</p></div>
+      </div>
+      <div class="project-detail-related"><a href="/projects/smart-energy-monitoring.html">Read the project case study &#8599;</a><a href="/energy-monitor/docs/hardware-plan.md">Hardware plan &#8599;</a><a href="/tools.html">Other engineering tools &#8599;</a></div>
+    </div></section>
+
+  </main>
+
+  <script src="/energy-monitor/model/dcem.js?v=d0edbc7c" defer></script>
+  <script src="/assets/energy-dashboard.js?v=659c1885" defer></script>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-tag">Embedded Intelligence · Real-World Power</p>
+        <p>An independent engineering initiative exploring embedded systems, power electronics, and intelligent hardware through practical designs, simulations, prototypes, and documented projects.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul class="footer-links">
+          <li><a href="/projects.html">Projects</a></li>
+          <li><a href="/expertise.html">Expertise</a></li>
+          <li><a href="/lab.html">Engineering Lab</a></li>
+          <li><a href="/tools.html">Engineering Tools</a></li>
+          <li><a href="/services.html">Collaboration</a></li>
+          <li><a href="/about.html">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul class="footer-links">
+          <li><a href="/contact.html">Contact</a></li>
+          <li><!--email_off--><a href="mailto:contact@elitebotstudios.me">contact@elitebotstudios.me</a><!--/email_off--></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="/cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>Pakistan · Independent engineering initiative</span>
+      <span>&copy; 2026 Elite Bot Studios</span>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js?v=087e6622" defer></script>
+</body>
+</html>

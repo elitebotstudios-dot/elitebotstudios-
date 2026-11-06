@@ -2,58 +2,134 @@
   {
     "slug": "smart-energy-monitoring",
     "title": "Smart Energy Monitoring",
-    "status": "concept",
+    "status": "simulation",
     "category": "Embedded Systems · Energy",
-    "tags": ["concept", "embedded systems", "energy monitoring"],
+    "tags": [
+      "concept",
+      "embedded systems",
+      "energy monitoring"
+    ],
     "date": "2026-11",
-    "summary": "A project direction exploring how embedded measurement might make electrical energy data easier to understand.",
+    "summary": "A low-voltage DC energy monitor, now a verified software model of the full measurement chain: source, load, sensing, ADC, sampled power and energy accumulation.",
     "objective": "Explore how embedded measurement and electrical energy data can be combined in a documented monitoring system.",
     "problem": "This is a project track, not a built device. The intended question is how useful electrical measurements can be collected and presented in a responsible, understandable way.",
     "approach": "No hardware architecture, component selection, firmware, or test plan is being claimed yet. Those details will be added only after they are actually designed and reviewed.",
-    "results_note": "No prototype, simulation, repository, or measured results are published for this concept.",
+    "results_note": "Software Model V1 is complete and verified against seven reference cases with an independent test suite. No hardware exists: no sensor, ADC, controller or board has been built or measured.",
     "case_study_url": "/projects/smart-energy-monitoring.html",
     "case_study": {
-      "overview": "A design brief for an energy-monitoring system, written before any hardware exists. It fixes the problem, the requirements and the open engineering choices, so the eventual schematic and firmware can be judged against something rather than invented after the fact.",
+      "overview": "A design brief for a low-voltage DC energy-monitoring system, and the first working artefact that follows it: a software model of the whole measurement chain — DC source, load, voltage and current sensing, ADC quantisation, sampled power and trapezoidal energy accumulation — with the formulas, source, reference cases and an independent verification suite published alongside it.",
       "application": "The intended application is low-voltage, supervised measurement of an appliance or small installation: enough to answer “what is this load actually drawing, and when?” without claiming revenue-grade accuracy or mains-connected deployment.",
       "requirements": [
-        { "id": "R1", "text": "Measure voltage and current of a single low-voltage DC load at a useful rate (at least tens of samples per second) and derive power." },
-        { "id": "R2", "text": "Keep measurement uncertainty stated, with a calibration procedure against a reference meter." },
-        { "id": "R3", "text": "Record or display data locally so a network outage does not lose the measurement." },
-        { "id": "R4", "text": "Stay inside a supervised, low-voltage boundary; any mains-referenced variant requires isolation review before it is attempted." },
-        { "id": "R5", "text": "Publish the architecture, calibration method and test conditions alongside any number, so a reader can check the claim." }
+        {
+          "id": "R1",
+          "text": "Measure voltage and current of a single low-voltage DC load at a useful rate (at least tens of samples per second) and derive power."
+        },
+        {
+          "id": "R2",
+          "text": "Keep measurement uncertainty stated, with a calibration procedure against a reference meter."
+        },
+        {
+          "id": "R3",
+          "text": "Record or display data locally so a network outage does not lose the measurement."
+        },
+        {
+          "id": "R4",
+          "text": "Stay inside a supervised, low-voltage boundary; any mains-referenced variant requires isolation review before it is attempted."
+        },
+        {
+          "id": "R5",
+          "text": "Publish the architecture, calibration method and test conditions alongside any number, so a reader can check the claim."
+        }
       ],
       "sensing_options": [
-        { "method": "Shunt resistor + current-sense amplifier", "note": "Best linearity and low-side simplicity; adds a small series drop and needs attention to common-mode range if used high-side." },
-        { "method": "Hall-effect current sensor", "note": "Isolated by construction, simpler to wire, but offset drift and temperature behaviour need checking against the datasheet." },
-        { "method": "Resistive divider for voltage", "note": "Cheap and predictable, but the divider loads the node and its impedance must suit the ADC sample-and-hold." },
-        { "method": "Energy-monitoring IC with integrated ADCs", "note": "Fewer analog decisions to make, less of the signal chain to learn — a trade of effort against understanding." }
+        {
+          "method": "Shunt resistor + current-sense amplifier",
+          "note": "Best linearity and low-side simplicity; adds a small series drop and needs attention to common-mode range if used high-side."
+        },
+        {
+          "method": "Hall-effect current sensor",
+          "note": "Isolated by construction, simpler to wire, but offset drift and temperature behaviour need checking against the datasheet."
+        },
+        {
+          "method": "Resistive divider for voltage",
+          "note": "Cheap and predictable, but the divider loads the node and its impedance must suit the ADC sample-and-hold."
+        },
+        {
+          "method": "Energy-monitoring IC with integrated ADCs",
+          "note": "Fewer analog decisions to make, less of the signal chain to learn — a trade of effort against understanding."
+        }
       ],
       "architecture_label": "Proposed functional roles · no component has been selected",
       "architecture": [
-        { "name": "Electrical input", "detail": "A low-voltage measurement boundary; source, range and isolation approach are still open." },
-        { "name": "Signal path", "detail": "A proposed conditioning and sampling stage; gain, filtering and reference are undecided." },
-        { "name": "Embedded processing", "detail": "A candidate role for RMS and power computation; firmware is not written." },
-        { "name": "Data use", "detail": "Possible logging or display direction; interface and connectivity are undecided." }
+        {
+          "name": "Electrical input",
+          "detail": "A low-voltage measurement boundary; source, range and isolation approach are still open."
+        },
+        {
+          "name": "Signal path",
+          "detail": "A proposed conditioning and sampling stage; gain, filtering and reference are undecided."
+        },
+        {
+          "name": "Embedded processing",
+          "detail": "A candidate role for RMS and power computation; firmware is not written."
+        },
+        {
+          "name": "Data use",
+          "detail": "Possible logging or display direction; interface and connectivity are undecided."
+        }
       ],
       "mcu_options": [
-        { "model": "ESP32 class", "note": "Wi-Fi and a capable ADC on one part; ADC linearity needs care and calibration." },
-        { "model": "STM32 class", "note": "Better analog peripherals and deterministic timing; connectivity needs additional design." },
-        { "model": "External ADC + any MCU", "note": "Moves accuracy requirements into a component with a proper datasheet, at the cost of board complexity." }
+        {
+          "model": "ESP32 class",
+          "note": "Wi-Fi and a capable ADC on one part; ADC linearity needs care and calibration."
+        },
+        {
+          "model": "STM32 class",
+          "note": "Better analog peripherals and deterministic timing; connectivity needs additional design."
+        },
+        {
+          "model": "External ADC + any MCU",
+          "note": "Moves accuracy requirements into a component with a proper datasheet, at the cost of board complexity."
+        }
       ],
       "isolation": "The first study stays low-voltage and supervised. A mains-referenced version would need galvanic isolation, creepage and clearance decisions, protective devices and review by someone qualified to sign it off — that is out of scope for this record.",
       "validation": [
-        "Compare against a calibrated reference meter at several operating points and record the deviation.",
-        "State ambient temperature, instrument, wiring and load for every measurement.",
-        "Repeat measurements over time to separate drift from noise.",
-        "Publish failed checks as well as passing ones."
+        "Run the reference suite and compare its printed table with the published values before trusting any number on the site.",
+        "Re-derive the power and energy relations independently; the independent suite exists so a self-consistent error cannot pass both.",
+        "For hardware, compare against a calibrated reference meter at several operating points and record the instrument, wiring, load and ambient conditions.",
+        "Publish failed checks as well as passing ones, and state the tolerance with every claim."
       ],
       "roadmap": [
-        { "stage": "Concept", "status": "Complete", "deliverable": "This design brief and the open-questions list." },
-        { "stage": "Requirements", "status": "In progress", "deliverable": "Ranges, accuracy target and safety boundary written down and reviewed." },
-        { "stage": "Architecture", "status": "Planned", "deliverable": "Block diagram with chosen sensing method and interfaces." },
-        { "stage": "Simulation", "status": "Planned", "deliverable": "Signal-chain model covering divider loading, gain and quantization." },
-        { "stage": "Implementation", "status": "Planned", "deliverable": "Schematic, PCB revision and firmware repository." },
-        { "stage": "Validation", "status": "Planned", "deliverable": "Bench comparison against a reference meter with conditions recorded." }
+        {
+          "stage": "Concept",
+          "status": "Complete",
+          "deliverable": "The design brief and the open-questions list."
+        },
+        {
+          "stage": "Requirements",
+          "status": "Complete",
+          "deliverable": "Requirements S1–S13 and N1–N5 with their acceptance criteria."
+        },
+        {
+          "stage": "Architecture",
+          "status": "Complete",
+          "deliverable": "Signal path, module structure and the two-path truth/measurement design."
+        },
+        {
+          "stage": "Simulation",
+          "status": "Complete",
+          "deliverable": "Software Model V1: model, reference tests, independent verification, datasets and instrument."
+        },
+        {
+          "stage": "Hardware",
+          "status": "Not started",
+          "deliverable": "Schematic, board revision and firmware for a supervised low-voltage prototype."
+        },
+        {
+          "stage": "Validation",
+          "status": "Not started",
+          "deliverable": "Bench comparison against a reference meter with conditions recorded."
+        }
       ],
       "open_questions": [
         "Which measurable quantity and operating range should the first study address?",
@@ -65,7 +141,25 @@
         "Publish the requirements table once the operating range is chosen.",
         "Compare candidate sensing approaches from datasheets and a signal-chain model.",
         "Only publish a schematic, simulation or firmware when those artifacts exist."
+      ],
+      "results": [
+        "Software Model V1 passes 67 reference assertions (cases A–G) and 594 independent checks across ten groups.",
+        "Energy matches hand-derived values exactly where the mathematics is exact: 43 200 J (12 Wh) at 12 V/1 A for 3600 s, 18 000 J (5 Wh) at 5 V/2 A for 1800 s.",
+        "A step that straddles one sample interval is quantified, not hidden: 26 997.5 J against a 27 000 J continuous ideal, a 0.0093 % difference that halves with the square of the sample interval.",
+        "Variable sampling is handled from real timestamps: an irregular five-interval profile integrates to the hand-computed 77.605 J, while a mean × time estimate would give 77.973 J.",
+        "Measurement error behaves as the equations predict: +2 % gain and a 50 mV offset produce a 10.4 V reading of a 10 V input, and calibration recovers 10.000 V exactly.",
+        "Invalid data is classified and refused rather than integrated into a plausible-looking total."
+      ],
+      "limitations": [
+        "No hardware accuracy of any kind: no sensor, ADC, microcontroller or board has been used or measured.",
+        "DC only, single channel, non-isolated: no AC, mains or grid measurement.",
+        "No ADC non-idealities (INL, DNL, reference drift), no fixed-point arithmetic and no timer jitter.",
+        "Loads that change faster than the sample interval are aliased, exactly as they would be in real firmware.",
+        "No filtering design, no loop response, no thermal or ageing behaviour."
       ]
-    }
+    },
+    "software_status": "Software Model V1 — verified against reference cases",
+    "hardware_status": "Hardware prototype — not yet built",
+    "demo_url": "/projects/dc-energy-monitor.html"
   }
 ]

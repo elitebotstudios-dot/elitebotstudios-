@@ -34,7 +34,17 @@ def render_project(p):
     action=''
     url=p.get('case_study_url') or ('/projects/%s.html'%slug if p.get('case_study') else '')
     if url and re.fullmatch(r'/projects/[a-z0-9-]+\.html',url): action='<a class="text-link" href="%s">Open project record ↗</a>'%html_escape(url,quote=True)
-    return '<article class="card proj-card reveal" id="%s"><div class="post-meta"><span class="chip %s">%s</span><span>%s</span></div><h3>%s</h3><dl class="proj-body" style="margin:0">%s</dl>%s%s</article>'%(slug,cls,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('title','')),quote=True),body,('<div class="chips">%s</div>'%tags) if tags else '',action)
+    demo=p.get('demo_url')
+    if demo and re.fullmatch(r'/projects/[a-z0-9-]+\.html',demo):
+        action=('<div class="proj-actions"><a class="btn btn-primary proj-demo" href="%s">Launch the DC Energy Monitor ↗</a>'
+                '<a class="text-link" href="%s">Project record ↗</a></div>'
+                %(html_escape(demo,quote=True),html_escape(url,quote=True)))
+    staged=''
+    if p.get('software_status') or p.get('hardware_status'):
+        staged='<ul class="proj-stages">%s%s</ul>'%(
+            ('<li data-state="done"><span>Software</span><b>%s</b></li>'%html_escape(str(p.get('software_status')),quote=True)) if p.get('software_status') else '',
+            ('<li data-state="pending"><span>Hardware</span><b>%s</b></li>'%html_escape(str(p.get('hardware_status')),quote=True)) if p.get('hardware_status') else '')
+    return '<article class="card proj-card reveal" id="%s"><div class="post-meta"><span class="chip %s">%s</span><span>%s</span></div><h3>%s</h3><dl class="proj-body" style="margin:0">%s</dl>%s%s%s</article>'%(slug,cls,status,html_escape(str(p.get('category','')),quote=True),html_escape(str(p.get('title','')),quote=True),body,staged,('<div class="chips">%s</div>'%tags) if tags else '',action)
 
 
 COLLABORATION = [
@@ -89,6 +99,9 @@ def projects():
     empty_attr=' hidden' if PROJECT_RECORDS else ''
     n_projects=len(PROJECT_RECORDS)
     n_tools=len(TOOLS)
+    SOFTWARE=[('Power-stage sizing utility','/projects/power-stage-utility.html',6),
+              ('Smart DC Energy Monitor','/projects/dc-energy-monitor.html',6)]
+    n_software=len(SOFTWARE)
     n_notes=len(POSTS)
     def work_type(index,kind,count,label,body,href,cta):
         return ('<article class="work-type"><span class="work-type-index">%s</span>'
@@ -102,9 +115,9 @@ def projects():
                 'Hardware work, kept honest',
                 'Converter, instrumentation and embedded-system work described through requirements, architecture and validation planning. Status labels show how far each one actually got &mdash; concept, simulation, prototype or measured.',
                 '/projects.html#project-records','Read the records'),
-      work_type('02','Software demonstration','1 artefact',
+      work_type('02','Software demonstration','%d artefacts'%n_software,
                 'Tested code, published source',
-                'The power-stage sizing utility: an ideal buck sizing module with its formulas, assumptions, worked calculation and an independent test suite published alongside. Attributed as AI-assisted work.',
+                'Two tested artefacts: an ideal buck sizing module, and the DC Energy Monitor — a simulated measurement chain with seven reference cases, an independent test suite and a running instrument. Both are attributed as AI-assisted work.',
                 '/projects/power-stage-utility.html','Open the utility'),
       work_type('03','Educational calculator','%d tools'%n_tools,
                 'Interactive models, stated limits',
@@ -137,6 +150,7 @@ def projects():
     <section class="section work-demo-section"><div class="wrap">
       <div class="project-section-label"><span class="section-index">02 / SOFTWARE DEMONSTRATIONS</span><span>TESTED CODE &middot; PUBLISHED SOURCE</span></div>
       <div class="software-artefact"><div><span class="work-status">Software demonstration &middot; tested</span><h2>Power-stage sizing utility</h2><p>Sizes an ideal buck inductor at the worst-case input voltage and reports the current stress and capacitance estimates that follow. The formulas, a hand-worked case, the published module and an independent test suite are on the page.</p><p class="software-artefact-meta">AI-assisted implementation &middot; no dependencies &middot; runs in the browser &middot; 495 independent assertions</p></div><a class="btn btn-ghost" href="/projects/power-stage-utility.html">Open the utility &#8599;</a></div>
+      <div class="software-artefact em-artefact-card"><div><span class="work-status">Software demonstration &middot; tested</span><h2>Smart DC Energy Monitor</h2><p>A simulated low-voltage DC energy monitor: source and load models, a configurable sensing chain with gain, offset, noise and ADC quantisation, sampled power and trapezoidal energy accumulation, running as an interactive instrument.</p><p class="software-artefact-meta">AI-assisted implementation &middot; 67 reference assertions &middot; 594 independent checks &middot; hardware not built</p></div><a class="btn btn-primary" href="/projects/dc-energy-monitor.html">Launch the instrument &#8599;</a></div>
     </div></section>
 '''
     body=body.replace('PROJECT_CARDS',cards).replace('EMPTY_ATTR',empty_attr).replace('WORK_TYPES',work_types)
@@ -170,10 +184,16 @@ def project_template_page():
     page('Project Record Standard | Elite Bot Studios','How Elite Bot Studios structures engineering case studies: objective, architecture, decisions, simulation, testing, results, limitations, and resources.','/project-template.html',body,jsonld=SCHEMA_GRAPH)
 
 
+# Slugs whose page is generated by a dedicated renderer instead of the generic
+# record template. scripts/site/build_energy.py owns the smart-energy-monitoring
+# page now, because it carries the completed software model and its evidence.
+DEDICATED_PAGES={'smart-energy-monitoring'}
+
 def project_detail_pages():
     for p in PROJECT_RECORDS:
         record=p.get('case_study')
         if not record: continue
+        if p.get('slug') in DEDICATED_PAGES: continue
         slug=p['slug'];status,status_class=PROJECT_STATUS.get(p.get('status'),('Unclassified','chip-amber'))
         architecture=record.get('architecture') or []
         nodes=[]
