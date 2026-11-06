@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUT = str(ROOT)
 SITE = 'https://elitebotstudios.me'
-SITE_BUILD = 'EBS-2026.11.06-R8'
+SITE_BUILD = 'EBS-2026.11.06-R9'
 EMAIL = 'contact@elitebotstudios.me'
 TAGLINE = 'Embedded Intelligence · Real-World Power'
 ONELINER = ('An independent engineering initiative exploring embedded systems, power electronics, and '
@@ -110,10 +110,14 @@ def head(title, desc, path, extra_head='', og_image='/assets/social-preview.png'
   <meta property="og:description" content="{desc}" />
 {ogurl_tag}
   <meta property="og:image" content="{site}{og}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{title}" />
   <meta name="twitter:description" content="{desc}" />
   <meta name="twitter:image" content="{site}{og}" />
+  <meta name="twitter:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
 
   <link rel="icon" href="{fav32}" sizes="32x32" />
   <link rel="icon" href="{fav16}" sizes="16x16" />

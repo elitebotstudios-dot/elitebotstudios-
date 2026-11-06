@@ -964,3 +964,13 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
 .cv-pending b{flex:none;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:#B4A176;font-weight:500}
 .cv-pending-note{margin:12px 0 0;font-size:.74rem;line-height:1.6;color:#76838F}
 @media(max-width:760px){.cv-focus li{grid-template-columns:1fr;gap:2px}.cv-links a,.cv-pending li{flex-direction:column;gap:3px;align-items:flex-start}}
+
+/* Power-stage page: sources */
+.ps-refs{margin-top:22px;padding:22px 24px;border:1px solid #2C3945;border-left:2px solid var(--cyan);border-radius:9px;background:#0E141B}
+.ps-refs h3{margin:0 0 12px;font-size:.94rem;color:#E6ECF0;font-weight:600}
+.ps-refs ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ps-refs li{font-size:.82rem;line-height:1.66;color:#9AA7B2}
+.ps-refs b{color:#DCE4EA;font-weight:600}
+.ps-refs em{color:#C3CED7;font-style:italic}
+.ps-refs a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(89,217,232,.32)}
+.ps-refs-note{margin:14px 0 0;padding-top:13px;border-top:1px solid #26313C;font-size:.76rem;line-height:1.6;color:#7F8C98}

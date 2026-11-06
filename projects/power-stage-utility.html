@@ -13,19 +13,23 @@
   <meta property="og:description" content="An ideal buck power-stage sizing module: inductor sized at the worst-case input voltage, current stress, CCM boundary and output-capacitance estimate, with formulas, a worked calculation and an independent test suite." />
 <meta property="og:url" content="https://elitebotstudios.me/projects/power-stage-utility.html" />
   <meta property="og:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Power-Stage Sizing Utility — tested software demonstration | Elite Bot Studios" />
   <meta name="twitter:description" content="An ideal buck power-stage sizing module: inductor sized at the worst-case input voltage, current stress, CCM boundary and output-capacitance estimate, with formulas, a worked calculation and an independent test suite." />
   <meta name="twitter:image" content="https://elitebotstudios.me/assets/social-preview.png" />
+  <meta name="twitter:image:alt" content="Elite Bot Studios — Power. Control. Intelligence." />
 
   <link rel="icon" href="/assets/favicon-32x32.png?v=f887a99b" sizes="32x32" />
   <link rel="icon" href="/assets/favicon-16x16.png?v=3a582b91" sizes="16x16" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=dd9eaed5" />
   <link rel="manifest" href="/site.webmanifest?v=f8f8f629" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.06-R8" />
+  <meta name="ebs-build" content="EBS-2026.11.06-R9" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=e64cf9d5" />
+  <link rel="stylesheet" href="/assets/site.css?v=6b02036a" />
 
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
@@ -297,6 +301,15 @@ node tests/powerstage-independent.test.js</code></p></article>
           <li>Steady-state CCM only. Below <code>L<sub>crit</sub></code> the tool stops claiming anything rather than reporting a DCM result.</li>
           <li>Nothing here has been compared with a bench measurement, because no converter has been built.</li>
         </ul>
+      </div>
+      <div class="ps-refs">
+        <h3>Sources this model is checked against</h3>
+        <ul>
+          <li><b>Hauke, B.</b> <em>Basic Calculation of a Buck Converter's Power Stage.</em> Texas Instruments Application Report SLVA477B, December 2011, revised August 2015. Inductor ripple (Eq.&nbsp;2) is evaluated at V<sub>IN(max)</sub>; minimum output capacitance (Eq.&nbsp;12) is ΔI<sub>L</sub>/(8 f<sub>S</sub> ΔV<sub>OUT</sub>); the ESR term (Eq.&nbsp;13) is ESR·ΔI<sub>L</sub>; the note also records that transient response, not steady-state ripple, often sizes the output capacitor. <a href="https://www.ti.com/lit/an/slva477b/slva477b.pdf" rel="noopener noreferrer">ti.com/lit/an/slva477b</a></li>
+          <li><b>Erickson, R. W. and Maksimović, D.</b> <em>Fundamentals of Power Electronics</em>, 3rd edition, Springer, 2020. Chapter 2 gives the inductor current ripple, the peak and valley currents, and the continuous/discontinuous conduction boundary used here.</li>
+          <li>The duty ratio is the ideal CCM conversion ratio V<sub>out</sub>/V<sub>in</sub>. Efficiency is deliberately not used to correct it; that is treated as an input-power estimate on the buck explorer instead. <a href="/lab/buck-converter-ccm-model.html">The derivation note</a> explains why.</li>
+        </ul>
+        <p class="ps-refs-note">These are the published relations the module implements, not measurements for comparison: the implementation is checked against them and against an independent switching-cycle simulation, which is what the test suites do.</p>
       </div>
     </div></section>
 

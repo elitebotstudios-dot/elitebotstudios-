@@ -468,6 +468,15 @@ node tests/powerstage-independent.test.js</code></p></article>
           <li>Nothing here has been compared with a bench measurement, because no converter has been built.</li>
         </ul>
       </div>
+      <div class="ps-refs">
+        <h3>Sources this model is checked against</h3>
+        <ul>
+          <li><b>Hauke, B.</b> <em>Basic Calculation of a Buck Converter's Power Stage.</em> Texas Instruments Application Report SLVA477B, December 2011, revised August 2015. Inductor ripple (Eq.&nbsp;2) is evaluated at V<sub>IN(max)</sub>; minimum output capacitance (Eq.&nbsp;12) is ΔI<sub>L</sub>/(8 f<sub>S</sub> ΔV<sub>OUT</sub>); the ESR term (Eq.&nbsp;13) is ESR·ΔI<sub>L</sub>; the note also records that transient response, not steady-state ripple, often sizes the output capacitor. <a href="https://www.ti.com/lit/an/slva477b/slva477b.pdf" rel="noopener noreferrer">ti.com/lit/an/slva477b</a></li>
+          <li><b>Erickson, R. W. and Maksimović, D.</b> <em>Fundamentals of Power Electronics</em>, 3rd edition, Springer, 2020. Chapter 2 gives the inductor current ripple, the peak and valley currents, and the continuous/discontinuous conduction boundary used here.</li>
+          <li>The duty ratio is the ideal CCM conversion ratio V<sub>out</sub>/V<sub>in</sub>. Efficiency is deliberately not used to correct it; that is treated as an input-power estimate on the buck explorer instead. <a href="/lab/buck-converter-ccm-model.html">The derivation note</a> explains why.</li>
+        </ul>
+        <p class="ps-refs-note">These are the published relations the module implements, not measurements for comparison: the implementation is checked against them and against an independent switching-cycle simulation, which is what the test suites do.</p>
+      </div>
     </div></section>
 
     <section class="section"><div class="wrap"><div class="project-detail-related"><a href="/projects.html">All project records &#8599;</a><a href="/tools/buck-converter.html">Explore one operating point &#8599;</a><a href="/lab/buck-converter-ccm-model.html">Read the derivation note &#8599;</a></div></div></section>
