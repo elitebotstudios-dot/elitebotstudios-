@@ -1129,7 +1129,8 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
   .em-buttons{grid-template-columns:1fr 1fr}
   .em-chart canvas{height:150px}
 }
-@media(max-width:420px){.em-readouts{grid-template-columns:1fr}.em-pair{grid-template-columns:1fr}}
+@media(max-width:420px){.em-pair{grid-template-columns:1fr}}
+@media(max-width:359px){.em-readouts{grid-template-columns:1fr}}
 
 /* The instrument uses the hidden attribute to swap load-model field groups;
    author display rules would otherwise win over the UA stylesheet. */
