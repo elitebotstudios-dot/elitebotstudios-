@@ -27,9 +27,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=dd9eaed5" />
   <link rel="manifest" href="/site.webmanifest?v=f8f8f629" />
   <meta name="theme-color" content="#080B10" />
-  <meta name="ebs-build" content="EBS-2026.11.06-R12" />
+  <meta name="ebs-build" content="EBS-2026.11.06-R15" />
 
-  <link rel="stylesheet" href="/assets/site.css?v=e63b79eb" />
+  <link rel="stylesheet" href="/assets/site.css?v=4badb496" />
 
   <!-- GA4 is queued immediately, then loaded in idle time so it does not compete with the first render. -->
   <script>
@@ -290,6 +290,16 @@
       </div></section>
 
       <section class="section em-plan-section"><div class="wrap">
+        <div class="section-heading split-heading"><div><span class="section-index">09b / HARDWARE DESIGN</span><h2>From model<br><em>to circuit.</em></h2></div><p>The measurement chain the model describes now has a schematic, a netlist, a bill of materials, a design review and a firmware core. It still has no prototype.</p></div>
+        <ol class="ms-ladder"><li class="ms" data-state="done"><span class="ms-name">Concept</span><span class="ms-status">Completed</span><span class="ms-detail">Design brief and open questions, published 2026-11.</span></li><li class="ms" data-state="done"><span class="ms-name">Software model</span><span class="ms-status">Completed and tested</span><span class="ms-detail">Seven reference cases plus 594 independent checks; the instrument runs in the browser.</span></li><li class="ms" data-state="done"><span class="ms-name">Hardware requirements</span><span class="ms-status">Completed (draft for review)</span><span class="ms-detail">E1–E12 written, each marked verified or proposed. No requirement is claimed as measured.</span></li><li class="ms" data-state="done"><span class="ms-name">Electrical design</span><span class="ms-status">Schematic drafted, ERC clean</span><span class="ms-detail">Native KiCad schematic built from official library symbols. kicad-cli 9.0.2 ERC: 0 errors, 0 warnings. KiCad netlist matches the design file pin for pin.</span></li><li class="ms" data-state="done"><span class="ms-name">Embedded firmware</span><span class="ms-status">Host-tested and cross-compiled for ESP32</span><span class="ms-detail">79 host checks across three suites; PlatformIO builds firmware.bin for esp32dev (25.4 % of flash). Never flashed, never run on a board.</span></li><li class="ms" data-state="pending"><span class="ms-name">Physical prototype</span><span class="ms-status">Not built</span><span class="ms-detail">No component has been purchased, assembled or powered.</span></li><li class="ms" data-state="pending"><span class="ms-name">Calibration</span><span class="ms-status">Not started</span><span class="ms-detail">Procedure and blank recording sheet prepared; no calibration has been performed.</span></li><li class="ms" data-state="pending"><span class="ms-name">Physical validation</span><span class="ms-status">Not available</span><span class="ms-detail">No measurement against a reference instrument exists.</span></li></ol>
+        <div class="em-hardware-teaser">
+          <div><h3>What exists</h3><p>A native KiCad schematic that passes ERC with 0 errors and 0 warnings, a netlist that matches the design file pin for pin, 25 design-rule checks with their margins printed, a bill of materials with a rationale for every part, firmware that cross-compiles for the ESP32 and passes 108 host checks including a mocked I²C bus, and a calibration procedure with a blank recording sheet.</p></div>
+          <div><h3>What does not exist</h3><p>No PCB layout, no assembled board, no flashed firmware, no measurement and no calibration. A clean ERC and a successful compile are not evidence that a circuit works. The hardware page says which of those is which, in detail.</p></div>
+        </div>
+        <div class="em-project-actions"><a class="btn btn-primary" href="/projects/dc-energy-monitor-hardware.html">Open the hardware design <span aria-hidden="true">&#8599;</span></a><a class="btn btn-ghost" href="/energy-monitor/verification/calibration-plan/calibration-plan.md">Calibration plan</a></div>
+      </div></section>
+
+      <section class="section em-plan-section"><div class="wrap">
         <div class="section-heading split-heading"><div><span class="section-index">10 / NEXT PHASE</span><h2>From model<br><em>to bench.</em></h2></div><p>A supervised, low-voltage hardware prototype. No component has been selected and nothing has been energised. Every milestone below is not started.</p></div>
         <ol class="em-milestones"><li class="em-milestone"><span>1</span><h3 class="em-milestone-h">Approve hardware requirements</h3><b>Not started</b></li><li class="em-milestone"><span>2</span><h3 class="em-milestone-h">Select components against datasheets</h3><b>Not started</b></li><li class="em-milestone"><span>3</span><h3 class="em-milestone-h">Review the schematic</h3><b>Not started</b></li><li class="em-milestone"><span>4</span><h3 class="em-milestone-h">Build the supervised low-voltage prototype</h3><b>Not started</b></li><li class="em-milestone"><span>5</span><h3 class="em-milestone-h">Implement firmware using the model as its arithmetic reference</h3><b>Not started</b></li><li class="em-milestone"><span>6</span><h3 class="em-milestone-h">Bench measurements with recorded conditions</h3><b>Not started</b></li><li class="em-milestone"><span>7</span><h3 class="em-milestone-h">Calibrate against a reference instrument</h3><b>Not started</b></li><li class="em-milestone"><span>8</span><h3 class="em-milestone-h">Document results, including failures</h3><b>Not started</b></li><li class="em-milestone"><span>9</span><h3 class="em-milestone-h">Compare simulation with measurement</h3><b>Not started</b></li></ol>
         <div class="em-plan-grid">
@@ -368,6 +378,6 @@ node energy-monitor/tests/dcem-independent.test.js</code></article>
     </div>
   </footer>
 
-  <script src="/assets/site.js?v=087e6622" defer></script>
+  <script src="/assets/site.js?v=6862eff3" defer></script>
 </body>
 </html>

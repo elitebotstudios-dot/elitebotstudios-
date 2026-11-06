@@ -1,0 +1,9 @@
+(sym_lib_table
+  (version 7  (lib (name "dcm")(type "KiCad")(uri "${KIPRJMOD}/dcm.kicad_sym")(options "")(descr "Symbols local to this project"))
+)
+  (lib (name "Device")(type "KiCad")(uri "/usr/share/kicad/symbols/Device.kicad_sym")(options "")(descr "Standard device symbols"))
+  (lib (name "Connector")(type "KiCad")(uri "/usr/share/kicad/symbols/Connector.kicad_sym")(options "")(descr "Connector symbols"))
+  (lib (name "Connector_Generic")(type "KiCad")(uri "/usr/share/kicad/symbols/Connector_Generic.kicad_sym")(options "")(descr "Generic connector symbols"))
+  (lib (name "Sensor_Energy")(type "KiCad")(uri "/usr/share/kicad/symbols/Sensor_Energy.kicad_sym")(options "")(descr "Energy monitoring ICs"))
+  (lib (name "power")(type "KiCad")(uri "/usr/share/kicad/symbols/power.kicad_sym")(options "")(descr "Power and ground symbols"))
+)

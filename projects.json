@@ -159,7 +159,59 @@
       ]
     },
     "software_status": "Software Model V1 — verified against reference cases",
-    "hardware_status": "Hardware prototype — not yet built",
-    "demo_url": "/projects/dc-energy-monitor.html"
+    "hardware_status": "Hardware design prepared — prototype not built",
+    "demo_url": "/projects/dc-energy-monitor.html",
+    "demo_label": "Launch the DC Energy Monitor",
+    "hardware_url": "/projects/dc-energy-monitor-hardware.html",
+    "milestones": [
+      {
+        "name": "Concept",
+        "state": "done",
+        "status": "Completed",
+        "detail": "Design brief and open questions, published 2026-11."
+      },
+      {
+        "name": "Software model",
+        "state": "done",
+        "status": "Completed and tested",
+        "detail": "Seven reference cases plus 594 independent checks; the instrument runs in the browser."
+      },
+      {
+        "name": "Hardware requirements",
+        "state": "done",
+        "status": "Completed (draft for review)",
+        "detail": "E1–E12 written, each marked verified or proposed. No requirement is claimed as measured."
+      },
+      {
+        "name": "Electrical design",
+        "state": "done",
+        "status": "Schematic drafted, ERC clean",
+        "detail": "Native KiCad schematic built from official library symbols. kicad-cli 9.0.2 ERC: 0 errors, 0 warnings. KiCad netlist matches the design file pin for pin."
+      },
+      {
+        "name": "Embedded firmware",
+        "state": "done",
+        "status": "Host-tested and cross-compiled for ESP32",
+        "detail": "79 host checks across three suites; PlatformIO builds firmware.bin for esp32dev (25.4 % of flash). Never flashed, never run on a board."
+      },
+      {
+        "name": "Physical prototype",
+        "state": "pending",
+        "status": "Not built",
+        "detail": "No component has been purchased, assembled or powered."
+      },
+      {
+        "name": "Calibration",
+        "state": "pending",
+        "status": "Not started",
+        "detail": "Procedure and blank recording sheet prepared; no calibration has been performed."
+      },
+      {
+        "name": "Physical validation",
+        "state": "pending",
+        "status": "Not available",
+        "detail": "No measurement against a reference instrument exists."
+      }
+    ]
   }
 ]

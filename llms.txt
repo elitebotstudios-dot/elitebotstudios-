@@ -11,6 +11,7 @@ The public portfolio separates concepts and educational models from project evid
 - [Home](https://elitebotstudios.me/): interactive conceptual power-control system, engineering focus, project direction, and academic profile.
 - [Projects](https://elitebotstudios.me/projects.html): evidence-labelled records, a conceptual system architecture, and separately marked future directions.
 - [DC Energy Monitor](https://elitebotstudios.me/projects/dc-energy-monitor.html): a running software model of a low-voltage DC energy-monitoring system — configurable source and five load models, a sensing chain with gain, offset, noise and ADC quantisation, sampled power and trapezoidal energy accumulation. Includes five guided experiments, CSV export and an architecture explanation. Attributed as AI-assisted work; no hardware exists.
+- [DC Energy Monitor — hardware design V1](https://elitebotstudios.me/projects/dc-energy-monitor-hardware.html): the hardware layer for Project 01 — two schematic sheets generated from a single netlist, an INA226 measurement carrier, a bill of materials, a design review with its open questions, a portable C++ firmware core with 69 desktop checks, and a calibration plan. Design drafted; no ERC, no compiled firmware, no prototype.
 - [Smart Energy Monitoring project record](https://elitebotstudios.me/projects/smart-energy-monitoring.html): the case study for Project 01 — problem, objective, system design, mathematics, verification results, trade-offs, limitations and the hardware plan. Software Model V1 is verified; the hardware prototype is explicitly not built.
 - [Power-stage sizing utility](https://elitebotstudios.me/projects/power-stage-utility.html): a published software demonstration. Sizes an ideal buck inductor at the worst-case input voltage (V_in,max, where ripple is largest), reports current stress, the CCM boundary and an output-capacitance estimate with optional ESR, derating and transient terms. Formulas, a worked calculation and two test suites (a reference-case suite and an independent switching-cycle simulation) are published with the source. Attributed as AI-assisted work rather than the founder's independent engineering.
 - [Expertise](https://elitebotstudios.me/expertise.html): academic foundation, practical exploration, and research interests linked as a system map.
@@ -19,6 +20,17 @@ The public portfolio separates concepts and educational models from project evid
 - [Capabilities & collaboration](https://elitebotstudios.me/services.html): transparent areas of study and possible collaboration.
 - [About](https://elitebotstudios.me/about.html): founder profile and academic/research direction.
 - [Contact](https://elitebotstudios.me/contact.html): posts to the site's own /api/contact endpoint. If mail delivery is not configured on a deployment, the endpoint reports that and the page opens a local email draft instead, telling the visitor that nothing was transmitted.
+
+## Project 01 hardware artefacts (design only)
+
+- Design source: `energy-monitor/hardware/design/dcm-hw-v1.json`; generator `generate.py`; rule checks `checks.py` (25 rules).
+- Schematic: `energy-monitor/hardware/schematic/` (SVG, generated from the netlist).
+- Netlist: `energy-monitor/hardware/netlist/` (CSV connections and a KiCad `.net`).
+- Bill of materials: `energy-monitor/hardware/bom/`.
+- Design review: `energy-monitor/hardware/design-review/design-review.md`.
+- Firmware: `energy-monitor/firmware/` — portable core compiled and tested with g++ (69 checks); ESP32 layer never compiled.
+- Verification: `energy-monitor/verification/` — test vectors, calibration plan, blank bench sheet.
+- Not done: KiCad ERC, PCB layout, any assembly, any measurement, any calibration.
 
 ## Project 01 artefacts
 
