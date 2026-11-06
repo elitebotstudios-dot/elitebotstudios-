@@ -34,11 +34,13 @@ def render_project(p):
     action=''
     url=p.get('case_study_url') or ('/projects/%s.html'%slug if p.get('case_study') else '')
     if url and re.fullmatch(r'/projects/[a-z0-9-]+\.html',url): action='<a class="text-link" href="%s">Open project record ↗</a>'%html_escape(url,quote=True)
-    demo=p.get('demo_url')
+    demo=p.get('demo_url'); hw=p.get('hardware_url')
     if demo and re.fullmatch(r'/projects/[a-z0-9-]+\.html',demo):
         action=('<div class="proj-actions"><a class="btn btn-primary proj-demo" href="%s">Launch the DC Energy Monitor ↗</a>'
-                '<a class="text-link" href="%s">Project record ↗</a></div>'
-                %(html_escape(demo,quote=True),html_escape(url,quote=True)))
+                '%s<a class="text-link" href="%s">Project record ↗</a></div>'
+                %(html_escape(demo,quote=True),
+                  ('<a class="btn btn-ghost" href="%s">Hardware design ↗</a>'%html_escape(hw,quote=True)) if hw and re.fullmatch(r'/projects/[a-z0-9-]+\.html',hw) else '',
+                  html_escape(url,quote=True)))
     staged=''
     if p.get('software_status') or p.get('hardware_status'):
         staged='<ul class="proj-stages">%s%s</ul>'%(

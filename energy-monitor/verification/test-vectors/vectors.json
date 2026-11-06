@@ -1,0 +1,760 @@
+{
+  "generated_by": "energy-monitor/verification/test-vectors/generate-vectors.js",
+  "firmware_policy": {
+    "energy": "trapezoidal on (t_n - t_n-1) milliseconds, unsigned arithmetic so rollover is safe",
+    "max_gap_ms": 5000,
+    "invalid_sample": "interval ending at an invalid sample AND the interval starting from it are held",
+    "calibration": "corrected = raw_engineering × gain + offset, applied per channel"
+  },
+  "sensor": {
+    "part": "INA226",
+    "shunt_lsb_v": 0.0000025,
+    "bus_lsb_v": 0.00125,
+    "shunt_ohms": 0.1
+  },
+  "sets": [
+    {
+      "id": "constant",
+      "description": "12 V, 0.25 A, ten samples one second apart. Trapezoidal integration of constant power is exact: 3 W × 9 s = 27 J = 0.0075 Wh.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1,
+        "v_offset": 0,
+        "i_gain": 1,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 0,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 3000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 5000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 6000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 7000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 8000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 9000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        }
+      ],
+      "hand_checked_j": 27,
+      "decoded": [
+        {
+          "t_ms": 0,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 3000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 5000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 6000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 7000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 8000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 9000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0.0075,
+        "import_j": 27,
+        "export_j": 0,
+        "integrated": 9,
+        "held": 0,
+        "gaps": 0,
+        "final_v": 12,
+        "final_i": 0.25,
+        "final_p": 3
+      }
+    },
+    {
+      "id": "step",
+      "description": "12 V; current steps from 0.30 A to 0.15 A at 2.5 s, falling between samples at 2 s and 3 s. The interval containing the step is charged the trapezoidal average.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1,
+        "v_offset": 0,
+        "i_gain": 1,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 0,
+          "bus_raw": 9600,
+          "shunt_raw": 12000,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "bus_raw": 9600,
+          "shunt_raw": 12000,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "bus_raw": 9600,
+          "shunt_raw": 12000,
+          "valid": true
+        },
+        {
+          "t_ms": 3000,
+          "bus_raw": 9600,
+          "shunt_raw": 6000,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "bus_raw": 9600,
+          "shunt_raw": 6000,
+          "valid": true
+        }
+      ],
+      "decoded": [
+        {
+          "t_ms": 0,
+          "v": 12,
+          "i": 0.3,
+          "p": 3.6,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "v": 12,
+          "i": 0.3,
+          "p": 3.6,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "v": 12,
+          "i": 0.3,
+          "p": 3.6,
+          "valid": true
+        },
+        {
+          "t_ms": 3000,
+          "v": 12,
+          "i": 0.15,
+          "p": 1.8,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "v": 12,
+          "i": 0.15,
+          "p": 1.8,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0.00325,
+        "import_j": 11.7,
+        "export_j": 0,
+        "integrated": 4,
+        "held": 0,
+        "gaps": 0,
+        "final_v": 12,
+        "final_i": 0.15,
+        "final_p": 1.7999999999999998
+      }
+    },
+    {
+      "id": "irregular",
+      "description": "Irregular timestamps (0, 700, 1500, 2600, 3800 ms) with varying current. The integrator must use the real interval each time.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1,
+        "v_offset": 0,
+        "i_gain": 1,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 0,
+          "bus_raw": 9600,
+          "shunt_raw": 8000,
+          "valid": true
+        },
+        {
+          "t_ms": 700,
+          "bus_raw": 9600,
+          "shunt_raw": 16000,
+          "valid": true
+        },
+        {
+          "t_ms": 1500,
+          "bus_raw": 9440,
+          "shunt_raw": 4000,
+          "valid": true
+        },
+        {
+          "t_ms": 2600,
+          "bus_raw": 9440,
+          "shunt_raw": 14000,
+          "valid": true
+        },
+        {
+          "t_ms": 3800,
+          "bus_raw": 9680,
+          "shunt_raw": 2000,
+          "valid": true
+        }
+      ],
+      "decoded": [
+        {
+          "t_ms": 0,
+          "v": 12,
+          "i": 0.2,
+          "p": 2.4,
+          "valid": true
+        },
+        {
+          "t_ms": 700,
+          "v": 12,
+          "i": 0.4,
+          "p": 4.8,
+          "valid": true
+        },
+        {
+          "t_ms": 1500,
+          "v": 11.8,
+          "i": 0.1,
+          "p": 1.18,
+          "valid": true
+        },
+        {
+          "t_ms": 2600,
+          "v": 11.8,
+          "i": 0.35,
+          "p": 4.13,
+          "valid": true
+        },
+        {
+          "t_ms": 3800,
+          "v": 12.1,
+          "i": 0.05,
+          "p": 0.605,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0.0029648611111111113,
+        "import_j": 10.6735,
+        "export_j": 0,
+        "integrated": 4,
+        "held": 0,
+        "gaps": 0,
+        "final_v": 12.1,
+        "final_i": 0.049999999999999996,
+        "final_p": 0.605
+      }
+    },
+    {
+      "id": "gap",
+      "description": "A 7 s gap between samples at 2 s and 9 s exceeds the 5 s maximum. That interval must be held, not integrated, and counted as a gap.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1,
+        "v_offset": 0,
+        "i_gain": 1,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 0,
+          "bus_raw": 9600,
+          "shunt_raw": 16000,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "bus_raw": 9600,
+          "shunt_raw": 16000,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "bus_raw": 9600,
+          "shunt_raw": 16000,
+          "valid": true
+        },
+        {
+          "t_ms": 9000,
+          "bus_raw": 9600,
+          "shunt_raw": 16000,
+          "valid": true
+        },
+        {
+          "t_ms": 10000,
+          "bus_raw": 9600,
+          "shunt_raw": 16000,
+          "valid": true
+        }
+      ],
+      "decoded": [
+        {
+          "t_ms": 0,
+          "v": 12,
+          "i": 0.4,
+          "p": 4.8,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "v": 12,
+          "i": 0.4,
+          "p": 4.8,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "v": 12,
+          "i": 0.4,
+          "p": 4.8,
+          "valid": true
+        },
+        {
+          "t_ms": 9000,
+          "v": 12,
+          "i": 0.4,
+          "p": 4.8,
+          "valid": true
+        },
+        {
+          "t_ms": 10000,
+          "v": 12,
+          "i": 0.4,
+          "p": 4.8,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0.003999999999999999,
+        "import_j": 14.399999999999999,
+        "export_j": 0,
+        "integrated": 3,
+        "held": 1,
+        "gaps": 1,
+        "final_v": 12,
+        "final_i": 0.39999999999999997,
+        "final_p": 4.8
+      }
+    },
+    {
+      "id": "invalid",
+      "description": "The sample at 2 s is marked invalid (sensor NACK). The interval ending at it and the interval starting from it are both held, so two intervals of 1 s are lost, not smeared over.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1,
+        "v_offset": 0,
+        "i_gain": 1,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 0,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "bus_raw": 0,
+          "shunt_raw": 0,
+          "valid": false
+        },
+        {
+          "t_ms": 3000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        }
+      ],
+      "decoded": [
+        {
+          "t_ms": 0,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "v": 0,
+          "i": 0,
+          "p": 0,
+          "valid": false
+        },
+        {
+          "t_ms": 3000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0.0016666666666666668,
+        "import_j": 6,
+        "export_j": 0,
+        "integrated": 2,
+        "held": 2,
+        "gaps": 0,
+        "final_v": 12,
+        "final_i": 0.25,
+        "final_p": 3
+      }
+    },
+    {
+      "id": "rollover",
+      "description": "The millisecond counter wraps between samples. Unsigned subtraction must still produce a 1.5 s interval, and the energy must match the same run without the wrap.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1,
+        "v_offset": 0,
+        "i_gain": 1,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 4294964296,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 4294965296,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 4294966796,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        }
+      ],
+      "note": "timestamp_ms is stored as an unsigned 32-bit value, so the third sample wraps to a small number.",
+      "decoded": [
+        {
+          "t_ms": 4294964296,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 4294965296,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        },
+        {
+          "t_ms": 4294966796,
+          "v": 12,
+          "i": 0.25,
+          "p": 3,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0.0020833333333333333,
+        "import_j": 7.5,
+        "export_j": 0,
+        "integrated": 2,
+        "held": 0,
+        "gaps": 0,
+        "final_v": 12,
+        "final_i": 0.25,
+        "final_p": 3
+      }
+    },
+    {
+      "id": "zero-current",
+      "description": "Voltage present, current zero. Power is zero at every sample, so the energy total must be exactly zero while the voltage is still reported.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1,
+        "v_offset": 0,
+        "i_gain": 1,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 0,
+          "bus_raw": 9600,
+          "shunt_raw": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "bus_raw": 9600,
+          "shunt_raw": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "bus_raw": 9600,
+          "shunt_raw": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 3000,
+          "bus_raw": 9600,
+          "shunt_raw": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "bus_raw": 9600,
+          "shunt_raw": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 5000,
+          "bus_raw": 9600,
+          "shunt_raw": 0,
+          "valid": true
+        }
+      ],
+      "decoded": [
+        {
+          "t_ms": 0,
+          "v": 12,
+          "i": 0,
+          "p": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "v": 12,
+          "i": 0,
+          "p": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 2000,
+          "v": 12,
+          "i": 0,
+          "p": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 3000,
+          "v": 12,
+          "i": 0,
+          "p": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 4000,
+          "v": 12,
+          "i": 0,
+          "p": 0,
+          "valid": true
+        },
+        {
+          "t_ms": 5000,
+          "v": 12,
+          "i": 0,
+          "p": 0,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0,
+        "import_j": 0,
+        "export_j": 0,
+        "integrated": 5,
+        "held": 0,
+        "gaps": 0,
+        "final_v": 12,
+        "final_i": 0,
+        "final_p": 0
+      }
+    },
+    {
+      "id": "calibrated",
+      "description": "The same raw data with a +2 % voltage gain, +30 mV voltage offset and −1 % current gain applied in engineering units: corrected = raw × gain + offset.",
+      "shunt_ohms": 0.1,
+      "calibration": {
+        "v_gain": 1.02,
+        "v_offset": 0.03,
+        "i_gain": 0.99,
+        "i_offset": 0
+      },
+      "samples": [
+        {
+          "t_ms": 0,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "bus_raw": 9600,
+          "shunt_raw": 10000,
+          "valid": true
+        }
+      ],
+      "decoded": [
+        {
+          "t_ms": 0,
+          "v": 12.27,
+          "i": 0.2475,
+          "p": 3.036825,
+          "valid": true
+        },
+        {
+          "t_ms": 1000,
+          "v": 12.27,
+          "i": 0.2475,
+          "p": 3.036825,
+          "valid": true
+        }
+      ],
+      "expected": {
+        "energy_wh": 0.0008435625,
+        "import_j": 3.036825,
+        "export_j": 0,
+        "integrated": 1,
+        "held": 0,
+        "gaps": 0,
+        "final_v": 12.27,
+        "final_i": 0.2475,
+        "final_p": 3.036825
+      }
+    }
+  ]
+}

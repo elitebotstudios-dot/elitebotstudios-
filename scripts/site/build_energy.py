@@ -583,6 +583,16 @@ def energy_project_page():
       </div></section>
 
       <section class="section em-plan-section"><div class="wrap">
+        <div class="section-heading split-heading"><div><span class="section-index">09b / HARDWARE DESIGN</span><h2>From model<br><em>to circuit.</em></h2></div><p>The measurement chain the model describes now has a schematic, a netlist, a bill of materials, a design review and a firmware core. It still has no prototype.</p></div>
+        MS_LADDER
+        <div class="em-hardware-teaser">
+          <div><h3>What exists</h3><p>Two schematic sheets generated from a single netlist, 25 design-rule checks with their margins printed, a bill of materials with a stated rationale for every part, a portable C++ calculation core that compiles and passes 69 desktop checks, and a calibration procedure with a blank recording sheet.</p></div>
+          <div><h3>What does not exist</h3><p>No KiCad project and no ERC, no compiled ESP32 firmware, no PCB, no assembled board, no measurement and no calibration. The hardware page says which of those is which, in detail.</p></div>
+        </div>
+        <div class="em-project-actions"><a class="btn btn-primary" href="/projects/dc-energy-monitor-hardware.html">Open the hardware design <span aria-hidden="true">&#8599;</span></a><a class="btn btn-ghost" href="/energy-monitor/verification/calibration-plan/calibration-plan.md">Calibration plan</a></div>
+      </div></section>
+
+      <section class="section em-plan-section"><div class="wrap">
         <div class="section-heading split-heading"><div><span class="section-index">10 / NEXT PHASE</span><h2>From model<br><em>to bench.</em></h2></div><p>A supervised, low-voltage hardware prototype. No component has been selected and nothing has been energised. Every milestone below is not started.</p></div>
         <ol class="em-milestones">@@MILESTONES@@</ol>
         <div class="em-plan-grid">
@@ -637,6 +647,7 @@ node energy-monitor/tests/dcem-independent.test.js</code></article>
             .replace('@@SENSING_ROWS@@', sensing_rows)
             .replace('@@MCU_ROWS@@', mcu_rows)
             .replace('@@VALIDATION@@', validation)
+            .replace('MS_LADDER', _milestone_ladder())
             .replace('@@ARTEFACTS@@', _artefacts_html()))
 
     ld = json.loads(build.SCHEMA_GRAPH)
@@ -657,6 +668,199 @@ node energy-monitor/tests/dcem-independent.test.js</code></article>
           + build.footer())
 
 
+
+# ---------------------------------------------------------------------------
+# Hardware design page: /projects/dc-energy-monitor-hardware.html
+#
+# The schematic sheets are embedded inline so they scale without a raster step
+# and can be zoomed with the browser; each also links to the raw SVG. The
+# milestone ladder is rendered from projects.json, the same data the case study
+# and the projects index read, so the statuses cannot drift apart.
+# ---------------------------------------------------------------------------
+HARDWARE_FILES = [
+    ('Design source (single file)', '/energy-monitor/hardware/design/dcm-hw-v1.json', 'components, pins, nets, layout'),
+    ('Schematic, sheet 1', '/energy-monitor/hardware/schematic/dcm-hw-v1-sheet1.svg', 'power path and current measurement'),
+    ('Schematic, sheet 2', '/energy-monitor/hardware/schematic/dcm-hw-v1-sheet2.svg', 'sensor supply, I2C, MCU interface'),
+    ('Connection table', '/energy-monitor/hardware/netlist/dcm-hw-v1-connections.csv', 'every pin, net by net'),
+    ('KiCad netlist', '/energy-monitor/hardware/netlist/dcm-hw-v1.net', 'for import into Pcbnew'),
+    ('Bill of materials', '/energy-monitor/hardware/bom/dcm-hw-v1-bom.csv', 'parts, ratings, rationale'),
+    ('Electrical requirements', '/energy-monitor/hardware/requirements/electrical-requirements.md', 'E1–E12, verified vs proposed'),
+    ('Design review', '/energy-monitor/hardware/design-review/design-review.md', 'findings and open questions'),
+    ('Design rule checks', '/energy-monitor/hardware/design/checks.py', '25 rules, runnable'),
+    ('Generator', '/energy-monitor/hardware/design/generate.py', 'draws the schematic from the source'),
+    ('Datasheet links', '/energy-monitor/hardware/datasheets-references/links.md', 'official sources'),
+    ('Build guide', '/energy-monitor/hardware/README.md', 'plain-language assembly'),
+    ('Firmware source', '/energy-monitor/firmware/src/main.cpp', 'ESP32 application layer'),
+    ('Firmware core', '/energy-monitor/firmware/src/core/integrator.cpp', 'energy accumulation'),
+    ('Firmware tests', '/energy-monitor/firmware/test/test_core.cpp', '69 desktop checks'),
+    ('Test vectors', '/energy-monitor/verification/test-vectors/vectors.json', '8 sets with expected values'),
+    ('Calibration plan', '/energy-monitor/verification/calibration-plan/calibration-plan.md', 'procedure, not results'),
+    ('Bench recording sheet', '/energy-monitor/verification/calibration-plan/bench-test-template.csv', 'blank, for the bench'),
+]
+
+
+def _milestone_ladder():
+    ms = _record().get('milestones') or []
+    rows = ''.join(
+        '<li class="ms" data-state="%s"><span class="ms-name">%s</span>'
+        '<span class="ms-status">%s</span><span class="ms-detail">%s</span></li>'
+        % (m['state'], m['name'], m['status'], m['detail']) for m in ms)
+    return '<ol class="ms-ladder">%s</ol>' % rows
+
+
+def _files_list():
+    return '<ul class="hw-files">%s</ul>' % ''.join(
+        '<li><a href="%s">%s</a><span>%s</span></li>' % (href, label, note)
+        for label, href, note in HARDWARE_FILES)
+
+
+def hardware_page():
+    record = _record()
+    body = '''
+    <section class="page-head hw-head"><div class="wrap">
+      <a class="backlink" href="/projects/smart-energy-monitoring.html">&larr; Smart Energy Monitoring</a>
+      <span class="eyebrow">Project 01 / Hardware design V1 / Prototype not built</span>
+      <h1>DC energy monitor.<br><em>The hardware layer.</em></h1>
+      <p>A measurement carrier between a low-voltage bench supply and a load: fuse, reverse-polarity diode, transient clamp, a 0.1 Ω shunt and an INA226, read by an ESP32-DevKitC over I²C. Schematics, netlist, bill of materials, design review, firmware and calibration plan are published together.</p>
+      <div class="em-head-tags">
+        <span class="em-tag em-tag-ok">Design drafted and script-reviewed</span>
+        <span class="em-tag em-tag-warn">KiCad ERC not run</span>
+        <span class="em-tag em-tag-warn">Firmware not compiled for the board</span>
+        <span class="em-tag">Prototype not built</span>
+      </div>
+    </div></section>
+
+    <section class="section hw-status-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">01 / WHERE THE PROJECT STANDS</span><h2>Eight stages,<br><em>four of them done.</em></h2></div><p>Each stage is reported at the level of evidence that actually exists. Nothing here is marked complete because it was written down.</p></div>
+      MS_LADDER
+      <p class="hw-caption">Software and hardware status are deliberately separate. A verified simulation says nothing about a circuit that has never been powered.</p>
+    </div></section>
+
+    <section class="section hw-design-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">02 / ARCHITECTURE</span><h2>Source, protection,<br><em>shunt, sensor.</em></h2></div><p>Four things happen between the supply and the load, and each one costs something that is written down.</p></div>
+      <div class="hw-block-grid">
+        <article><span class="hw-block-no">01</span><h3>Input protection</h3><p>A 1.1 A hold resettable fuse, a 3 A 40 V Schottky for reverse polarity, and a 15 V transient clamp that conducts at 24.4 V — below the sensor's 36 V absolute maximum.</p><p class="hw-block-note">Cost: 0.3–0.4 V of headroom and about 0.2 W at 0.5 A through the diode.</p></article>
+        <article><span class="hw-block-no">02</span><h3>Current shunt</h3><p>0.1 Ω, 0.5 %, 1 W in a 2512 package, in series with the load. At 0.5 A it drops 50 mV and dissipates 25 mW — 2 % of its rating.</p><p class="hw-block-note">Cost: the burden voltage, and a hard measurable limit of 0.819 A.</p></article>
+        <article><span class="hw-block-no">03</span><h3>Measurement</h3><p>An INA226 measures the shunt drop and the load-side bus voltage, both 16-bit, with ±81.92 mV and 0–36 V ranges. It sits on the 3.3 V rail, so no level shifting is needed.</p><p class="hw-block-note">Cost: the module is the least-defined part — see the open questions.</p></article>
+        <article><span class="hw-block-no">04</span><h3>Controller and link</h3><p>An ESP32-DevKitC reads the sensor over I²C at 0x40 on GPIO21/22, with 4.7 kΩ pull-ups to 3.3 V on the carrier, accumulates energy and prints CSV on the USB serial port.</p><p class="hw-block-note">Cost: no real-time clock, so timestamps are milliseconds since boot.</p></article>
+      </div>
+    </div></section>
+
+    <section class="section hw-sch-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">03 / SCHEMATIC</span><h2>Two sheets,<br><em>generated from one netlist.</em></h2></div><p>Both sheets are drawn from <code>design/dcm-hw-v1.json</code> by a script that refuses to emit a drawing with a floating connection. Open either at full size, or regenerate and check the output yourself.</p></div>
+      <figure class="hw-sch"><figcaption><b>Sheet 1 — power path and current measurement</b><a href="/energy-monitor/hardware/schematic/dcm-hw-v1-sheet1.svg">Open full size &#8599;</a></figcaption>
+        <div class="hw-sch-frame" tabindex="0" role="region" aria-label="Schematic sheet 1, scrollable on narrow screens"><img src="/energy-monitor/hardware/schematic/dcm-hw-v1-sheet1.svg" width="1080" height="700" alt="Schematic sheet 1: DC input J1 through fuse F1 and reverse-protection diode D1 to a junction feeding TVS D2 to ground, then shunt R1 to the load terminals J2. Test points on the input and load side. The INA226 pins IN+ and IN- are attached by VPROT and VLOAD labels." loading="lazy" decoding="async"></div>
+        <p class="hw-caption">The current path is drawn explicitly. The sensor taps across the shunt through the VPROT and VLOAD net labels, which is why no wire runs from the sensor to the middle of the circuit.</p>
+      </figure>
+      <figure class="hw-sch"><figcaption><b>Sheet 2 — sensor supply, I²C and microcontroller interface</b><a href="/energy-monitor/hardware/schematic/dcm-hw-v1-sheet2.svg">Open full size &#8599;</a></figcaption>
+        <div class="hw-sch-frame" tabindex="0" role="region" aria-label="Schematic drawing, scrollable on narrow screens"><img src="/energy-monitor/hardware/schematic/dcm-hw-v1-sheet2.svg" width="1080" height="560" alt="Schematic sheet 2: INA226 module supply and ground, decoupling capacitors C1 and C2, 4.7 kilo-ohm pull-ups R2 and R3 to 3.3 volts, a four-way connector J3 and the ESP32-DevKitC with SDA on GPIO21 and SCL on GPIO22." loading="lazy" decoding="async"></div>
+        <p class="hw-caption">Connectivity on this sheet is carried by net labels; the pin-by-pin truth is in the connection table.</p>
+      </figure>
+      <div class="hw-erc-note">
+        <span class="section-index">WHAT HAS NOT BEEN DONE</span>
+        <p><strong>No KiCad project exists and no ERC has been run.</strong> No EDA tool was available in the environment where this was designed. Instead, the circuit is described in one JSON file; a generator draws the schematic and emits a KiCad netlist; and <code>design/checks.py</code> checks the 25 electrical rules this design depends on, printing the margin for each. That is not the same as ERC, and it is not presented as such. The next step for the owner is to redraw the sheets in KiCad, import or re-enter the netlist, and run ERC.</p>
+      </div>
+    </div></section>
+
+    <section class="section hw-checks-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">04 / DESIGN RULE CHECKS</span><h2>Twenty-five checks,<br><em>with their margins.</em></h2></div><p>Run <code>python3 energy-monitor/hardware/design/checks.py</code> to reproduce. Every number comes from the design file or the datasheet figure recorded beside it.</p></div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Design rule check results, scrollable"><table class="hw-table"><caption class="sr-only">Design rule checks and their outcomes</caption>
+        <thead><tr><th scope="col">Rule</th><th scope="col">Requirement</th><th scope="col">Actual</th><th scope="col">Margin</th><th scope="col">Result</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">S1 bus voltage</th><td>12 V inside the sensor's 0–36 V range</td><td>12 V vs 36 V</td><td>67 % headroom</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">S2 shunt range</th><td>Drop at 0.5 A inside ±81.92 mV</td><td>50.0 mV</td><td>61 % of full scale</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">S3 measurable current</th><td>State the limit of the chosen shunt</td><td>0.8192 A</td><td>a 1 A test needs 0.05 Ω</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">S5 sensing point</th><td>Measure the load side of the shunt</td><td>IN− on VLOAD</td><td>P = V_load × I</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">L1 logic levels</th><td>No 5 V device on the bus</td><td>3.3 V throughout</td><td>no shifter required</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">L2 pull-ups</th><td>1–10 kΩ for 100 kHz at 3.3 V</td><td>4.7 kΩ</td><td>mid-range</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">P2 transient clamp</th><td>Standoff &gt; 12 V, clamp &lt; 36 V</td><td>15 V / 24.4 V</td><td>3.0 V above, 11.6 V below</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">P5 shunt dissipation</th><td>Under half the rating at 0.5 A</td><td>25 mW in a 1 W part</td><td>2 % of rating</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">P7 ground continuity</th><td>One common ground</td><td>9 pin connections</td><td>single net</td><td class="hw-pass">PASS</td></tr>
+          <tr><th scope="row">N1 single-pin nets</th><td>Every net has ≥ 2 connections</td><td>all except the declared NC</td><td>—</td><td class="hw-pass">PASS</td></tr>
+        </tbody>
+      </table></div>
+      <p class="hw-caption">Ten of the twenty-five are shown above; the full table prints when you run the script. All twenty-five pass. Passing these checks means the design satisfies the rules written for it — not that the circuit works.</p>
+    </div></section>
+
+    <section class="section hw-bom-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">05 / COMPONENTS</span><h2>What to buy,<br><em>and why that part.</em></h2></div><p>No price is listed: no supplier was queried while writing this, and an invented price is worse than a blank one. Nothing has been purchased.</p></div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Bill of materials, scrollable"><table class="hw-table"><caption class="sr-only">Bill of materials</caption>
+        <thead><tr><th scope="col">Ref</th><th scope="col">Part</th><th scope="col">Function</th><th scope="col">Key ratings</th><th scope="col">Why this one</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">J1, J2</th><td>Phoenix MKDS 1/2-5.08 or equivalent</td><td>Input and load terminals</td><td class="hw-mono">10 A, 300 V</td><td>Far above the 1 A design current, and safe to probe</td></tr>
+          <tr><th scope="row">F1</th><td>Bourns MF-R110</td><td>Resettable fuse</td><td class="hw-mono">1.1 A hold, 2.2 A trip</td><td>At 0.5 A it sits at 45 % of hold, so it does not nuisance-trip</td></tr>
+          <tr><th scope="row">D1</th><td>onsemi SS34</td><td>Reverse-polarity protection</td><td class="hw-mono">3 A, 40 V</td><td>Upstream of the shunt, so it cannot corrupt the measurement</td></tr>
+          <tr><th scope="row">D2</th><td>Littelfuse SMBJ15A</td><td>Transient clamp</td><td class="hw-mono">15 V standoff, 24.4 V clamp</td><td>Above 12 V, below the sensor's 36 V maximum</td></tr>
+          <tr><th scope="row">R1</th><td>Vishay CRCW2512 0R1</td><td>Current shunt</td><td class="hw-mono">0.1 Ω, 0.5 %, 1 W</td><td>50 mV at 0.5 A: 61 % of the sensor range with a 25 mW burden</td></tr>
+          <tr><th scope="row">U1</th><td>INA226 module (CJMCU-226 class)</td><td>Voltage and current measurement</td><td class="hw-mono">0–36 V, ±81.92 mV, 2.7–5.5 V</td><td>16-bit, 3.3 V logic, no level shifting</td></tr>
+          <tr><th scope="row">U2</th><td>Espressif ESP32-DevKitC-32E</td><td>Microcontroller</td><td class="hw-mono">3.3 V logic</td><td>Same logic level as the sensor, documented, widely available</td></tr>
+          <tr><th scope="row">C1, C2</th><td>10 µF 1210, 100 nF 0603, 25 V X7R</td><td>Decoupling</td><td class="hw-mono">25 V</td><td>Standard pair at the sensor supply pin</td></tr>
+          <tr><th scope="row">R2, R3</th><td>Yageo RC0603 4k7 1 %</td><td>I²C pull-ups</td><td class="hw-mono">4.7 kΩ</td><td>On the carrier, to 3.3 V, so the module's own pull-ups can be removed</td></tr>
+          <tr><th scope="row">J3</th><td>4-way 2.54 mm header</td><td>Link to the MCU</td><td class="hw-mono">3 A</td><td>Four wires: 3V3, GND, SDA, SCL</td></tr>
+        </tbody>
+      </table></div>
+      <p class="hw-caption">The full BOM with rationale and datasheet links for every line is in the download package.</p>
+    </div></section>
+
+    <section class="section hw-firmware-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">06 / FIRMWARE</span><h2>A core that runs<br><em>on a desktop.</em></h2></div><p>The arithmetic lives in a platform-free C++ core with no Arduino headers, so it can be compiled and tested without a board. The application layer that touches I²C and the serial port is separate.</p></div>
+      <div class="hw-fw-grid">
+        <article><h3>Modules</h3><ul><li>Register decode (INA226, no I²C)</li><li>Calibration per channel</li><li>Power and trapezoidal energy</li><li>Missing-data policy and counters</li><li>I²C and serial application layer</li></ul></article>
+        <article><h3>Missing-data policy</h3><p>An invalid reading costs two intervals — the one ending at it and the one starting from it. A gap longer than five seconds is not integrated at all. Both are counted, so a period with no measurement cannot look like a period of zero power.</p></article>
+        <article><h3>Timing</h3><p>Milliseconds since boot in an unsigned 32-bit counter; subtraction wraps correctly after 49.7 days. There is no real-time clock in this design, so no date or time of day is claimed.</p></article>
+        <article><h3>What has run</h3><p>The core compiles with <code>g++ -std=c++17 -Wall -Wextra</code> and passes <strong>69 checks</strong> across eight vector sets. The ESP32 application layer has <strong>never been compiled</strong>, because no ESP32 toolchain was available.</p><code class="hw-code" tabindex="0" role="region" aria-label="Commands to run the firmware tests">g++ -std=c++17 -I include -o /tmp/t src/core/*.cpp test/test_core.cpp
+/tmp/t</code></article>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Firmware test vectors, scrollable"><table class="hw-table"><caption class="sr-only">Firmware vector sets and expected results</caption>
+        <thead><tr><th scope="col">Vector set</th><th scope="col">What it exercises</th><th scope="col">Expected energy</th><th scope="col">Integrated / held / gaps</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">constant</th><td>12 V, 0.25 A, 1 s samples</td><td class="hw-mono">0.007500000 Wh (= 27 J)</td><td class="hw-mono">9 / 0 / 0</td></tr>
+          <tr><th scope="row">step</th><td>Current step falls between samples</td><td class="hw-mono">0.003250000 Wh</td><td class="hw-mono">4 / 0 / 0</td></tr>
+          <tr><th scope="row">irregular</th><td>Uneven timestamps</td><td class="hw-mono">0.002964861 Wh</td><td class="hw-mono">4 / 0 / 0</td></tr>
+          <tr><th scope="row">gap</th><td>7 s hole exceeds the 5 s limit</td><td class="hw-mono">0.004000000 Wh</td><td class="hw-mono">3 / 1 / 1</td></tr>
+          <tr><th scope="row">invalid</th><td>Sensor NACK mid-run</td><td class="hw-mono">0.001666667 Wh</td><td class="hw-mono">2 / 2 / 0</td></tr>
+          <tr><th scope="row">rollover</th><td>32-bit millisecond wrap</td><td class="hw-mono">0.002083333 Wh</td><td class="hw-mono">2 / 0 / 0</td></tr>
+          <tr><th scope="row">zero-current</th><td>Voltage present, no load</td><td class="hw-mono">0.000000000 Wh</td><td class="hw-mono">5 / 0 / 0</td></tr>
+          <tr><th scope="row">calibrated</th><td>+2 % gain, +30 mV offset</td><td class="hw-mono">0.000843563 Wh</td><td class="hw-mono">1 / 0 / 0</td></tr>
+        </tbody>
+      </table></div>
+      <p class="hw-caption">The same vectors are fed back through the verified browser model; where the two policies agree the energies match to 1e-12 Wh, and where they differ the difference is asserted rather than hidden.</p>
+    </div></section>
+
+    <section class="section hw-next-section"><div class="wrap">
+      <div class="section-heading split-heading"><div><span class="section-index">07 / OPEN QUESTIONS</span><h2>What only the<br><em>physical module can answer.</em></h2></div><p>Six questions that must be answered with a multimeter before the ESP32 is connected to anything.</p></div>
+      <ol class="hw-questions">
+        <li><b>Address straps</b><span>Does the module actually sit at 0x40? Read it with an I²C scanner.</span></li>
+        <li><b>Pull-up rail</b><span>Do the module's pull-ups go to 3.3 V, 5 V, or the module supply? Measure before wiring.</span></li>
+        <li><b>VBUS connection</b><span>Is the bus voltage taken at IN−? If the pin is separate, wire it there.</span></li>
+        <li><b>On-board shunt</b><span>What value is fitted, and does it sit in parallel with the external 0.1 Ω?</span></li>
+        <li><b>Common-mode range</b><span>Does the module's amplifier accept a 12 V common-mode at the shunt?</span></li>
+        <li><b>Supply quality</b><span>Does the 3.3 V rail hold up under I²C traffic?</span></li>
+      </ol>
+      <div class="hw-downloads"><span class="section-index">DOWNLOAD THE PACKAGE</span>HW_FILES</div>
+      <div class="project-detail-related"><a href="/projects/dc-energy-monitor.html">Run the software model &#8599;</a><a href="/projects/smart-energy-monitoring.html">Project case study &#8599;</a><a href="/energy-monitor/verification/calibration-plan/calibration-plan.md">Calibration plan &#8599;</a></div>
+    </div></section>
+'''
+    body = body.replace('MS_LADDER', _milestone_ladder()).replace('HW_FILES', _files_list())
+
+    ld = json.loads(build.SCHEMA_GRAPH)
+    ld['@graph'].append({
+        "@type": "TechArticle",
+        "headline": "Smart DC Energy Monitor — hardware design V1",
+        "about": "Low-voltage DC energy measurement carrier: schematic, netlist, BOM, design review, firmware and calibration plan.",
+        "url": "https://elitebotstudios.me/projects/dc-energy-monitor-hardware.html",
+        "author": {"@type": "Organization", "name": "Elite Bot Studios"}
+    })
+
+    write('/projects/dc-energy-monitor-hardware.html',
+          build.head('DC Energy Monitor — hardware design V1 | Elite Bot Studios',
+                     'Hardware design for a low-voltage DC energy monitor: schematic sheets, netlist, bill of materials, design review, embedded firmware and calibration plan. Design drafted; prototype not built.',
+                     '/projects/dc-energy-monitor-hardware.html', jsonld=json.dumps(ld, indent=2))
+          + build.header('/projects.html') + '\n  <main id="main">\n' + body + '\n  </main>\n'
+          + build.footer())
+
+
 if __name__ == '__main__':
     energy_monitor_page()
     energy_project_page()
+    hardware_page()

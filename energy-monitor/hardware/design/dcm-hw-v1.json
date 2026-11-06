@@ -1,0 +1,1058 @@
+{
+  "design": {
+    "id": "DCM-HW-V1",
+    "title": "Smart DC Energy Monitor — measurement carrier, hardware design V1",
+    "revision": "A",
+    "date": "2026-11-06",
+    "status": "design-complete-draft",
+    "status_note": "Schematic drawn and reviewed against the rules in design/checks.py. No EDA tool was available in the authoring environment, so KiCad ERC has NOT been run and no PCB exists. Nothing has been built, powered or measured.",
+    "author": "Elite Bot Studios (AI-assisted)",
+    "envelope": {
+      "vin_nominal_v": 12,
+      "vin_min_v": 5,
+      "vin_max_v": 12,
+      "i_max_a": 0.5,
+      "i_absolute_measure_a": 0.8192,
+      "load": "resistive, low voltage DC",
+      "supply": "current-limited bench supply, <= 1 A limit"
+    }
+  },
+  "components": [
+    {
+      "ref": "J1",
+      "value": "2-way 5.08 mm",
+      "part": "Phoenix MKDS 1/2-5.08 or equivalent",
+      "manufacturer": "Phoenix Contact (or equivalent)",
+      "function": "DC input terminals",
+      "ratings": {
+        "current_a": 10,
+        "voltage_v": 300
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "+",
+          "net": "VIN"
+        },
+        {
+          "number": "2",
+          "name": "-",
+          "net": "GND"
+        }
+      ],
+      "rationale": "Screw terminals accept the bench-supply leads and are rated far above the 1 A design current. Alternatives: Wago 233 series, or a 5.5/2.1 mm barrel jack (less safe to probe).",
+      "datasheet": "manufacturer-terminal-blocks",
+      "symbol": "terminal"
+    },
+    {
+      "ref": "F1",
+      "value": "1.1 A hold / 2.2 A trip",
+      "part": "Bourns MF-R110",
+      "manufacturer": "Bourns",
+      "function": "Resettable series protection",
+      "ratings": {
+        "hold_a": 1.1,
+        "trip_a": 2.2,
+        "voltage_v": 60
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "in",
+          "net": "VIN"
+        },
+        {
+          "number": "2",
+          "name": "out",
+          "net": "VFUSED"
+        }
+      ],
+      "rationale": "A PTC at 0.5 A continuous runs well below its 1.1 A hold current, so it does not nuisance-trip, while still limiting a fault. The bench supply's own current limit remains the primary protection; this is the second line. Alternatives: 0.75 A PTC (closer to the load but less margin), or a 1 A blade fuse (not resettable).",
+      "datasheet": "bourns-mf-r",
+      "symbol": "fuse"
+    },
+    {
+      "ref": "D1",
+      "value": "3 A 40 V Schottky",
+      "part": "onsemi SS34",
+      "manufacturer": "onsemi",
+      "function": "Reverse-polarity protection",
+      "ratings": {
+        "if_a": 3,
+        "vr_v": 40,
+        "vf_v": 0.5
+      },
+      "pins": [
+        {
+          "number": "A",
+          "name": "anode",
+          "net": "VFUSED"
+        },
+        {
+          "number": "K",
+          "name": "cathode",
+          "net": "VPROT"
+        }
+      ],
+      "rationale": "Placed upstream of the shunt, so it protects the electronics without corrupting the measurement: the shunt still sees the true load current and the INA226 still measures the voltage the load actually receives. Costs roughly 0.3–0.4 V of headroom and 0.2 W at 0.5 A. Alternatives: ideal-diode controller (more parts), or omit and rely on a keyed connector.",
+      "datasheet": "onsemi-ss34",
+      "symbol": "diode"
+    },
+    {
+      "ref": "D2",
+      "value": "15 V standoff 600 W",
+      "part": "Littelfuse SMBJ15A",
+      "manufacturer": "Littelfuse",
+      "function": "Transient clamp across the protected rail",
+      "ratings": {
+        "v_standoff": 15,
+        "v_clamp": 24.4,
+        "p_peak_w": 600
+      },
+      "pins": [
+        {
+          "number": "A",
+          "name": "anode",
+          "net": "GND"
+        },
+        {
+          "number": "K",
+          "name": "cathode",
+          "net": "VPROT"
+        }
+      ],
+      "rationale": "Standoff 15 V sits above the 12 V maximum input with margin; the clamp at 24.4 V stays below the INA226's 36 V absolute maximum. Alternatives: SMBJ12A (tighter but less margin above 12 V + tolerance), or a 5 V part if the envelope were fixed at 5 V.",
+      "datasheet": "littelfuse-smbj",
+      "symbol": "tvs"
+    },
+    {
+      "ref": "R1",
+      "value": "0.1 Ω 0.5 % 1 W",
+      "part": "Vishay CRCW2512 0R1 1 W (or Panasonic ERJ-M1WS)",
+      "manufacturer": "Vishay",
+      "function": "Current shunt, external to the module",
+      "ratings": {
+        "resistance_ohm": 0.1,
+        "tolerance_pct": 0.5,
+        "power_w": 1,
+        "tempco_ppm": 100
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "high",
+          "net": "VPROT"
+        },
+        {
+          "number": "2",
+          "name": "low",
+          "net": "VLOAD"
+        }
+      ],
+      "rationale": "0.1 Ω puts 0.5 A at 50 mV — 61 % of the INA226's ±81.92 mV shunt range, so the full design current is measurable with headroom, while the burden voltage stays at 50 mV and dissipation at 25 mW. 0.5 % tolerance and 100 ppm/°C keep the gain error predictable. The same value caps the measurable current at 0.819 A: a later 1 A test needs 0.05 Ω and a fresh calibration, which is recorded in the design review.",
+      "datasheet": "vishay-crcw2512",
+      "symbol": "resistor"
+    },
+    {
+      "ref": "U1",
+      "value": "INA226 module (verified attributes)",
+      "part": "INA226 breakout, e.g. CJMCU-226 class module with INA226AIDGSR",
+      "manufacturer": "Texas Instruments (IC); module vendor varies",
+      "function": "Bus voltage and shunt current measurement, I2C",
+      "ratings": {
+        "v_supply_min": 2.7,
+        "v_supply_max": 5.5,
+        "v_bus_max": 36,
+        "v_shunt_fs_mv": 81.92,
+        "i2c_address": "0x40"
+      },
+      "pins": [
+        {
+          "number": "VCC",
+          "name": "supply",
+          "net": "3V3"
+        },
+        {
+          "number": "GND",
+          "name": "ground",
+          "net": "GND"
+        },
+        {
+          "number": "SDA",
+          "name": "data",
+          "net": "SDA"
+        },
+        {
+          "number": "SCL",
+          "name": "clock",
+          "net": "SCL"
+        },
+        {
+          "number": "IN+",
+          "name": "shunt in",
+          "net": "VPROT"
+        },
+        {
+          "number": "IN-",
+          "name": "shunt out",
+          "net": "VLOAD"
+        },
+        {
+          "number": "ALE",
+          "name": "alert",
+          "net": "NC",
+          "no_connect": true
+        }
+      ],
+      "rationale": "16-bit shunt and bus conversion with a ±81.92 mV shunt range, 0–36 V bus range and a 2.7–5.5 V supply makes it compatible with 3.3 V logic and a 12 V bus without level shifting. It measures the load-side bus voltage, so P = V_load × I is what the load actually receives. Alternatives: INA219 (12-bit, ±320 mV, 26 V bus), INA228 (20-bit, tighter but harder to hand-solder), or a shunt amplifier plus an external ADC (more of the chain to design and calibrate).",
+      "module_caveats": [
+        "The module's on-board shunt value varies by vendor. This design uses an external 0.1 Ω shunt on IN+/IN- and requires the module's own shunt path to be measured or bypassed before use.",
+        "The module's I2C pull-up rail varies by vendor — some pull up to the module supply, some to 5 V. Measure it before connecting an ESP32. R2/R3 on this carrier provide 3.3 V pull-ups; any module pull-ups must be removed or confirmed to be on 3.3 V.",
+        "The I2C address straps (A0/A1) must be confirmed to select 0x40 before firmware is trusted.",
+        "The module's VBUS connection: confirm the bus voltage is taken at IN-, not IN+."
+      ],
+      "datasheet": "ti-ina226",
+      "symbol": "block"
+    },
+    {
+      "ref": "C1",
+      "value": "10 µF 25 V X7R",
+      "part": "Murata GRM32ER71E106KA12 (1210)",
+      "manufacturer": "Murata",
+      "function": "Bulk decoupling at the module supply",
+      "ratings": {
+        "capacitance_f": 1e-05,
+        "voltage_v": 25
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "+",
+          "net": "3V3"
+        },
+        {
+          "number": "2",
+          "name": "-",
+          "net": "GND"
+        }
+      ],
+      "rationale": "Keeps the INA226 supply stable when the I2C bus is clocked and when the host board's regulator is shared. Alternatives: 4.7 µF, or a 22 µF electrolytic (polarity risk for a beginner).",
+      "datasheet": "murata-grm",
+      "symbol": "capacitor"
+    },
+    {
+      "ref": "C2",
+      "value": "100 nF 25 V X7R",
+      "part": "Kemet C0603C104K3RAC (0603)",
+      "manufacturer": "Kemet",
+      "function": "High-frequency decoupling at the module supply",
+      "ratings": {
+        "capacitance_f": 1e-07,
+        "voltage_v": 25
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "+",
+          "net": "3V3"
+        },
+        {
+          "number": "2",
+          "name": "-",
+          "net": "GND"
+        }
+      ],
+      "rationale": "Placed close to the module VCC pin; the pair with C1 is standard practice. Alternatives: any 25 V X7R part.",
+      "datasheet": "kemet-c-series",
+      "symbol": "capacitor"
+    },
+    {
+      "ref": "R2",
+      "value": "4.7 kΩ 1 %",
+      "part": "Yageo RC0603FR-074K7L",
+      "manufacturer": "Yageo",
+      "function": "I2C pull-up, SDA, to 3.3 V",
+      "ratings": {
+        "resistance_ohm": 4700,
+        "power_w": 0.1
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "to 3V3",
+          "net": "3V3"
+        },
+        {
+          "number": "2",
+          "name": "to SDA",
+          "net": "SDA"
+        }
+      ],
+      "rationale": "4.7 kΩ is the usual pull-up for 100 kHz I2C at 3.3 V; it keeps the rise time inside the specification while not loading the bus. Pulling up to 3.3 V — the same rail as the ESP32 and the sensor — is what keeps the bus voltage-safe. Alternatives: 2.2 kΩ for faster edges or longer wiring (more current), 10 kΩ for very low power (slower edges).",
+      "datasheet": "yageo-rc",
+      "symbol": "resistor"
+    },
+    {
+      "ref": "R3",
+      "value": "4.7 kΩ 1 %",
+      "part": "Yageo RC0603FR-074K7L",
+      "manufacturer": "Yageo",
+      "function": "I2C pull-up, SCL, to 3.3 V",
+      "ratings": {
+        "resistance_ohm": 4700,
+        "power_w": 0.1
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "to 3V3",
+          "net": "3V3"
+        },
+        {
+          "number": "2",
+          "name": "to SCL",
+          "net": "SCL"
+        }
+      ],
+      "rationale": "Symmetrical with R2. Alternatives: as R2.",
+      "datasheet": "yageo-rc",
+      "symbol": "resistor"
+    },
+    {
+      "ref": "J2",
+      "value": "2-way 5.08 mm",
+      "part": "Phoenix MKDS 1/2-5.08 or equivalent",
+      "manufacturer": "Phoenix Contact (or equivalent)",
+      "function": "Load output terminals",
+      "ratings": {
+        "current_a": 10,
+        "voltage_v": 300
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "+",
+          "net": "VLOAD"
+        },
+        {
+          "number": "2",
+          "name": "-",
+          "net": "GND"
+        }
+      ],
+      "rationale": "Same connector family as J1 so the wiring is symmetric and reviewable. Alternatives: as J1.",
+      "datasheet": "manufacturer-terminal-blocks",
+      "symbol": "terminal"
+    },
+    {
+      "ref": "J3",
+      "value": "4-way 2.54 mm header",
+      "part": "Wurth 61300411121 (or generic 4-pin header)",
+      "manufacturer": "Wurth Elektronik",
+      "function": "I2C and 3.3 V link to the microcontroller",
+      "ratings": {
+        "current_a": 3,
+        "voltage_v": 250
+      },
+      "pins": [
+        {
+          "number": "1",
+          "name": "3V3",
+          "net": "3V3"
+        },
+        {
+          "number": "2",
+          "name": "GND",
+          "net": "GND"
+        },
+        {
+          "number": "3",
+          "name": "SDA",
+          "net": "SDA"
+        },
+        {
+          "number": "4",
+          "name": "SCL",
+          "net": "SCL"
+        }
+      ],
+      "rationale": "Four wires, keyed by a 1×4 housing so it cannot be reversed if a polarised shell is used. Alternatives: JST-SH for a smaller cable (harder to probe).",
+      "datasheet": "wurth-6130",
+      "symbol": "terminal4"
+    },
+    {
+      "ref": "U2",
+      "value": "ESP32-DevKitC-32E",
+      "part": "Espressif ESP32-DevKitC-32E",
+      "manufacturer": "Espressif Systems",
+      "function": "Microcontroller, off-board, connected by J3",
+      "ratings": {
+        "logic_v": 3.3,
+        "v_supply_min": 3.0,
+        "v_supply_max": 3.6,
+        "adc_bits": 12
+      },
+      "pins": [
+        {
+          "number": "3V3",
+          "name": "3.3 V out",
+          "net": "3V3"
+        },
+        {
+          "number": "GND",
+          "name": "ground",
+          "net": "GND"
+        },
+        {
+          "number": "IO21",
+          "name": "I2C SDA (default)",
+          "net": "SDA"
+        },
+        {
+          "number": "IO22",
+          "name": "I2C SCL (default)",
+          "net": "SCL"
+        }
+      ],
+      "rationale": "3.3 V logic matches the INA226 module directly, the default Arduino-ESP32 I2C pins are GPIO21/22, and the board is widely available, documented and cheap. Alternatives: STM32 Nucleo (better timers and ADC peripherals, more setup), or a bare ESP32-WROOM module (needs a regulator and USB-serial).",
+      "datasheet": "espressif-devkitc",
+      "symbol": "block"
+    },
+    {
+      "ref": "TP1",
+      "value": "test point, VIN",
+      "part": "Keystone 5000 series or 1 mm pad",
+      "manufacturer": "Keystone",
+      "function": "Probe point, raw input",
+      "pins": [
+        {
+          "number": "1",
+          "name": "probe",
+          "net": "VIN"
+        }
+      ],
+      "rationale": "Lets the input be measured without shorting adjacent pins.",
+      "datasheet": "keystone-5000",
+      "symbol": "testpoint"
+    },
+    {
+      "ref": "TP2",
+      "value": "test point, VPROT",
+      "part": "Keystone 5000 series or 1 mm pad",
+      "manufacturer": "Keystone",
+      "function": "Probe point, protected rail / shunt high side",
+      "pins": [
+        {
+          "number": "1",
+          "name": "probe",
+          "net": "VPROT"
+        }
+      ],
+      "rationale": "With TP3 this gives the shunt drop directly, which is how the current channel is checked.",
+      "datasheet": "keystone-5000",
+      "symbol": "testpoint"
+    },
+    {
+      "ref": "TP3",
+      "value": "test point, VLOAD",
+      "part": "Keystone 5000 series or 1 mm pad",
+      "manufacturer": "Keystone",
+      "function": "Probe point, load side of the shunt",
+      "pins": [
+        {
+          "number": "1",
+          "name": "probe",
+          "net": "VLOAD"
+        }
+      ],
+      "rationale": "The voltage the INA226 should report as bus voltage.",
+      "datasheet": "keystone-5000",
+      "symbol": "testpoint"
+    },
+    {
+      "ref": "TP4",
+      "value": "test point, GND",
+      "part": "Keystone 5000 series or 1 mm pad",
+      "manufacturer": "Keystone",
+      "function": "Probe point, common ground",
+      "pins": [
+        {
+          "number": "1",
+          "name": "probe",
+          "net": "GND"
+        }
+      ],
+      "rationale": "Ground reference for every other probe: without a known zero, no other measurement means anything.",
+      "datasheet": "keystone-5000",
+      "symbol": "testpoint"
+    },
+    {
+      "ref": "TP5",
+      "value": "test point, SCL",
+      "part": "Keystone 5000 series or 1 mm pad",
+      "manufacturer": "Keystone",
+      "function": "Probe point, I2C clock",
+      "pins": [
+        {
+          "number": "1",
+          "name": "probe",
+          "net": "SCL"
+        }
+      ],
+      "rationale": "A scope or logic analyser here shows whether the bus is actually clocking.",
+      "datasheet": "keystone-5000",
+      "symbol": "testpoint"
+    }
+  ],
+  "nets": [
+    {
+      "name": "VIN",
+      "class": "power",
+      "voltage_max_v": 12,
+      "description": "Raw DC input, before the fuse."
+    },
+    {
+      "name": "VFUSED",
+      "class": "power",
+      "voltage_max_v": 12,
+      "description": "After the fuse, before the reverse-protection diode."
+    },
+    {
+      "name": "VPROT",
+      "class": "power",
+      "voltage_max_v": 12,
+      "description": "Protected rail and shunt high side. TVS clamps here."
+    },
+    {
+      "name": "VLOAD",
+      "class": "power",
+      "voltage_max_v": 12,
+      "description": "Load side of the shunt; the voltage the instrument reports."
+    },
+    {
+      "name": "3V3",
+      "class": "power",
+      "voltage_max_v": 3.3,
+      "description": "3.3 V logic and sensor supply, from the ESP32 board."
+    },
+    {
+      "name": "GND",
+      "class": "ground",
+      "voltage_max_v": 0,
+      "description": "Common ground: supply return, sensor, and microcontroller."
+    },
+    {
+      "name": "SDA",
+      "class": "signal",
+      "voltage_max_v": 3.3,
+      "description": "I²C data, pulled up to 3.3 V by R2."
+    },
+    {
+      "name": "SCL",
+      "class": "signal",
+      "voltage_max_v": 3.3,
+      "description": "I²C clock, pulled up to 3.3 V by R3."
+    }
+  ],
+  "not_connected": [
+    {
+      "ref": "U1",
+      "pin": "ALE",
+      "reason": "Alert output unused in V1; firmware polls instead."
+    }
+  ],
+  "layout": {
+    "sheets": [
+      {
+        "id": 1,
+        "title": "Power path and current measurement",
+        "width": 1080,
+        "height": 700,
+        "note": "The current path is drawn explicitly from the input terminals through the fuse, the reverse-protection diode and the shunt to the load. The sensor taps across the shunt are attached by the net labels VPROT and VLOAD.",
+        "components": [
+          {
+            "ref": "J1",
+            "x": 150,
+            "y": 300,
+            "orient": "vertical"
+          },
+          {
+            "ref": "F1",
+            "x": 330,
+            "y": 283,
+            "orient": "horizontal"
+          },
+          {
+            "ref": "D1",
+            "x": 500,
+            "y": 283,
+            "orient": "horizontal"
+          },
+          {
+            "ref": "R1",
+            "x": 700,
+            "y": 283,
+            "orient": "horizontal"
+          },
+          {
+            "ref": "J2",
+            "x": 920,
+            "y": 300,
+            "orient": "vertical"
+          },
+          {
+            "ref": "D2",
+            "x": 500,
+            "y": 420,
+            "orient": "vertical"
+          },
+          {
+            "ref": "U1",
+            "x": 780,
+            "y": 520,
+            "orient": "vertical"
+          },
+          {
+            "ref": "TP2",
+            "x": 190,
+            "y": 160,
+            "orient": "vertical"
+          },
+          {
+            "ref": "TP3",
+            "x": 840,
+            "y": 160,
+            "orient": "vertical"
+          }
+        ],
+        "pin_subset": {
+          "U1": [
+            "IN+",
+            "IN-"
+          ]
+        },
+        "connections": [
+          {
+            "from": [
+              "J1",
+              "1"
+            ],
+            "to": [
+              "F1",
+              "1"
+            ]
+          },
+          {
+            "from": [
+              "F1",
+              "2"
+            ],
+            "to": [
+              "D1",
+              "A"
+            ]
+          },
+          {
+            "from": [
+              "D1",
+              "K"
+            ],
+            "to": [
+              "R1",
+              "1"
+            ]
+          },
+          {
+            "from": [
+              "R1",
+              "2"
+            ],
+            "to": [
+              "J2",
+              "1"
+            ]
+          },
+          {
+            "from": [
+              "D1",
+              "K"
+            ],
+            "to": [
+              "D2",
+              "K"
+            ],
+            "via": [
+              [
+                540,
+                283
+              ]
+            ]
+          },
+          {
+            "from": [
+              "D2",
+              "A"
+            ],
+            "to": "GND"
+          },
+          {
+            "from": [
+              "J1",
+              "2"
+            ],
+            "to": "GND",
+            "dir": [
+              -1,
+              0
+            ]
+          },
+          {
+            "from": [
+              "J2",
+              "2"
+            ],
+            "to": "GND",
+            "dir": [
+              -1,
+              0
+            ]
+          },
+          {
+            "from": [
+              "TP2",
+              "1"
+            ],
+            "to": [
+              "J1",
+              "1"
+            ],
+            "via": [
+              [
+                190,
+                283
+              ]
+            ]
+          },
+          {
+            "from": [
+              "TP3",
+              "1"
+            ],
+            "to": [
+              "R1",
+              "2"
+            ],
+            "via": [
+              [
+                840,
+                283
+              ]
+            ]
+          },
+          {
+            "from": [
+              "U1",
+              "IN+"
+            ],
+            "to": "VPROT"
+          },
+          {
+            "from": [
+              "U1",
+              "IN-"
+            ],
+            "to": "VLOAD"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Sensor supply, I2C and microcontroller interface",
+        "width": 1080,
+        "height": 560,
+        "components": [
+          {
+            "ref": "U1",
+            "x": 200,
+            "y": 250,
+            "orient": "vertical"
+          },
+          {
+            "ref": "C1",
+            "x": 430,
+            "y": 130,
+            "orient": "vertical"
+          },
+          {
+            "ref": "C2",
+            "x": 570,
+            "y": 130,
+            "orient": "vertical"
+          },
+          {
+            "ref": "R2",
+            "x": 430,
+            "y": 330,
+            "orient": "vertical"
+          },
+          {
+            "ref": "R3",
+            "x": 570,
+            "y": 330,
+            "orient": "vertical"
+          },
+          {
+            "ref": "J3",
+            "x": 790,
+            "y": 250,
+            "orient": "vertical"
+          },
+          {
+            "ref": "U2",
+            "x": 1000,
+            "y": 250,
+            "orient": "vertical"
+          },
+          {
+            "ref": "TP5",
+            "x": 790,
+            "y": 450,
+            "orient": "vertical"
+          }
+        ],
+        "pin_subset": {
+          "U1": [
+            "VCC",
+            "GND",
+            "SDA",
+            "SCL"
+          ]
+        },
+        "connections": [
+          {
+            "from": [
+              "U1",
+              "VCC"
+            ],
+            "to": "3V3"
+          },
+          {
+            "from": [
+              "C1",
+              "1"
+            ],
+            "to": "3V3"
+          },
+          {
+            "from": [
+              "C2",
+              "1"
+            ],
+            "to": "3V3"
+          },
+          {
+            "from": [
+              "R2",
+              "1"
+            ],
+            "to": "3V3"
+          },
+          {
+            "from": [
+              "R3",
+              "1"
+            ],
+            "to": "3V3"
+          },
+          {
+            "from": [
+              "J3",
+              "1"
+            ],
+            "to": "3V3"
+          },
+          {
+            "from": [
+              "U2",
+              "3V3"
+            ],
+            "to": "3V3"
+          },
+          {
+            "from": [
+              "U1",
+              "GND"
+            ],
+            "to": "GND"
+          },
+          {
+            "from": [
+              "C1",
+              "2"
+            ],
+            "to": "GND"
+          },
+          {
+            "from": [
+              "C2",
+              "2"
+            ],
+            "to": "GND"
+          },
+          {
+            "from": [
+              "J3",
+              "2"
+            ],
+            "to": "GND"
+          },
+          {
+            "from": [
+              "U2",
+              "GND"
+            ],
+            "to": "GND"
+          },
+          {
+            "from": [
+              "U1",
+              "SDA"
+            ],
+            "to": "SDA"
+          },
+          {
+            "from": [
+              "R2",
+              "2"
+            ],
+            "to": "SDA"
+          },
+          {
+            "from": [
+              "J3",
+              "3"
+            ],
+            "to": "SDA"
+          },
+          {
+            "from": [
+              "U2",
+              "IO21"
+            ],
+            "to": "SDA"
+          },
+          {
+            "from": [
+              "U1",
+              "SCL"
+            ],
+            "to": "SCL"
+          },
+          {
+            "from": [
+              "R3",
+              "2"
+            ],
+            "to": "SCL"
+          },
+          {
+            "from": [
+              "J3",
+              "4"
+            ],
+            "to": "SCL"
+          },
+          {
+            "from": [
+              "U2",
+              "IO22"
+            ],
+            "to": "SCL"
+          },
+          {
+            "from": [
+              "TP5",
+              "1"
+            ],
+            "to": "SCL"
+          }
+        ],
+        "note": "Connectivity on this sheet is carried by the net labels; the pin-by-pin truth is in netlist/dcm-hw-v1-connections.csv. R2 and R3 are the 3.3 V pull-ups that replace any module pull-ups."
+      }
+    ]
+  },
+  "references": {
+    "ti-ina226": {
+      "title": "Texas Instruments INA226 — 36 V, 16-bit, ultra-precise I²C output current/voltage/power monitor",
+      "url": "https://www.ti.com/product/INA226",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/ina226.pdf",
+      "accessed": "2026-11-06"
+    },
+    "ti-ina219": {
+      "title": "Texas Instruments INA219 — 26 V, 12-bit I²C current/power monitor",
+      "url": "https://www.ti.com/product/INA219",
+      "datasheet": "https://www.ti.com/lit/ds/symlink/ina219.pdf",
+      "accessed": "2026-11-06"
+    },
+    "espressif-devkitc": {
+      "title": "Espressif ESP32-DevKitC-32E development board documentation",
+      "url": "https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp32-devkitc/index.html",
+      "accessed": "2026-11-06"
+    },
+    "espressif-esp32": {
+      "title": "Espressif ESP32 series datasheet",
+      "url": "https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf",
+      "accessed": "2026-11-06"
+    },
+    "bourns-mf-r": {
+      "title": "Bourns MF-R series radial PTC resettable fuse",
+      "url": "https://www.bourns.com/docs/product-datasheets/mf-r.pdf",
+      "accessed": "2026-11-06"
+    },
+    "onsemi-ss34": {
+      "title": "onsemi SS34 — 3 A, 40 V Schottky rectifier",
+      "url": "https://www.onsemi.com/pdf/datasheet/ss34-d.pdf",
+      "accessed": "2026-11-06"
+    },
+    "littelfuse-smbj": {
+      "title": "Littelfuse SMBJ series transient voltage suppressors",
+      "url": "https://www.littelfuse.com/assetdocs/tvs-diode-smbj-series-datasheet?assetguid=8a1b8b1e-0d3d-4a3f-9b8c-0e1f2a3b4c5d",
+      "accessed": "2026-11-06"
+    },
+    "vishay-crcw2512": {
+      "title": "Vishay CRCW series thick-film chip resistors",
+      "url": "https://www.vishay.com/docs/20035/dcrcwe3.pdf",
+      "accessed": "2026-11-06"
+    },
+    "yageo-rc": {
+      "title": "Yageo RC series general-purpose chip resistors",
+      "url": "https://www.yageo.com/upload/media/product/productsearch/datasheet/rchip/PYu-RC_Group_51-RoHS_L_.pdf",
+      "accessed": "2026-11-06"
+    },
+    "murata-grm": {
+      "title": "Murata GRM series monolithic ceramic capacitors",
+      "url": "https://www.murata.com/en-global/products/capacitor/ceramiccapacitor",
+      "accessed": "2026-11-06"
+    },
+    "kemet-c-series": {
+      "title": "KEMET ceramic C-series surface-mount capacitors",
+      "url": "https://www.kemet.com/en/us/capacitors/ceramic.html",
+      "accessed": "2026-11-06"
+    },
+    "wurth-6130": {
+      "title": "Würth Elektronik WR-PHD 2.54 mm pin headers",
+      "url": "https://www.we-online.com/en/components/products/WR-PHD",
+      "accessed": "2026-11-06"
+    },
+    "keystone-5000": {
+      "title": "Keystone Electronics 5000 series test points",
+      "url": "https://www.keyelco.com/category.cfm/Test-Points/Test-Points/id/487",
+      "accessed": "2026-11-06"
+    },
+    "manufacturer-terminal-blocks": {
+      "title": "Phoenix Contact MKDS 1 series PCB terminal blocks",
+      "url": "https://www.phoenixcontact.com/en-pc/terminal-blocks",
+      "accessed": "2026-11-06"
+    }
+  }
+}

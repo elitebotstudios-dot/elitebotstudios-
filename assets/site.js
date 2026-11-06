@@ -106,6 +106,32 @@ function ebsList(label, items) {
   return '<div><dt>' + label + '</dt><dd>' + items.map(ebsEsc).join(' · ') + '</dd></div>';
 }
 
+/* Status split and launch target, shared by the projects grid and the homepage
+   preview. Both are rendered from /projects.json in the browser; if these
+   helpers did not exist, the client-rendered cards would silently drop the
+   launch button and the software/hardware split that the static HTML carries. */
+function ebsStages(p) {
+  var rows = '';
+  if (p.software_status) {
+    rows += '<li data-state="done"><span>Software</span><b>' + ebsEsc(p.software_status) + '</b></li>';
+  }
+  if (p.hardware_status) {
+    rows += '<li data-state="pending"><span>Hardware</span><b>' + ebsEsc(p.hardware_status) + '</b></li>';
+  }
+  return rows ? '<ul class="proj-stages">' + rows + '</ul>' : '';
+}
+function ebsDemoLink(p, primaryClass) {
+  var url = p.demo_url;
+  if (!url || !(/^\/(?!\/)/.test(url))) return '';
+  return '<a class="btn ' + (primaryClass || 'btn-primary') + ' proj-demo" href="' + ebsEsc(url) + '">' +
+    ebsEsc(p.demo_label || 'Open the demonstration') + ' <span aria-hidden="true">\u2197</span></a>';
+}
+function ebsHardwareLink(p) {
+  var url = p.hardware_url;
+  if (!url || !(/^\/(?!\/)/.test(url))) return '';
+  return '<a class="btn btn-ghost" href="' + ebsEsc(url) + '">Hardware design <span aria-hidden="true">\u2197</span></a>';
+}
+
 function ebsProjectCard(p) {
   var tags = (p.tags || []).map(function (t) { return '<span class="chip">' + ebsEsc(t) + '</span>'; }).join('');
   var links = '';
@@ -120,8 +146,13 @@ function ebsProjectCard(p) {
     links += '<a class="btn btn-ghost" href="' + ebsEsc(p.documentation_url) + '" rel="noopener noreferrer">Documentation</a>';
   }
   var caseStudyUrl = p.case_study_url || (p.case_study ? '/projects/' + (p.slug || '') + '.html' : '');
+  var demo = ebsDemoLink(p);
   if (caseStudyUrl && safeLink(caseStudyUrl)) {
-    links += '<a class="btn btn-ghost" href="' + ebsEsc(caseStudyUrl) + '">Open project record</a>';
+    links += demo
+      ? ebsHardwareLink(p) + '<a class="text-link" href="' + ebsEsc(caseStudyUrl) + '">Project record <span aria-hidden="true">\u2197</span></a>'
+      : ebsHardwareLink(p) + '<a class="btn btn-ghost" href="' + ebsEsc(caseStudyUrl) + '">Open project record</a>';
+  } else {
+    links += demo;
   }
 
   var anchor = /^[a-z0-9-]+$/.test(p.slug || '') ? ' id="' + p.slug + '"' : '';
@@ -142,6 +173,7 @@ function ebsProjectCard(p) {
       ebsBlock('Evidence', p.measured_results || p.results || p.results_note) +
       ebsBlock('Lessons', p.lessons) +
     '</dl>' +
+    ebsStages(p) +
     (tags ? '<div class="chips">' + tags + '</div>' : '') +
     (links ? '<div class="proj-links">' + links + '</div>' : '') +
   '</article>';
@@ -221,7 +253,9 @@ window.EBS.renderProjectCard = ebsProjectCard;
       '<div class="featured-project-mark" aria-hidden="true"><svg viewBox="0 0 120 96"><path d="M10 48h22m56 0h22M32 24h56v48H32zM46 36v24m14-24v24m14-24v24M4 20h16v56H4m80-56h16v56H84"/><circle cx="60" cy="48" r="4"/></svg></div>' +
       '<div><div class="post-meta"><span class="status-label">' + ebsEsc(status) + '</span><span>' + ebsEsc(p.category || 'Project track') + '</span></div>' +
       '<h3>' + ebsEsc(p.title || 'Project record') + '</h3><p>' + ebsEsc(summary) + '</p>' +
-      '<a class="text-link" href="' + ebsEsc(projectHref) + '">See the project record <span aria-hidden="true">→</span></a></div></article>';
+      '<div class="featured-actions">' + ebsDemoLink(p, 'btn-primary') +
+        '<a class="text-link" href="' + ebsEsc(projectHref) + '">See the project record <span aria-hidden="true">→</span></a>' +
+      '</div></div></article>';
   }).catch(function () { /* retain the accessible static fallback */ });
 }());
 
