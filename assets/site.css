@@ -1325,3 +1325,20 @@ h1,h2,h3{font-family:var(--font-display);letter-spacing:-.04em;font-weight:560}
 .hw-sch{min-width:0;max-width:100%}
 .hw-firmware-section .hw-fw-grid>article{min-width:0}
 @media(max-width:620px){.hw-sch-frame img{min-width:0}}
+
+/* The hardware hero is dark, so it must carry its own text colours: the base
+   .page-head rules are written for the light editorial sections. */
+.hw-head{border-bottom-color:#1D2731}
+.hw-head h1{color:#F4F6F8;max-width:18ch;letter-spacing:-.045em}
+.hw-head h1 em{font-style:normal;color:var(--teal)}
+.hw-head p{color:#AEBAC4}
+.hw-head .backlink{color:#9AA7B2}
+.hw-head .eyebrow{color:#B4A176}
+
+/* The instrument hero is dark as well; without these rules the h1 inherits the
+   dark text colour used by the light editorial page-heads and disappears. */
+.em-head h1{color:#F4F6F8}
+.em-head h1 em{font-style:normal;color:var(--teal)}
+.em-head p{color:#AEBAC4}
+.em-head .backlink{color:#9AA7B2}
+.em-head .eyebrow{color:#B4A176}
